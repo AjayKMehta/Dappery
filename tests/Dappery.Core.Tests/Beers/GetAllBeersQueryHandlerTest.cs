@@ -14,7 +14,7 @@ namespace Dappery.Core.Tests.Beers
             using var unitOfWork = UnitOfWork;
             var query = new GetBeersQuery();
             var handler = new GetBeersQueryHandler(unitOfWork);
-            
+
             // Act
             var result = await handler.Handle(query, CancellationTestToken);
 
@@ -23,7 +23,7 @@ namespace Dappery.Core.Tests.Beers
             result.Items.ShouldNotBeNull();
             result.Count.ShouldBe(5);
         }
-        
+
         [Fact]
         public async Task GivenValidRequest_WhenBeersAreNotPopulated_ReturnsMappedEmptyBeerList()
         {
@@ -36,7 +36,7 @@ namespace Dappery.Core.Tests.Beers
             await unitOfWork.BeerRepository.DeleteBeerAsync(3, CancellationTestToken);
             await unitOfWork.BeerRepository.DeleteBeerAsync(4, CancellationTestToken);
             await unitOfWork.BeerRepository.DeleteBeerAsync(5, CancellationTestToken);
-            
+
             // Act
             var result = await handler.Handle(query, CancellationTestToken);
 

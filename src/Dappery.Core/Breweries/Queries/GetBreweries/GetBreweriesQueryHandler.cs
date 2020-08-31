@@ -22,10 +22,10 @@ namespace Dappery.Core.Breweries.Queries.GetBreweries
             // Retrieve the breweries and clean up our resources
             var breweries = await _unitOfWork.BreweryRepository.GetAllBreweries(cancellationToken);
             _unitOfWork.Commit();
-            
+
             // Map our breweries from the returned query
             var mappedBreweries = breweries.Select(b => b.ToBreweryDto());
-            
+
             // Map each brewery to its corresponding DTO
             return new BreweryResourceList(mappedBreweries);
         }

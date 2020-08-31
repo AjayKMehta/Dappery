@@ -21,10 +21,10 @@ namespace Dappery.Core.Beers.Queries.GetBeers
         {
             // Retrieve all of our beers from the database
             var beers = await _unitOfWork.BeerRepository.GetAllBeersAsync(cancellationToken);
-            
+
             // Clean up our resources
             _unitOfWork.Commit();
-            
+
             // Map our beers and return the response
             var mappedBeers = beers.Select(b => b.ToBeerDto());
 

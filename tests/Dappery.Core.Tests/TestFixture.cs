@@ -12,11 +12,11 @@ namespace Dappery.Core.Tests
             // Initialize our test database with our seed data
             UnitOfWork = new UnitOfWork(null);
         }
-        
+
         protected IUnitOfWork UnitOfWork { get; }
-        
+
         protected static CancellationToken CancellationTestToken => CancellationToken.None;
-        
+
         public void Dispose()
         {
             Dispose(true);

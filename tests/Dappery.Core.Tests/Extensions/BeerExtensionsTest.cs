@@ -46,7 +46,7 @@ namespace Dappery.Core.Tests.Extensions
             mappedBeer.Brewery?.Address?.State.ShouldBe(beerToMap.Brewery.Address?.State);
             mappedBeer.Brewery?.Address?.ZipCode.ShouldBe(beerToMap.Brewery.Address?.ZipCode);
             mappedBeer.Brewery?.Address?.StreetAddress.ShouldBe(beerToMap.Brewery.Address?.StreetAddress);
-            
+
             // Validate the beers were not recursively mapped
             mappedBeer.Brewery?.Beers.ShouldBeNull();
             mappedBeer.Brewery?.BeerCount.ShouldBeNull();

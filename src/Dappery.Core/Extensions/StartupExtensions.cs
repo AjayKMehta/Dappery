@@ -15,7 +15,7 @@ namespace Dappery.Core.Extensions
         {
             // Add our MediatR and FluentValidation dependencies
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            
+
             // Add our MediatR validation pipeline
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
         }

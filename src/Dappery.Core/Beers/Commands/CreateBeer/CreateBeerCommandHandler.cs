@@ -1,15 +1,15 @@
 namespace Dappery.Core.Beers.Commands.CreateBeer
 {
     using System;
+    using System.Net;
     using System.Threading;
     using System.Threading.Tasks;
-    using Extensions;
+    using Data;
     using Domain.Entities;
     using Domain.Media;
-    using Data;
-    using MediatR;
     using Exceptions;
-    using System.Net;
+    using Extensions;
+    using MediatR;
 
     public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerResource>
     {

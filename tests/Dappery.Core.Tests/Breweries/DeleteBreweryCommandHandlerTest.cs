@@ -17,7 +17,7 @@ namespace Dappery.Core.Tests.Breweries
             using var unitOfWork = UnitOfWork;
             var deleteCommand = new DeleteBreweryCommand(1);
             var handler = new DeleteBreweryCommandHandler(unitOfWork);
-            
+
             // Act
             var result = await handler.Handle(deleteCommand, CancellationTestToken);
 
@@ -25,7 +25,7 @@ namespace Dappery.Core.Tests.Breweries
             result.ShouldNotBeNull();
             result.ShouldBeOfType<Unit>();
         }
-        
+
         [Fact]
         public async Task GivenValidDeleteRequest_WhenDoesNotBreweryExist_IsNotRemovedFromDatabaseAndExceptionIsThrown()
         {
@@ -33,7 +33,7 @@ namespace Dappery.Core.Tests.Breweries
             using var unitOfWork = UnitOfWork;
             var deleteCommand = new DeleteBreweryCommand(11);
             var handler = new DeleteBreweryCommandHandler(unitOfWork);
-            
+
             // Act
             var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(deleteCommand, CancellationTestToken));
 

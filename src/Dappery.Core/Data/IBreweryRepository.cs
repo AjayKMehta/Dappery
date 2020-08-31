@@ -8,7 +8,7 @@ namespace Dappery.Core.Data
     public interface IBreweryRepository
     {
         Task<IEnumerable<Brewery>> GetAllBreweries(CancellationToken cancellationToken);
-        
+
         Task<Brewery> GetBreweryById(int id, CancellationToken cancellationToken);
 
         Task<int> CreateBrewery(Brewery brewery, CancellationToken cancellationToken);

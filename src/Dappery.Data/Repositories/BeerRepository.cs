@@ -15,14 +15,14 @@ namespace Dappery.Data.Repositories
         private readonly IDbTransaction _dbTransaction;
         private readonly IDbConnection _dbConnection;
         private readonly string _insertRowRetrievalQuery;
-    
+
         public BeerRepository(IDbTransaction dbTransaction, string insertRowRetrievalQuery)
         {
             _dbTransaction = dbTransaction;
             _dbConnection = _dbTransaction.Connection;
             _insertRowRetrievalQuery = insertRowRetrievalQuery;
         }
-        
+
         public async Task<IEnumerable<Beer>> GetAllBeersAsync(CancellationToken token)
         {
             // Initialize our commands to utilize our cancellation token
@@ -30,12 +30,12 @@ namespace Dappery.Data.Repositories
                 "SELECT * FROM Addresses",
                 transaction: _dbTransaction,
                 cancellationToken: token);
-            
+
             var resultCommand = new CommandDefinition(
                 @"SELECT b.*, br.* FROM Beers b INNER JOIN Breweries br ON br.Id = b.BreweryId",
                 transaction: _dbTransaction,
                 cancellationToken: token);
-            
+
             // Retrieve the addresses, as this is a nested mapping
             var addresses = (await _dbConnection.QueryAsync<Address>(addressCommand)).ToList();
 
@@ -50,7 +50,7 @@ namespace Dappery.Data.Repositories
                 }
             );
         }
-        
+
         public async Task<Beer> GetBeerByIdAsync(int id, CancellationToken cancellationToken)
         {
             // Initialize our command
@@ -61,7 +61,7 @@ namespace Dappery.Data.Repositories
                 new { Id = id },
                 _dbTransaction,
                 cancellationToken: cancellationToken);
-            
+
             // Retrieve the beer from the database
             var beerFromId = (await _dbConnection.QueryAsync<Beer, Brewery, Beer>(
                 beerFromIdCommand,
@@ -76,7 +76,7 @@ namespace Dappery.Data.Repositories
             {
                 return null!;
             }
-            
+
             // Instantiate a command for the address and brewery
             var addressCommand = new CommandDefinition(
                 @"SELECT * FROM Addresses WHERE BreweryId = @BreweryId",
@@ -98,7 +98,7 @@ namespace Dappery.Data.Repositories
             {
                 beerFromId.Brewery.Address = address;
             }
-            
+
             // Let's add all the beers to our brewery attached to this beer
             var beersFromBrewery = await _dbConnection.QueryAsync<Beer>(breweryCommand);
 
@@ -116,7 +116,7 @@ namespace Dappery.Data.Repositories
             // From our business we defined, we'll assume the brewery ID is always attached to the beer
             var beerToInsertSql = new StringBuilder(@"INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                                         VALUES (@Name, @BeerStyle, @CreatedAt, @UpdatedAt, @BreweryId)");
-            
+
             var beerToCreateCommand = new CommandDefinition(
                 beerToInsertSql.Append(_insertRowRetrievalQuery).ToString(),
                 new
@@ -129,10 +129,10 @@ namespace Dappery.Data.Repositories
                 },
                 _dbTransaction,
                 cancellationToken: cancellationToken);
-            
+
             // Let's insert the beer and grab its ID
             var beerId = await _dbConnection.ExecuteScalarAsync<int>(beerToCreateCommand);
-            
+
             // Finally, we'll return the newly inserted beer Id
             return beerId;
         }
@@ -154,7 +154,7 @@ namespace Dappery.Data.Repositories
                 },
                 _dbTransaction,
                 cancellationToken: cancellationToken);
-            
+
             await _dbConnection.ExecuteAsync(updateBeerCommand);
         }
 
@@ -167,7 +167,7 @@ namespace Dappery.Data.Repositories
                 new { Id = beerId },
                 _dbTransaction,
                 cancellationToken: cancellationToken);
-            
+
             await _dbConnection.ExecuteAsync(deleteBeerCommand);
         }
     }

@@ -12,7 +12,7 @@ namespace Dappery.Core.Breweries.Queries.RetrieveBrewery
                 .WithMessage("Must supply an ID to retrieve a brewery")
                 .GreaterThanOrEqualTo(1)
                 .WithMessage("Must be a valid brewery ID");
-                
+
         }
     }
 }

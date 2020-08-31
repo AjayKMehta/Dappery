@@ -20,7 +20,7 @@ namespace Dappery.Core.Extensions
                 }
             });
         }
-        
+
         public static void HasValidStateAbbreviation<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
             ruleBuilder.Custom((stateAbbreviation, context) =>
@@ -33,7 +33,7 @@ namespace Dappery.Core.Extensions
             .NotEmpty()
             .WithMessage("State code cannot be empty");
         }
-        
+
         public static void HasValidStreetAddress<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
             ruleBuilder.Custom((streetAddress, context) =>
@@ -44,14 +44,14 @@ namespace Dappery.Core.Extensions
                     context.AddFailure("Must supply a street address");
                     return;
                 }
-                
+
                 if (!StreetAddressRegex.IsMatch(context.PropertyValue.ToString()))
                 {
                     context.AddFailure($"{streetAddress} is not a valid street address");
                 }
             });
         }
-        
+
         public static void HasValidZipCode<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
             ruleBuilder.Custom((zipCode, context) =>
@@ -62,7 +62,7 @@ namespace Dappery.Core.Extensions
                     context.AddFailure("Must supply the zip code");
                     return;
                 }
-                
+
                 if (!ZipCodeRegex.IsMatch(context.PropertyValue.ToString()))
                 {
                     context.AddFailure($"{zipCode} is not a valid zipcode");

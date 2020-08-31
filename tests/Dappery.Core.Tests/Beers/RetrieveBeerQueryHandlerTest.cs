@@ -16,7 +16,7 @@ namespace Dappery.Core.Tests.Beers
             using var unitOfWork = UnitOfWork;
             var query = new RetrieveBeerQuery(1);
             var handler = new RetrieveBeerQueryHandler(unitOfWork);
-            
+
             // Act
             var result = await handler.Handle(query, CancellationTestToken);
 
@@ -33,7 +33,7 @@ namespace Dappery.Core.Tests.Beers
             result.Self.Brewery?.Id.ShouldBe(1);
             result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
         }
-        
+
         [Fact]
         public async Task GivenValidRequest_WhenBeerDoesNotExist_ThrowsApiExceptionForNotFound()
         {
@@ -41,7 +41,7 @@ namespace Dappery.Core.Tests.Beers
             using var unitOfWork = UnitOfWork;
             var query = new RetrieveBeerQuery(11);
             var handler = new RetrieveBeerQueryHandler(unitOfWork);
-            
+
             // Act
             var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(query, CancellationTestToken));
 

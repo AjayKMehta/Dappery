@@ -24,15 +24,15 @@ namespace Dappery.Core.Tests.Extensions
                     StreetAddress = "123 Redding St."
                 }
             };
-            
+
             // Add our beers since they are initialized within the domain
             breweryToMap.Beers.Add(new Beer { Id = 1, Name = "Test Beer 1", BeerStyle = BeerStyle.Lager });
             breweryToMap.Beers.Add(new Beer { Id = 2, Name = "Test Beer 2", BeerStyle = BeerStyle.Ipa });
             breweryToMap.Beers.Add(new Beer { Id = 3, Name = "Test Beer 3", BeerStyle = BeerStyle.DoubleIpa });
-            
+
             // Act
             var mappedBrewery = breweryToMap.ToBreweryDto();
-            
+
             // Assert
             mappedBrewery.ShouldNotBeNull();
             mappedBrewery.Id.ShouldBe(breweryToMap.Id);
@@ -53,7 +53,7 @@ namespace Dappery.Core.Tests.Extensions
             mappedBrewery.BeerCount.ShouldNotBeNull();
             mappedBrewery.BeerCount.ShouldBe(3);
         }
-        
+
         [Fact]
         public void ToBreweryDto_GivenValidBreweryWithoutListOfBeers_ReturnsMappedBreweryDtoWithEmptyBeerListAndZeroCount()
         {
@@ -70,10 +70,10 @@ namespace Dappery.Core.Tests.Extensions
                     StreetAddress = "123 Redding St."
                 }
             };
-            
+
             // Act
             var mappedBrewery = breweryToMap.ToBreweryDto();
-            
+
             // Assert
             mappedBrewery.ShouldNotBeNull();
             mappedBrewery.Id.ShouldBe(breweryToMap.Id);
@@ -88,7 +88,7 @@ namespace Dappery.Core.Tests.Extensions
             mappedBrewery.BeerCount.ShouldNotBeNull();
             mappedBrewery.BeerCount.ShouldBe(0);
         }
-        
+
         [Fact]
         public void ToBreweryDto_GivenValidBreweryWithoutBeerListIncluded_ReturnsMappedBreweryDtoWithoutBeerListOrCount()
         {
@@ -105,7 +105,7 @@ namespace Dappery.Core.Tests.Extensions
                     StreetAddress = "123 Redding St."
                 }
             };
-            
+
             // Add our beers since they are initialized within the domain
             breweryToMap.Beers.Add(new Beer { Id = 1, Name = "Test Beer 1", BeerStyle = BeerStyle.Lager });
             breweryToMap.Beers.Add(new Beer { Id = 2, Name = "Test Beer 2", BeerStyle = BeerStyle.Ipa });
@@ -113,7 +113,7 @@ namespace Dappery.Core.Tests.Extensions
 
             // Act
             var mappedBrewery = breweryToMap.ToBreweryDto(false);
-            
+
             // Assert
             mappedBrewery.ShouldNotBeNull();
             mappedBrewery.Id.ShouldBe(breweryToMap.Id);
@@ -126,7 +126,7 @@ namespace Dappery.Core.Tests.Extensions
             mappedBrewery.Beers.ShouldBeNull();
             mappedBrewery.BeerCount.ShouldBeNull();
         }
-        
+
         [Fact]
         public void ToBreweryDto_GivenValidBreweryWithNoBeerListAndWithoutBeerListIncluded_ReturnsMappedBreweryDtoWithoutBeerListOrCount()
         {
@@ -143,10 +143,10 @@ namespace Dappery.Core.Tests.Extensions
                     StreetAddress = "123 Redding St."
                 }
             };
-            
+
             // Act
             var mappedBrewery = breweryToMap.ToBreweryDto(false);
-            
+
             // Assert
             mappedBrewery.ShouldNotBeNull();
             mappedBrewery.Id.ShouldBe(breweryToMap.Id);

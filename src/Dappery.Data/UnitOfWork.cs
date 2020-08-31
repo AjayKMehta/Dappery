@@ -17,8 +17,8 @@ namespace Dappery.Data
         public UnitOfWork(string? connectionString, bool isPostgres = false)
         {
             // Based on our database implementation, we'll need a reference to the last row inserted
-            string rowInsertRetrievalQuery; 
-            
+            string rowInsertRetrievalQuery;
+
             // If no connection string is passed, we'll assume we're running with our SQLite database provider
             if (string.IsNullOrWhiteSpace(connectionString))
             {
@@ -27,10 +27,10 @@ namespace Dappery.Data
             }
             else
             {
-                _dbConnection = isPostgres ? (IDbConnection) new NpgsqlConnection(connectionString) : new SqlConnection(connectionString);
-                rowInsertRetrievalQuery = isPostgres ? "returning Id;" : "; SELECT CAST(SCOPE_IDENTITY() as int);" ;
+                _dbConnection = isPostgres ? (IDbConnection)new NpgsqlConnection(connectionString) : new SqlConnection(connectionString);
+                rowInsertRetrievalQuery = isPostgres ? "returning Id;" : "; SELECT CAST(SCOPE_IDENTITY() as int);";
             }
-            
+
             // Open our connection, begin our transaction, and instantiate our repositories
             _dbConnection.Open();
             _dbTransaction = _dbConnection.BeginTransaction();
@@ -51,7 +51,7 @@ namespace Dappery.Data
                 }
             }
         }
-        
+
         public IBreweryRepository BreweryRepository { get; }
 
         public IBeerRepository BeerRepository { get; }
@@ -98,7 +98,7 @@ namespace Dappery.Data
                     UpdatedAt DATE
                 );
             ";
-            
+
             const string createBeersSql = @"
                 CREATE TABLE Beers (
                     Id INTEGER PRIMARY KEY,
@@ -111,7 +111,7 @@ namespace Dappery.Data
                         REFERENCES Breweries (Id) ON DELETE CASCADE
                 );
             ";
-            
+
             const string createAddressSql = @"
                 CREATE TABLE Addresses (
                     Id INTEGER PRIMARY KEY,
@@ -126,12 +126,12 @@ namespace Dappery.Data
                         REFERENCES Breweries (Id) ON DELETE CASCADE
                 );
             ";
-            
+
             // Add our tables
             dbConnection.Execute(createBreweriesSql, _dbTransaction);
             dbConnection.Execute(createBeersSql, _dbTransaction);
             dbConnection.Execute(createAddressSql, _dbTransaction);
-            
+
             // Seed our data
             dbConnection.Execute(@"
                 INSERT INTO Breweries (Name, CreatedAt, UpdatedAt)
@@ -142,7 +142,7 @@ namespace Dappery.Data
                         CURRENT_DATE 
                     );",
                 transaction: _dbTransaction);
-            
+
             dbConnection.Execute(@"
                 INSERT INTO Breweries (Name, CreatedAt, UpdatedAt)
                 VALUES 
@@ -152,7 +152,7 @@ namespace Dappery.Data
                         CURRENT_DATE 
                     );",
                 transaction: _dbTransaction);
-            
+
             dbConnection.Execute(@"
                 INSERT INTO Addresses (StreetAddress, City, State, ZipCode, CreatedAt, UpdatedAt, BreweryId)
                 VALUES 
@@ -166,7 +166,7 @@ namespace Dappery.Data
                         1
                     );",
                 transaction: _dbTransaction);
-            
+
             dbConnection.Execute(@"
                 INSERT INTO Addresses (StreetAddress, City, State, ZipCode, CreatedAt, UpdatedAt, BreweryId)
                 VALUES 
@@ -180,7 +180,7 @@ namespace Dappery.Data
                         2
                     );",
                 transaction: _dbTransaction);
-            
+
             dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
@@ -192,7 +192,7 @@ namespace Dappery.Data
                         1
                     );",
                 transaction: _dbTransaction);
-            
+
             dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
@@ -204,7 +204,7 @@ namespace Dappery.Data
                         1
                     );",
                 transaction: _dbTransaction);
-            
+
             dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
@@ -216,7 +216,7 @@ namespace Dappery.Data
                         1
                     );",
                 transaction: _dbTransaction);
-            
+
             dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
@@ -228,7 +228,7 @@ namespace Dappery.Data
                         2
                     );",
                 transaction: _dbTransaction);
-            
+
             dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
