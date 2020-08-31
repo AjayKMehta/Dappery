@@ -3,10 +3,10 @@ namespace Dappery.Core.Breweries.Commands.UpdateBrewery
     using System.Net;
     using System.Threading;
     using System.Threading.Tasks;
-    using Extensions;
     using Data;
     using Domain.Media;
     using Exceptions;
+    using Extensions;
     using MediatR;
 
     public class UpdateBreweryCommandHandler : IRequestHandler<UpdateBreweryCommand, BreweryResource>
@@ -26,9 +26,9 @@ namespace Dappery.Core.Breweries.Commands.UpdateBrewery
             // Invalidate the request if no brewery was found
             if (breweryToUpdate is null)
             {
-                throw new DapperyApiException($"No brewery was found with ID {request.BreweryId}", HttpStatusCode.NotFound);   
+                throw new DapperyApiException($"No brewery was found with ID {request.BreweryId}", HttpStatusCode.NotFound);
             }
-            
+
             // Update the properties on the brewery entity
             breweryToUpdate.Name = request.Dto.Name;
             var updateBreweryAddress = false;
@@ -42,12 +42,12 @@ namespace Dappery.Core.Breweries.Commands.UpdateBrewery
                 breweryToUpdate.Address.State = request.Dto.Address.State;
                 breweryToUpdate.Address.ZipCode = request.Dto.Address.ZipCode;
             }
-            
+
             // Update the brewery in the database, retrieve it, and clean up our resources
             await _unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, cancellationToken, updateBreweryAddress);
             var updatedBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken);
             _unitOfWork.Commit();
-            
+
             // Map and return the brewery
             return new BreweryResource(updatedBrewery.ToBreweryDto());
         }

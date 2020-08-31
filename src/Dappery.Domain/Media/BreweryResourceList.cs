@@ -5,7 +5,7 @@ namespace Dappery.Domain.Media
 
     public class BreweryResourceList : ResourceList<BreweryDto>
     {
-        public BreweryResourceList(IEnumerable<BreweryDto> items) 
+        public BreweryResourceList(IEnumerable<BreweryDto> items)
             : base(items)
         {
         }

@@ -17,10 +17,10 @@ namespace Dappery.Core.Tests.Breweries
             using var unitOfWork = UnitOfWork;
             var query = new RetrieveBreweryQuery(1);
             var handler = new RetrieveBreweryQueryHandler(unitOfWork);
-            
+
             // Act
             var response = await handler.Handle(query, CancellationTestToken);
-            
+
             // Assert
             response.ShouldNotBeNull();
             response.ShouldBeOfType<BreweryResource>();
@@ -32,7 +32,7 @@ namespace Dappery.Core.Tests.Breweries
             response.Self.BeerCount?.ShouldNotBeNull();
             response.Self.BeerCount?.ShouldBe(3);
         }
-        
+
         [Fact]
         public async Task RetrieveBreweryHandler_GivenNonExistingBreweryId_ReturnsApiException()
         {
@@ -40,10 +40,10 @@ namespace Dappery.Core.Tests.Breweries
             using var unitOfWork = UnitOfWork;
             var query = new RetrieveBreweryQuery(11);
             var handler = new RetrieveBreweryQueryHandler(unitOfWork);
-            
+
             // Act
             var response = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(query, CancellationTestToken));
-            
+
             // Assert
             response.ShouldNotBeNull();
             response.ShouldBeOfType<DapperyApiException>();

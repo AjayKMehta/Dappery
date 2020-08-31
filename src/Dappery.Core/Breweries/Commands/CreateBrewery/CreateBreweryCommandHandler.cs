@@ -35,12 +35,12 @@ namespace Dappery.Core.Breweries.Commands.CreateBrewery
                     UpdatedAt = DateTime.UtcNow
                 }
             };
-            
+
             // Create our brewery, retrieve the brewery so we can map it to the response, and clean up our resources
             var breweryId = await _unitOfWork.BreweryRepository.CreateBrewery(breweryToCreate, cancellationToken);
             var insertedBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(breweryId, cancellationToken);
             _unitOfWork.Commit();
-            
+
             // Map and return the response
             return new BreweryResource(insertedBrewery.ToBreweryDto());
         }

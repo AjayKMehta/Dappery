@@ -24,7 +24,7 @@ namespace Dappery.Core.Tests.Beers
                 BreweryId = 1
             });
             var handler = new CreateBeerCommandHandler(unitOfWork);
-            
+
             // Act
             var result = await handler.Handle(beerCommand, CancellationTestToken);
 
@@ -45,7 +45,7 @@ namespace Dappery.Core.Tests.Beers
             result.Self.Name.ShouldBe(beerCommand.Dto.Name);
             result.Self.Style.ShouldBe(beerCommand.Dto.Style);
         }
-        
+
         [Fact]
         public async Task GivenValidRequest_WhenBreweryDoesNotExist_ThrowsApiExceptionForBadRequest()
         {
@@ -58,7 +58,7 @@ namespace Dappery.Core.Tests.Beers
                 BreweryId = 11
             });
             var handler = new CreateBeerCommandHandler(unitOfWork);
-            
+
             // Act
             var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(beerCommand, CancellationTestToken));
 
@@ -66,7 +66,7 @@ namespace Dappery.Core.Tests.Beers
             result.ShouldNotBeNull();
             result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         }
-        
+
         [Fact]
         public async Task GivenValidRequest_WithInvalidBeerStyle_ReturnsMappedAndCreatedBeerWithOtherAsStyle()
         {
@@ -79,7 +79,7 @@ namespace Dappery.Core.Tests.Beers
                 BreweryId = 1
             });
             var handler = new CreateBeerCommandHandler(unitOfWork);
-            
+
             // Act
             var result = await handler.Handle(beerCommand, CancellationTestToken);
 

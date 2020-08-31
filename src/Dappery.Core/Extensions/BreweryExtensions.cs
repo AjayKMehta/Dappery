@@ -27,7 +27,7 @@ namespace Dappery.Core.Extensions
                     StreetAddress = brewery.Address?.StreetAddress,
                     ZipCode = brewery.Address?.ZipCode
                 },
-                BeerCount = includeBeerList ? brewery.BeerCount : (int?) null
+                BeerCount = includeBeerList ? brewery.BeerCount : (int?)null
             };
         }
     }

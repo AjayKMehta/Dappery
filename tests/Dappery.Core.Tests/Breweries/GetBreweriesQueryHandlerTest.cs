@@ -34,7 +34,7 @@ namespace Dappery.Core.Tests.Breweries
             response.Items.FirstOrDefault(b => b.Id == 2)?.BeerCount.ShouldNotBeNull();
             response.Items.FirstOrDefault(b => b.Id == 2)?.BeerCount.ShouldBe(2);
         }
-        
+
         [Fact]
         public async Task GetBreweriesQueryHandler_WhenNoBreweriesExist_ReturnsEmptyListOfBreweries()
         {

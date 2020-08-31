@@ -7,7 +7,7 @@ namespace Dappery.Core.Extensions
     {
         public static BeerDto ToBeerDto(this Beer beer)
         {
-             return new BeerDto
+            return new BeerDto
             {
                 Id = beer.Id,
                 Name = beer.Name,

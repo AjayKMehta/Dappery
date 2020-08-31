@@ -28,7 +28,7 @@ namespace Dappery.Core.Tests.Breweries
                 },
                 Name = "Updated Brewery Name"
             }, breweryId);
-            
+
             // Act
             var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
             var result = await commandHandler.Handle(updateCommand, CancellationTestToken);
@@ -45,7 +45,7 @@ namespace Dappery.Core.Tests.Breweries
             result.Self.Address?.ZipCode.ShouldBe(updateCommand.Dto.Address?.ZipCode);
             result.Self.Name.ShouldBe(updateCommand.Dto.Name);
         }
-        
+
         [Fact]
         public async Task GivenValidUpdateRequest_WhenBreweryDoesNotExist_ThrowsNotFoundException()
         {
@@ -63,7 +63,7 @@ namespace Dappery.Core.Tests.Breweries
                 },
                 Name = "Doesn't Exist!"
             }, breweryId);
-            
+
             // Act
             var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
             var result = await Should.ThrowAsync<DapperyApiException>(async () => await commandHandler.Handle(updateCommand, CancellationTestToken));
@@ -72,7 +72,7 @@ namespace Dappery.Core.Tests.Breweries
             result.ShouldNotBeNull();
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
-        
+
         [Fact]
         public async Task GivenValidUpdateRequest_WhenBreweryDoesExistAndAddressIsNotUpdated_ReturnsMappedBreweryWithNoUpdatedAddress()
         {
@@ -83,7 +83,7 @@ namespace Dappery.Core.Tests.Breweries
             {
                 Name = "Cedar Crest Brewery"
             }, breweryId);
-            
+
             // Act
             var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
             var result = await commandHandler.Handle(updateCommand, CancellationTestToken);

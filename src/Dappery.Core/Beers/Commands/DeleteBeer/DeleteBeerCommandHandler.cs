@@ -20,13 +20,13 @@ namespace Dappery.Core.Beers.Commands.DeleteBeer
         {
             // Retrieve the beer from the request
             var existingBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken);
-            
+
             // Invalidate the request if no beer is found 
             if (existingBeer is null)
             {
                 throw new DapperyApiException($"No beer found with ID {request.BeerId}", HttpStatusCode.NotFound);
             }
-            
+
             // Remove the beer from the database
             await _unitOfWork.BeerRepository.DeleteBeerAsync(request.BeerId, cancellationToken);
             _unitOfWork.Commit();

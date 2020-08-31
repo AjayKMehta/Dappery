@@ -9,7 +9,7 @@ namespace Dappery.Core.Breweries.Commands.UpdateBrewery
         public UpdateBreweryCommand(UpdateBreweryDto dto, int breweryId) => (Dto, BreweryId) = (dto, breweryId);
 
         public int BreweryId { get; }
-            
+
         public UpdateBreweryDto Dto { get; }
     }
 }

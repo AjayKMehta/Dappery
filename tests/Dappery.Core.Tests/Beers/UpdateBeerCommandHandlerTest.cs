@@ -22,7 +22,7 @@ namespace Dappery.Core.Tests.Beers
                 Style = "Ipa"
             }, 1);
             var handler = new UpdateBeerCommandHandler(unitOfWork);
-            
+
             // Act
             var result = await handler.Handle(updateCommand, CancellationTestToken);
 
@@ -42,7 +42,7 @@ namespace Dappery.Core.Tests.Beers
             result.Self.Brewery?.Id.ShouldBe(1);
             result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
         }
-        
+
         [Fact]
         public async Task GivenValidRequest_WhenBeerExistsAndStyleIsUnknown_UpdatesAndReturnsMappedBeerWithOtherStyle()
         {
@@ -54,7 +54,7 @@ namespace Dappery.Core.Tests.Beers
                 Style = "Not a valid beer style!"
             }, 1);
             var handler = new UpdateBeerCommandHandler(unitOfWork);
-            
+
             // Act
             var result = await handler.Handle(updateCommand, CancellationTestToken);
 
@@ -74,7 +74,7 @@ namespace Dappery.Core.Tests.Beers
             result.Self.Brewery?.Id.ShouldBe(1);
             result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
         }
-        
+
         [Fact]
         public async Task GivenValidRequest_WhenBeerExistsAndExistingBreweryIsUpdated_UpdatesAndReturnsMappedBeer()
         {
@@ -87,7 +87,7 @@ namespace Dappery.Core.Tests.Beers
                 BreweryId = 2
             }, 1);
             var handler = new UpdateBeerCommandHandler(unitOfWork);
-            
+
             // Act
             var result = await handler.Handle(updateCommand, CancellationTestToken);
 
@@ -107,7 +107,7 @@ namespace Dappery.Core.Tests.Beers
             result.Self.Brewery?.Id.ShouldBe(2);
             result.Self.Brewery?.Name.ShouldBe("Sierra Nevada Brewing Company");
         }
-        
+
         [Fact]
         public async Task GivenValidRequest_WhenBeerExistsAndNonExistingBrewery_ThrowsApiExceptionForBadRequest()
         {
@@ -120,7 +120,7 @@ namespace Dappery.Core.Tests.Beers
                 BreweryId = 22
             }, 1);
             var handler = new UpdateBeerCommandHandler(unitOfWork);
-            
+
             // Act
             var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(updateCommand, CancellationTestToken));
 

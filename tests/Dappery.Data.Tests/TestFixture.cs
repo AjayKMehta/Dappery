@@ -10,11 +10,11 @@ namespace Dappery.Data.Tests
         {
             UnitOfWork = new UnitOfWork(null);
         }
-        
+
         protected IUnitOfWork UnitOfWork { get; }
 
         protected static CancellationToken CancellationTestToken => CancellationToken.None;
-        
+
         public void Dispose()
         {
             Dispose(true);

@@ -22,16 +22,16 @@ namespace Dappery.Core.Beers.Queries.RetrieveBeer
         {
             // Grab the beer from the ID
             var beer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.Id, cancellationToken);
-            
+
             // Invalidate the request if no beer is found
             if (beer is null)
             {
                 throw new DapperyApiException($"No beer found with ID {request.Id}", HttpStatusCode.NotFound);
             }
-            
+
             // Commit the query and clean up our resources
             _unitOfWork.Commit();
-            
+
             // Map and return the query
             return new BeerResource(beer.ToBeerDto());
         }
