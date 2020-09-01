@@ -3,11 +3,11 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Dappery.Core.Data;
+using Dappery.Core.Exceptions;
+using Dappery.Core.Extensions;
 using Dappery.Domain.Entities;
 using Dappery.Domain.Media;
-using Dappery.Core.Exceptions;
 using MediatR;
-using Dappery.Core.Extensions;
 
 namespace Dappery.Core.Beers.Commands.CreateBeer
 {

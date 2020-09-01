@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
-using Dappery.Data;
 using Dappery.Core.Data;
+using Dappery.Data;
 
 namespace Dappery.Core.Tests
 {

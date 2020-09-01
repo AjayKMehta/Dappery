@@ -1,11 +1,11 @@
 using System;
 using System.Data;
-using Dappery.Core.Data;
 using Dapper;
+using Dappery.Core.Data;
+using Dappery.Data.Repositories;
 using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
 using Npgsql;
-using Dappery.Data.Repositories;
 
 namespace Dappery.Data
 {
@@ -60,16 +60,16 @@ namespace Dappery.Data
         {
             try
             {
-               this.dbTransaction.Commit();
+                this.dbTransaction.Commit();
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Could not commit the transaction, reason: {e.Message}");
-               this.dbTransaction.Rollback();
+                this.dbTransaction.Rollback();
             }
             finally
             {
-               this.dbTransaction.Dispose();
+                this.dbTransaction.Dispose();
             }
         }
 
@@ -83,8 +83,8 @@ namespace Dappery.Data
         {
             if (disposing)
             {
-               this.dbTransaction?.Dispose();
-               this.dbConnection?.Dispose();
+                this.dbTransaction?.Dispose();
+                this.dbConnection?.Dispose();
             }
         }
 
@@ -128,9 +128,9 @@ namespace Dappery.Data
             ";
 
             // Add our tables
-            dbConnection.Execute(createBreweriesSql,this.dbTransaction);
-            dbConnection.Execute(createBeersSql,this.dbTransaction);
-            dbConnection.Execute(createAddressSql,this.dbTransaction);
+            dbConnection.Execute(createBreweriesSql, this.dbTransaction);
+            dbConnection.Execute(createBeersSql, this.dbTransaction);
+            dbConnection.Execute(createAddressSql, this.dbTransaction);
 
             // Seed our data
             dbConnection.Execute(@"
@@ -141,7 +141,7 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         CURRENT_DATE
                     );",
-                transaction:this.dbTransaction);
+                transaction: this.dbTransaction);
 
             dbConnection.Execute(@"
                 INSERT INTO Breweries (Name, CreatedAt, UpdatedAt)
@@ -151,7 +151,7 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         CURRENT_DATE
                     );",
-                transaction:this.dbTransaction);
+                transaction: this.dbTransaction);
 
             dbConnection.Execute(@"
                 INSERT INTO Addresses (StreetAddress, City, State, ZipCode, CreatedAt, UpdatedAt, BreweryId)
@@ -165,7 +165,7 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         1
                     );",
-                transaction:this.dbTransaction);
+                transaction: this.dbTransaction);
 
             dbConnection.Execute(@"
                 INSERT INTO Addresses (StreetAddress, City, State, ZipCode, CreatedAt, UpdatedAt, BreweryId)
@@ -179,7 +179,7 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         2
                     );",
-                transaction:this.dbTransaction);
+                transaction: this.dbTransaction);
 
             dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -191,7 +191,7 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         1
                     );",
-                transaction:this.dbTransaction);
+                transaction: this.dbTransaction);
 
             dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -203,7 +203,7 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         1
                     );",
-                transaction:this.dbTransaction);
+                transaction: this.dbTransaction);
 
             dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -215,7 +215,7 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         1
                     );",
-                transaction:this.dbTransaction);
+                transaction: this.dbTransaction);
 
             dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -227,7 +227,7 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         2
                     );",
-                transaction:this.dbTransaction);
+                transaction: this.dbTransaction);
 
             dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -239,7 +239,7 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         2
                     );",
-                transaction:this.dbTransaction);
+                transaction: this.dbTransaction);
         }
     }
 }

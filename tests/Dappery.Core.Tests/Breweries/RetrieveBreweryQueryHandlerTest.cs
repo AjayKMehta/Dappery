@@ -1,8 +1,8 @@
 using System.Net;
 using System.Threading.Tasks;
 using Dappery.Core.Breweries.Queries.RetrieveBrewery;
-using Dappery.Domain.Media;
 using Dappery.Core.Exceptions;
+using Dappery.Domain.Media;
 using Shouldly;
 using Xunit;
 

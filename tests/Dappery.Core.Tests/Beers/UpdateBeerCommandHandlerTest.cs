@@ -1,9 +1,9 @@
 using System.Net;
 using System.Threading.Tasks;
 using Dappery.Core.Beers.Commands.UpdateBeery;
+using Dappery.Core.Exceptions;
 using Dappery.Domain.Dtos.Beer;
 using Dappery.Domain.Entities;
-using Dappery.Core.Exceptions;
 using Shouldly;
 using Xunit;
 

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Dappery.Core.Data;
 using Dapper;
+using Dappery.Core.Data;
 using Dappery.Domain.Entities;
 
 namespace Dappery.Data.Repositories

@@ -2,9 +2,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Dappery.Core.Data;
+using Dappery.Core.Extensions;
 using Dappery.Domain.Entities;
 using Dappery.Domain.Media;
-using Dappery.Core.Extensions;
 using MediatR;
 
 namespace Dappery.Core.Breweries.Commands.CreateBrewery
