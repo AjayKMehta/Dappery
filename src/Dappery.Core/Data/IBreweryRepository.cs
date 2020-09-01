@@ -1,10 +1,10 @@
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Dappery.Domain.Entities;
+
 namespace Dappery.Core.Data
 {
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Domain.Entities;
-
     public interface IBreweryRepository
     {
         Task<IEnumerable<Brewery>> GetAllBreweries(CancellationToken cancellationToken);

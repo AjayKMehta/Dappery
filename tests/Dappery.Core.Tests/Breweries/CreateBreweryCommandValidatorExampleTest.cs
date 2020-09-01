@@ -1,11 +1,11 @@
+using Dappery.Core.Breweries.Commands.CreateBrewery;
+using Dappery.Domain.Dtos;
+using Dappery.Domain.Dtos.Brewery;
+using Shouldly;
+using Xunit;
+
 namespace Dappery.Core.Tests.Breweries
 {
-    using Core.Breweries.Commands.CreateBrewery;
-    using Domain.Dtos;
-    using Domain.Dtos.Brewery;
-    using Shouldly;
-    using Xunit;
-
     public class CreateBreweryCommandValidatorExampleTest
     {
         [Fact]

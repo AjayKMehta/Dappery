@@ -1,15 +1,12 @@
+using System;
+using System.Threading;
+using Dappery.Core.Data;
+
 namespace Dappery.Data.Tests
 {
-    using System;
-    using System.Threading;
-    using Core.Data;
-
     public class TestFixture : IDisposable
     {
-        protected TestFixture()
-        {
-            UnitOfWork = new UnitOfWork(null);
-        }
+        protected TestFixture() => this.UnitOfWork = new UnitOfWork(null);
 
         protected IUnitOfWork UnitOfWork { get; }
 
@@ -17,7 +14,7 @@ namespace Dappery.Data.Tests
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -25,7 +22,7 @@ namespace Dappery.Data.Tests
         {
             if (disposing)
             {
-                UnitOfWork.Dispose();
+                this.UnitOfWork.Dispose();
             }
         }
     }

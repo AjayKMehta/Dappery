@@ -1,35 +1,35 @@
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using Dappery.Core.Data;
+using Dappery.Core.Exceptions;
+using MediatR;
+
 namespace Dappery.Core.Beers.Commands.DeleteBeer
 {
-    using System.Net;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Data;
-    using Exceptions;
-    using MediatR;
-
     public class DeleteBeerCommandHandler : IRequestHandler<DeleteBeerCommand, Unit>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
         public DeleteBeerCommandHandler(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(DeleteBeerCommand request, CancellationToken cancellationToken)
         {
             // Retrieve the beer from the request
-            var existingBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken);
+            var existingBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken);
 
-            // Invalidate the request if no beer is found 
+            // Invalidate the request if no beer is found
             if (existingBeer is null)
             {
                 throw new DapperyApiException($"No beer found with ID {request.BeerId}", HttpStatusCode.NotFound);
             }
 
             // Remove the beer from the database
-            await _unitOfWork.BeerRepository.DeleteBeerAsync(request.BeerId, cancellationToken);
-            _unitOfWork.Commit();
+            await this.unitOfWork.BeerRepository.DeleteBeerAsync(request.BeerId, cancellationToken);
+            this.unitOfWork.Commit();
 
             return Unit.Value;
         }

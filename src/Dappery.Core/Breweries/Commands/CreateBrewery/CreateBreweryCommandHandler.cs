@@ -1,21 +1,21 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Dappery.Core.Data;
+using Dappery.Domain.Entities;
+using Dappery.Domain.Media;
+using Dappery.Core.Extensions;
+using MediatR;
+
 namespace Dappery.Core.Breweries.Commands.CreateBrewery
 {
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Data;
-    using Domain.Entities;
-    using Domain.Media;
-    using Extensions;
-    using MediatR;
-
     public class CreateBreweryCommandHandler : IRequestHandler<CreateBreweryCommand, BreweryResource>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
         public CreateBreweryCommandHandler(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<BreweryResource> Handle(CreateBreweryCommand request, CancellationToken cancellationToken)
@@ -37,9 +37,9 @@ namespace Dappery.Core.Breweries.Commands.CreateBrewery
             };
 
             // Create our brewery, retrieve the brewery so we can map it to the response, and clean up our resources
-            var breweryId = await _unitOfWork.BreweryRepository.CreateBrewery(breweryToCreate, cancellationToken);
-            var insertedBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(breweryId, cancellationToken);
-            _unitOfWork.Commit();
+            var breweryId = await this.unitOfWork.BreweryRepository.CreateBrewery(breweryToCreate, cancellationToken);
+            var insertedBrewery = await this.unitOfWork.BreweryRepository.GetBreweryById(breweryId, cancellationToken).ConfigureAwait(false);
+            this.unitOfWork.Commit();
 
             // Map and return the response
             return new BreweryResource(insertedBrewery.ToBreweryDto());

@@ -6,7 +6,7 @@ namespace Dappery.Core.Beers.Commands.DeleteBeer
     {
         public DeleteBeerCommandValidator()
         {
-            RuleFor(b => b.BeerId)
+            this.RuleFor(b => b.BeerId)
                 .NotNull()
                 .WithMessage("Must supply the beer ID");
         }
