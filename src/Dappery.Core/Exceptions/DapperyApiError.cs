@@ -4,8 +4,8 @@ namespace Dappery.Core.Exceptions
     {
         public DapperyApiError(string errorMessage, string propertyName)
         {
-            ErrorMessage = errorMessage;
-            PropertyName = propertyName;
+            this.ErrorMessage = errorMessage;
+            this.PropertyName = propertyName;
         }
 
         public string ErrorMessage { get; }

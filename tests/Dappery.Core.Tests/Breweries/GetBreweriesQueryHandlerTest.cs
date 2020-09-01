@@ -1,23 +1,23 @@
+using System.Linq;
+using System.Threading.Tasks;
+using Dappery.Core.Breweries.Queries.GetBreweries;
+using Dappery.Domain.Media;
+using Shouldly;
+using Xunit;
+
 namespace Dappery.Core.Tests.Breweries
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Core.Breweries.Queries.GetBreweries;
-    using Domain.Media;
-    using Shouldly;
-    using Xunit;
-
     public class GetBreweriesQueryHandlerTest : TestFixture
     {
         [Fact]
         public async Task GetBreweriesQueryHandler_WhenBreweriesExist_ReturnsListOfBreweriesWithBeers()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var handler = new GetBreweriesQueryHandler(unitOfWork);
 
             // Act
-            var response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken);
+            var response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             response.ShouldNotBeNull();
@@ -39,9 +39,9 @@ namespace Dappery.Core.Tests.Breweries
         public async Task GetBreweriesQueryHandler_WhenNoBreweriesExist_ReturnsEmptyListOfBreweries()
         {
             // Arrange, remove all breweries from the test database
-            using var unitOfWork = UnitOfWork;
-            await UnitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken);
-            await UnitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken);
+            using var unitOfWork = this.UnitOfWork;
+            await this.UnitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
+            await this.UnitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken).ConfigureAwait(false);
             var handler = new GetBreweriesQueryHandler(unitOfWork);
 
             // Act

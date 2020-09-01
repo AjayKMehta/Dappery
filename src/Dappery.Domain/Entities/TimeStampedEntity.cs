@@ -1,7 +1,7 @@
+using System;
+
 namespace Dappery.Domain.Entities
 {
-    using System;
-
     public class TimeStampedEntity
     {
         public int Id { get; set; }

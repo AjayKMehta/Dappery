@@ -1,21 +1,21 @@
+using System.Net;
+using System.Threading.Tasks;
+using Dappery.Core.Breweries.Commands.UpdateBrewery;
+using Dappery.Core.Exceptions;
+using Dappery.Domain.Dtos;
+using Dappery.Domain.Dtos.Brewery;
+using Shouldly;
+using Xunit;
+
 namespace Dappery.Core.Tests.Breweries
 {
-    using System.Net;
-    using System.Threading.Tasks;
-    using Core.Breweries.Commands.UpdateBrewery;
-    using Domain.Dtos;
-    using Domain.Dtos.Brewery;
-    using Exceptions;
-    using Shouldly;
-    using Xunit;
-
     public class UpdateBreweryCommandHandlerTest : TestFixture
     {
         [Fact]
         public async Task GivenValidUpdateRequest_WhenBreweryExists_ReturnsUpdatedMappedBrewery()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             const int breweryId = 1;
             var updateCommand = new UpdateBreweryCommand(new UpdateBreweryDto
             {
@@ -50,7 +50,7 @@ namespace Dappery.Core.Tests.Breweries
         public async Task GivenValidUpdateRequest_WhenBreweryDoesNotExist_ThrowsNotFoundException()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             const int breweryId = 11;
             var updateCommand = new UpdateBreweryCommand(new UpdateBreweryDto
             {
@@ -66,7 +66,7 @@ namespace Dappery.Core.Tests.Breweries
 
             // Act
             var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
-            var result = await Should.ThrowAsync<DapperyApiException>(async () => await commandHandler.Handle(updateCommand, CancellationTestToken));
+            var result = await Should.ThrowAsync<DapperyApiException>(async () => await commandHandler.Handle(updateCommand, CancellationTestToken)).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();
@@ -77,7 +77,7 @@ namespace Dappery.Core.Tests.Breweries
         public async Task GivenValidUpdateRequest_WhenBreweryDoesExistAndAddressIsNotUpdated_ReturnsMappedBreweryWithNoUpdatedAddress()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             const int breweryId = 1;
             var updateCommand = new UpdateBreweryCommand(new UpdateBreweryDto
             {
@@ -86,7 +86,7 @@ namespace Dappery.Core.Tests.Breweries
 
             // Act
             var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
-            var result = await commandHandler.Handle(updateCommand, CancellationTestToken);
+            var result = await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();

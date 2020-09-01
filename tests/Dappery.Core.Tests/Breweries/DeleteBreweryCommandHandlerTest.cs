@@ -1,20 +1,20 @@
+using System.Net;
+using System.Threading.Tasks;
+using Dappery.Core.Breweries.Commands.DeleteBrewery;
+using Dappery.Core.Exceptions;
+using MediatR;
+using Shouldly;
+using Xunit;
+
 namespace Dappery.Core.Tests.Breweries
 {
-    using System.Net;
-    using System.Threading.Tasks;
-    using Core.Breweries.Commands.DeleteBrewery;
-    using Exceptions;
-    using MediatR;
-    using Shouldly;
-    using Xunit;
-
     public class DeleteBreweryCommandHandlerTest : TestFixture
     {
         [Fact]
         public async Task GivenValidDeleteRequest_WhenBreweryExists_IsRemovedFromDatabaseIncludingAllBeers()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var deleteCommand = new DeleteBreweryCommand(1);
             var handler = new DeleteBreweryCommandHandler(unitOfWork);
 
@@ -30,7 +30,7 @@ namespace Dappery.Core.Tests.Breweries
         public async Task GivenValidDeleteRequest_WhenDoesNotBreweryExist_IsNotRemovedFromDatabaseAndExceptionIsThrown()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var deleteCommand = new DeleteBreweryCommand(11);
             var handler = new DeleteBreweryCommandHandler(unitOfWork);
 

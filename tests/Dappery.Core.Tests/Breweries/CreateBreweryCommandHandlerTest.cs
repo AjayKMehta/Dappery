@@ -1,14 +1,14 @@
+using System.Threading;
+using System.Threading.Tasks;
+using Dappery.Core.Breweries.Commands.CreateBrewery;
+using Dappery.Domain.Dtos;
+using Dappery.Domain.Dtos.Brewery;
+using Dappery.Domain.Media;
+using Shouldly;
+using Xunit;
+
 namespace Dappery.Core.Tests.Breweries
 {
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Core.Breweries.Commands.CreateBrewery;
-    using Domain.Dtos;
-    using Domain.Dtos.Brewery;
-    using Domain.Media;
-    using Shouldly;
-    using Xunit;
-
     public class CreateBreweryCommandHandlerTest : TestFixture
     {
         [Fact]

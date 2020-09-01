@@ -1,24 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Dappery.Domain.Entities;
+using Shouldly;
+using Xunit;
+
 namespace Dappery.Data.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Domain.Entities;
-    using Shouldly;
-    using Xunit;
-
     public class BreweryRepositoryTest : TestFixture
     {
         [Fact]
         public async Task GetAllBreweries_WhenInvokedAndBreweriesExist_ReturnsValidListOfBreweries()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
 
             // Act
-            var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken)).ToList();
+            var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false)).ToList();
             unitOfWork.Commit();
 
             // Assert
@@ -27,7 +27,7 @@ namespace Dappery.Data.Tests
             breweries.Count.ShouldBe(2);
             breweries.All(br => br.Address != null).ShouldBeTrue();
             breweries.All(br => br.Beers != null).ShouldBeTrue();
-            breweries.All(br => br.Beers.Any()).ShouldBeTrue();
+            breweries.All(br => br.Beers.Count > 0).ShouldBeTrue();
             breweries.FirstOrDefault(br => br.Name == "Fall River Brewery")?.Beers
                 .ShouldContain(b => b.Name == "Hexagenia");
             breweries.FirstOrDefault(br => br.Name == "Fall River Brewery")?.Beers
@@ -44,12 +44,12 @@ namespace Dappery.Data.Tests
         public async Task GetAllBreweries_WhenInvokedAndNoBreweriesExist_ReturnsEmptyList()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
-            await unitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken);
-            await unitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken);
+            using var unitOfWork = this.UnitOfWork;
+            await unitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
+            await unitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken).ConfigureAwait(false);
 
             // Act
-            var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken)).ToList();
+            var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false)).ToList();
             unitOfWork.Commit();
 
             // Assert
@@ -62,10 +62,10 @@ namespace Dappery.Data.Tests
         public async Task GetBreweryById_WhenInvokedAndBreweryExist_ReturnsValidBreweryWithBeersAndAddress()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
 
             // Act
-            var brewery = await unitOfWork.BreweryRepository.GetBreweryById(1, CancellationTestToken);
+            var brewery = await unitOfWork.BreweryRepository.GetBreweryById(1, CancellationTestToken).ConfigureAwait(false);
             unitOfWork.Commit();
 
             // Assert
@@ -84,10 +84,10 @@ namespace Dappery.Data.Tests
         public async Task GetBreweryById_WhenInvokedAndNoBreweryExist_ReturnsNull()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
 
             // Act
-            var brewery = await unitOfWork.BreweryRepository.GetBreweryById(11, CancellationTestToken);
+            var brewery = await unitOfWork.BreweryRepository.GetBreweryById(11, CancellationTestToken).ConfigureAwait(false);
             unitOfWork.Commit();
 
             // Assert
@@ -98,7 +98,7 @@ namespace Dappery.Data.Tests
         public async Task CreateBrewery_WhenBreweryIsValid_ReturnsNewlyInsertedBrewery()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var breweryToInsert = new Brewery
             {
                 Name = "Bike Dog Brewing Company",
@@ -116,8 +116,8 @@ namespace Dappery.Data.Tests
             };
 
             // Act
-            var breweryId = await unitOfWork.BreweryRepository.CreateBrewery(breweryToInsert, CancellationTestToken);
-            var insertedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryId, CancellationTestToken);
+            var breweryId = await unitOfWork.BreweryRepository.CreateBrewery(breweryToInsert, CancellationTestToken).ConfigureAwait(false);
+            var insertedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryId, CancellationTestToken).ConfigureAwait(false);
             unitOfWork.Commit();
 
             // Assert
@@ -133,7 +133,7 @@ namespace Dappery.Data.Tests
         public async Task UpdateBrewery_WhenBreweryIsValidAndAddressIsNotUpdated_ReturnsUpdatedBrewery()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var breweryToUpdate = new Brewery
             {
                 Id = 2,
@@ -151,8 +151,8 @@ namespace Dappery.Data.Tests
             };
 
             // Act
-            await unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, CancellationTestToken);
-            var updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken);
+            await unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, CancellationTestToken).ConfigureAwait(false);
+            var updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken).ConfigureAwait(false);
             unitOfWork.Commit();
 
             // Assert
@@ -169,7 +169,7 @@ namespace Dappery.Data.Tests
         public async Task UpdateBrewery_WhenBreweryIsValidAndAddressIsUpdated_ReturnsUpdatedBrewery()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var breweryToUpdate = new Brewery
             {
                 Id = 2,
@@ -188,8 +188,8 @@ namespace Dappery.Data.Tests
             };
 
             // Act
-            await unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, CancellationTestToken, true);
-            var updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken);
+            await unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, CancellationTestToken, true).ConfigureAwait(false);
+            var updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken).ConfigureAwait(false);
             unitOfWork.Commit();
 
             // Assert
@@ -208,15 +208,14 @@ namespace Dappery.Data.Tests
         public async Task DeleteBrewery_WhenBreweryExists_RemovesBreweryAndAllAssociatedBeersAndAddress()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
-            (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken))?.Count().ShouldBe(2);
-            (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationToken.None))?.Count().ShouldBe(5);
-
+            using var unitOfWork = this.UnitOfWork;
+            (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false))?.Count().ShouldBe(2);
+            (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationToken.None).ConfigureAwait(false))?.Count().ShouldBe(5);
 
             // Act
-            await unitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken);
-            var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken)).ToList();
-            (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationToken.None))?.Count().ShouldBe(2);
+            await unitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
+            var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false)).ToList();
+            (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationToken.None).ConfigureAwait(false))?.Count().ShouldBe(2);
             unitOfWork.Commit();
 
             // Assert

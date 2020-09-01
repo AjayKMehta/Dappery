@@ -1,13 +1,13 @@
+using System.Net;
+using System.Threading.Tasks;
+using Dappery.Core.Beers.Commands.DeleteBeer;
+using Dappery.Core.Exceptions;
+using MediatR;
+using Shouldly;
+using Xunit;
+
 namespace Dappery.Core.Tests.Beers
 {
-    using System.Net;
-    using System.Threading.Tasks;
-    using Core.Beers.Commands.DeleteBeer;
-    using Exceptions;
-    using MediatR;
-    using Shouldly;
-    using Xunit;
-
     public class DeleteBeerCommandHandlerTest : TestFixture
     {
         [Fact]

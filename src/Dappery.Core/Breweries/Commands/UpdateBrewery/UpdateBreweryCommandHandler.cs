@@ -1,27 +1,27 @@
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using Dappery.Core.Data;
+using Dappery.Domain.Media;
+using Dappery.Core.Exceptions;
+using Dappery.Core.Extensions;
+using MediatR;
+
 namespace Dappery.Core.Breweries.Commands.UpdateBrewery
 {
-    using System.Net;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Data;
-    using Domain.Media;
-    using Exceptions;
-    using Extensions;
-    using MediatR;
-
     public class UpdateBreweryCommandHandler : IRequestHandler<UpdateBreweryCommand, BreweryResource>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
         public UpdateBreweryCommandHandler(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<BreweryResource> Handle(UpdateBreweryCommand request, CancellationToken cancellationToken)
         {
             // Retrieve the brewery on the request
-            var breweryToUpdate = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken);
+            var breweryToUpdate = await this.unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken);
 
             // Invalidate the request if no brewery was found
             if (breweryToUpdate is null)
@@ -44,9 +44,9 @@ namespace Dappery.Core.Breweries.Commands.UpdateBrewery
             }
 
             // Update the brewery in the database, retrieve it, and clean up our resources
-            await _unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, cancellationToken, updateBreweryAddress);
-            var updatedBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken);
-            _unitOfWork.Commit();
+            await this.unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, cancellationToken, updateBreweryAddress).ConfigureAwait(false);
+            var updatedBrewery = await this.unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
+            this.unitOfWork.Commit();
 
             // Map and return the brewery
             return new BreweryResource(updatedBrewery.ToBreweryDto());

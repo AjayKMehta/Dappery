@@ -1,22 +1,22 @@
+using System.Net;
+using System.Threading.Tasks;
+using Dappery.Core.Beers.Commands.CreateBeer;
+using Dappery.Domain.Dtos.Beer;
+using Dappery.Domain.Entities;
+using Dappery.Domain.Media;
+using Dappery.Core.Exceptions;
+using Shouldly;
+using Xunit;
+
 namespace Dappery.Core.Tests.Beers
 {
-    using System.Net;
-    using System.Threading.Tasks;
-    using Core.Beers.Commands.CreateBeer;
-    using Domain.Dtos.Beer;
-    using Domain.Entities;
-    using Domain.Media;
-    using Exceptions;
-    using Shouldly;
-    using Xunit;
-
     public class CreateBeerCommandHandlerTest : TestFixture
     {
         [Fact]
         public async Task GivenValidRequest_WhenBreweryExists_ReturnsMappedAndCreatedBeer()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var beerCommand = new CreateBeerCommand(new CreateBeerDto
             {
                 Name = "Test Beer",
@@ -26,7 +26,7 @@ namespace Dappery.Core.Tests.Beers
             var handler = new CreateBeerCommandHandler(unitOfWork);
 
             // Act
-            var result = await handler.Handle(beerCommand, CancellationTestToken);
+            var result = await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();
@@ -50,7 +50,7 @@ namespace Dappery.Core.Tests.Beers
         public async Task GivenValidRequest_WhenBreweryDoesNotExist_ThrowsApiExceptionForBadRequest()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var beerCommand = new CreateBeerCommand(new CreateBeerDto
             {
                 Name = "Test Beer",
@@ -60,7 +60,7 @@ namespace Dappery.Core.Tests.Beers
             var handler = new CreateBeerCommandHandler(unitOfWork);
 
             // Act
-            var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(beerCommand, CancellationTestToken));
+            var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();
@@ -71,7 +71,7 @@ namespace Dappery.Core.Tests.Beers
         public async Task GivenValidRequest_WithInvalidBeerStyle_ReturnsMappedAndCreatedBeerWithOtherAsStyle()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var beerCommand = new CreateBeerCommand(new CreateBeerDto
             {
                 Name = "Test Beer",
@@ -81,7 +81,7 @@ namespace Dappery.Core.Tests.Beers
             var handler = new CreateBeerCommandHandler(unitOfWork);
 
             // Act
-            var result = await handler.Handle(beerCommand, CancellationTestToken);
+            var result = await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();
@@ -98,7 +98,7 @@ namespace Dappery.Core.Tests.Beers
             result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
             result.Self.Id.ShouldNotBeNull();
             result.Self.Name.ShouldBe(beerCommand.Dto.Name);
-            result.Self.Style.ShouldBe(BeerStyle.Other.ToString());
+            result.Self.Style.ShouldBe(nameof(BeerStyle.Other));
         }
     }
 }

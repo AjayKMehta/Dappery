@@ -1,29 +1,26 @@
+using System;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using Dappery.Core.Data;
+using Dappery.Domain.Entities;
+using Dappery.Domain.Media;
+using Dappery.Core.Exceptions;
+using MediatR;
+using Dappery.Core.Extensions;
+
 namespace Dappery.Core.Beers.Commands.CreateBeer
 {
-    using System;
-    using System.Net;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Data;
-    using Domain.Entities;
-    using Domain.Media;
-    using Exceptions;
-    using Extensions;
-    using MediatR;
-
     public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerResource>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
-        public CreateBeerCommandHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
+        public CreateBeerCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
 
         public async Task<BeerResource> Handle(CreateBeerCommand request, CancellationToken cancellationToken)
         {
             // Check to make sure the brewery exists from the given brewery ID on the request
-            var existingBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId, cancellationToken);
+            var existingBrewery = await this.unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId, cancellationToken).ConfigureAwait(false);
 
             // Invalidate the request if no corresponding brewery exists
             // Since we're not overloading the '==' operator, let's use the 'is' comparison here
@@ -46,9 +43,9 @@ namespace Dappery.Core.Beers.Commands.CreateBeer
             };
 
             // Add the record to the database and retrieve the record after we create it
-            var createdBeerId = await _unitOfWork.BeerRepository.CreateBeerAsync(beerToAdd, cancellationToken);
-            var createdBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(createdBeerId, cancellationToken);
-            _unitOfWork.Commit();
+            var createdBeerId = await this.unitOfWork.BeerRepository.CreateBeerAsync(beerToAdd, cancellationToken).ConfigureAwait(false);
+            var createdBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(createdBeerId, cancellationToken).ConfigureAwait(false);
+            this.unitOfWork.Commit();
 
             // Return the mapped beer
             return new BeerResource(createdBeer.ToBeerDto());

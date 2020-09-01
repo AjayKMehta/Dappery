@@ -6,13 +6,12 @@ namespace Dappery.Core.Breweries.Queries.RetrieveBrewery
     {
         public RetrieveBreweryQueryValidator()
         {
-            RuleFor(b => b.Id)
+            this.RuleFor(b => b.Id)
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("Must supply an ID to retrieve a brewery")
                 .GreaterThanOrEqualTo(1)
                 .WithMessage("Must be a valid brewery ID");
-
         }
     }
 }
