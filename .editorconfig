@@ -374,6 +374,12 @@ dotnet_naming_rule.parameters_rule.style                = camel_case_style
 dotnet_naming_rule.parameters_rule.severity             = warning
 
 ##########################################
+# Disabled analyzer rules
+##########################################
+
+dotnet_diagnostic.IDE0058.severity = none
+
+##########################################
 # License
 ##########################################
 # The following applies as to the .editorconfig file ONLY, and is
