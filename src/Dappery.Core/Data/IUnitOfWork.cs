@@ -1,7 +1,7 @@
+using System;
+
 namespace Dappery.Core.Data
 {
-    using System;
-
     public interface IUnitOfWork : IDisposable
     {
         IBeerRepository BeerRepository { get; }

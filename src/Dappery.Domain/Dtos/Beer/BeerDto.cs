@@ -1,7 +1,7 @@
+using Dappery.Domain.Dtos.Brewery;
+
 namespace Dappery.Domain.Dtos.Beer
 {
-    using Brewery;
-
     public class BeerDto
     {
         public int Id { get; set; }

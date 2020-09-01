@@ -7,11 +7,9 @@ namespace Dappery.Core.Tests
 {
     public class TestFixture : IDisposable
     {
-        public TestFixture()
-        {
+        public TestFixture() =>
             // Initialize our test database with our seed data
             this.UnitOfWork = new UnitOfWork(null);
-        }
 
         protected IUnitOfWork UnitOfWork { get; }
 

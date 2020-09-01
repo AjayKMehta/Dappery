@@ -19,7 +19,7 @@ namespace Dappery.Core.Tests.Breweries
             var handler = new DeleteBreweryCommandHandler(unitOfWork);
 
             // Act
-            var result = await handler.Handle(deleteCommand, CancellationTestToken);
+            var result = await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();
@@ -35,7 +35,7 @@ namespace Dappery.Core.Tests.Breweries
             var handler = new DeleteBreweryCommandHandler(unitOfWork);
 
             // Act
-            var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(deleteCommand, CancellationTestToken));
+            var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();

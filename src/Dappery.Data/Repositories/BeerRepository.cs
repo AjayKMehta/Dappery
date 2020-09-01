@@ -32,23 +32,23 @@ namespace Dappery.Data.Repositories
                 cancellationToken: token);
 
             var resultCommand = new CommandDefinition(
-                @"SELECT b.*, br.* FROM Beers b INNER JOIN Breweries br ON br.Id = b.BreweryId",
+                "SELECT b.*, br.* FROM Beers b INNER JOIN Breweries br ON br.Id = b.BreweryId",
                 transaction: this.transaction,
                 cancellationToken: token);
 
             // Retrieve the addresses, as this is a nested mapping
-            var addresses = (await this.dbConnection.QueryAsync<Address>(addressCommand)).ToList();
+            var addresses = (await this.dbConnection.QueryAsync<Address>(addressCommand).ConfigureAwait(false)).ToList();
 
             return await this.dbConnection.QueryAsync<Beer, Brewery, Beer>(
                 resultCommand,
                 (beer, brewery) =>
                 {
                     // Map the brewery that Dapper returns for us to the beer
-                    brewery.Address = addresses.FirstOrDefault(a => a.BreweryId == brewery.Id);
+                    brewery.Address = addresses.Find(a => a.BreweryId == brewery.Id);
                     beer.Brewery = brewery;
                     return beer;
                 }
-            );
+            ).ConfigureAwait(false);
         }
 
         public async Task<Beer> GetBeerByIdAsync(int id, CancellationToken cancellationToken)
@@ -69,7 +69,7 @@ namespace Dappery.Data.Repositories
                 {
                     beer.Brewery = brewery;
                     return beer;
-                })).FirstOrDefault();
+                }).ConfigureAwait(false)).FirstOrDefault();
 
             // Return back to the caller if no beer is found, let the business logic decide what to do if we can't the specified beer
             if (beerFromId is null)
@@ -79,19 +79,19 @@ namespace Dappery.Data.Repositories
 
             // Instantiate a command for the address and brewery
             var addressCommand = new CommandDefinition(
-                @"SELECT * FROM Addresses WHERE BreweryId = @BreweryId",
+                "SELECT * FROM Addresses WHERE BreweryId = @BreweryId",
                 new { BreweryId = beerFromId.Brewery?.Id },
                 this.transaction,
                 cancellationToken: cancellationToken);
 
             var breweryCommand = new CommandDefinition(
-                @"SELECT * FROM Beers WHERE BreweryId = @BreweryId",
+                "SELECT * FROM Beers WHERE BreweryId = @BreweryId",
                 new { beerFromId.BreweryId },
                 this.transaction,
                 cancellationToken: cancellationToken);
 
             // Map the address to the beer's brewery
-            var address = await this.dbConnection.QueryFirstOrDefaultAsync<Address>(addressCommand);
+            var address = await this.dbConnection.QueryFirstOrDefaultAsync<Address>(addressCommand).ConfigureAwait(false);
 
             // Set the address found in the previous query to the beer's brewery address, if we have a brewery
             if (beerFromId.Brewery != null)
@@ -100,7 +100,7 @@ namespace Dappery.Data.Repositories
             }
 
             // Let's add all the beers to our brewery attached to this beer
-            var beersFromBrewery = await this.dbConnection.QueryAsync<Beer>(breweryCommand);
+            var beersFromBrewery = await this.dbConnection.QueryAsync<Beer>(breweryCommand).ConfigureAwait(false);
 
             // Lastly, let's add all the beers to the entity model
             foreach (var beer in beersFromBrewery)
@@ -131,7 +131,7 @@ namespace Dappery.Data.Repositories
                 cancellationToken: cancellationToken);
 
             // Let's insert the beer and grab its ID
-            var beerId = await this.dbConnection.ExecuteScalarAsync<int>(beerToCreateCommand);
+            var beerId = await this.dbConnection.ExecuteScalarAsync<int>(beerToCreateCommand).ConfigureAwait(false);
 
             // Finally, we'll return the newly inserted beer Id
             return beerId;
@@ -163,7 +163,7 @@ namespace Dappery.Data.Repositories
             // Our simplest command, just remove the beer directly from the database
             // Validation that the beer actually exists in the database will left to the application layer
             var deleteBeerCommand = new CommandDefinition(
-                @"DELETE FROM Beers WHERE Id = @Id",
+                "DELETE FROM Beers WHERE Id = @Id",
                 new { Id = beerId },
                 this.transaction,
                 cancellationToken: cancellationToken);

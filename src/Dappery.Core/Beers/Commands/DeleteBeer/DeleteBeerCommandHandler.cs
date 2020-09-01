@@ -11,15 +11,12 @@ namespace Dappery.Core.Beers.Commands.DeleteBeer
     {
         private readonly IUnitOfWork unitOfWork;
 
-        public DeleteBeerCommandHandler(IUnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
-        }
+        public DeleteBeerCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
 
         public async Task<Unit> Handle(DeleteBeerCommand request, CancellationToken cancellationToken)
         {
             // Retrieve the beer from the request
-            var existingBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken);
+            var existingBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
 
             // Invalidate the request if no beer is found
             if (existingBeer is null)
@@ -28,7 +25,7 @@ namespace Dappery.Core.Beers.Commands.DeleteBeer
             }
 
             // Remove the beer from the database
-            await this.unitOfWork.BeerRepository.DeleteBeerAsync(request.BeerId, cancellationToken);
+            await this.unitOfWork.BeerRepository.DeleteBeerAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
             this.unitOfWork.Commit();
 
             return Unit.Value;

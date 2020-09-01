@@ -2,7 +2,7 @@ namespace Dappery.Domain.Media
 {
     public class Resource<T>
     {
-        public Resource(T resource) => Self = resource;
+        public Resource(T resource) => this.Self = resource;
 
         public T Self { get; }
 

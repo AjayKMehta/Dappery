@@ -13,10 +13,7 @@ namespace Dappery.Core.Breweries.Commands.CreateBrewery
     {
         private readonly IUnitOfWork unitOfWork;
 
-        public CreateBreweryCommandHandler(IUnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
-        }
+        public CreateBreweryCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
 
         public async Task<BreweryResource> Handle(CreateBreweryCommand request, CancellationToken cancellationToken)
         {
@@ -37,7 +34,7 @@ namespace Dappery.Core.Breweries.Commands.CreateBrewery
             };
 
             // Create our brewery, retrieve the brewery so we can map it to the response, and clean up our resources
-            var breweryId = await this.unitOfWork.BreweryRepository.CreateBrewery(breweryToCreate, cancellationToken);
+            var breweryId = await this.unitOfWork.BreweryRepository.CreateBrewery(breweryToCreate, cancellationToken).ConfigureAwait(false);
             var insertedBrewery = await this.unitOfWork.BreweryRepository.GetBreweryById(breweryId, cancellationToken).ConfigureAwait(false);
             this.unitOfWork.Commit();
 

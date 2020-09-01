@@ -1,8 +1,8 @@
+using System.Text.RegularExpressions;
+using FluentValidation;
+
 namespace Dappery.Core.Extensions
 {
-    using System.Text.RegularExpressions;
-    using FluentValidation;
-
     public static class RuleBuilderExtensions
     {
         // Normally, would put things like this in a shared project, like a separate Dappery.Common project

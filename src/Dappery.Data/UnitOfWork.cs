@@ -43,7 +43,7 @@ namespace Dappery.Data
                 try
                 {
                     // We'll seed a couple breweries each with an address and several beers
-                    SeedDatabase(this.dbConnection);
+                    this.SeedDatabase(this.dbConnection);
                 }
                 catch (Exception e)
                 {
@@ -240,11 +240,6 @@ namespace Dappery.Data
                         2
                     );",
                 transaction:this.dbTransaction);
-        }
-
-        ~UnitOfWork()
-        {
-            Dispose(false);
         }
     }
 }

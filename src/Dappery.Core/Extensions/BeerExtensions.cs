@@ -1,19 +1,17 @@
+using Dappery.Domain.Dtos.Beer;
+using Dappery.Domain.Entities;
+
 namespace Dappery.Core.Extensions
 {
-    using Domain.Dtos.Beer;
-    using Domain.Entities;
-
     public static class BeerExtensions
     {
-        public static BeerDto ToBeerDto(this Beer beer)
+        public static BeerDto ToBeerDto(this Beer beer) =>
+        new BeerDto
         {
-            return new BeerDto
-            {
-                Id = beer.Id,
-                Name = beer.Name,
-                Style = beer.BeerStyle.ToString(),
-                Brewery = beer.Brewery?.ToBreweryDto(false),
-            };
-        }
+            Id = beer.Id,
+            Name = beer.Name,
+            Style = beer.BeerStyle.ToString(),
+            Brewery = beer.Brewery?.ToBreweryDto(false),
+        };
     }
 }

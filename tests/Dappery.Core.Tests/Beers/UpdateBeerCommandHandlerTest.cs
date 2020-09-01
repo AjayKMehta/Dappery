@@ -24,7 +24,7 @@ namespace Dappery.Core.Tests.Beers
             var handler = new UpdateBeerCommandHandler(unitOfWork);
 
             // Act
-            var result = await handler.Handle(updateCommand, CancellationTestToken);
+            var result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();
@@ -56,14 +56,14 @@ namespace Dappery.Core.Tests.Beers
             var handler = new UpdateBeerCommandHandler(unitOfWork);
 
             // Act
-            var result = await handler.Handle(updateCommand, CancellationTestToken);
+            var result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();
             result.Self.ShouldNotBeNull();
             result.Self.Id.ShouldBe(updateCommand.BeerId);
             result.Self.Name.ShouldBe(updateCommand.Dto.Name);
-            result.Self.Style.ShouldBe(BeerStyle.Other.ToString());
+            result.Self.Style.ShouldBe(nameof(BeerStyle.Other));
             result.Self.Brewery.ShouldNotBeNull();
             result.Self.Brewery?.Address.ShouldNotBeNull();
             result.Self.Brewery?.Address?.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
@@ -89,7 +89,7 @@ namespace Dappery.Core.Tests.Beers
             var handler = new UpdateBeerCommandHandler(unitOfWork);
 
             // Act
-            var result = await handler.Handle(updateCommand, CancellationTestToken);
+            var result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();
@@ -122,7 +122,7 @@ namespace Dappery.Core.Tests.Beers
             var handler = new UpdateBeerCommandHandler(unitOfWork);
 
             // Act
-            var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(updateCommand, CancellationTestToken));
+            var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();

@@ -1,12 +1,12 @@
+using Dappery.Domain.Dtos.Beer;
+using Dappery.Domain.Media;
+using MediatR;
+
 namespace Dappery.Core.Beers.Commands.UpdateBeery
 {
-    using Domain.Dtos.Beer;
-    using Domain.Media;
-    using MediatR;
-
     public class UpdateBeerCommand : IRequest<BeerResource>
     {
-        public UpdateBeerCommand(UpdateBeerDto beerDto, int requestId) => (Dto, BeerId) = (beerDto, requestId);
+        public UpdateBeerCommand(UpdateBeerDto beerDto, int requestId) => (this.Dto, this.BeerId) = (beerDto, requestId);
 
         public UpdateBeerDto Dto { get; }
 

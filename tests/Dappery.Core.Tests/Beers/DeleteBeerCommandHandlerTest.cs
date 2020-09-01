@@ -14,12 +14,12 @@ namespace Dappery.Core.Tests.Beers
         public async Task GivenValidRequest_WhenBeerExists_DeletesBeerAndReturnsUnit()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var deleteCommand = new DeleteBeerCommand(1);
             var handler = new DeleteBeerCommandHandler(unitOfWork);
 
             // Act
-            var result = await handler.Handle(deleteCommand, CancellationTestToken);
+            var result = await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();
@@ -30,12 +30,12 @@ namespace Dappery.Core.Tests.Beers
         public async Task GivenValidRequest_WhenBeerDoesNotExist_ThrowsApiErrorForNotFound()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var deleteCommand = new DeleteBeerCommand(11);
             var handler = new DeleteBeerCommandHandler(unitOfWork);
 
             // Act
-            var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(deleteCommand, CancellationTestToken));
+            var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();

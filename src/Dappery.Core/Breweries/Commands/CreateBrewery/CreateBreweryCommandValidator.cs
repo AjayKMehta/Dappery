@@ -1,33 +1,33 @@
+using Dappery.Core.Extensions;
+using FluentValidation;
+
 namespace Dappery.Core.Breweries.Commands.CreateBrewery
 {
-    using Extensions;
-    using FluentValidation;
-
     public class CreateBreweryCommandValidator : AbstractValidator<CreateBreweryCommand>
     {
         public CreateBreweryCommandValidator()
         {
-            RuleFor(b => b.Dto)
+            this.RuleFor(b => b.Dto)
                 .NotNull()
                 .WithMessage("A request must contain valid creation data");
 
-            RuleFor(b => b.Dto.Name)
+            this.RuleFor(b => b.Dto.Name)
                 .NotNullOrEmpty();
 
-            RuleFor(b => b.Dto.Address)
+            this.RuleFor(b => b.Dto.Address)
                 .NotNull()
                 .WithMessage("Must supply the address of the brewery when creating");
 
-            RuleFor(b => b.Dto.Address!.City)
+            this.RuleFor(b => b.Dto.Address!.City)
                 .NotNullOrEmpty();
 
-            RuleFor(b => b.Dto.Address!.State)
+            this.RuleFor(b => b.Dto.Address!.State)
                 .HasValidStateAbbreviation();
 
-            RuleFor(b => b.Dto.Address!.StreetAddress)
+            this.RuleFor(b => b.Dto.Address!.StreetAddress)
                 .HasValidStreetAddress();
 
-            RuleFor(b => b.Dto.Address!.ZipCode)
+            this.RuleFor(b => b.Dto.Address!.ZipCode)
                 .HasValidZipCode();
         }
     }

@@ -18,7 +18,7 @@ namespace Dappery.Core.Breweries.Queries.RetrieveBrewery
         public async Task<BreweryResource> Handle(RetrieveBreweryQuery request, CancellationToken cancellationToken)
         {
             // Retrieve the brewery and clean up our resources
-            var brewery = await this.unitOfWork.BreweryRepository.GetBreweryById(request.Id, cancellationToken);
+            var brewery = await this.unitOfWork.BreweryRepository.GetBreweryById(request.Id, cancellationToken).ConfigureAwait(false);
             this.unitOfWork.Commit();
 
             // Invalidate the request if no brewery is found
