@@ -28,16 +28,15 @@ namespace Dappery.Data.Tests
             breweries.All(br => br.Address != null).ShouldBeTrue();
             breweries.All(br => br.Beers != null).ShouldBeTrue();
             breweries.All(br => br.Beers.Count > 0).ShouldBeTrue();
-            breweries.FirstOrDefault(br => br.Name == "Fall River Brewery")?.Beers
-                .ShouldContain(b => b.Name == "Hexagenia");
-            breweries.FirstOrDefault(br => br.Name == "Fall River Brewery")?.Beers
-                .ShouldContain(b => b.Name == "Widowmaker");
-            breweries.FirstOrDefault(br => br.Name == "Fall River Brewery")?.Beers
-                .ShouldContain(b => b.Name == "Hooked");
-            breweries.FirstOrDefault(br => br.Name == "Sierra Nevada Brewing Company")?.Beers
-                .ShouldContain(b => b.Name == "Pale Ale");
-            breweries.FirstOrDefault(br => br.Name == "Sierra Nevada Brewing Company")?.Beers
-                .ShouldContain(b => b.Name == "Hazy Little Thing");
+
+            var brewery = breweries.Find(br => br.Name == "Fall River Brewery");
+            brewery?.Beers.ShouldContain(b => b.Name == "Hexagenia");
+            brewery?.Beers.ShouldContain(b => b.Name == "Widowmaker");
+            brewery?.Beers.ShouldContain(b => b.Name == "Hooked");
+
+            brewery = breweries.Find(br => br.Name == "Sierra Nevada Brewing Company");
+            brewery?.Beers.ShouldContain(b => b.Name == "Pale Ale");
+            brewery?.Beers.ShouldContain(b => b.Name == "Hazy Little Thing");
         }
 
         [Fact]
