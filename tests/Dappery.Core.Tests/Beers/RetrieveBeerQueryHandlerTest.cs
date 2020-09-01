@@ -1,24 +1,24 @@
+using System.Net;
+using System.Threading.Tasks;
+using Dappery.Core.Beers.Queries.RetrieveBeer;
+using Dappery.Core.Exceptions;
+using Shouldly;
+using Xunit;
+
 namespace Dappery.Core.Tests.Beers
 {
-    using System.Net;
-    using System.Threading.Tasks;
-    using Core.Beers.Queries.RetrieveBeer;
-    using Exceptions;
-    using Shouldly;
-    using Xunit;
-
     public class RetrieveBeerQueryHandlerTest : TestFixture
     {
         [Fact]
         public async Task GivenValidRequest_WhenBeerExists_ReturnsMappedBeer()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var query = new RetrieveBeerQuery(1);
             var handler = new RetrieveBeerQueryHandler(unitOfWork);
 
             // Act
-            var result = await handler.Handle(query, CancellationTestToken);
+            var result = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();
@@ -38,12 +38,12 @@ namespace Dappery.Core.Tests.Beers
         public async Task GivenValidRequest_WhenBeerDoesNotExist_ThrowsApiExceptionForNotFound()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var query = new RetrieveBeerQuery(11);
             var handler = new RetrieveBeerQueryHandler(unitOfWork);
 
             // Act
-            var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(query, CancellationTestToken));
+            var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(query, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
             result.ShouldNotBeNull();

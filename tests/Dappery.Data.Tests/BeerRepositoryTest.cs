@@ -28,15 +28,15 @@ namespace Dappery.Data.Tests
             beers.All(b => b.Brewery!.Address != null).ShouldBeTrue();
             beers.All(b => b.Brewery!.Address!.BreweryId == b.Brewery.Id).ShouldBeTrue();
             beers.ShouldContain(b => b.Name == "Hexagenia");
-            beers.FirstOrDefault(b => b.Name == "Hexagenia")?.BeerStyle.ShouldBe(BeerStyle.Ipa);
+            beers.Find(b => b.Name == "Hexagenia")?.BeerStyle.ShouldBe(BeerStyle.Ipa);
             beers.ShouldContain(b => b.Name == "Widowmaker");
-            beers.FirstOrDefault(b => b.Name == "Widowmaker")?.BeerStyle.ShouldBe(BeerStyle.DoubleIpa);
+            beers.Find(b => b.Name == "Widowmaker")?.BeerStyle.ShouldBe(BeerStyle.DoubleIpa);
             beers.ShouldContain(b => b.Name == "Hooked");
-            beers.FirstOrDefault(b => b.Name == "Hooked")?.BeerStyle.ShouldBe(BeerStyle.Lager);
+            beers.Find(b => b.Name == "Hooked")?.BeerStyle.ShouldBe(BeerStyle.Lager);
             beers.ShouldContain(b => b.Name == "Pale Ale");
-            beers.FirstOrDefault(b => b.Name == "Pale Ale")?.BeerStyle.ShouldBe(BeerStyle.PaleAle);
+            beers.Find(b => b.Name == "Pale Ale")?.BeerStyle.ShouldBe(BeerStyle.PaleAle);
             beers.ShouldContain(b => b.Name == "Hazy Little Thing");
-            beers.FirstOrDefault(b => b.Name == "Hazy Little Thing")?.BeerStyle.ShouldBe(BeerStyle.NewEnglandIpa);
+            beers.Find(b => b.Name == "Hazy Little Thing")?.BeerStyle.ShouldBe(BeerStyle.NewEnglandIpa);
         }
 
         [Fact]

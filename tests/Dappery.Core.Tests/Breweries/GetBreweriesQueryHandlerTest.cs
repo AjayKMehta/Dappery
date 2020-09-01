@@ -45,7 +45,7 @@ namespace Dappery.Core.Tests.Breweries
             var handler = new GetBreweriesQueryHandler(unitOfWork);
 
             // Act
-            var response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken);
+            var response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken).ConfigureAwait(false);
 
             // Assert
             response.ShouldNotBeNull();

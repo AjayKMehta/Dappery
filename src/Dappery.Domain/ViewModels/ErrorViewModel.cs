@@ -1,13 +1,10 @@
+using Dappery.Domain.Dtos;
+
 namespace Dappery.Domain.ViewModels
 {
-    using Dtos;
-
     public class ErrorViewModel
     {
-        public ErrorViewModel(ErrorDto errors)
-        {
-            Errors = errors;
-        }
+        public ErrorViewModel(ErrorDto errors) => this.Errors = errors;
 
         public ErrorDto Errors { get; }
     }

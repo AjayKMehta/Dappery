@@ -1,13 +1,10 @@
+using System.Collections.Generic;
+
 namespace Dappery.Domain.Entities
 {
-    using System.Collections.Generic;
-
     public class Brewery : TimeStampedEntity
     {
-        public Brewery()
-        {
-            Beers = new List<Beer>();
-        }
+        public Brewery() => this.Beers = new List<Beer>();
 
         public string? Name { get; set; }
 
@@ -15,6 +12,6 @@ namespace Dappery.Domain.Entities
 
         public ICollection<Beer> Beers { get; }
 
-        public int BeerCount => Beers.Count;
+        public int BeerCount => this.Beers.Count;
     }
 }

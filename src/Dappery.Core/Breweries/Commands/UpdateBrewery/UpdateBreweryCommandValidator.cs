@@ -1,7 +1,7 @@
+using FluentValidation;
+
 namespace Dappery.Core.Breweries.Commands.UpdateBrewery
 {
-    using FluentValidation;
-
     public class UpdateBreweryCommandValidator : AbstractValidator<UpdateBreweryCommand>
     {
         public UpdateBreweryCommandValidator()

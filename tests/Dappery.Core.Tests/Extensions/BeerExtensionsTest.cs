@@ -1,10 +1,10 @@
+using Dappery.Core.Extensions;
+using Dappery.Domain.Entities;
+using Shouldly;
+using Xunit;
+
 namespace Dappery.Core.Tests.Extensions
 {
-    using Core.Extensions;
-    using Domain.Entities;
-    using Shouldly;
-    using Xunit;
-
     public class BeerExtensionsTest
     {
         [Fact]

@@ -15,7 +15,7 @@ namespace Dappery.Core.Tests.Breweries
         public async Task CreateBreweryCommandHandler_GivenAValidRequest_CreatesBrewery()
         {
             // Arrange
-            using var unitOfWork = UnitOfWork;
+            using var unitOfWork = this.UnitOfWork;
             var createBreweryDto = new CreateBreweryDto
             {
                 Name = "Pizza Port Brewing Company",
@@ -30,7 +30,7 @@ namespace Dappery.Core.Tests.Breweries
 
             // Act
             var handler = new CreateBreweryCommandHandler(unitOfWork);
-            var createdBrewery = await handler.Handle(new CreateBreweryCommand(createBreweryDto), CancellationToken.None);
+            var createdBrewery = await handler.Handle(new CreateBreweryCommand(createBreweryDto), CancellationToken.None).ConfigureAwait(false);
 
             // Assert
             createdBrewery.ShouldNotBeNull();

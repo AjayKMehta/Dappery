@@ -33,7 +33,7 @@ namespace Dappery.Data.Repositories
                 cancellationToken: cancellationToken);
 
             var breweryCommand = new CommandDefinition(
-                @"SELECT br.*, a.* FROM Breweries br INNER JOIN Addresses a ON a.BreweryId = br.Id WHERE br.Id = @Id",
+                "SELECT br.*, a.* FROM Breweries br INNER JOIN Addresses a ON a.BreweryId = br.Id WHERE br.Id = @Id",
                 new { Id = id },
                 this.dbTransaction,
                 cancellationToken: cancellationToken);
@@ -94,7 +94,7 @@ namespace Dappery.Data.Repositories
                     }
 
                     return brewery;
-                });
+                }).ConfigureAwait(false);
         }
 
         public async Task<int> CreateBrewery(Brewery brewery, CancellationToken cancellationToken)
@@ -112,7 +112,7 @@ namespace Dappery.Data.Repositories
                 cancellationToken: cancellationToken);
 
             // Let's add the brewery
-            var breweryId = await this.dbConnection.ExecuteScalarAsync<int>(breweryInsertCommand);
+            var breweryId = await this.dbConnection.ExecuteScalarAsync<int>(breweryInsertCommand).ConfigureAwait(false);
 
             var addressInsertCommand = new CommandDefinition(
                 @"INSERT INTO Addresses (StreetAddress, City, State, ZipCode, CreatedAt, UpdatedAt, BreweryId)
@@ -131,7 +131,7 @@ namespace Dappery.Data.Repositories
                 cancellationToken: cancellationToken);
 
             // One of our business rules is that a brewery must have an associated address
-            await this.dbConnection.ExecuteAsync(addressInsertCommand);
+            await this.dbConnection.ExecuteAsync(addressInsertCommand).ConfigureAwait(false);
 
             return breweryId;
         }
@@ -140,7 +140,7 @@ namespace Dappery.Data.Repositories
         {
             // Instantiate our commands to utilize our cancellation token
             var breweryUpdateCommand = new CommandDefinition(
-                @"UPDATE Breweries SET Name = @Name, UpdatedAt = @UpdatedAt WHERE Id = @Id",
+                "UPDATE Breweries SET Name = @Name, UpdatedAt = @UpdatedAt WHERE Id = @Id",
                 new
                 {
                     brewery.Name,
@@ -151,12 +151,12 @@ namespace Dappery.Data.Repositories
                 cancellationToken: cancellationToken);
 
             // Again, we'll assume the brewery details are being validated and mapped properly in the application layer
-            await this.dbConnection.ExecuteAsync(breweryUpdateCommand);
+            await this.dbConnection.ExecuteAsync(breweryUpdateCommand).ConfigureAwait(false);
 
             if (brewery.Address != null && updateAddress)
             {
                 var addressUpdateCommand = new CommandDefinition(
-                    @"UPDATE Addresses SET StreetAddress = @StreetAddress, City = @City, ZipCode = @ZipCode, State = @State, UpdatedAt = @UpdatedAt WHERE Id = @Id",
+                    "UPDATE Addresses SET StreetAddress = @StreetAddress, City = @City, ZipCode = @ZipCode, State = @State, UpdatedAt = @UpdatedAt WHERE Id = @Id",
                     new
                     {
                         brewery.Address.StreetAddress,
@@ -171,7 +171,7 @@ namespace Dappery.Data.Repositories
 
                 // Again, we'll assume the brewery details are being validated and mapped properly in the application layer
                 // For now, we won't allow users to swap breweries address to another address
-                await this.dbConnection.ExecuteAsync(addressUpdateCommand);
+                await this.dbConnection.ExecuteAsync(addressUpdateCommand).ConfigureAwait(false);
             }
         }
 
@@ -182,12 +182,12 @@ namespace Dappery.Data.Repositories
             // NOTE: Because we don't directly expose CRUD operations on the address table, we'll validate the cascade
             // remove directly in the database for now
             var deleteBreweryCommand = new CommandDefinition(
-                @"DELETE FROM Breweries WHERE Id = @Id",
+                "DELETE FROM Breweries WHERE Id = @Id",
                 new { Id = breweryId },
                 this.dbTransaction,
                 cancellationToken: cancellationToken);
 
-            await this.dbConnection.ExecuteAsync(deleteBreweryCommand);
+            await this.dbConnection.ExecuteAsync(deleteBreweryCommand).ConfigureAwait(false);
         }
     }
 }

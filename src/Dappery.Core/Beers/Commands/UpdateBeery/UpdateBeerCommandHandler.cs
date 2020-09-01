@@ -15,15 +15,12 @@ namespace Dappery.Core.Beers.Commands.UpdateBeery
     {
         private readonly IUnitOfWork unitOfWork;
 
-        public UpdateBeerCommandHandler(IUnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
-        }
+        public UpdateBeerCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
 
         public async Task<BeerResource> Handle(UpdateBeerCommand request, CancellationToken cancellationToken)
         {
             // First validate both the beer
-            var existingBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken);
+            var existingBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
 
             // Invalidate the request if no beer was found
             if (existingBeer is null)
@@ -43,7 +40,7 @@ namespace Dappery.Core.Beers.Commands.UpdateBeery
             if (request.Dto.BreweryId.HasValue)
             {
                 // Retrieve the brewery, or invalidate the request if none is returned
-                var existingBrewery = await this.unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId.Value, cancellationToken);
+                var existingBrewery = await this.unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId.Value, cancellationToken).ConfigureAwait(false);
 
                 if (existingBrewery is null)
                 {
@@ -54,8 +51,8 @@ namespace Dappery.Core.Beers.Commands.UpdateBeery
             }
 
             // Perform the update and grab the newly return beer for the response
-            await this.unitOfWork.BeerRepository.UpdateBeerAsync(existingBeer, cancellationToken);
-            var updatedBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(existingBeer.Id, cancellationToken);
+            await this.unitOfWork.BeerRepository.UpdateBeerAsync(existingBeer, cancellationToken).ConfigureAwait(false);
+            var updatedBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(existingBeer.Id, cancellationToken).ConfigureAwait(false);
             this.unitOfWork.Commit();
 
             // Return the response with the updated beer

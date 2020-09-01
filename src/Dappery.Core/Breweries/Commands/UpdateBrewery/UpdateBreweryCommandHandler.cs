@@ -13,15 +13,12 @@ namespace Dappery.Core.Breweries.Commands.UpdateBrewery
     {
         private readonly IUnitOfWork unitOfWork;
 
-        public UpdateBreweryCommandHandler(IUnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
-        }
+        public UpdateBreweryCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
 
         public async Task<BreweryResource> Handle(UpdateBreweryCommand request, CancellationToken cancellationToken)
         {
             // Retrieve the brewery on the request
-            var breweryToUpdate = await this.unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken);
+            var breweryToUpdate = await this.unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
 
             // Invalidate the request if no brewery was found
             if (breweryToUpdate is null)
