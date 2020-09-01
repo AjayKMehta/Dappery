@@ -22,15 +22,14 @@ namespace Dappery.Core.Infrastructure
 
         public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            var context = new ValidationContext(request);
+            var context = new ValidationContext<TRequest>(request);
 
             var failures = this.validators
                 .Select(v => v.Validate(context))
                 .SelectMany(result => result.Errors)
-                .Where(f => f != null)
-                .ToList();
+                .Where(f => f != null);
 
-            if (failures.Count > 0)
+            if (failures.Any())
             {
                 this.logger.LogInformation($"Validation failures for request [{request}]");
                 throw new ValidationException(failures);
