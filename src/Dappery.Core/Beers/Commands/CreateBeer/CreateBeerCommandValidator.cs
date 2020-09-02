@@ -11,14 +11,14 @@ namespace Dappery.Core.Beers.Commands.CreateBeer
                 .NotNull()
                 .WithMessage("Must supply a request object to create a beer");
 
-            this.RuleFor(b => b.Dto.Name)
+            this.RuleFor(b => b.Dto!.Name)
                 .NotNullOrEmpty();
 
-            this.RuleFor(b => b.Dto.Style)
+            this.RuleFor(b => b.Dto!.Style)
                 .NotNullOrEmpty();
 
-            this.RuleFor(b => b.Dto.BreweryId)
-                .NotNull()
+            this.RuleFor(b => b.Dto!.BreweryId)
+                .NotEmpty()
                 .WithMessage("Must supply the brewery ID");
         }
     }

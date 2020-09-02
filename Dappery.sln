@@ -17,10 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CCB0EB15
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dappery.Core.Tests", "tests\Dappery.Core.Tests\Dappery.Core.Tests.csproj", "{6535456C-4DA5-4724-BF64-935598C18EC1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{37D5900E-247E-4665-A18F-5CA6676C4712}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{261B3D8C-C64A-4FE4-A183-BD5BAA50B98F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,8 +30,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{37D5900E-247E-4665-A18F-5CA6676C4712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37D5900E-247E-4665-A18F-5CA6676C4712}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBD25F67-6202-426D-9C2A-40BBF69F4D0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBD25F67-6202-426D-9C2A-40BBF69F4D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD25F67-6202-426D-9C2A-40BBF69F4D0B}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -103,6 +97,5 @@ Global
 		{DAEFFBCA-FAE3-4B26-89E4-81109BFB5964} = {1CAE0334-A17F-4F2F-9086-8C702273AB6A}
 		{E57BA333-E247-4203-8AC6-F76A2C619C32} = {CCB0EB15-845B-4A64-8F6A-4001F09EDCD5}
 		{6535456C-4DA5-4724-BF64-935598C18EC1} = {CCB0EB15-845B-4A64-8F6A-4001F09EDCD5}
-		{37D5900E-247E-4665-A18F-5CA6676C4712} = {261B3D8C-C64A-4FE4-A183-BD5BAA50B98F}
 	EndGlobalSection
 EndGlobal

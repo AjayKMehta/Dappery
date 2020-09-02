@@ -11,10 +11,10 @@ namespace Dappery.Core.Beers.Commands.UpdateBeery
                 .NotNull()
                 .WithMessage("Must supply a beer to update");
 
-            this.RuleFor(b => b.Dto.Name)
+            this.RuleFor(b => b.Dto!.Name)
                 .NotNullOrEmpty();
 
-            this.RuleFor(b => b.Dto.Style)
+            this.RuleFor(b => b.Dto!.Style)
                 .NotNullOrEmpty();
         }
     }

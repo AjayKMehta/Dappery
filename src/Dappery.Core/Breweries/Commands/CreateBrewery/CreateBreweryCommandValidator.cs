@@ -11,7 +11,7 @@ namespace Dappery.Core.Breweries.Commands.CreateBrewery
                 .NotNull()
                 .WithMessage("A request must contain valid creation data");
 
-            this.RuleFor(b => b.Dto.Name)
+            this.RuleFor(b => b.Dto!.Name)
                 .NotNullOrEmpty();
 
             this.RuleFor(b => b.Dto.Address)

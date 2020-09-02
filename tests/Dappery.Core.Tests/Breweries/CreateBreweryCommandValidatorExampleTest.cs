@@ -1,7 +1,7 @@
 using Dappery.Core.Breweries.Commands.CreateBrewery;
 using Dappery.Domain.Dtos;
 using Dappery.Domain.Dtos.Brewery;
-using Shouldly;
+using FluentValidation.TestHelper;
 using Xunit;
 
 namespace Dappery.Core.Tests.Breweries
@@ -26,10 +26,11 @@ namespace Dappery.Core.Tests.Breweries
                 });
 
             // Act
-            var validationResult = new CreateBreweryCommandValidator().Validate(command);
+            var validationResult = new CreateBreweryCommandValidator().TestValidate(command);
 
             // Assert
-            validationResult.IsValid.ShouldBeTrue();
+            validationResult.ShouldNotHaveValidationErrorFor(b => b.Dto);
+            validationResult.ShouldNotHaveValidationErrorFor(b => b.Dto.Address);
         }
     }
 }
