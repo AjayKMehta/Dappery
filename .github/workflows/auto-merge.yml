@@ -1,0 +1,14 @@
+name: auto-merge
+
+on:
+  pull_request:
+
+jobs:
+  auto-merge:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/marketplace/actions/dependabot-auto-merge
+      - uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
