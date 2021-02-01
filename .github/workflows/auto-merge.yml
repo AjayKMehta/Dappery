@@ -19,6 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       # https://github.com/marketplace/actions/dependabot-auto-merge
       - uses: ahmadnassri/action-dependabot-auto-merge@v2
+        if: github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'dependabot-preview[bot]'
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.DEPENDABOT_TOKEN }}
           command: squash
