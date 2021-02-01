@@ -1,6 +1,0 @@
-name: "Merge Dependabot PR"
-
-on:
-  pull_request:
-    branches:
-      - master
