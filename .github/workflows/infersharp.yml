@@ -1,0 +1,30 @@
+name: Run examples as a GitHub Action
+
+on: [push, workflow_dispatch]
+
+jobs:
+  infersharp:
+    if: contains(github.actor, 'dependabot') == false
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup dotnet
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "5.0.200"
+
+      - name: Build dotnet
+        run: dotnet build Dappery.sln
+
+      - name: Run tests
+        run: dotnet test
+
+      - name: Run Infer#
+        id: runinfersharp
+        uses: ./
+        with:
+          binary-path: "./"
+
+      - name: Infer# analysis results
+        run: echo "${{ steps.runinfersharp.outputs.results }}"
