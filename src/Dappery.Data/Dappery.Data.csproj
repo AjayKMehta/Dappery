@@ -3,7 +3,7 @@
   <Import Project="../../Dappery.targets" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,4 +18,3 @@
   </ItemGroup>
 
 </Project>
-
