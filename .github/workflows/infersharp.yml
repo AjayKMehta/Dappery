@@ -17,9 +17,6 @@ jobs:
       - name: Build dotnet
         run: dotnet build Dappery.sln
 
-      - name: Run tests
-        run: dotnet test
-
       - name: Run Infer#
         id: runinfersharp
         uses: microsoft/infersharpaction@v1.0
