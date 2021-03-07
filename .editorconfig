@@ -173,8 +173,8 @@ csharp_using_directive_placement = outside_namespace
 
 # Unnecessary code rules
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/unnecessary-code-rules
-csharp_style_unused_value_assignment_preference = discard_variable:suggestion
-csharp_style_unused_value_expression_statement_preference = discard_variable:suggestion
+csharp_style_unused_value_assignment_preference = false:suggestion
+csharp_style_unused_value_expression_statement_preference = false:suggestion
 dotnet_code_quality_unused_parameters = non_public:suggestion
 dotnet_remove_unnecessary_suppression_exclusions = all
 
