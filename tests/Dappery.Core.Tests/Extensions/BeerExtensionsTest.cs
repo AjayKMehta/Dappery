@@ -8,7 +8,7 @@ namespace Dappery.Core.Tests.Extensions
     public class BeerExtensionsTest
     {
         [Fact]
-        public void ToBeerDto_GivenValidBeer_ReturnsMappedBeerDtoWithoutBreweryBeerListAndCount()
+        public void ToBeerDtoGivenValidBeerReturnsMappedBeerDtoWithoutBreweryBeerListAndCount()
         {
             // Arrange
             var beerToMap = new Beer
@@ -52,7 +52,7 @@ namespace Dappery.Core.Tests.Extensions
             mappedBeer.Brewery?.BeerCount.ShouldBeNull();
         }
         [Fact]
-        public void ToBeerDto_GivenValidBeerWithoutBrewery_ReturnsMappedBeerDtoWithoutBrewery()
+        public void ToBeerDtoGivenValidBeerWithoutBreweryReturnsMappedBeerDtoWithoutBrewery()
         {
             // Arrange
             var beerToMap = new Beer

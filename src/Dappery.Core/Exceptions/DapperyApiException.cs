@@ -9,7 +9,7 @@ namespace Dappery.Core.Exceptions
         public DapperyApiException(string message, HttpStatusCode statusCode)
             : this(message) => this.StatusCode = statusCode;
 
-        public DapperyApiException() : base() => this.ApiErrors = new List<DapperyApiError>();
+        public DapperyApiException() => this.ApiErrors = new List<DapperyApiError>();
 
         public DapperyApiException(string message) : base(message) => this.ApiErrors = new List<DapperyApiError>();
 

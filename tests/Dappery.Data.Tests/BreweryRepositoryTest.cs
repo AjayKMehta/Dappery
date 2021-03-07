@@ -12,7 +12,7 @@ namespace Dappery.Data.Tests
     public class BreweryRepositoryTest : TestFixture
     {
         [Fact]
-        public async Task GetAllBreweries_WhenInvokedAndBreweriesExist_ReturnsValidListOfBreweries()
+        public async Task GetAllBreweriesWhenInvokedAndBreweriesExistReturnsValidListOfBreweries()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -40,7 +40,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task GetAllBreweries_WhenInvokedAndNoBreweriesExist_ReturnsEmptyList()
+        public async Task GetAllBreweriesWhenInvokedAndNoBreweriesExistReturnsEmptyList()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -58,7 +58,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task GetBreweryById_WhenInvokedAndBreweryExist_ReturnsValidBreweryWithBeersAndAddress()
+        public async Task GetBreweryByIdWhenInvokedAndBreweryExistReturnsValidBreweryWithBeersAndAddress()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -68,11 +68,9 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            brewery.ShouldNotBeNull();
-            brewery.ShouldBeOfType<Brewery>();
+            brewery.ShouldNotBeNull().ShouldBeOfType<Brewery>();
             brewery.Address.ShouldNotBeNull();
-            brewery.Beers.ShouldNotBeNull();
-            brewery.Beers.ShouldNotBeEmpty();
+            brewery.Beers.ShouldNotBeNull().ShouldNotBeEmpty();
             brewery.BeerCount.ShouldBe(3);
             brewery.Beers.ShouldContain(b => b.Name == "Hexagenia");
             brewery.Beers.ShouldContain(b => b.Name == "Widowmaker");
@@ -80,7 +78,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task GetBreweryById_WhenInvokedAndNoBreweryExist_ReturnsNull()
+        public async Task GetBreweryByIdWhenInvokedAndNoBreweryExistReturnsNull()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -94,7 +92,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task CreateBrewery_WhenBreweryIsValid_ReturnsNewlyInsertedBrewery()
+        public async Task CreateBreweryWhenBreweryIsValidReturnsNewlyInsertedBrewery()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -129,7 +127,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task UpdateBrewery_WhenBreweryIsValidAndAddressIsNotUpdated_ReturnsUpdatedBrewery()
+        public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsNotUpdatedReturnsUpdatedBrewery()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -165,7 +163,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task UpdateBrewery_WhenBreweryIsValidAndAddressIsUpdated_ReturnsUpdatedBrewery()
+        public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsUpdatedReturnsUpdatedBrewery()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -204,7 +202,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task DeleteBrewery_WhenBreweryExists_RemovesBreweryAndAllAssociatedBeersAndAddress()
+        public async Task DeleteBreweryWhenBreweryExistsRemovesBreweryAndAllAssociatedBeersAndAddress()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;

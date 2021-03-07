@@ -12,7 +12,7 @@ namespace Dappery.Core.Tests.Beers
     public class UpdateBeerCommandHandlerTest : TestFixture
     {
         [Fact]
-        public async Task GivenValidRequest_WhenBeerExistsAndBreweryIsNotUpdated_UpdatesAndReturnsMappedBeer()
+        public async Task GivenValidRequestWhenBeerExistsAndBreweryIsNotUpdatedUpdatesAndReturnsMappedBeer()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -44,7 +44,7 @@ namespace Dappery.Core.Tests.Beers
         }
 
         [Fact]
-        public async Task GivenValidRequest_WhenBeerExistsAndStyleIsUnknown_UpdatesAndReturnsMappedBeerWithOtherStyle()
+        public async Task GivenValidRequestWhenBeerExistsAndStyleIsUnknownUpdatesAndReturnsMappedBeerWithOtherStyle()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -76,7 +76,7 @@ namespace Dappery.Core.Tests.Beers
         }
 
         [Fact]
-        public async Task GivenValidRequest_WhenBeerExistsAndExistingBreweryIsUpdated_UpdatesAndReturnsMappedBeer()
+        public async Task GivenValidRequestWhenBeerExistsAndExistingBreweryIsUpdatedUpdatesAndReturnsMappedBeer()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -109,7 +109,7 @@ namespace Dappery.Core.Tests.Beers
         }
 
         [Fact]
-        public async Task GivenValidRequest_WhenBeerExistsAndNonExistingBrewery_ThrowsApiExceptionForBadRequest()
+        public async Task GivenValidRequestWhenBeerExistsAndNonExistingBreweryThrowsApiExceptionForBadRequest()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;

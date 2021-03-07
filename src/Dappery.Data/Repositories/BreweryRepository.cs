@@ -13,7 +13,7 @@ namespace Dappery.Data.Repositories
     public class BreweryRepository : IBreweryRepository
     {
         private readonly IDbTransaction dbTransaction;
-        private readonly IDbConnection dbConnection;
+        private readonly IDbConnection? dbConnection;
         private readonly string rowInsertRetrievalQuery;
 
         public BreweryRepository(IDbTransaction dbTransaction, string rowInsertRetrievalQuery)
@@ -38,26 +38,24 @@ namespace Dappery.Data.Repositories
                 this.dbTransaction,
                 cancellationToken: cancellationToken);
 
-            var beersFromBrewery = (await this.dbConnection.QueryAsync<Beer>(beersFromBreweryCommand).ConfigureAwait(false)).ToList();
+            var beersFromBrewery = (await this.dbConnection!.QueryAsync<Beer>(beersFromBreweryCommand).ConfigureAwait(false)).ToList();
 
-            return (await this.dbConnection.QueryAsync<Brewery, Address, Brewery>(
+            var breweries = await this.dbConnection!.QueryAsync<Brewery, Address, Brewery>(
                 breweryCommand,
                 (brewery, address) =>
                 {
                     // Since breweries have a one-to-one relation with address, we can initialize that mapping here
                     brewery.Address = address;
 
-                    // Add each beer from the previous query into the list of beers for the brewery
-                    if (beersFromBrewery.Count > 0)
+                    foreach (var beer in beersFromBrewery)
                     {
-                        foreach (var beer in beersFromBrewery)
-                        {
-                            brewery.Beers.Add(beer);
-                        }
+                        brewery.Beers.Add(beer);
                     }
 
                     return brewery;
-                }).ConfigureAwait(false)).FirstOrDefault();
+                }).ConfigureAwait(false);
+
+            return breweries?.FirstOrDefault() ?? new Brewery();
         }
 
         public async Task<IEnumerable<Brewery>> GetAllBreweries(CancellationToken cancellationToken)

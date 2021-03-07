@@ -8,7 +8,7 @@ namespace Dappery.Core.Tests.Beers
     public class GetAllBeersQueryHandlerTest : TestFixture
     {
         [Fact]
-        public async Task GivenValidRequest_WhenBeersArePopulated_ReturnsMappedBeerList()
+        public async Task GivenValidRequestWhenBeersArePopulatedReturnsMappedBeerList()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -25,7 +25,7 @@ namespace Dappery.Core.Tests.Beers
         }
 
         [Fact]
-        public async Task GivenValidRequest_WhenBeersAreNotPopulated_ReturnsMappedEmptyBeerList()
+        public async Task GivenValidRequestWhenBeersAreNotPopulatedReturnsMappedEmptyBeerList()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;

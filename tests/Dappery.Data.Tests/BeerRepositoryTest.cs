@@ -11,7 +11,7 @@ namespace Dappery.Data.Tests
     public class BeerRepositoryTest : TestFixture
     {
         [Fact]
-        public async Task GetAllBeers_WhenInvokedAndBeersExist_ReturnsValidListOfBeers()
+        public async Task GetAllBeersWhenInvokedAndBeersExistReturnsValidListOfBeers()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -40,7 +40,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task GetAllBeers_WhenNoBeersExist_ReturnsEmptyListOfBeers()
+        public async Task GetAllBeersWhenNoBeersExistReturnsEmptyListOfBeers()
         {
             // Arrange, remove all the beers from our database
             using var unitOfWork = this.UnitOfWork;
@@ -61,7 +61,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task GetBeerById_WhenInvokedAndBeerExists_ReturnsValidBeer()
+        public async Task GetBeerByIdWhenInvokedAndBeerExistsReturnsValidBeer()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -82,7 +82,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task GetBeerById_WhenInvokedAndBeerDoesNotExist_ReturnsNull()
+        public async Task GetBeerByIdWhenInvokedAndBeerDoesNotExistReturnsNull()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -96,7 +96,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task CreateBeer_WhenBeerIsValid_ReturnsNewlyInsertedBeer()
+        public async Task CreateBeerWhenBeerIsValidReturnsNewlyInsertedBeer()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -125,7 +125,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task UpdateBeer_WhenBeerIsValid_ReturnsUpdateBeer()
+        public async Task UpdateBeerWhenBeerIsValidReturnsUpdateBeer()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -156,7 +156,7 @@ namespace Dappery.Data.Tests
         }
 
         [Fact]
-        public async Task DeleteBeer_WhenBeerExists_RemovesBeerFromDatabase()
+        public async Task DeleteBeerWhenBeerExistsRemovesBeerFromDatabase()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;

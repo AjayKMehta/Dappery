@@ -11,7 +11,7 @@ namespace Dappery.Core.Tests.Breweries
     public class RetrieveBreweryQueryHandlerTest : TestFixture
     {
         [Fact]
-        public async Task RetrieveBreweryHandler_GivenExistingBreweryId_ReturnsBreweryWithBeers()
+        public async Task RetrieveBreweryHandlerGivenExistingBreweryIdReturnsBreweryWithBeers()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -29,12 +29,11 @@ namespace Dappery.Core.Tests.Breweries
             response.Self.Beers.ShouldNotBeNull();
             response.Self.Beers.ShouldNotBeEmpty();
             response.Self.Name.ShouldBe("Fall River Brewery");
-            response.Self.BeerCount?.ShouldNotBeNull();
             response.Self.BeerCount?.ShouldBe(3);
         }
 
         [Fact]
-        public async Task RetrieveBreweryHandler_GivenNonExistingBreweryId_ReturnsApiException()
+        public async Task RetrieveBreweryHandlerGivenNonExistingBreweryIdReturnsApiException()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;

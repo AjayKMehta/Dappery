@@ -13,7 +13,7 @@ namespace Dappery.Core.Tests.Beers
     public class CreateBeerCommandHandlerTest : TestFixture
     {
         [Fact]
-        public async Task GivenValidRequest_WhenBreweryExists_ReturnsMappedAndCreatedBeer()
+        public async Task GivenValidRequestWhenBreweryExistsReturnsMappedAndCreatedBeer()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -41,13 +41,12 @@ namespace Dappery.Core.Tests.Beers
             result.Self.Brewery?.Beers.ShouldBeNull();
             result.Self.Brewery?.Id.ShouldBe(1);
             result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
-            result.Self.Id.ShouldNotBeNull();
             result.Self.Name.ShouldBe(beerCommand.Dto.Name);
             result.Self.Style.ShouldBe(beerCommand.Dto.Style);
         }
 
         [Fact]
-        public async Task GivenValidRequest_WhenBreweryDoesNotExist_ThrowsApiExceptionForBadRequest()
+        public async Task GivenValidRequestWhenBreweryDoesNotExistThrowsApiExceptionForBadRequest()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -68,7 +67,7 @@ namespace Dappery.Core.Tests.Beers
         }
 
         [Fact]
-        public async Task GivenValidRequest_WithInvalidBeerStyle_ReturnsMappedAndCreatedBeerWithOtherAsStyle()
+        public async Task GivenValidRequestWithInvalidBeerStyleReturnsMappedAndCreatedBeerWithOtherAsStyle()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -87,7 +86,7 @@ namespace Dappery.Core.Tests.Beers
             result.ShouldNotBeNull();
             result.ShouldBeOfType<BeerResource>();
             result.Self.ShouldNotBeNull();
-            result.Self.Brewery.ShouldNotBeNull();
+            result.Self.Brewery?.ShouldNotBeNull();
             result.Self.Brewery?.Address.ShouldNotBeNull();
             result.Self.Brewery?.Address?.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
             result.Self.Brewery?.Address?.City.ShouldBe("Redding");
@@ -96,7 +95,6 @@ namespace Dappery.Core.Tests.Beers
             result.Self.Brewery?.Beers.ShouldBeNull();
             result.Self.Brewery?.Id.ShouldBe(1);
             result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
-            result.Self.Id.ShouldNotBeNull();
             result.Self.Name.ShouldBe(beerCommand.Dto.Name);
             result.Self.Style.ShouldBe(nameof(BeerStyle.Other));
         }

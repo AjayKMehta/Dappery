@@ -6,9 +6,9 @@ namespace Dappery.Core.Extensions
     public static class RuleBuilderExtensions
     {
         // Normally, would put things like this in a shared project, like a separate Dappery.Common project
-        private static readonly Regex ValidStateRegex = new Regex("^((A[LKZR])|(C[AOT])|(D[EC])|(FL)|(GA)|(HI)|(I[DLNA])|(K[SY])|(LA)|(M[EDAINSOT])|(N[EVHJMYCD])|(O[HKR])|(PA)|(RI)|(S[CD])|(T[NX])|(UT)|(V[TA])|(W[AVIY]))$");
-        private static readonly Regex StreetAddressRegex = new Regex("\\d{1,5}\\s(\\b\\w*\\b\\s){1,2}\\w*\\.");
-        private static readonly Regex ZipCodeRegex = new Regex("^\\d{5}$");
+        private static readonly Regex validStateRegex = new Regex("^((A[LKZR])|(C[AOT])|(D[EC])|(FL)|(GA)|(HI)|(I[DLNA])|(K[SY])|(LA)|(M[EDAINSOT])|(N[EVHJMYCD])|(O[HKR])|(PA)|(RI)|(S[CD])|(T[NX])|(UT)|(V[TA])|(W[AVIY]))$");
+        private static readonly Regex streetAddressRegex = new Regex("\\d{1,5}\\s(\\b\\w*\\b\\s){1,2}\\w*\\.");
+        private static readonly Regex zipCodeRegex = new Regex("^\\d{5}$");
 
         public static void NotNullOrEmpty<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
@@ -25,7 +25,7 @@ namespace Dappery.Core.Extensions
         {
             ruleBuilder.Custom((stateAbbreviation, context) =>
             {
-                if (!ValidStateRegex.IsMatch(stateAbbreviation))
+                if (stateAbbreviation != null && !validStateRegex.IsMatch(stateAbbreviation))
                 {
                     context.AddFailure($"{stateAbbreviation} is not a valid state code");
                 }
@@ -38,14 +38,14 @@ namespace Dappery.Core.Extensions
         {
             ruleBuilder.Custom((streetAddress, context) =>
             {
-                if (string.IsNullOrWhiteSpace(streetAddress))
+                if (streetAddress != null && string.IsNullOrWhiteSpace(streetAddress))
                 {
                     // Add the context failure and break out of the validation
                     context.AddFailure("Must supply a street address");
                     return;
                 }
 
-                if (!StreetAddressRegex.IsMatch(context.PropertyValue.ToString()))
+                if (!streetAddressRegex.IsMatch(context!.PropertyValue?.ToString() ?? string.Empty))
                 {
                     context.AddFailure($"{streetAddress} is not a valid street address");
                 }
@@ -63,9 +63,9 @@ namespace Dappery.Core.Extensions
                     return;
                 }
 
-                if (!ZipCodeRegex.IsMatch(context.PropertyValue.ToString()))
+                if (!zipCodeRegex.IsMatch(context!.PropertyValue?.ToString() ?? string.Empty))
                 {
-                    context.AddFailure($"{zipCode} is not a valid zipcode");
+                    context!.AddFailure($"{zipCode} is not a valid zipcode");
                 }
             });
         }

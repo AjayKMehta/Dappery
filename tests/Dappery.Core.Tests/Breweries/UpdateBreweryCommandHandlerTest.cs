@@ -12,7 +12,7 @@ namespace Dappery.Core.Tests.Breweries
     public class UpdateBreweryCommandHandlerTest : TestFixture
     {
         [Fact]
-        public async Task GivenValidUpdateRequest_WhenBreweryExists_ReturnsUpdatedMappedBrewery()
+        public async Task GivenValidUpdateRequestWhenBreweryExistsReturnsUpdatedMappedBrewery()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -47,7 +47,7 @@ namespace Dappery.Core.Tests.Breweries
         }
 
         [Fact]
-        public async Task GivenValidUpdateRequest_WhenBreweryDoesNotExist_ThrowsNotFoundException()
+        public async Task GivenValidUpdateRequestWhenBreweryDoesNotExistThrowsNotFoundException()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -74,7 +74,7 @@ namespace Dappery.Core.Tests.Breweries
         }
 
         [Fact]
-        public async Task GivenValidUpdateRequest_WhenBreweryDoesExistAndAddressIsNotUpdated_ReturnsMappedBreweryWithNoUpdatedAddress()
+        public async Task GivenValidUpdateRequestWhenBreweryDoesExistAndAddressIsNotUpdatedReturnsMappedBreweryWithNoUpdatedAddress()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;

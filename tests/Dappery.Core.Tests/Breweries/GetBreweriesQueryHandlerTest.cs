@@ -10,7 +10,7 @@ namespace Dappery.Core.Tests.Breweries
     public class GetBreweriesQueryHandlerTest : TestFixture
     {
         [Fact]
-        public async Task GetBreweriesQueryHandler_WhenBreweriesExist_ReturnsListOfBreweriesWithBeers()
+        public async Task GetBreweriesQueryHandlerWhenBreweriesExistReturnsListOfBreweriesWithBeers()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -36,7 +36,7 @@ namespace Dappery.Core.Tests.Breweries
         }
 
         [Fact]
-        public async Task GetBreweriesQueryHandler_WhenNoBreweriesExist_ReturnsEmptyListOfBreweries()
+        public async Task GetBreweriesQueryHandlerWhenNoBreweriesExistReturnsEmptyListOfBreweries()
         {
             // Arrange, remove all breweries from the test database
             using var unitOfWork = this.UnitOfWork;

@@ -12,7 +12,7 @@ namespace Dappery.Core.Tests.Breweries
     public class CreateBreweryCommandHandlerTest : TestFixture
     {
         [Fact]
-        public async Task CreateBreweryCommandHandler_GivenAValidRequest_CreatesBrewery()
+        public async Task CreateBreweryCommandHandlerGivenAValidRequestCreatesBrewery()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;

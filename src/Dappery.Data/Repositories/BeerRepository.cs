@@ -13,7 +13,7 @@ namespace Dappery.Data.Repositories
     public class BeerRepository : IBeerRepository
     {
         private readonly IDbTransaction transaction;
-        private readonly IDbConnection dbConnection;
+        private readonly IDbConnection? dbConnection;
         private readonly string insertRowRetrievalQuery;
 
         public BeerRepository(IDbTransaction dbTransaction, string insertRowRetrievalQuery)
@@ -23,18 +23,18 @@ namespace Dappery.Data.Repositories
             this.insertRowRetrievalQuery = insertRowRetrievalQuery;
         }
 
-        public async Task<IEnumerable<Beer>> GetAllBeersAsync(CancellationToken token)
+        public async Task<IEnumerable<Beer>> GetAllBeersAsync(CancellationToken cancellationToken)
         {
             // Initialize our commands to utilize our cancellation token
             var addressCommand = new CommandDefinition(
                 "SELECT * FROM Addresses",
                 transaction: this.transaction,
-                cancellationToken: token);
+                cancellationToken: cancellationToken);
 
             var resultCommand = new CommandDefinition(
                 "SELECT b.*, br.* FROM Beers b INNER JOIN Breweries br ON br.Id = b.BreweryId",
                 transaction: this.transaction,
-                cancellationToken: token);
+                cancellationToken: cancellationToken);
 
             // Retrieve the addresses, as this is a nested mapping
             var addresses = (await this.dbConnection.QueryAsync<Address>(addressCommand).ConfigureAwait(false)).ToList();
@@ -131,10 +131,7 @@ namespace Dappery.Data.Repositories
                 cancellationToken: cancellationToken);
 
             // Let's insert the beer and grab its ID
-            var beerId = await this.dbConnection.ExecuteScalarAsync<int>(beerToCreateCommand).ConfigureAwait(false);
-
-            // Finally, we'll return the newly inserted beer Id
-            return beerId;
+            return await this.dbConnection.ExecuteScalarAsync<int>(beerToCreateCommand).ConfigureAwait(false);
         }
 
         public async Task UpdateBeerAsync(Beer beer, CancellationToken cancellationToken)
@@ -158,13 +155,13 @@ namespace Dappery.Data.Repositories
             await this.dbConnection.ExecuteAsync(updateBeerCommand).ConfigureAwait(false);
         }
 
-        public async Task DeleteBeerAsync(int beerId, CancellationToken cancellationToken)
+        public async Task DeleteBeerAsync(int id, CancellationToken cancellationToken)
         {
             // Our simplest command, just remove the beer directly from the database
             // Validation that the beer actually exists in the database will left to the application layer
             var deleteBeerCommand = new CommandDefinition(
                 "DELETE FROM Beers WHERE Id = @Id",
-                new { Id = beerId },
+                new { Id = id },
                 this.transaction,
                 cancellationToken: cancellationToken);
 

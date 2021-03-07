@@ -11,7 +11,7 @@ namespace Dappery.Core.Tests.Breweries
     public class DeleteBreweryCommandHandlerTest : TestFixture
     {
         [Fact]
-        public async Task GivenValidDeleteRequest_WhenBreweryExists_IsRemovedFromDatabaseIncludingAllBeers()
+        public async Task GivenValidDeleteRequestWhenBreweryExistsIsRemovedFromDatabaseIncludingAllBeers()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -22,12 +22,11 @@ namespace Dappery.Core.Tests.Breweries
             var result = await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
             result.ShouldBeOfType<Unit>();
         }
 
         [Fact]
-        public async Task GivenValidDeleteRequest_WhenDoesNotBreweryExist_IsNotRemovedFromDatabaseAndExceptionIsThrown()
+        public async Task GivenValidDeleteRequestWhenDoesNotBreweryExistIsNotRemovedFromDatabaseAndExceptionIsThrown()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;

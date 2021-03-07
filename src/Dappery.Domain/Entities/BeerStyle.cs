@@ -4,7 +4,7 @@ namespace Dappery.Domain.Entities
 {
     public enum BeerStyle
     {
-        Lager,
+        Lager = 0,
         Pilsner,
         Amber,
         PaleAle,

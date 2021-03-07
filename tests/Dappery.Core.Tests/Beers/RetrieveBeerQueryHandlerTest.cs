@@ -10,7 +10,7 @@ namespace Dappery.Core.Tests.Beers
     public class RetrieveBeerQueryHandlerTest : TestFixture
     {
         [Fact]
-        public async Task GivenValidRequest_WhenBeerExists_ReturnsMappedBeer()
+        public async Task GivenValidRequestWhenBeerExistsReturnsMappedBeer()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;
@@ -35,7 +35,7 @@ namespace Dappery.Core.Tests.Beers
         }
 
         [Fact]
-        public async Task GivenValidRequest_WhenBeerDoesNotExist_ThrowsApiExceptionForNotFound()
+        public async Task GivenValidRequestWhenBeerDoesNotExistThrowsApiExceptionForNotFound()
         {
             // Arrange
             using var unitOfWork = this.UnitOfWork;

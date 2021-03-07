@@ -9,7 +9,7 @@ namespace Dappery.Core.Tests.Extensions
     public class BreweryExtensionsTest
     {
         [Fact]
-        public void ToBreweryDto_GivenValidBreweryWithAListOfBeers_ReturnsMappedBreweryDto()
+        public void ToBreweryDtoGivenValidBreweryWithAListOfBeersReturnsMappedBreweryDto()
         {
             // Arrange
             var breweryToMap = new Brewery
@@ -55,7 +55,7 @@ namespace Dappery.Core.Tests.Extensions
         }
 
         [Fact]
-        public void ToBreweryDto_GivenValidBreweryWithoutListOfBeers_ReturnsMappedBreweryDtoWithEmptyBeerListAndZeroCount()
+        public void ToBreweryDtoGivenValidBreweryWithoutListOfBeersReturnsMappedBreweryDtoWithEmptyBeerListAndZeroCount()
         {
             // Arrange
             var breweryToMap = new Brewery
@@ -90,7 +90,7 @@ namespace Dappery.Core.Tests.Extensions
         }
 
         [Fact]
-        public void ToBreweryDto_GivenValidBreweryWithoutBeerListIncluded_ReturnsMappedBreweryDtoWithoutBeerListOrCount()
+        public void ToBreweryDtoGivenValidBreweryWithoutBeerListIncludedReturnsMappedBreweryDtoWithoutBeerListOrCount()
         {
             // Arrange
             var breweryToMap = new Brewery
@@ -128,7 +128,7 @@ namespace Dappery.Core.Tests.Extensions
         }
 
         [Fact]
-        public void ToBreweryDto_GivenValidBreweryWithNoBeerListAndWithoutBeerListIncluded_ReturnsMappedBreweryDtoWithoutBeerListOrCount()
+        public void ToBreweryDtoGivenValidBreweryWithNoBeerListAndWithoutBeerListIncludedReturnsMappedBreweryDtoWithoutBeerListOrCount()
         {
             // Arrange
             var breweryToMap = new Brewery
