@@ -1,5 +1,3 @@
-name: Run examples as a GitHub Action
-
 on: [push, workflow_dispatch]
 
 jobs:
