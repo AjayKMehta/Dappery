@@ -46,7 +46,7 @@ namespace Dappery.Core.Breweries.Commands.UpdateBrewery
             this.unitOfWork.Commit();
 
             // Map and return the brewery
-            return new BreweryResource(updatedBrewery.ToBreweryDto());
+            return new BreweryResource(updatedBrewery!.ToBreweryDto());
         }
     }
 }

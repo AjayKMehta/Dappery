@@ -51,7 +51,7 @@ namespace Dappery.Data.Repositories
             ).ConfigureAwait(false);
         }
 
-        public async Task<Beer> GetBeerByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<Beer?> GetBeerByIdAsync(int id, CancellationToken cancellationToken)
         {
             // Initialize our command
             var beerFromIdCommand = new CommandDefinition(

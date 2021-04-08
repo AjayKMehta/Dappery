@@ -56,7 +56,7 @@ namespace Dappery.Core.Beers.Commands.UpdateBeery
             this.unitOfWork.Commit();
 
             // Return the response with the updated beer
-            return new BeerResource(updatedBeer.ToBeerDto());
+            return new BeerResource(updatedBeer!.ToBeerDto());
         }
     }
 }

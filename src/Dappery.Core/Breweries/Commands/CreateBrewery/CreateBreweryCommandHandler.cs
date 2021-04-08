@@ -39,7 +39,7 @@ namespace Dappery.Core.Breweries.Commands.CreateBrewery
             this.unitOfWork.Commit();
 
             // Map and return the response
-            return new BreweryResource(insertedBrewery.ToBreweryDto());
+            return new BreweryResource(insertedBrewery!.ToBreweryDto());
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Dappery.Data.Repositories
             this.rowInsertRetrievalQuery = rowInsertRetrievalQuery;
         }
 
-        public async Task<Brewery> GetBreweryById(int id, CancellationToken cancellationToken)
+        public async Task<Brewery?> GetBreweryById(int id, CancellationToken cancellationToken)
         {
             // Instantiate our commands
             var beersFromBreweryCommand = new CommandDefinition(
@@ -55,7 +55,7 @@ namespace Dappery.Data.Repositories
                     return brewery;
                 }).ConfigureAwait(false);
 
-            return breweries?.FirstOrDefault() ?? new Brewery();
+            return breweries?.FirstOrDefault();
         }
 
         public async Task<IEnumerable<Brewery>> GetAllBreweries(CancellationToken cancellationToken)

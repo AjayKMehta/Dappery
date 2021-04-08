@@ -9,7 +9,7 @@ namespace Dappery.Core.Data
     {
         Task<IEnumerable<Brewery>> GetAllBreweries(CancellationToken cancellationToken);
 
-        Task<Brewery> GetBreweryById(int id, CancellationToken cancellationToken);
+        Task<Brewery?> GetBreweryById(int id, CancellationToken cancellationToken);
 
         Task<int> CreateBrewery(Brewery brewery, CancellationToken cancellationToken);
 

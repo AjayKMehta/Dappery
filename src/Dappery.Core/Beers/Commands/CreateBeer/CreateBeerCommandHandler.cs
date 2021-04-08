@@ -48,7 +48,7 @@ namespace Dappery.Core.Beers.Commands.CreateBeer
             this.unitOfWork.Commit();
 
             // Return the mapped beer
-            return new BeerResource(createdBeer.ToBeerDto());
+            return new BeerResource(createdBeer!.ToBeerDto());
         }
     }
 }

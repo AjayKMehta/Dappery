@@ -38,14 +38,14 @@ namespace Dappery.Core.Extensions
         {
             ruleBuilder.Custom((streetAddress, context) =>
             {
-                if (streetAddress != null && string.IsNullOrWhiteSpace(streetAddress))
+                if (string.IsNullOrWhiteSpace(streetAddress))
                 {
                     // Add the context failure and break out of the validation
                     context.AddFailure("Must supply a street address");
                     return;
                 }
 
-                if (!streetAddressRegex.IsMatch(context!.PropertyValue?.ToString() ?? string.Empty))
+                if (!streetAddressRegex.IsMatch(streetAddress))
                 {
                     context.AddFailure($"{streetAddress} is not a valid street address");
                 }
@@ -63,7 +63,7 @@ namespace Dappery.Core.Extensions
                     return;
                 }
 
-                if (!zipCodeRegex.IsMatch(context!.PropertyValue?.ToString() ?? string.Empty))
+                if (!zipCodeRegex.IsMatch(zipCode))
                 {
                     context!.AddFailure($"{zipCode} is not a valid zipcode");
                 }
