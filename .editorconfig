@@ -345,3 +345,75 @@ dotnet_naming_rule.private_fields_rule.severity = warning
 dotnet_naming_rule.public_protected_static_readonly_fields_rule.symbols  = public_protected_static_readonly_fields_group
 dotnet_naming_rule.public_protected_static_readonly_fields_rule.style    = pascal_case_style
 dotnet_naming_rule.public_protected_static_readonly_fields_rule.severity = warning
+
+##########################################
+# Roslynator Analyzers
+# https://github.com/JosefPihrt/Roslynator
+##########################################
+
+# RCS1005: Simplify nested using statement
+dotnet_diagnostic.RCS1005.severity = suggestion
+
+# RCS1007: Add braces
+dotnet_diagnostic.RCS1007.severity = suggestion
+
+# RCS1013: Use predefined type
+dotnet_diagnostic.RCS1013.severity = suggestion
+
+# RCS1031: Remove unnecessary braces
+dotnet_diagnostic.RCS1031.severity = suggestion
+
+# RCS1040: Remove empty 'else' clause
+dotnet_diagnostic.RCS1040.severity = suggestion
+
+# RCS1051: Parenthesize condition of conditional expression
+dotnet_diagnostic.RCS1051.severity = suggestion
+roslynator.RCS1051.do_not_parenthesize_single_token = true
+
+# RCS1052: Declare each attribute separately
+dotnet_diagnostic.RCS1052.severity = suggestion
+
+# RCS1071: Remove redundant base constructor call
+dotnet_diagnostic.RCS1071.severity = warning
+
+# RCS1126: Add braces to if-else
+dotnet_diagnostic.RCS1126.severity = suggestion
+
+# RCS1145: Remove redundant 'as' operator
+dotnet_diagnostic.RCS1145.severity = warning
+
+# RCS1165: Unconstrained type parameter checked for null
+dotnet_diagnostic.RCS1165.severity = suggestion
+
+# RCS1168: Parameter name differs from base name
+dotnet_diagnostic.RCS1168.severity = suggestion
+
+# RCS1176: Use 'var' instead of explicit type (when the type is not obvious)
+dotnet_diagnostic.RCS1176.severity = suggestion
+
+# RCS1177: Use 'var' instead of explicit type (in foreach)
+dotnet_diagnostic.RCS1177.severity = suggestion
+
+# RCS1182: Remove redundant base interface
+dotnet_diagnostic.RCS1182.severity = suggestion
+
+# RCS1207: Convert anonymous function to method group
+dotnet_diagnostic.RCS1207.severity = suggestion
+
+# RCS1208: Reduce 'if' nesting
+dotnet_diagnostic.RCS1208.severity = suggestion
+
+# RCS1211: Remove unnecessary 'else'
+dotnet_diagnostic.RCS1211.severity = suggestion
+
+# RCS1231: Make parameter ref read-only
+dotnet_diagnostic.RCS1231.severity = suggestion
+
+# RCS1238: Avoid nested ?: operators
+dotnet_diagnostic.RCS1238.severity = suggestion
+
+# RCS1241: Implement non-generic counterpart
+dotnet_diagnostic.RCS1241.severity = warning
+
+# RCS1248: Use pattern matching to check for null (or vice versa)
+dotnet_diagnostic.RCS1248.severity = suggestion
