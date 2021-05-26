@@ -382,8 +382,9 @@ dotnet_diagnostic.RCS1126.severity = suggestion
 # RCS1145: Remove redundant 'as' operator
 dotnet_diagnostic.RCS1145.severity = warning
 
+# https://github.com/JosefPihrt/Roslynator/issues/384
 # RCS1165: Unconstrained type parameter checked for null
-dotnet_diagnostic.RCS1165.severity = suggestion
+dotnet_diagnostic.RCS1165.severity = none
 
 # RCS1168: Parameter name differs from base name
 dotnet_diagnostic.RCS1168.severity = suggestion
