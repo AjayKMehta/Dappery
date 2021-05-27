@@ -29,7 +29,7 @@ namespace Dappery.Core.Beers.Commands.UpdateBeery
             }
 
             // Attempt to parse the incoming BeerStyle enumeration value (exactly how we parse in the CreateBeerCommandHandler)
-            var parsedBeerStyle = Enum.TryParse(request.Dto.Style, true, out BeerStyle beerStyle);
+            var parsedBeerStyle = Enum.TryParse<BeerStyle>(request.Dto.Style, true, out var beerStyle);
 
             // Update the fields on the existing beer
             existingBeer.BeerStyle = parsedBeerStyle ? beerStyle : BeerStyle.Other;

@@ -371,7 +371,7 @@ dotnet_diagnostic.RCS1051.severity = suggestion
 roslynator.RCS1051.do_not_parenthesize_single_token = true
 
 # RCS1052: Declare each attribute separately
-dotnet_diagnostic.RCS1052.severity = suggestion
+dotnet_diagnostic.RCS1052.severity = none
 
 # RCS1071: Remove redundant base constructor call
 dotnet_diagnostic.RCS1071.severity = warning
@@ -402,7 +402,7 @@ dotnet_diagnostic.RCS1182.severity = suggestion
 dotnet_diagnostic.RCS1207.severity = suggestion
 
 # RCS1208: Reduce 'if' nesting
-dotnet_diagnostic.RCS1208.severity = suggestion
+dotnet_diagnostic.RCS1208.severity = none
 
 # RCS1211: Remove unnecessary 'else'
 dotnet_diagnostic.RCS1211.severity = suggestion

@@ -4,7 +4,7 @@ namespace Dappery.Domain.Dtos
     {
         public ErrorDto(string? description, object? details = null)
         {
-            this.Description = string.IsNullOrWhiteSpace(description) ? "An expected error has occured." : description;
+            this.Description = string.IsNullOrWhiteSpace(description) ? "An expected error has occurred." : description;
             this.Details = details;
         }
 

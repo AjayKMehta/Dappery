@@ -30,7 +30,7 @@ namespace Dappery.Core.Beers.Commands.CreateBeer
             }
 
             // Attempt to parse the incoming BeerStyle enumeration value
-            var parsedBeerStyle = Enum.TryParse(request.Dto.Style, true, out BeerStyle beerStyle);
+            var parsedBeerStyle = Enum.TryParse<BeerStyle>(request.Dto.Style, true, out var beerStyle);
 
             // Let's instantiate a beer instance
             var beerToAdd = new Beer
