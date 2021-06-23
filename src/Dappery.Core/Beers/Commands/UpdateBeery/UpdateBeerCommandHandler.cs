@@ -19,6 +19,11 @@ namespace Dappery.Core.Beers.Commands.UpdateBeery
 
         public async Task<BeerResource> Handle(UpdateBeerCommand request, CancellationToken cancellationToken)
         {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             // First validate both the beer
             var existingBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
 

@@ -1,4 +1,4 @@
-namespace Dappery.Domain.Dtos.Brewery
+namespace Dappery.Domain.Dtos
 {
     public class CreateBreweryDto
     {

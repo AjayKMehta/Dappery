@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -22,12 +23,17 @@ namespace Dappery.Core.Infrastructure
 
         public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
+            if (next is null)
+            {
+                throw new ArgumentNullException(nameof(next));
+            }
+
             var context = new ValidationContext<TRequest>(request);
 
             var failures = this.validators
                 .Select(v => v.Validate(context))
                 .SelectMany(result => result.Errors)
-                .Where(f => f != null);
+                .Where(f => f is not null);
 
             if (failures.Any())
             {

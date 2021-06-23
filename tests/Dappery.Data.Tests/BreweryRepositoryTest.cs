@@ -25,8 +25,8 @@ namespace Dappery.Data.Tests
             breweries.ShouldNotBeNull();
             breweries.ShouldNotBeEmpty();
             breweries.Count.ShouldBe(2);
-            breweries.All(br => br.Address != null).ShouldBeTrue();
-            breweries.All(br => br.Beers != null).ShouldBeTrue();
+            breweries.All(br => br.Address is not null).ShouldBeTrue();
+            breweries.All(br => br.Beers is not null).ShouldBeTrue();
             breweries.All(br => br.Beers.Count > 0).ShouldBeTrue();
 
             var brewery = breweries.Find(br => br.Name == "Fall River Brewery");

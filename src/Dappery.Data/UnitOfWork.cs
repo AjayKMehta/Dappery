@@ -27,7 +27,7 @@ namespace Dappery.Data
             }
             else
             {
-                this.dbConnection = isPostgres ? (IDbConnection)new NpgsqlConnection(connectionString) : new SqlConnection(connectionString);
+                this.dbConnection = isPostgres ? new NpgsqlConnection(connectionString) : new SqlConnection(connectionString);
                 rowInsertRetrievalQuery = isPostgres ? "returning Id;" : "; SELECT CAST(SCOPE_IDENTITY() as int);";
             }
 

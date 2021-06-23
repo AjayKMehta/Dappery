@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Dappery.Core.Breweries.Commands.UpdateBrewery;
 using Dappery.Core.Exceptions;
 using Dappery.Domain.Dtos;
-using Dappery.Domain.Dtos.Brewery;
 using Shouldly;
 using Xunit;
 

@@ -19,6 +19,11 @@ namespace Dappery.Core.Beers.Commands.CreateBeer
 
         public async Task<BeerResource> Handle(CreateBeerCommand request, CancellationToken cancellationToken)
         {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             // Check to make sure the brewery exists from the given brewery ID on the request
             var existingBrewery = await this.unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId, cancellationToken).ConfigureAwait(false);
 

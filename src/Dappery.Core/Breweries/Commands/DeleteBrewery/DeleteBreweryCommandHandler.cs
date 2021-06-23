@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,6 +16,11 @@ namespace Dappery.Core.Breweries.Commands.DeleteBrewery
 
         public async Task<Unit> Handle(DeleteBreweryCommand request, CancellationToken cancellationToken)
         {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             // Retrieve the brewery and invalidate the request if none is found
             var breweryToDelete = await this.unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
 

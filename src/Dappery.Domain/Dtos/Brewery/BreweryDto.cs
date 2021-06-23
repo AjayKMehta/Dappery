@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Dappery.Domain.Dtos.Beer;
 
-namespace Dappery.Domain.Dtos.Brewery
+namespace Dappery.Domain.Dtos
 {
     public class BreweryDto
     {

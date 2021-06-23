@@ -151,7 +151,7 @@ namespace Dappery.Data.Repositories
             // Again, we'll assume the brewery details are being validated and mapped properly in the application layer
             await this.dbConnection.ExecuteAsync(breweryUpdateCommand).ConfigureAwait(false);
 
-            if (brewery.Address != null && updateAddress)
+            if (brewery.Address is not null && updateAddress)
             {
                 var addressUpdateCommand = new CommandDefinition(
                     "UPDATE Addresses SET StreetAddress = @StreetAddress, City = @City, ZipCode = @ZipCode, State = @State, UpdatedAt = @UpdatedAt WHERE Id = @Id",

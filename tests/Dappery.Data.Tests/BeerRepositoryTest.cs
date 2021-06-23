@@ -24,8 +24,8 @@ namespace Dappery.Data.Tests
             beers.ShouldNotBeNull();
             beers.ShouldBeOfType<List<Beer>>();
             beers.ShouldNotBeEmpty();
-            beers.All(b => b.Brewery != null).ShouldBeTrue();
-            beers.All(b => b.Brewery!.Address != null).ShouldBeTrue();
+            beers.All(b => b.Brewery is not null).ShouldBeTrue();
+            beers.All(b => b.Brewery!.Address is not null).ShouldBeTrue();
             beers.All(b => b.Brewery!.Address!.BreweryId == b.Brewery.Id).ShouldBeTrue();
             beers.ShouldContain(b => b.Name == "Hexagenia");
             beers.Find(b => b.Name == "Hexagenia")?.BeerStyle.ShouldBe(BeerStyle.Ipa);

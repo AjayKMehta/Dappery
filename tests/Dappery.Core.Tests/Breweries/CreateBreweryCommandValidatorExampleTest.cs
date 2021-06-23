@@ -1,6 +1,5 @@
 using Dappery.Core.Breweries.Commands.CreateBrewery;
 using Dappery.Domain.Dtos;
-using Dappery.Domain.Dtos.Brewery;
 using FluentValidation.TestHelper;
 using Xunit;
 

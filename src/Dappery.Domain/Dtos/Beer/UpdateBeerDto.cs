@@ -1,4 +1,4 @@
-namespace Dappery.Domain.Dtos.Beer
+namespace Dappery.Domain.Dtos
 {
     public class UpdateBeerDto
     {

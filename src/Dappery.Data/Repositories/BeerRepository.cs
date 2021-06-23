@@ -94,7 +94,7 @@ namespace Dappery.Data.Repositories
             var address = await this.dbConnection.QueryFirstOrDefaultAsync<Address>(addressCommand).ConfigureAwait(false);
 
             // Set the address found in the previous query to the beer's brewery address, if we have a brewery
-            if (beerFromId.Brewery != null)
+            if (beerFromId.Brewery is not null)
             {
                 beerFromId.Brewery.Address = address;
             }
