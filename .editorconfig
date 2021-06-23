@@ -418,3 +418,68 @@ dotnet_diagnostic.RCS1241.severity = warning
 
 # RCS1248: Use pattern matching to check for null (or vice versa)
 dotnet_diagnostic.RCS1248.severity = suggestion
+
+
+##########################################
+# .NET Code Quality Rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/
+##########################################
+
+## Design rules
+
+# CA1000: Do not declare static members on generic types
+dotnet_code_quality.CA1000.api_surface = all
+dotnet_code_quality.CA1000.severity = none
+
+# CA1002: Do not expose generic lists
+dotnet_diagnostic.CA1002.severity = suggestion
+
+# CA1005: Avoid excessive parameters on generic types
+dotnet_code_quality.CA1005.api_surface = all
+dotnet_code_quality.CA1005.severity = none
+
+# CA1017: Mark assemblies with ComVisibleAttribute
+dotnet_code_quality.CA1007.severity = none
+
+# CA1021: Avoid out parameters
+dotnet_code_quality.CA1021.severity = none
+
+# CA1024: Use properties where appropriate
+dotnet_diagnostic.CA1024.severity = suggestion
+
+# CA1028: Enum storage should be Int32
+dotnet_code_quality.CA1028.severity = none
+
+# CA1040: Avoid empty interfaces
+dotnet_code_quality.CA1040.api_surface = all
+dotnet_code_quality.CA1040.severity = none
+
+# CA1045: Do not pass types by reference
+dotnet_code_quality.CA1045.severity = none
+
+# https://github.com/dotnet/roslyn-analyzers/issues/3218
+# If NRT enabled, gives false positives
+dotnet_code_quality.CA1062.severity = none
+
+## Globalization rules
+
+# CA1303: Do not pass literals as localized parameters
+dotnet_code_quality.CA1303.severity = none
+
+# CA1310: Specify StringComparison for correctness
+dotnet_code_quality.CA1310.severity = suggestion
+
+## Maintainability rules
+
+# CA1501: Avoid excessive inheritance
+dotnet_code_quality.CA1501.severity = suggestion
+
+## Naming rules
+
+# CA1724: Type names should not match namespaces
+dotnet_code_quality.CA1724.severity = none
+
+## Performance rules
+
+# CA1802: Use Literals Where Appropriate
+dotnet_code_quality.CA1802.required_modifiers = none
