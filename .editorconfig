@@ -439,7 +439,7 @@ dotnet_code_quality.CA1005.api_surface = all
 dotnet_code_quality.CA1005.severity = none
 
 # CA1017: Mark assemblies with ComVisibleAttribute
-dotnet_code_quality.CA1007.severity = none
+dotnet_code_quality.CA1017.severity = none
 
 # CA1021: Avoid out parameters
 dotnet_code_quality.CA1021.severity = none
