@@ -1,3 +1,5 @@
+[![.github/workflows/ci.yml](https://github.com/AjayKMehta/Dappery/actions/workflows/ci.yml/badge.svg)](https://github.com/AjayKMehta/Dappery/actions/workflows/ci.yml)
+
 ## Run unit tests
 
 ```shell
