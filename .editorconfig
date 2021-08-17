@@ -423,7 +423,6 @@ dotnet_diagnostic.RCS1241.severity = warning
 # RCS1248: Use pattern matching to check for null (or vice versa)
 dotnet_diagnostic.RCS1248.severity = suggestion
 
-
 ##########################################
 # .NET Code Quality Rules
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/
@@ -441,6 +440,10 @@ dotnet_diagnostic.CA1002.severity = suggestion
 # CA1005: Avoid excessive parameters on generic types
 dotnet_code_quality.CA1005.api_surface = all
 dotnet_diagnostic.CA1005.severity = none
+
+# CA1014: Mark assemblies with CLSCompliantAttribute
+# https://github.com/dotnet/roslyn/issues/37876#issuecomment-738042719
+dotnet_diagnostic.CA1014.severity = none
 
 # CA1017: Mark assemblies with ComVisibleAttribute
 dotnet_diagnostic.CA1017.severity = none
@@ -480,6 +483,9 @@ dotnet_diagnostic.CA1501.severity = suggestion
 
 ## Naming rules
 
+# CA1715: Identifiers should have correct prefix
+dotnet_code_quality.CA1715.exclude_single_letter_type_parameters = true
+
 # CA1724: Type names should not match namespaces
 dotnet_diagnostic.CA1724.severity = none
 
@@ -487,3 +493,9 @@ dotnet_diagnostic.CA1724.severity = none
 
 # CA1802: Use Literals Where Appropriate
 dotnet_code_quality.CA1802.required_modifiers = none
+
+## Usage rules
+
+# CA1801: Review unused parameters
+# This rule has been deprecated in favor of IDE0060.
+dotnet_diagnostic.CA1802.severity = none
