@@ -355,6 +355,12 @@ dotnet_naming_rule.public_protected_static_readonly_fields_rule.severity = warni
 # https://github.com/JosefPihrt/Roslynator
 ##########################################
 
+# Add newline after conditional operator instead of before it
+roslynator.RCS0028.invert = true
+
+# Add newline after expression-body arrow instead of before it
+roslynator.RCS0032.invert = true
+
 # RCS1005: Simplify nested using statement
 dotnet_diagnostic.RCS1005.severity = suggestion
 
@@ -364,11 +370,17 @@ dotnet_diagnostic.RCS1007.severity = suggestion
 # RCS1013: Use predefined type
 dotnet_diagnostic.RCS1013.severity = suggestion
 
+# Use implicitly typed array (when type is obvious)
+roslynator.RCS1014.use_implicit_type_when_obvious = true
+
 # RCS1031: Remove unnecessary braces
 dotnet_diagnostic.RCS1031.severity = suggestion
 
 # RCS1040: Remove empty 'else' clause
 dotnet_diagnostic.RCS1040.severity = suggestion
+
+# Do not rename private static field to camel case with underscore
+roslynator.RCS1045.suppress_when_field_is_static = true
 
 # RCS1051: Parenthesize condition of conditional expression
 dotnet_diagnostic.RCS1051.severity = suggestion
@@ -379,6 +391,9 @@ dotnet_diagnostic.RCS1052.severity = none
 
 # RCS1071: Remove redundant base constructor call
 dotnet_diagnostic.RCS1071.severity = warning
+
+# Use string.Empty instead of ""
+roslynator.RCS1078.invert = true
 
 # RCS1126: Add braces to if-else
 dotnet_diagnostic.RCS1126.severity = suggestion
