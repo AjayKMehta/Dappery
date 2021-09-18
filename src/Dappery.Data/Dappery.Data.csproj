@@ -1,15 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="../../Dappery.targets" />
-
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
-    <AnalysisLevel>latest</AnalysisLevel>
-    <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
-  </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Dappery.Core\Dappery.Core.csproj" />
   </ItemGroup>
