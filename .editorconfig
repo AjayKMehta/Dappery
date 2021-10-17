@@ -383,7 +383,7 @@ dotnet_diagnostic.RCS1040.severity = suggestion
 roslynator.RCS1045.suppress_when_field_is_static = true
 
 # RCS1051: Parenthesize condition of conditional expression
-dotnet_diagnostic.RCS1051.severity = suggestion
+dotnet_diagnostic.RCS1051.severity = none
 roslynator.RCS1051.do_not_parenthesize_single_token = true
 
 # RCS1052: Declare each attribute separately
