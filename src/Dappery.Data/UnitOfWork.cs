@@ -40,15 +40,7 @@ namespace Dappery.Data
             // Once our connection is open, if we're running SQLite for unit tests (or that actual application), let's seed some data
             if (string.IsNullOrWhiteSpace(connectionString))
             {
-                try
-                {
-                    // We'll seed a couple breweries each with an address and several beers
-                    this.SeedDatabase(this.dbConnection);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Could not seed the database: {e.Message}");
-                }
+                this.SeedDatabase(this.dbConnection);
             }
         }
 
@@ -62,7 +54,7 @@ namespace Dappery.Data
             {
                 this.dbTransaction.Commit();
             }
-            catch (Exception e)
+            catch (InvalidOperationException e)
             {
                 Console.WriteLine($"Could not commit the transaction, reason: {e.Message}");
                 this.dbTransaction.Rollback();

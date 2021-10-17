@@ -10,14 +10,14 @@ using Microsoft.Extensions.Logging;
 namespace Dappery.Core.Infrastructure
 {
     public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest<TResponse>
+        where TRequest : notnull, IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> validators;
         private readonly ILogger<TRequest> logger;
 
         public RequestValidationBehavior(IEnumerable<IValidator<TRequest>> validators, ILogger<TRequest> logger)
         {
-            this.validators = validators;
+            this.validators = validators ?? Enumerable.Empty<IValidator<TRequest>>();
             this.logger = logger;
         }
 

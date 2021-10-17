@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dappery.Core.Breweries.Commands.CreateBrewery;
 using Dappery.Domain.Dtos;
+using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Media;
 using Shouldly;
 using Xunit;

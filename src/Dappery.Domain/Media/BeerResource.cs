@@ -1,4 +1,4 @@
-using Dappery.Domain.Dtos;
+using Dappery.Domain.Dtos.Beer;
 
 namespace Dappery.Domain.Media
 {

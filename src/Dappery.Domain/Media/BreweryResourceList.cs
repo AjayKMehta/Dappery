@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Dappery.Domain.Dtos;
+using Dappery.Domain.Dtos.Brewery;
 
 namespace Dappery.Domain.Media
 {

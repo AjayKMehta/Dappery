@@ -1,4 +1,4 @@
-using Dappery.Domain.Dtos;
+using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Media;
 using MediatR;
 

@@ -2,7 +2,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Dappery.Core.Beers.Commands.UpdateBeery;
 using Dappery.Core.Exceptions;
-using Dappery.Domain.Dtos;
+using Dappery.Domain.Dtos.Beer;
 using Dappery.Domain.Entities;
 using Shouldly;
 using Xunit;
