@@ -1,13 +1,13 @@
 namespace Dappery.Domain.Entities
 {
-    public class Beer : TimeStampedEntity
+    public record Beer : TimeStampedEntity
     {
-        public string? Name { get; set; }
+        public string? Name { get; init; }
 
-        public BeerStyle BeerStyle { get; set; }
+        public BeerStyle BeerStyle { get; init; }
 
-        public int BreweryId { get; set; }
+        public int BreweryId { get; init; }
 
-        public Brewery? Brewery { get; set; }
+        public Brewery? Brewery { get; init; }
     }
 }
