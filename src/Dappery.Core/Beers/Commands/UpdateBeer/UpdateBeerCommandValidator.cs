@@ -7,7 +7,7 @@ namespace Dappery.Core.Beers.Commands.UpdateBeer
     {
         public UpdateBeerCommandValidator()
         {
-            this.RuleFor(b => b.Dto)
+            _ = this.RuleFor(b => b.Dto)
                 .NotNull()
                 .WithMessage("Must supply a beer to update");
 

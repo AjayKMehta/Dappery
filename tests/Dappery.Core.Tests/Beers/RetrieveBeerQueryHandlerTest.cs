@@ -21,17 +21,22 @@ namespace Dappery.Core.Tests.Beers
             var result = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.Self.ShouldNotBeNull();
-            result.Self.Brewery.ShouldNotBeNull();
-            result.Self.Brewery?.Address.ShouldNotBeNull();
-            result.Self.Brewery?.Address?.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
-            result.Self.Brewery?.Address?.City.ShouldBe("Redding");
-            result.Self.Brewery?.Address?.State.ShouldBe("CA");
-            result.Self.Brewery?.Address?.ZipCode.ShouldBe("96002");
-            result.Self.Brewery?.Beers.ShouldBeNull();
-            result.Self.Brewery?.Id.ShouldBe(1);
-            result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
+            var beerDto =
+                result
+                .ShouldNotBeNull()
+                .Self
+                .ShouldNotBeNull();
+
+            var breweryDto = beerDto!.Brewery.ShouldNotBeNull();
+            breweryDto!.Beers.ShouldBeNull();
+            breweryDto!.Id.ShouldBe(1);
+            breweryDto!.Name.ShouldBe("Fall River Brewery");
+
+            var addressDto = breweryDto!.Address.ShouldNotBeNull();
+            addressDto!.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
+            addressDto!.City.ShouldBe("Redding");
+            addressDto!.State.ShouldBe("CA");
+            addressDto!.ZipCode.ShouldBe("96002");
         }
 
         [Fact]
@@ -46,8 +51,7 @@ namespace Dappery.Core.Tests.Beers
             var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(query, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+            result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
     }
 }

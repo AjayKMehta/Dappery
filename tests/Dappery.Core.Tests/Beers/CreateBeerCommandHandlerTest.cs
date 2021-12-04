@@ -29,20 +29,24 @@ namespace Dappery.Core.Tests.Beers
             var result = await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.ShouldBeOfType<BeerResource>();
-            result.Self.ShouldNotBeNull();
-            result.Self.Brewery.ShouldNotBeNull();
-            result.Self.Brewery?.Address.ShouldNotBeNull();
-            result.Self.Brewery?.Address?.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
-            result.Self.Brewery?.Address?.City.ShouldBe("Redding");
-            result.Self.Brewery?.Address?.State.ShouldBe("CA");
-            result.Self.Brewery?.Address?.ZipCode.ShouldBe("96002");
-            result.Self.Brewery?.Beers.ShouldBeNull();
-            result.Self.Brewery?.Id.ShouldBe(1);
-            result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
-            result.Self.Name.ShouldBe(beerCommand.Dto.Name);
-            result.Self.Style.ShouldBe(beerCommand.Dto.Style);
+            var beerDto = result
+                .ShouldNotBeNull()
+                .ShouldBeOfType<BeerResource>()
+                .Self
+                .ShouldNotBeNull();
+            beerDto!.Name.ShouldBe(beerCommand.Dto.Name);
+            beerDto!.Style.ShouldBe(beerCommand.Dto.Style);
+
+            var breweryDto = beerDto!.Brewery.ShouldNotBeNull();
+            breweryDto!.Beers.ShouldBeNull();
+            breweryDto!.Id.ShouldBe(1);
+            breweryDto!.Name.ShouldBe("Fall River Brewery");
+
+            var addressDto = breweryDto!.Address.ShouldNotBeNull();
+            addressDto!.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
+            addressDto!.City.ShouldBe("Redding");
+            addressDto!.State.ShouldBe("CA");
+            addressDto!.ZipCode.ShouldBe("96002");
         }
 
         [Fact]
@@ -62,8 +66,7 @@ namespace Dappery.Core.Tests.Beers
             var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+            result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         }
 
         [Fact]
@@ -83,20 +86,23 @@ namespace Dappery.Core.Tests.Beers
             var result = await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.ShouldBeOfType<BeerResource>();
-            result.Self.ShouldNotBeNull();
-            result.Self.Brewery?.ShouldNotBeNull();
-            result.Self.Brewery?.Address.ShouldNotBeNull();
-            result.Self.Brewery?.Address?.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
-            result.Self.Brewery?.Address?.City.ShouldBe("Redding");
-            result.Self.Brewery?.Address?.State.ShouldBe("CA");
-            result.Self.Brewery?.Address?.ZipCode.ShouldBe("96002");
-            result.Self.Brewery?.Beers.ShouldBeNull();
-            result.Self.Brewery?.Id.ShouldBe(1);
-            result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
-            result.Self.Name.ShouldBe(beerCommand.Dto.Name);
-            result.Self.Style.ShouldBe(nameof(BeerStyle.Other));
+            var beerDto = result
+                .ShouldNotBeNull()
+                .ShouldBeOfType<BeerResource>()
+                .Self
+                .ShouldNotBeNull();
+
+            var breweryDto = beerDto!.Brewery?.ShouldNotBeNull();
+            var addressDto = breweryDto!.Address.ShouldNotBeNull();
+            addressDto!.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
+            addressDto!.City.ShouldBe("Redding");
+            addressDto!.State.ShouldBe("CA");
+            addressDto!.ZipCode.ShouldBe("96002");
+            breweryDto!.Beers.ShouldBeNull();
+            breweryDto!.Id.ShouldBe(1);
+            breweryDto!.Name.ShouldBe("Fall River Brewery");
+            beerDto!.Name.ShouldBe(beerCommand.Dto.Name);
+            beerDto!.Style.ShouldBe(nameof(BeerStyle.Other));
         }
     }
 }

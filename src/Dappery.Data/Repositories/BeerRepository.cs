@@ -152,7 +152,7 @@ namespace Dappery.Data.Repositories
                 this.transaction,
                 cancellationToken: cancellationToken);
 
-            await this.dbConnection.ExecuteAsync(updateBeerCommand).ConfigureAwait(false);
+            _ = await this.dbConnection.ExecuteAsync(updateBeerCommand).ConfigureAwait(false);
         }
 
         public async Task DeleteBeerAsync(int id, CancellationToken cancellationToken)
@@ -165,7 +165,7 @@ namespace Dappery.Data.Repositories
                 this.transaction,
                 cancellationToken: cancellationToken);
 
-            await this.dbConnection.ExecuteAsync(deleteBeerCommand).ConfigureAwait(false);
+            _ = await this.dbConnection.ExecuteAsync(deleteBeerCommand).ConfigureAwait(false);
         }
     }
 }
