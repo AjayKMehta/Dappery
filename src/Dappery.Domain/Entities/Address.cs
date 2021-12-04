@@ -1,15 +1,15 @@
 namespace Dappery.Domain.Entities
 {
-    public record Address : TimeStampedEntity
+    public class Address : TimeStampedEntity
     {
-        public string? StreetAddress { get; init; }
+        public string? StreetAddress { get; set; }
 
-        public string? City { get; init; }
+        public string? City { get; set; }
 
-        public string? State { get; init; }
+        public string? State { get; set; }
 
-        public string? ZipCode { get; init; }
+        public string? ZipCode { get; set; }
 
-        public int BreweryId { get; init; }
+        public int BreweryId { get; set; }
     }
 }

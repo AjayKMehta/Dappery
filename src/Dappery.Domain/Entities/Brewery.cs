@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace Dappery.Domain.Entities
 {
-    public record Brewery : TimeStampedEntity
+    public class Brewery : TimeStampedEntity
     {
         public Brewery() => this.Beers = new List<Beer>();
 
-        public string? Name { get; init; }
+        public string? Name { get; set; }
 
-        public Address? Address { get; init; }
+        public Address? Address { get; set; }
 
         public ICollection<Beer> Beers { get; }
 

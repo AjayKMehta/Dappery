@@ -3,16 +3,16 @@ using Dappery.Domain.Dtos.Beer;
 
 namespace Dappery.Domain.Dtos.Brewery
 {
-    public record BreweryDto
+    public class BreweryDto
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
 
-        public string? Name { get; init; }
+        public string? Name { get; set; }
 
-        public AddressDto? Address { get; init; }
+        public AddressDto? Address { get; set; }
 
-        public IEnumerable<BeerDto>? Beers { get; init; }
+        public IEnumerable<BeerDto>? Beers { get; set; }
 
-        public int? BeerCount { get; init; }
+        public int? BeerCount { get; set; }
     }
 }

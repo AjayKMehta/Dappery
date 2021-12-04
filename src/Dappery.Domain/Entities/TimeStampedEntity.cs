@@ -2,12 +2,12 @@ using System;
 
 namespace Dappery.Domain.Entities
 {
-    public record TimeStampedEntity
+    public class TimeStampedEntity
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
 
-        public DateTime CreatedAt { get; init; }
+        public DateTime CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; init; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

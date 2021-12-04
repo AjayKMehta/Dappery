@@ -1,9 +1,9 @@
 namespace Dappery.Domain.Dtos.Brewery
 {
-    public record UpdateBreweryDto
+    public class UpdateBreweryDto
     {
-        public string? Name { get; init; }
+        public string? Name { get; set; }
 
-        public AddressDto? Address { get; init; }
+        public AddressDto? Address { get; set; }
     }
 }
