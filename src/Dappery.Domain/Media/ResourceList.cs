@@ -5,10 +5,13 @@ namespace Dappery.Domain.Media
 {
     public class ResourceList<T>
     {
-        public ResourceList(IEnumerable<T> items) => this.Items = items;
-
+        public ResourceList(IEnumerable<T> items)
+        {
+            this.Items = items;
+            this.Count = this.Items.Count();
+        }
         public IEnumerable<T> Items { get; }
 
-        public int Count => this.Items.Count();
+        public int Count { get; }
     }
 }
