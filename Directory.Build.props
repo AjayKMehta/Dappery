@@ -7,5 +7,6 @@
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <AnalysisLevel>latest</AnalysisLevel>
     <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+    <Nullable>Enable</Nullable>
   </PropertyGroup>
 </Project>

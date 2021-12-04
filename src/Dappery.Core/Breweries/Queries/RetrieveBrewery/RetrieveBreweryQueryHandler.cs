@@ -1,4 +1,3 @@
-using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,11 +17,6 @@ namespace Dappery.Core.Breweries.Queries.RetrieveBrewery
 
         public async Task<BreweryResource> Handle(RetrieveBreweryQuery request, CancellationToken cancellationToken)
         {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
             // Retrieve the brewery and clean up our resources
             var brewery = await this.unitOfWork.BreweryRepository.GetBreweryById(request.Id, cancellationToken).ConfigureAwait(false);
             this.unitOfWork.Commit();

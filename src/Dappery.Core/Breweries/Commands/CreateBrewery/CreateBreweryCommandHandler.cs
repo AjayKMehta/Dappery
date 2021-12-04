@@ -17,11 +17,6 @@ namespace Dappery.Core.Breweries.Commands.CreateBrewery
 
         public async Task<BreweryResource> Handle(CreateBreweryCommand request, CancellationToken cancellationToken)
         {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
             var breweryToCreate = new Brewery
             {
                 Name = request.Dto.Name,

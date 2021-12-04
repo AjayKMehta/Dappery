@@ -21,9 +21,7 @@ namespace Dappery.Data.Tests
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 this.UnitOfWork.Dispose();
-            }
         }
     }
 }
