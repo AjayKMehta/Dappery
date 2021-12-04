@@ -19,9 +19,8 @@ namespace Dappery.Core.Tests.Beers
             var result = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.Items.ShouldNotBeNull();
-            result.Count.ShouldBe(5);
+            result.ShouldNotBeNull().Count.ShouldBe(5);
+            _ = result.Items.ShouldNotBeNull();
         }
 
         [Fact]
@@ -41,9 +40,8 @@ namespace Dappery.Core.Tests.Beers
             var result = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.Items.ShouldNotBeNull();
-            result.Count.ShouldBe(0);
+            result.ShouldNotBeNull().Count.ShouldBe(0);
+            _ = result.Items.ShouldNotBeNull();
         }
     }
 }

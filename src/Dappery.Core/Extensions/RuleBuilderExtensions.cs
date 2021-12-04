@@ -11,62 +11,58 @@ namespace Dappery.Core.Extensions
 
         public static void NotNullOrEmpty<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
-            ruleBuilder.Custom((stringToValidate, context) =>
-            {
-                if (string.IsNullOrWhiteSpace(stringToValidate))
-                {
-                    context.AddFailure($"{context.PropertyName} cannot be null, or empty");
-                }
-            });
+            _ = ruleBuilder.Custom((stringToValidate, context) =>
+              {
+                  if (string.IsNullOrWhiteSpace(stringToValidate))
+                  {
+                      context.AddFailure($"{context.PropertyName} cannot be null, or empty");
+                  }
+              });
         }
 
         public static void HasValidStateAbbreviation<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
-            ruleBuilder.Custom((stateAbbreviation, context) =>
-            {
-                if (stateAbbreviation is not null && !validStateRegex.IsMatch(stateAbbreviation))
-                {
-                    context.AddFailure($"{stateAbbreviation} is not a valid state code");
-                }
-            })
+            _ = ruleBuilder.Custom((stateAbbreviation, context) =>
+              {
+                  if (stateAbbreviation is not null && !validStateRegex.IsMatch(stateAbbreviation))
+                  {
+                      context.AddFailure($"{stateAbbreviation} is not a valid state code");
+                  }
+              })
             .NotEmpty()
             .WithMessage("State code cannot be empty");
         }
 
         public static void HasValidStreetAddress<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
-            ruleBuilder.Custom((streetAddress, context) =>
-            {
-                if (string.IsNullOrWhiteSpace(streetAddress))
-                {
-                    // Add the context failure and break out of the validation
-                    context.AddFailure("Must supply a street address");
-                    return;
-                }
+            _ = ruleBuilder.Custom((streetAddress, context) =>
+              {
+                  if (string.IsNullOrWhiteSpace(streetAddress))
+                  {
+                      // Add the context failure and break out of the validation
+                      context.AddFailure("Must supply a street address");
+                      return;
+                  }
 
-                if (!streetAddressRegex.IsMatch(streetAddress))
-                {
-                    context.AddFailure($"{streetAddress} is not a valid street address");
-                }
-            });
+                  if (!streetAddressRegex.IsMatch(streetAddress))
+                      context.AddFailure($"{streetAddress} is not a valid street address");
+              });
         }
 
         public static void HasValidZipCode<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
-            ruleBuilder.Custom((zipCode, context) =>
-            {
-                if (string.IsNullOrWhiteSpace(zipCode))
-                {
-                    // Add the context failure and break out of the validation
-                    context.AddFailure("Must supply the zip code");
-                    return;
-                }
+            _ = ruleBuilder.Custom((zipCode, context) =>
+              {
+                  if (string.IsNullOrWhiteSpace(zipCode))
+                  {
+                      // Add the context failure and break out of the validation
+                      context.AddFailure("Must supply the zip code");
+                      return;
+                  }
 
-                if (!zipCodeRegex.IsMatch(zipCode))
-                {
-                    context!.AddFailure($"{zipCode} is not a valid zipcode");
-                }
-            });
+                  if (!zipCodeRegex.IsMatch(zipCode))
+                      context!.AddFailure($"{zipCode} is not a valid zipcode");
+              });
         }
     }
 }

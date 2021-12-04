@@ -129,7 +129,7 @@ namespace Dappery.Data.Repositories
                 cancellationToken: cancellationToken);
 
             // One of our business rules is that a brewery must have an associated address
-            await this.dbConnection.ExecuteAsync(addressInsertCommand).ConfigureAwait(false);
+            _ = await this.dbConnection.ExecuteAsync(addressInsertCommand).ConfigureAwait(false);
 
             return breweryId;
         }
@@ -149,7 +149,7 @@ namespace Dappery.Data.Repositories
                 cancellationToken: cancellationToken);
 
             // Again, we'll assume the brewery details are being validated and mapped properly in the application layer
-            await this.dbConnection.ExecuteAsync(breweryUpdateCommand).ConfigureAwait(false);
+            _ = await this.dbConnection.ExecuteAsync(breweryUpdateCommand).ConfigureAwait(false);
 
             if (brewery.Address is not null && updateAddress)
             {
@@ -169,7 +169,7 @@ namespace Dappery.Data.Repositories
 
                 // Again, we'll assume the brewery details are being validated and mapped properly in the application layer
                 // For now, we won't allow users to swap breweries address to another address
-                await this.dbConnection.ExecuteAsync(addressUpdateCommand).ConfigureAwait(false);
+                _ = await this.dbConnection.ExecuteAsync(addressUpdateCommand).ConfigureAwait(false);
             }
         }
 
@@ -185,7 +185,7 @@ namespace Dappery.Data.Repositories
                 this.dbTransaction,
                 cancellationToken: cancellationToken);
 
-            await this.dbConnection.ExecuteAsync(deleteBreweryCommand).ConfigureAwait(false);
+            _ = await this.dbConnection.ExecuteAsync(deleteBreweryCommand).ConfigureAwait(false);
         }
     }
 }
