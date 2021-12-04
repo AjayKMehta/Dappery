@@ -37,8 +37,7 @@ namespace Dappery.Core.Tests.Breweries
             var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+            result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Dappery.Core.Infrastructure
 
             if (failures.Any())
             {
-                this.logger.LogInformation($"Validation failures for request [{request}]");
+                this.logger.LogInformation("Validation failures for request [{Request}]", request);
                 throw new ValidationException(failures);
             }
 

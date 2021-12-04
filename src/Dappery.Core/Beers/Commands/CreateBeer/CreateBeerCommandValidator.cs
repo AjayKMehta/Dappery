@@ -7,7 +7,7 @@ namespace Dappery.Core.Beers.Commands.CreateBeer
     {
         public CreateBeerCommandValidator()
         {
-            this.RuleFor(b => b.Dto)
+            _ = this.RuleFor(b => b.Dto)
                 .NotNull()
                 .WithMessage("Must supply a request object to create a beer");
 
@@ -17,7 +17,7 @@ namespace Dappery.Core.Beers.Commands.CreateBeer
             this.RuleFor(b => b.Dto!.Style)
                 .NotNullOrEmpty();
 
-            this.RuleFor(b => b.Dto!.BreweryId)
+            _ = this.RuleFor(b => b.Dto!.BreweryId)
                 .NotEmpty()
                 .WithMessage("Must supply the brewery ID");
         }
