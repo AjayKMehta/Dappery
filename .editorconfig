@@ -135,6 +135,7 @@ csharp_style_conditional_delegate_call = true:warning
 dotnet_style_coalesce_expression = true:warning
 dotnet_style_null_propagation = true:warning
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
+csharp_style_prefer_null_check_over_type_check = true
 
 # 'var' preferences
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0007-ide0008
@@ -164,17 +165,15 @@ csharp_style_prefer_pattern_matching = true:suggestion
 
 # Code block preferences
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/code-block-preferences
-csharp_prefer_braces = true:suggestion # TO DO: TEST
+csharp_prefer_braces = when_multiline:suggestion
 csharp_prefer_simple_using_statement = true:suggestion
-
-# 'using' directive placement
-# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0065
-csharp_using_directive_placement = outside_namespace
 
 # Unnecessary code rules
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/unnecessary-code-rules
-csharp_style_unused_value_assignment_preference = false:suggestion
-csharp_style_unused_value_expression_statement_preference = false:suggestion
+csharp_style_unused_value_assignment_preference = discard_variable
+dotnet_diagnostic.IDE0059.severity = suggestion
+
+csharp_style_unused_value_expression_statement_preference = discard_variable
 dotnet_code_quality_unused_parameters = non_public:suggestion
 dotnet_remove_unnecessary_suppression_exclusions = all
 
@@ -241,6 +240,14 @@ csharp_space_between_square_brackets = false
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#wrap-options
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = true
+
+# Using directive options
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#using-directive-options
+csharp_using_directive_placement = outside_namespace
+
+# Namespace options
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#namespace-options
+csharp_style_namespace_declarations = file_scoped
 
 #########################
 # .NET Naming conventions
@@ -364,9 +371,6 @@ roslynator.RCS0032.invert = true
 # RCS1005: Simplify nested using statement
 dotnet_diagnostic.RCS1005.severity = suggestion
 
-# RCS1007: Add braces
-dotnet_diagnostic.RCS1007.severity = suggestion
-
 # RCS1013: Use predefined type
 dotnet_diagnostic.RCS1013.severity = suggestion
 
@@ -394,9 +398,6 @@ dotnet_diagnostic.RCS1071.severity = warning
 
 # Use string.Empty instead of ""
 roslynator.RCS1078.invert = true
-
-# RCS1126: Add braces to if-else
-dotnet_diagnostic.RCS1126.severity = suggestion
 
 # RCS1145: Remove redundant 'as' operator
 dotnet_diagnostic.RCS1145.severity = warning
