@@ -2,7 +2,7 @@ using Dappery.Domain.Dtos.Beer;
 using Dappery.Domain.Media;
 using MediatR;
 
-namespace Dappery.Core.Beers.Commands.UpdateBeery
+namespace Dappery.Core.Beers.Commands.UpdateBeer
 {
     public class UpdateBeerCommand : IRequest<BeerResource>
     {

@@ -1,7 +1,7 @@
 using Dappery.Core.Extensions;
 using FluentValidation;
 
-namespace Dappery.Core.Beers.Commands.UpdateBeery
+namespace Dappery.Core.Beers.Commands.UpdateBeer
 {
     public class UpdateBeerCommandValidator : AbstractValidator<UpdateBeerCommand>
     {
