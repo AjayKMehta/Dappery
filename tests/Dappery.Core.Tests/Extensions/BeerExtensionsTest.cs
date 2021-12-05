@@ -34,22 +34,23 @@ namespace Dappery.Core.Tests.Extensions
             var mappedBeer = beerToMap.ToBeerDto();
 
             // Assert
-            mappedBeer.ShouldNotBeNull();
-            mappedBeer.Id.ShouldBe(beerToMap.Id);
-            mappedBeer.Name.ShouldBe(beerToMap.Name);
-            mappedBeer.Style.ShouldBe(beerToMap.BeerStyle.ToString());
-            mappedBeer.Brewery?.ShouldNotBeNull();
-            mappedBeer.Brewery?.Id.ShouldBe(beerToMap.Brewery.Id);
-            mappedBeer.Brewery?.Name.ShouldBe(beerToMap.Brewery.Name);
-            mappedBeer.Brewery?.Address?.ShouldNotBeNull();
-            mappedBeer.Brewery?.Address?.City.ShouldBe(beerToMap.Brewery.Address?.City);
-            mappedBeer.Brewery?.Address?.State.ShouldBe(beerToMap.Brewery.Address?.State);
-            mappedBeer.Brewery?.Address?.ZipCode.ShouldBe(beerToMap.Brewery.Address?.ZipCode);
-            mappedBeer.Brewery?.Address?.StreetAddress.ShouldBe(beerToMap.Brewery.Address?.StreetAddress);
+            var beerDto = mappedBeer.ShouldNotBeNull();
+            beerDto!.Id.ShouldBe(beerToMap.Id);
+            beerDto!.Name.ShouldBe(beerToMap.Name);
+            beerDto!.Style.ShouldBe(beerToMap.BeerStyle.ToString());
 
+            var breweryDto = beerDto!.Brewery.ShouldNotBeNull();
+            breweryDto!.Id.ShouldBe(beerToMap.Brewery.Id);
+            breweryDto!.Name.ShouldBe(beerToMap.Brewery.Name);
             // Validate the beers were not recursively mapped
-            mappedBeer.Brewery?.Beers.ShouldBeNull();
-            mappedBeer.Brewery?.BeerCount.ShouldBeNull();
+            breweryDto!.Beers.ShouldBeNull();
+            breweryDto!.BeerCount.ShouldBeNull();
+
+            var addressDto = breweryDto!.Address.ShouldNotBeNull();
+            addressDto!.City.ShouldBe(beerToMap.Brewery.Address?.City);
+            addressDto!.State.ShouldBe(beerToMap.Brewery.Address?.State);
+            addressDto!.ZipCode.ShouldBe(beerToMap.Brewery.Address?.ZipCode);
+            addressDto!.StreetAddress.ShouldBe(beerToMap.Brewery.Address?.StreetAddress);
         }
         [Fact]
         public void ToBeerDtoGivenValidBeerWithoutBreweryReturnsMappedBeerDtoWithoutBrewery()
@@ -66,11 +67,11 @@ namespace Dappery.Core.Tests.Extensions
             var mappedBeer = beerToMap.ToBeerDto();
 
             // Assert
-            mappedBeer.ShouldNotBeNull();
-            mappedBeer.Id.ShouldBe(beerToMap.Id);
-            mappedBeer.Name.ShouldBe(beerToMap.Name);
-            mappedBeer.Style.ShouldBe(beerToMap.BeerStyle.ToString());
-            mappedBeer.Brewery?.ShouldBeNull();
+            var beerDto = mappedBeer.ShouldNotBeNull();
+            beerDto!.Id.ShouldBe(beerToMap.Id);
+            beerDto!.Name.ShouldBe(beerToMap.Name);
+            beerDto!.Style.ShouldBe(beerToMap.BeerStyle.ToString());
+            beerDto!.Brewery.ShouldBeNull();
         }
     }
 }

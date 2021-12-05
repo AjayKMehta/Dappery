@@ -20,19 +20,26 @@ namespace Dappery.Core.Tests.Breweries
             var response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            response.ShouldNotBeNull();
-            response.ShouldBeOfType<BreweryResourceList>();
-            response.Items.ShouldNotBeNull();
-            response.Items.ShouldNotBeEmpty();
-            response.Count.ShouldBe(2);
-            response.Items.FirstOrDefault(b => b.Id == 1)?.Address.ShouldNotBeNull();
-            response.Items.FirstOrDefault(b => b.Id == 1)?.Beers.ShouldNotBeEmpty();
-            response.Items.FirstOrDefault(b => b.Id == 1)?.BeerCount.ShouldNotBeNull();
-            response.Items.FirstOrDefault(b => b.Id == 1)?.BeerCount.ShouldBe(3);
-            response.Items.FirstOrDefault(b => b.Id == 2)?.Address.ShouldNotBeNull();
-            response.Items.FirstOrDefault(b => b.Id == 2)?.Beers.ShouldNotBeEmpty();
-            response.Items.FirstOrDefault(b => b.Id == 2)?.BeerCount.ShouldNotBeNull();
-            response.Items.FirstOrDefault(b => b.Id == 2)?.BeerCount.ShouldBe(2);
+            var breweryList = response
+                .ShouldNotBeNull()
+                .ShouldBeOfType<BreweryResourceList>();
+            breweryList.Count.ShouldBe(2);
+
+            var items = breweryList
+                .Items
+                .ShouldNotBeNull();
+            items.ShouldNotBeEmpty();
+
+            var firstBreweryDto = items.FirstOrDefault(b => b.Id == 1);
+            _ = firstBreweryDto?.Address.ShouldNotBeNull();
+            firstBreweryDto?.Beers.ShouldNotBeEmpty();
+            firstBreweryDto?.BeerCount.ShouldBe(3);
+
+            var secondBreweryDto = items.FirstOrDefault(b => b.Id == 2);
+            _ = secondBreweryDto?.Address.ShouldNotBeNull();
+            secondBreweryDto?.Beers.ShouldNotBeEmpty();
+            _ = secondBreweryDto?.BeerCount.ShouldNotBeNull();
+            secondBreweryDto?.BeerCount.ShouldBe(2);
         }
 
         [Fact]
@@ -48,10 +55,12 @@ namespace Dappery.Core.Tests.Breweries
             var response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            response.ShouldNotBeNull();
-            response.ShouldBeOfType<BreweryResourceList>();
-            response.Items.ShouldNotBeNull();
-            response.Items.ShouldBeEmpty();
+            response
+                .ShouldNotBeNull()
+                .ShouldBeOfType<BreweryResourceList>()
+                .Items
+                .ShouldNotBeNull()
+                .ShouldBeEmpty();
             response.Count.ShouldBe(0);
         }
     }

@@ -61,7 +61,7 @@ namespace Dappery.Core.Extensions
                   }
 
                   if (!zipCodeRegex.IsMatch(zipCode))
-                      context!.AddFailure($"{zipCode} is not a valid zipcode");
+                      context.AddFailure($"{zipCode} is not a valid zipcode");
               });
         }
     }

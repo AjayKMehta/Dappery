@@ -22,14 +22,18 @@ namespace Dappery.Core.Tests.Breweries
             var response = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            response.ShouldNotBeNull();
-            response.ShouldBeOfType<BreweryResource>();
-            response.Self.ShouldNotBeNull();
-            response.Self.Address?.ShouldNotBeNull();
-            response.Self.Beers.ShouldNotBeNull();
-            response.Self.Beers.ShouldNotBeEmpty();
-            response.Self.Name.ShouldBe("Fall River Brewery");
-            response.Self.BeerCount?.ShouldBe(3);
+            var breweryDto = response
+                .ShouldNotBeNull()
+                .ShouldBeOfType<BreweryResource>()
+                .Self
+                .ShouldNotBeNull();
+            _ = breweryDto.Address.ShouldNotBeNull();
+            breweryDto
+                .Beers
+                .ShouldNotBeNull()
+                .ShouldNotBeEmpty();
+            breweryDto.Name.ShouldBe("Fall River Brewery");
+            breweryDto.BeerCount?.ShouldBe(3);
         }
 
         [Fact]
@@ -44,9 +48,11 @@ namespace Dappery.Core.Tests.Breweries
             var response = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(query, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
-            response.ShouldNotBeNull();
-            response.ShouldBeOfType<DapperyApiException>();
-            response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+            response
+                .ShouldNotBeNull()
+                .ShouldBeOfType<DapperyApiException>()
+                .StatusCode
+                .ShouldBe(HttpStatusCode.NotFound);
         }
     }
 }

@@ -7,14 +7,14 @@ namespace Dappery.Core.Breweries.Commands.CreateBrewery
     {
         public CreateBreweryCommandValidator()
         {
-            this.RuleFor(b => b.Dto)
+            _ = this.RuleFor(b => b.Dto)
                 .NotNull()
                 .WithMessage("A request must contain valid creation data");
 
             this.RuleFor(b => b.Dto!.Name)
                 .NotNullOrEmpty();
 
-            this.RuleFor(b => b.Dto.Address)
+            _ = this.RuleFor(b => b.Dto.Address)
                 .NotNull()
                 .WithMessage("Must supply the address of the brewery when creating");
 

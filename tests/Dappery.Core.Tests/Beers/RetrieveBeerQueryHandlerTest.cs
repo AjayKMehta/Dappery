@@ -27,16 +27,16 @@ namespace Dappery.Core.Tests.Beers
                 .Self
                 .ShouldNotBeNull();
 
-            var breweryDto = beerDto!.Brewery.ShouldNotBeNull();
-            breweryDto!.Beers.ShouldBeNull();
-            breweryDto!.Id.ShouldBe(1);
-            breweryDto!.Name.ShouldBe("Fall River Brewery");
+            var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+            breweryDto.Beers.ShouldBeNull();
+            breweryDto.Id.ShouldBe(1);
+            breweryDto.Name.ShouldBe("Fall River Brewery");
 
-            var addressDto = breweryDto!.Address.ShouldNotBeNull();
-            addressDto!.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
-            addressDto!.City.ShouldBe("Redding");
-            addressDto!.State.ShouldBe("CA");
-            addressDto!.ZipCode.ShouldBe("96002");
+            var addressDto = breweryDto.Address.ShouldNotBeNull();
+            addressDto.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
+            addressDto.City.ShouldBe("Redding");
+            addressDto.State.ShouldBe("CA");
+            addressDto.ZipCode.ShouldBe("96002");
         }
 
         [Fact]

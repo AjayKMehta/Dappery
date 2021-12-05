@@ -190,15 +190,14 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            updatedBrewery.ShouldNotBeNull();
-            updatedBrewery.ShouldBeOfType<Brewery>();
-            updatedBrewery.Address?.ShouldNotBeNull();
-            updatedBrewery.Address?.StreetAddress.ShouldBe(breweryToUpdate.Address.StreetAddress);
-            updatedBrewery.Address?.ZipCode.ShouldBe(breweryToUpdate.Address.ZipCode);
-            updatedBrewery.Address?.City.ShouldBe(breweryToUpdate.Address.City);
-            updatedBrewery.Address?.BreweryId.ShouldBe(2);
-            updatedBrewery.Beers.ShouldNotBeNull();
-            updatedBrewery.Beers.ShouldNotBeEmpty();
+            var brewery = updatedBrewery.ShouldNotBeNull().ShouldBeOfType<Brewery>();
+            brewery.Beers.ShouldNotBeNull().ShouldNotBeEmpty();
+
+            var address = updatedBrewery.Address.ShouldNotBeNull();
+            address.StreetAddress.ShouldBe(breweryToUpdate.Address.StreetAddress);
+            address.ZipCode.ShouldBe(breweryToUpdate.Address.ZipCode);
+            address.City.ShouldBe(breweryToUpdate.Address.City);
+            address.BreweryId.ShouldBe(2);
         }
 
         [Fact]
@@ -216,7 +215,7 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            breweries.ShouldNotBeNull();
+            _ = breweries.ShouldNotBeNull();
             breweries.Count.ShouldBe(1);
             breweries.ShouldNotContain(br => br.Name == "Fall River Brewery");
         }
