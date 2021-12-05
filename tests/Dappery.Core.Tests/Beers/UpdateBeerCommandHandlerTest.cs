@@ -27,20 +27,24 @@ namespace Dappery.Core.Tests.Beers
             var result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.Self.ShouldNotBeNull();
-            result.Self.Id.ShouldBe(updateCommand.BeerId);
-            result.Self.Name.ShouldBe(updateCommand.Dto.Name);
-            result.Self.Style.ShouldBe(updateCommand.Dto.Style);
-            result.Self.Brewery.ShouldNotBeNull();
-            result.Self.Brewery?.Address.ShouldNotBeNull();
-            result.Self.Brewery?.Address?.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
-            result.Self.Brewery?.Address?.City.ShouldBe("Redding");
-            result.Self.Brewery?.Address?.State.ShouldBe("CA");
-            result.Self.Brewery?.Address?.ZipCode.ShouldBe("96002");
-            result.Self.Brewery?.Beers.ShouldBeNull();
-            result.Self.Brewery?.Id.ShouldBe(1);
-            result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
+            var beerDto = result
+                .ShouldNotBeNull()
+                .Self
+                .ShouldNotBeNull();
+            beerDto.Id.ShouldBe(updateCommand.BeerId);
+            beerDto.Name.ShouldBe(updateCommand.Dto.Name);
+            beerDto.Style.ShouldBe(updateCommand.Dto.Style);
+
+            var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+            breweryDto.Id.ShouldBe(1);
+            breweryDto.Name.ShouldBe("Fall River Brewery");
+            breweryDto.Beers.ShouldBeNull();
+
+            var addressDto = breweryDto.Address.ShouldNotBeNull();
+            addressDto.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
+            addressDto.City.ShouldBe("Redding");
+            addressDto.State.ShouldBe("CA");
+            addressDto.ZipCode.ShouldBe("96002");
         }
 
         [Fact]
@@ -59,20 +63,24 @@ namespace Dappery.Core.Tests.Beers
             var result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.Self.ShouldNotBeNull();
-            result.Self.Id.ShouldBe(updateCommand.BeerId);
-            result.Self.Name.ShouldBe(updateCommand.Dto.Name);
-            result.Self.Style.ShouldBe(nameof(BeerStyle.Other));
-            result.Self.Brewery.ShouldNotBeNull();
-            result.Self.Brewery?.Address.ShouldNotBeNull();
-            result.Self.Brewery?.Address?.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
-            result.Self.Brewery?.Address?.City.ShouldBe("Redding");
-            result.Self.Brewery?.Address?.State.ShouldBe("CA");
-            result.Self.Brewery?.Address?.ZipCode.ShouldBe("96002");
-            result.Self.Brewery?.Beers.ShouldBeNull();
-            result.Self.Brewery?.Id.ShouldBe(1);
-            result.Self.Brewery?.Name.ShouldBe("Fall River Brewery");
+            var beerDto = result
+                .ShouldNotBeNull()
+                .Self
+                .ShouldNotBeNull();
+            beerDto.Id.ShouldBe(updateCommand.BeerId);
+            beerDto.Name.ShouldBe(updateCommand.Dto.Name);
+            beerDto.Style.ShouldBe(nameof(BeerStyle.Other));
+
+            var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+            breweryDto.Id.ShouldBe(1);
+            breweryDto.Name.ShouldBe("Fall River Brewery");
+            breweryDto.Beers.ShouldBeNull();
+
+            var addressDto = breweryDto.Address.ShouldNotBeNull();
+            addressDto.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
+            addressDto.City.ShouldBe("Redding");
+            addressDto.State.ShouldBe("CA");
+            addressDto.ZipCode.ShouldBe("96002");
         }
 
         [Fact]
@@ -92,20 +100,23 @@ namespace Dappery.Core.Tests.Beers
             var result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.Self.ShouldNotBeNull();
-            result.Self.Id.ShouldBe(updateCommand.BeerId);
-            result.Self.Name.ShouldBe(updateCommand.Dto.Name);
-            result.Self.Style.ShouldBe(updateCommand.Dto.Style);
-            result.Self.Brewery.ShouldNotBeNull();
-            result.Self.Brewery?.Address.ShouldNotBeNull();
-            result.Self.Brewery?.Address?.StreetAddress.ShouldBe("1075 E 20th St");
-            result.Self.Brewery?.Address?.City.ShouldBe("Chico");
-            result.Self.Brewery?.Address?.State.ShouldBe("CA");
-            result.Self.Brewery?.Address?.ZipCode.ShouldBe("95928");
-            result.Self.Brewery?.Beers.ShouldBeNull();
-            result.Self.Brewery?.Id.ShouldBe(2);
-            result.Self.Brewery?.Name.ShouldBe("Sierra Nevada Brewing Company");
+            var beerDto = result.
+                ShouldNotBeNull()
+                .Self.ShouldNotBeNull();
+            beerDto.Id.ShouldBe(updateCommand.BeerId);
+            beerDto.Name.ShouldBe(updateCommand.Dto.Name);
+            beerDto.Style.ShouldBe(updateCommand.Dto.Style);
+
+            var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+            breweryDto.Beers.ShouldBeNull();
+            breweryDto.Id.ShouldBe(2);
+            breweryDto.Name.ShouldBe("Sierra Nevada Brewing Company");
+
+            var addressDto = breweryDto.Address.ShouldNotBeNull();
+            addressDto.StreetAddress.ShouldBe("1075 E 20th St");
+            addressDto.City.ShouldBe("Chico");
+            addressDto.State.ShouldBe("CA");
+            addressDto.ZipCode.ShouldBe("95928");
         }
 
         [Fact]
@@ -125,8 +136,7 @@ namespace Dappery.Core.Tests.Beers
             var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+            result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         }
     }
 }

@@ -40,13 +40,14 @@ namespace Dappery.Core.Tests.Breweries
                 .Self.ShouldNotBeNull()
                 .ShouldBeOfType<BreweryDto>();
             breweryDto.Name.ShouldNotBeNull().ShouldBe(createBreweryDto.Name);
-            var addressDto = breweryDto.Address?.ShouldNotBeNull();
-            addressDto!.City.ShouldBe(createdAddress.City);
-            addressDto!.State.ShouldBe(createdAddress.State);
-            addressDto!.StreetAddress.ShouldBe(createdAddress.StreetAddress);
-            addressDto!.ZipCode.ShouldBe(createdAddress.ZipCode);
             breweryDto.Beers.ShouldBeEmpty();
             breweryDto.BeerCount.ShouldBe(0);
+
+            var addressDto = breweryDto.Address.ShouldNotBeNull();
+            addressDto.City.ShouldBe(createdAddress.City);
+            addressDto.State.ShouldBe(createdAddress.State);
+            addressDto.StreetAddress.ShouldBe(createdAddress.StreetAddress);
+            addressDto.ZipCode.ShouldBe(createdAddress.ZipCode);
         }
     }
 }

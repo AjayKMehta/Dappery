@@ -69,8 +69,7 @@ namespace Dappery.Core.Tests.Breweries
             var result = await Should.ThrowAsync<DapperyApiException>(async () => await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
+            result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
         [Fact]
@@ -89,17 +88,19 @@ namespace Dappery.Core.Tests.Breweries
             var result = await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.ShouldNotBeNull();
-            result.Self.ShouldNotBeNull();
-            result.ApiVersion.ShouldNotBeNull();
-            result.Self.Id.ShouldBe(breweryId);
-            result.Self.Address?.ShouldNotBeNull();
-            result.Self.Address?.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
-            result.Self.Address?.City.ShouldBe("Redding");
-            result.Self.Address?.State.ShouldBe("CA");
-            result.Self.Address?.ZipCode.ShouldBe("96002");
-            result.Self.Name.ShouldBe(updateCommand.Dto.Name);
+            _ = result
+                .ShouldNotBeNull()
+                .ApiVersion
+                .ShouldNotBeNull();
+            var breweryDto = result.Self.ShouldNotBeNull();
+            breweryDto.Name.ShouldBe(updateCommand.Dto.Name);
+            breweryDto.Id.ShouldBe(breweryId);
+
+            var addressDto = breweryDto.Address.ShouldNotBeNull();
+            addressDto.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
+            addressDto.City.ShouldBe("Redding");
+            addressDto.State.ShouldBe("CA");
+            addressDto.ZipCode.ShouldBe("96002");
         }
     }
 }

@@ -35,22 +35,22 @@ namespace Dappery.Core.Tests.Extensions
 
             // Assert
             var beerDto = mappedBeer.ShouldNotBeNull();
-            beerDto!.Id.ShouldBe(beerToMap.Id);
-            beerDto!.Name.ShouldBe(beerToMap.Name);
-            beerDto!.Style.ShouldBe(beerToMap.BeerStyle.ToString());
+            beerDto.Id.ShouldBe(beerToMap.Id);
+            beerDto.Name.ShouldBe(beerToMap.Name);
+            beerDto.Style.ShouldBe(beerToMap.BeerStyle.ToString());
 
-            var breweryDto = beerDto!.Brewery.ShouldNotBeNull();
-            breweryDto!.Id.ShouldBe(beerToMap.Brewery.Id);
-            breweryDto!.Name.ShouldBe(beerToMap.Brewery.Name);
+            var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+            breweryDto.Id.ShouldBe(beerToMap.Brewery.Id);
+            breweryDto.Name.ShouldBe(beerToMap.Brewery.Name);
             // Validate the beers were not recursively mapped
-            breweryDto!.Beers.ShouldBeNull();
-            breweryDto!.BeerCount.ShouldBeNull();
+            breweryDto.Beers.ShouldBeNull();
+            breweryDto.BeerCount.ShouldBeNull();
 
-            var addressDto = breweryDto!.Address.ShouldNotBeNull();
-            addressDto!.City.ShouldBe(beerToMap.Brewery.Address?.City);
-            addressDto!.State.ShouldBe(beerToMap.Brewery.Address?.State);
-            addressDto!.ZipCode.ShouldBe(beerToMap.Brewery.Address?.ZipCode);
-            addressDto!.StreetAddress.ShouldBe(beerToMap.Brewery.Address?.StreetAddress);
+            var addressDto = breweryDto.Address.ShouldNotBeNull();
+            addressDto.City.ShouldBe(beerToMap.Brewery.Address?.City);
+            addressDto.State.ShouldBe(beerToMap.Brewery.Address?.State);
+            addressDto.ZipCode.ShouldBe(beerToMap.Brewery.Address?.ZipCode);
+            addressDto.StreetAddress.ShouldBe(beerToMap.Brewery.Address?.StreetAddress);
         }
         [Fact]
         public void ToBeerDtoGivenValidBeerWithoutBreweryReturnsMappedBeerDtoWithoutBrewery()
@@ -68,10 +68,10 @@ namespace Dappery.Core.Tests.Extensions
 
             // Assert
             var beerDto = mappedBeer.ShouldNotBeNull();
-            beerDto!.Id.ShouldBe(beerToMap.Id);
-            beerDto!.Name.ShouldBe(beerToMap.Name);
-            beerDto!.Style.ShouldBe(beerToMap.BeerStyle.ToString());
-            beerDto!.Brewery.ShouldBeNull();
+            beerDto.Id.ShouldBe(beerToMap.Id);
+            beerDto.Name.ShouldBe(beerToMap.Name);
+            beerDto.Style.ShouldBe(beerToMap.BeerStyle.ToString());
+            beerDto.Brewery.ShouldBeNull();
         }
     }
 }
