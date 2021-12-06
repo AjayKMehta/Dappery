@@ -22,7 +22,7 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            breweries.ShouldNotBeNull();
+            _ = breweries.ShouldNotBeNull();
             breweries.ShouldNotBeEmpty();
             breweries.Count.ShouldBe(2);
             breweries.All(br => br.Address is not null).ShouldBeTrue();
@@ -52,9 +52,7 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            breweries.ShouldNotBeNull();
-            breweries.ShouldBeOfType<List<Brewery>>();
-            breweries.ShouldBeEmpty();
+            breweries.ShouldNotBeNull().ShouldBeOfType<List<Brewery>>().ShouldBeEmpty();
         }
 
         [Fact]
@@ -68,13 +66,15 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            brewery.ShouldNotBeNull().ShouldBeOfType<Brewery>();
-            brewery.Address.ShouldNotBeNull();
-            brewery.Beers.ShouldNotBeNull().ShouldNotBeEmpty();
+            _ = brewery.ShouldNotBeNull().ShouldBeOfType<Brewery>();
+            _ = brewery.Address.ShouldNotBeNull();
             brewery.BeerCount.ShouldBe(3);
-            brewery.Beers.ShouldContain(b => b.Name == "Hexagenia");
-            brewery.Beers.ShouldContain(b => b.Name == "Widowmaker");
-            brewery.Beers.ShouldContain(b => b.Name == "Hooked");
+
+            var beers = brewery.Beers.ShouldNotBeNull();
+            beers.ShouldNotBeEmpty();
+            beers.ShouldContain(b => b.Name == "Hexagenia");
+            beers.ShouldContain(b => b.Name == "Widowmaker");
+            beers.ShouldContain(b => b.Name == "Hooked");
         }
 
         [Fact]
@@ -118,12 +118,14 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            insertedBrewery.ShouldNotBeNull();
-            insertedBrewery.ShouldBeOfType<Brewery>();
-            insertedBrewery.Address?.ShouldNotBeNull();
-            insertedBrewery.Address?.StreetAddress.ShouldBe(breweryToInsert.Address.StreetAddress);
-            insertedBrewery.Address?.BreweryId.ShouldBe(3);
-            insertedBrewery.Beers.ShouldBeEmpty();
+            var brewery = insertedBrewery
+                .ShouldNotBeNull()
+                .ShouldBeOfType<Brewery>();
+            brewery.Beers.ShouldBeEmpty();
+
+            var address = insertedBrewery.Address.ShouldNotBeNull();
+            address.StreetAddress.ShouldBe(breweryToInsert.Address.StreetAddress);
+            address.BreweryId.ShouldBe(3);
         }
 
         [Fact]
@@ -153,13 +155,14 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            updatedBrewery.ShouldNotBeNull();
-            updatedBrewery.ShouldBeOfType<Brewery>();
-            updatedBrewery.Address?.ShouldNotBeNull();
-            updatedBrewery.Address?.StreetAddress.ShouldBe(breweryToUpdate.Address.StreetAddress);
-            updatedBrewery.Address?.BreweryId.ShouldBe(2);
-            updatedBrewery.Beers.ShouldNotBeNull();
-            updatedBrewery.Beers.ShouldNotBeEmpty();
+            var brewery = updatedBrewery
+                .ShouldNotBeNull()
+                .ShouldBeOfType<Brewery>();
+            brewery.Beers.ShouldNotBeNull().ShouldNotBeEmpty();
+
+            var address = brewery.Address.ShouldNotBeNull();
+            address.StreetAddress.ShouldBe(breweryToUpdate.Address.StreetAddress);
+            address.BreweryId.ShouldBe(2);
         }
 
         [Fact]

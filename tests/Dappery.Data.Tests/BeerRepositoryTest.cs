@@ -21,22 +21,18 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            beers.ShouldNotBeNull();
-            beers.ShouldBeOfType<List<Beer>>();
+            _ = beers
+                .ShouldNotBeNull()
+                .ShouldBeOfType<List<Beer>>();
             beers.ShouldNotBeEmpty();
             beers.All(b => b.Brewery is not null).ShouldBeTrue();
             beers.All(b => b.Brewery!.Address is not null).ShouldBeTrue();
             beers.All(b => b.Brewery!.Address!.BreweryId == b.Brewery.Id).ShouldBeTrue();
-            beers.ShouldContain(b => b.Name == "Hexagenia");
-            beers.Find(b => b.Name == "Hexagenia")?.BeerStyle.ShouldBe(BeerStyle.Ipa);
-            beers.ShouldContain(b => b.Name == "Widowmaker");
-            beers.Find(b => b.Name == "Widowmaker")?.BeerStyle.ShouldBe(BeerStyle.DoubleIpa);
-            beers.ShouldContain(b => b.Name == "Hooked");
-            beers.Find(b => b.Name == "Hooked")?.BeerStyle.ShouldBe(BeerStyle.Lager);
-            beers.ShouldContain(b => b.Name == "Pale Ale");
-            beers.Find(b => b.Name == "Pale Ale")?.BeerStyle.ShouldBe(BeerStyle.PaleAle);
-            beers.ShouldContain(b => b.Name == "Hazy Little Thing");
-            beers.Find(b => b.Name == "Hazy Little Thing")?.BeerStyle.ShouldBe(BeerStyle.NewEnglandIpa);
+            beers.Find(b => b.Name == "Hexagenia").ShouldNotBeNull().BeerStyle.ShouldBe(BeerStyle.Ipa);
+            beers.Find(b => b.Name == "Widowmaker").ShouldNotBeNull().BeerStyle.ShouldBe(BeerStyle.DoubleIpa);
+            beers.Find(b => b.Name == "Hooked").ShouldNotBeNull().BeerStyle.ShouldBe(BeerStyle.Lager);
+            beers.Find(b => b.Name == "Pale Ale").ShouldNotBeNull().BeerStyle.ShouldBe(BeerStyle.PaleAle);
+            beers.Find(b => b.Name == "Hazy Little Thing").ShouldNotBeNull().BeerStyle.ShouldBe(BeerStyle.NewEnglandIpa);
         }
 
         [Fact]
@@ -55,9 +51,7 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            beers.ShouldNotBeNull();
-            beers.ShouldBeOfType<List<Beer>>();
-            beers.ShouldBeEmpty();
+            beers.ShouldNotBeNull().ShouldBeOfType<List<Beer>>().ShouldBeEmpty();
         }
 
         [Fact]
@@ -71,14 +65,15 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert, validate a few properties
-            beer.ShouldNotBeNull();
-            beer.ShouldBeOfType<Beer>();
+            beer = beer
+                .ShouldNotBeNull()
+                .ShouldBeOfType<Beer>();
             beer.Name.ShouldBe("Hexagenia");
             beer.BeerStyle.ShouldBe(BeerStyle.Ipa);
-            beer.Brewery?.ShouldNotBeNull();
-            beer.Brewery?.Name.ShouldBe("Fall River Brewery");
-            beer.Brewery?.Address?.ShouldNotBeNull();
-            beer.Brewery?.Address?.City.ShouldBe("Redding");
+
+            var brewery = beer.Brewery.ShouldNotBeNull();
+            brewery.Name.ShouldBe("Fall River Brewery");
+            brewery.Address.ShouldNotBeNull().City.ShouldBe("Redding");
         }
 
         [Fact]
@@ -114,14 +109,15 @@ namespace Dappery.Data.Tests
             var insertedBeer = await unitOfWork.BeerRepository.GetBeerByIdAsync(beerId, CancellationTestToken).ConfigureAwait(false);
             unitOfWork.Commit();
 
-            insertedBeer.ShouldNotBeNull();
-            insertedBeer.ShouldBeOfType<Beer>();
-            insertedBeer.Brewery!.ShouldNotBeNull();
-            insertedBeer.Brewery!.Address!.ShouldNotBeNull();
-            insertedBeer.Brewery!.Beers.ShouldNotBeEmpty();
-            insertedBeer.Brewery!.Beers.Count.ShouldBe(4);
-            insertedBeer.Brewery!.Beers.ShouldContain(b => b.Id == insertedBeer.Id);
-            insertedBeer.Brewery!.Beers.FirstOrDefault(b => b.Id == insertedBeer.Id)?.Name.ShouldBe(beerToInsert.Name);
+            var beer = insertedBeer
+                .ShouldNotBeNull()
+                .ShouldBeOfType<Beer>();
+            var brewery = beer.Brewery.ShouldNotBeNull();
+            _ = brewery.Address.ShouldNotBeNull();
+            brewery.Beers.ShouldNotBeEmpty();
+            brewery.Beers.Count.ShouldBe(4);
+            brewery.Beers.ShouldContain(b => b.Id == insertedBeer.Id);
+            brewery.Beers.FirstOrDefault(b => b.Id == insertedBeer.Id)?.Name.ShouldBe(beerToInsert.Name);
         }
 
         [Fact]
@@ -143,16 +139,18 @@ namespace Dappery.Data.Tests
             var updatedBeer = await unitOfWork.BeerRepository.GetBeerByIdAsync(beerToUpdate.Id, CancellationTestToken).ConfigureAwait(false);
             unitOfWork.Commit();
 
-            updatedBeer.ShouldNotBeNull();
-            updatedBeer.ShouldNotBeNull();
-            updatedBeer.ShouldBeOfType<Beer>();
-            updatedBeer.Brewery?.ShouldNotBeNull();
-            updatedBeer.Brewery?.Address?.ShouldNotBeNull();
-            updatedBeer.Brewery?.Beers.ShouldNotBeEmpty();
-            updatedBeer.Brewery?.Beers.Count.ShouldBe(3);
-            updatedBeer.Brewery?.Beers.ShouldContain(b => b.Id == beerToUpdate.Id);
-            updatedBeer.Brewery?.Beers.ShouldNotContain(b => b.Name == "Hexagenia");
-            updatedBeer.Brewery?.Beers.FirstOrDefault(b => b.Id == beerToUpdate.Id)?.Name.ShouldBe(beerToUpdate.Name);
+            var brewery = updatedBeer
+                .ShouldNotBeNull()
+                .ShouldBeOfType<Beer>()
+                .Brewery
+                .ShouldNotBeNull();
+
+            _ = brewery.Address.ShouldNotBeNull();
+            brewery.Beers.ShouldNotBeEmpty();
+            brewery.Beers.Count.ShouldBe(3);
+            brewery.Beers.ShouldContain(b => b.Id == beerToUpdate.Id);
+            brewery.Beers.ShouldNotContain(b => b.Name == "Hexagenia");
+            brewery.Beers.FirstOrDefault(b => b.Id == beerToUpdate.Id)?.Name.ShouldBe(beerToUpdate.Name);
         }
 
         [Fact]
@@ -169,10 +167,12 @@ namespace Dappery.Data.Tests
             unitOfWork.Commit();
 
             // Assert
-            breweryOfRemovedBeer.ShouldNotBeNull();
-            breweryOfRemovedBeer.Beers.ShouldNotBeNull();
-            breweryOfRemovedBeer.Beers.ShouldNotBeEmpty();
-            breweryOfRemovedBeer.Beers.ShouldNotContain(b => b.Name == "Hexagenia");
+            var beers = breweryOfRemovedBeer
+                .ShouldNotBeNull()
+                .Beers
+                .ShouldNotBeNull();
+            beers.ShouldNotBeEmpty();
+            beers.ShouldNotContain(b => b.Name == "Hexagenia");
         }
     }
 }

@@ -34,24 +34,31 @@ namespace Dappery.Core.Tests.Extensions
             var mappedBrewery = breweryToMap.ToBreweryDto();
 
             // Assert
-            mappedBrewery.ShouldNotBeNull();
-            mappedBrewery.Id.ShouldBe(breweryToMap.Id);
-            mappedBrewery.Name.ShouldBe(breweryToMap.Name);
-            mappedBrewery.Address?.ShouldNotBeNull();
-            mappedBrewery.Address?.City.ShouldBe(breweryToMap.Address?.City);
-            mappedBrewery.Address?.State.ShouldBe(breweryToMap.Address?.State);
-            mappedBrewery.Address?.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
-            mappedBrewery.Address?.ZipCode.ShouldBe(breweryToMap.Address?.ZipCode);
-            mappedBrewery.Beers.ShouldNotBeNull();
-            mappedBrewery.Beers.ShouldNotBeEmpty();
-            mappedBrewery.Beers.First(b => b.Id == 1).Name.ShouldBe("Test Beer 1");
-            mappedBrewery.Beers.First(b => b.Id == 1).Style.ShouldBe("Lager");
-            mappedBrewery.Beers.First(b => b.Id == 2).Name.ShouldBe("Test Beer 2");
-            mappedBrewery.Beers.First(b => b.Id == 2).Style.ShouldBe("Ipa");
-            mappedBrewery.Beers.First(b => b.Id == 3).Name.ShouldBe("Test Beer 3");
-            mappedBrewery.Beers.First(b => b.Id == 3).Style.ShouldBe("DoubleIpa");
-            mappedBrewery.BeerCount.ShouldNotBeNull();
-            mappedBrewery.BeerCount.ShouldBe(3);
+            var breweryDto = mappedBrewery.ShouldNotBeNull();
+            breweryDto.Id.ShouldBe(breweryToMap.Id);
+            breweryDto.Name.ShouldBe(breweryToMap.Name);
+            breweryDto.BeerCount.ShouldNotBeNull().ShouldBe(3);
+
+            var addressDto = breweryDto.Address.ShouldNotBeNull();
+            addressDto.City.ShouldBe(breweryToMap.Address?.City);
+            addressDto.State.ShouldBe(breweryToMap.Address?.State);
+            addressDto.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
+            addressDto.ZipCode.ShouldBe(breweryToMap.Address?.ZipCode);
+
+            var beers = mappedBrewery.Beers.ShouldNotBeNull();
+            beers.ShouldNotBeEmpty();
+
+            var firstBeer = beers.First(b => b.Id == 1);
+            firstBeer.Name.ShouldBe("Test Beer 1");
+            firstBeer.Style.ShouldBe("Lager");
+
+            var secondBeer = beers.First(b => b.Id == 2);
+            secondBeer.Name.ShouldBe("Test Beer 2");
+            secondBeer.Style.ShouldBe("Ipa");
+
+            var thirdBeer = beers.First(b => b.Id == 3);
+            thirdBeer.Name.ShouldBe("Test Beer 3");
+            thirdBeer.Style.ShouldBe("DoubleIpa");
         }
 
         [Fact]
@@ -75,18 +82,22 @@ namespace Dappery.Core.Tests.Extensions
             var mappedBrewery = breweryToMap.ToBreweryDto();
 
             // Assert
-            mappedBrewery.ShouldNotBeNull();
+            _ = mappedBrewery.ShouldNotBeNull();
             mappedBrewery.Id.ShouldBe(breweryToMap.Id);
             mappedBrewery.Name.ShouldBe(breweryToMap.Name);
-            mappedBrewery.Address?.ShouldNotBeNull();
-            mappedBrewery.Address?.City.ShouldBe(breweryToMap.Address?.City);
-            mappedBrewery.Address?.State.ShouldBe(breweryToMap.Address?.State);
-            mappedBrewery.Address?.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
-            mappedBrewery.Address?.ZipCode.ShouldBe(breweryToMap.Address?.ZipCode);
-            mappedBrewery.Beers.ShouldNotBeNull();
-            mappedBrewery.Beers.ShouldBeEmpty();
-            mappedBrewery.BeerCount.ShouldNotBeNull();
-            mappedBrewery.BeerCount.ShouldBe(0);
+            var addressDto = mappedBrewery.Address.ShouldNotBeNull();
+            addressDto.City.ShouldBe(breweryToMap.Address?.City);
+            addressDto.State.ShouldBe(breweryToMap.Address?.State);
+            addressDto.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
+            addressDto.ZipCode.ShouldBe(breweryToMap.Address?.ZipCode);
+            mappedBrewery
+                .Beers
+                .ShouldNotBeNull()
+                .ShouldBeEmpty();
+            mappedBrewery
+                .BeerCount
+                .ShouldNotBeNull()
+                .ShouldBe(0);
         }
 
         [Fact]
@@ -115,16 +126,17 @@ namespace Dappery.Core.Tests.Extensions
             var mappedBrewery = breweryToMap.ToBreweryDto(false);
 
             // Assert
-            mappedBrewery.ShouldNotBeNull();
-            mappedBrewery.Id.ShouldBe(breweryToMap.Id);
-            mappedBrewery.Name.ShouldBe(breweryToMap.Name);
-            mappedBrewery.Address?.ShouldNotBeNull();
-            mappedBrewery.Address?.City.ShouldBe(breweryToMap.Address?.City);
-            mappedBrewery.Address?.State.ShouldBe(breweryToMap.Address?.State);
-            mappedBrewery.Address?.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
-            mappedBrewery.Address?.ZipCode.ShouldBe(breweryToMap.Address?.ZipCode);
-            mappedBrewery.Beers.ShouldBeNull();
-            mappedBrewery.BeerCount.ShouldBeNull();
+            var breweryDto = mappedBrewery.ShouldNotBeNull();
+            breweryDto.Id.ShouldBe(breweryToMap.Id);
+            breweryDto.Name.ShouldBe(breweryToMap.Name);
+            breweryDto.Beers.ShouldBeNull();
+            breweryDto.BeerCount.ShouldBeNull();
+
+            var addressDto = mappedBrewery.Address.ShouldNotBeNull();
+            addressDto.City.ShouldBe(breweryToMap.Address?.City);
+            addressDto.State.ShouldBe(breweryToMap.Address?.State);
+            addressDto.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
+            addressDto.ZipCode.ShouldBe(breweryToMap.Address?.ZipCode);
         }
 
         [Fact]
@@ -148,16 +160,17 @@ namespace Dappery.Core.Tests.Extensions
             var mappedBrewery = breweryToMap.ToBreweryDto(false);
 
             // Assert
-            mappedBrewery.ShouldNotBeNull();
-            mappedBrewery.Id.ShouldBe(breweryToMap.Id);
-            mappedBrewery.Name.ShouldBe(breweryToMap.Name);
-            mappedBrewery.Address?.ShouldNotBeNull();
-            mappedBrewery.Address?.City.ShouldBe(breweryToMap.Address?.City);
-            mappedBrewery.Address?.State.ShouldBe(breweryToMap.Address?.State);
-            mappedBrewery.Address?.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
-            mappedBrewery.Address?.ZipCode.ShouldBe(breweryToMap.Address?.ZipCode);
-            mappedBrewery.Beers.ShouldBeNull();
-            mappedBrewery.BeerCount.ShouldBeNull();
+            var breweryDto = mappedBrewery.ShouldNotBeNull();
+            breweryDto.Id.ShouldBe(breweryToMap.Id);
+            breweryDto.Name.ShouldBe(breweryToMap.Name);
+            breweryDto.Beers.ShouldBeNull();
+            breweryDto.BeerCount.ShouldBeNull();
+
+            var addressDto = mappedBrewery.Address.ShouldNotBeNull();
+            addressDto.City.ShouldBe(breweryToMap.Address?.City);
+            addressDto.State.ShouldBe(breweryToMap.Address?.State);
+            addressDto.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
+            addressDto.ZipCode.ShouldBe(breweryToMap.Address?.ZipCode);
         }
     }
 }

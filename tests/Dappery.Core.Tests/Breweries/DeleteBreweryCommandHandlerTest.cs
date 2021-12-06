@@ -22,7 +22,7 @@ namespace Dappery.Core.Tests.Breweries
             var result = await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldBeOfType<Unit>();
+            _ = result.ShouldBeOfType<Unit>();
         }
 
         [Fact]

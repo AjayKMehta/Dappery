@@ -34,16 +34,20 @@ namespace Dappery.Core.Tests.Breweries
             var result = await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            result.ShouldNotBeNull();
-            result.Self.ShouldNotBeNull();
-            result.ApiVersion.ShouldNotBeNull();
-            result.Self.Id.ShouldBe(breweryId);
-            result.Self.Address?.ShouldNotBeNull();
-            result.Self.Address?.City.ShouldBe(updateCommand.Dto.Address?.City);
-            result.Self.Address?.State.ShouldBe(updateCommand.Dto.Address?.State);
-            result.Self.Address?.StreetAddress.ShouldBe(updateCommand.Dto.Address?.StreetAddress);
-            result.Self.Address?.ZipCode.ShouldBe(updateCommand.Dto.Address?.ZipCode);
-            result.Self.Name.ShouldBe(updateCommand.Dto.Name);
+            var breweryDTo = result
+                .ShouldNotBeNull()
+                .Self
+                .ShouldNotBeNull();
+            breweryDTo.Id.ShouldBe(breweryId);
+            breweryDTo.Name.ShouldBe(updateCommand.Dto.Name);
+
+            _ = result.ApiVersion.ShouldNotBeNull();
+
+            var addressDto = breweryDTo.Address.ShouldNotBeNull();
+            addressDto.City.ShouldBe(updateCommand.Dto.Address?.City);
+            addressDto.State.ShouldBe(updateCommand.Dto.Address?.State);
+            addressDto.StreetAddress.ShouldBe(updateCommand.Dto.Address?.StreetAddress);
+            addressDto.ZipCode.ShouldBe(updateCommand.Dto.Address?.ZipCode);
         }
 
         [Fact]
