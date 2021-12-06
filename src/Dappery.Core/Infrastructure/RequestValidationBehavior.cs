@@ -12,6 +12,10 @@ namespace Dappery.Core.Infrastructure
     public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : notnull, IRequest<TResponse>
     {
+        private static readonly Action<ILogger, TRequest, Exception?> logValidationFailure = LoggerMessage.Define<TRequest>(
+            LogLevel.Information,
+            new EventId(1, "RequestValidationException"),
+            "Validation failures for request [{Request}]");
         private readonly IEnumerable<IValidator<TRequest>> validators;
         private readonly ILogger<TRequest> logger;
 
@@ -37,10 +41,9 @@ namespace Dappery.Core.Infrastructure
 
             if (failures.Any())
             {
-                this.logger.LogInformation("Validation failures for request [{Request}]", request);
+                logValidationFailure(this.logger, request, null);
                 throw new ValidationException(failures);
             }
-
             return next();
         }
     }
