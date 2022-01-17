@@ -2,8 +2,10 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
+
 using MediatR;
 
 namespace Dappery.Core.Beers.Commands.DeleteBeer

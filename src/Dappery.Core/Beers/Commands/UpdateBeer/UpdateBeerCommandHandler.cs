@@ -2,11 +2,13 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
 using Dappery.Core.Extensions;
 using Dappery.Domain.Entities;
 using Dappery.Domain.Media;
+
 using MediatR;
 
 namespace Dappery.Core.Beers.Commands.UpdateBeer
@@ -20,9 +22,7 @@ namespace Dappery.Core.Beers.Commands.UpdateBeer
         public async Task<BeerResource> Handle(UpdateBeerCommand request, CancellationToken cancellationToken)
         {
             if (request is null)
-            {
                 throw new ArgumentNullException(nameof(request));
-            }
 
             // First validate both the beer
             var existingBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
