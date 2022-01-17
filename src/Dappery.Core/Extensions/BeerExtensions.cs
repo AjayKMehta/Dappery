@@ -1,4 +1,5 @@
 using System;
+
 using Dappery.Domain.Dtos.Beer;
 using Dappery.Domain.Entities;
 

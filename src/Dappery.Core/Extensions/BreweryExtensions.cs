@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+
 using Dappery.Domain.Dtos;
 using Dappery.Domain.Dtos.Beer;
 using Dappery.Domain.Dtos.Brewery;

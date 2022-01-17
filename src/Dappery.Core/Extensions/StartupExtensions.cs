@@ -1,6 +1,9 @@
 using System.Reflection;
+
 using Dappery.Core.Infrastructure;
+
 using MediatR;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dappery.Core.Extensions

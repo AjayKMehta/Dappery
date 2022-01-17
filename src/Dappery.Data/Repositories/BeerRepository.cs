@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Dapper;
+
 using Dappery.Core.Data;
 using Dappery.Domain.Entities;
 
@@ -42,13 +44,14 @@ namespace Dappery.Data.Repositories
             return await this.dbConnection.QueryAsync<Beer, Brewery, Beer>(
                 resultCommand,
                 (beer, brewery) =>
-                {
-                    // Map the brewery that Dapper returns for us to the beer
-                    brewery.Address = addresses.Find(a => a.BreweryId == brewery.Id);
-                    beer.Brewery = brewery;
-                    return beer;
-                }
-            ).ConfigureAwait(false);
+                    {
+                        // Map the brewery that Dapper returns for us to the beer
+                        brewery.Address = addresses.Find(a => a.BreweryId == brewery.Id);
+                        beer.Brewery = brewery;
+                        return beer;
+                    }
+                )
+                .ConfigureAwait(false);
         }
 
         public async Task<Beer?> GetBeerByIdAsync(int id, CancellationToken cancellationToken)
@@ -69,7 +72,9 @@ namespace Dappery.Data.Repositories
                 {
                     beer.Brewery = brewery;
                     return beer;
-                }).ConfigureAwait(false)).FirstOrDefault();
+                })
+                .ConfigureAwait(false))
+                .FirstOrDefault();
 
             // Return back to the caller if no beer is found, let the business logic decide what to do if we can't the specified beer
             if (beerFromId is null)
