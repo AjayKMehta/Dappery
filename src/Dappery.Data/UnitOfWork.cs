@@ -43,9 +43,7 @@ namespace Dappery.Data
 
             // Once our connection is open, if we're running SQLite for unit tests (or that actual application), let's seed some data
             if (string.IsNullOrWhiteSpace(connectionString))
-            {
                 this.SeedDatabase(this.dbConnection);
-            }
         }
 
         public IBreweryRepository BreweryRepository { get; }

@@ -1,10 +1,12 @@
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
 using Dappery.Core.Extensions;
 using Dappery.Domain.Media;
+
 using MediatR;
 
 namespace Dappery.Core.Breweries.Commands.UpdateBrewery
@@ -22,9 +24,7 @@ namespace Dappery.Core.Breweries.Commands.UpdateBrewery
 
             // Invalidate the request if no brewery was found
             if (breweryToUpdate is null)
-            {
                 throw new DapperyApiException($"No brewery was found with ID {request.BreweryId}", HttpStatusCode.NotFound);
-            }
 
             // Update the properties on the brewery entity
             breweryToUpdate.Name = request.Dto.Name;

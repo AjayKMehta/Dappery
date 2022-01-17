@@ -50,9 +50,7 @@ namespace Dappery.Data.Repositories
                     brewery.Address = address;
 
                     foreach (var beer in beersFromBrewery)
-                    {
                         brewery.Beers.Add(beer);
-                    }
 
                     return brewery;
                 })
@@ -89,9 +87,7 @@ namespace Dappery.Data.Repositories
                     if (beers.Any(b => b.BreweryId == brewery.Id))
                     {
                         foreach (var beer in beers.Where(b => b.BreweryId == brewery.Id))
-                        {
                             brewery.Beers.Add(beer);
-                        }
                     }
 
                     return brewery;

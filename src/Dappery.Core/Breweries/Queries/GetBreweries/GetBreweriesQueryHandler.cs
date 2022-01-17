@@ -1,9 +1,11 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Dappery.Core.Data;
 using Dappery.Core.Extensions;
 using Dappery.Domain.Media;
+
 using MediatR;
 
 namespace Dappery.Core.Breweries.Queries.GetBreweries

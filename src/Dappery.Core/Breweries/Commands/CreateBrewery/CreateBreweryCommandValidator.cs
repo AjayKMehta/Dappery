@@ -1,4 +1,5 @@
 using Dappery.Core.Extensions;
+
 using FluentValidation;
 
 namespace Dappery.Core.Breweries.Commands.CreateBrewery
