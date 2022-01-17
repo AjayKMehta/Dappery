@@ -1,10 +1,12 @@
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
 using Dappery.Core.Extensions;
 using Dappery.Domain.Media;
+
 using MediatR;
 
 namespace Dappery.Core.Breweries.Queries.RetrieveBrewery
@@ -23,9 +25,7 @@ namespace Dappery.Core.Breweries.Queries.RetrieveBrewery
 
             // Invalidate the request if no brewery is found
             if (brewery is null)
-            {
                 throw new DapperyApiException($"No brewery found with ID {request.Id}", HttpStatusCode.NotFound);
-            }
 
             // Map and return the brewery
             return new BreweryResource(brewery.ToBreweryDto());

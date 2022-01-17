@@ -1,8 +1,10 @@
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
+
 using MediatR;
 
 namespace Dappery.Core.Breweries.Commands.DeleteBrewery
@@ -20,9 +22,7 @@ namespace Dappery.Core.Breweries.Commands.DeleteBrewery
 
             // Invalidate the request if no brewery is found
             if (breweryToDelete is null)
-            {
                 throw new DapperyApiException($"No brewery was found with ID {request.BreweryId}", HttpStatusCode.NotFound);
-            }
 
             // Delete the brewery from the database and clean up our resources once we know we have a valid beer
             await this.unitOfWork.BreweryRepository.DeleteBrewery(request.BreweryId, cancellationToken).ConfigureAwait(false);

@@ -1,5 +1,6 @@
 using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Media;
+
 using MediatR;
 
 namespace Dappery.Core.Breweries.Commands.UpdateBrewery

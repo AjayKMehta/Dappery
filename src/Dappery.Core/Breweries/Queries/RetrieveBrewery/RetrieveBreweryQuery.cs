@@ -1,4 +1,5 @@
 using Dappery.Domain.Media;
+
 using MediatR;
 
 namespace Dappery.Core.Breweries.Queries.RetrieveBrewery
