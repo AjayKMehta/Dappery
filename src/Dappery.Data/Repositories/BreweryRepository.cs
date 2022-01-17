@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Dapper;
+
 using Dappery.Core.Data;
 using Dappery.Domain.Entities;
 
@@ -53,7 +55,8 @@ namespace Dappery.Data.Repositories
                     }
 
                     return brewery;
-                }).ConfigureAwait(false);
+                })
+                .ConfigureAwait(false);
 
             return breweries?.FirstOrDefault();
         }
@@ -92,7 +95,8 @@ namespace Dappery.Data.Repositories
                     }
 
                     return brewery;
-                }).ConfigureAwait(false);
+                })
+                .ConfigureAwait(false);
         }
 
         public async Task<int> CreateBrewery(Brewery brewery, CancellationToken cancellationToken)

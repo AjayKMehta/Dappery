@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using FluentValidation;
+
 using MediatR;
+
 using Microsoft.Extensions.Logging;
 
 namespace Dappery.Core.Infrastructure
@@ -16,6 +19,7 @@ namespace Dappery.Core.Infrastructure
             LogLevel.Information,
             new EventId(1, "RequestValidationException"),
             "Validation failures for request [{Request}]");
+
         private readonly IEnumerable<IValidator<TRequest>> validators;
         private readonly ILogger<TRequest> logger;
 

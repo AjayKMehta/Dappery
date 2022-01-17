@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+
 using Dappery.Core.Data;
 using Dappery.Data;
 
@@ -11,11 +12,13 @@ namespace Dappery.Core.Tests
 
         protected IUnitOfWork UnitOfWork { get; }
         protected static CancellationToken CancellationTestToken => CancellationToken.None;
+
         public void Dispose()
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

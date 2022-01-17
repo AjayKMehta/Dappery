@@ -10,6 +10,7 @@ namespace Dappery.Domain.Media
             this.Items = items;
             this.Count = this.Items.Count();
         }
+
         public IEnumerable<T> Items { get; }
 
         public int Count { get; }

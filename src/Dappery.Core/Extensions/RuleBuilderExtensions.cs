@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+
 using FluentValidation;
 
 namespace Dappery.Core.Extensions
@@ -29,8 +30,8 @@ namespace Dappery.Core.Extensions
                       context.AddFailure($"{stateAbbreviation} is not a valid state code");
                   }
               })
-            .NotEmpty()
-            .WithMessage("State code cannot be empty");
+                .NotEmpty()
+                .WithMessage("State code cannot be empty");
         }
 
         public static void HasValidStreetAddress<T>(this IRuleBuilder<T, string?> ruleBuilder)

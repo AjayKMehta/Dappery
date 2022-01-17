@@ -1,10 +1,14 @@
 using System;
 using System.Data;
+
 using Dapper;
+
 using Dappery.Core.Data;
 using Dappery.Data.Repositories;
+
 using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
+
 using Npgsql;
 
 namespace Dappery.Data
