@@ -1,7 +1,10 @@
 using System.Linq;
+
 using Dappery.Core.Extensions;
 using Dappery.Domain.Entities;
+
 using Shouldly;
+
 using Xunit;
 
 namespace Dappery.Core.Tests.Extensions
