@@ -1,20 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="../../Dappery.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Dappery.Core\Dappery.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.0" />
-<PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.1" />
-<PackageReference Include="Npgsql" Version="6.0.2" />
-<PackageReference Include="UnoptimizedAssemblyDetector" Version="0.1.1">
-  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-  <PrivateAssets>all</PrivateAssets>
-</PackageReference>
-
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.1" />
+    <PackageReference Include="Npgsql" Version="6.0.2" />
+    <PackageReference Include="UnoptimizedAssemblyDetector" Version="0.1.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Roslynator.Analyzers" Version="3.3.0" />
   </ItemGroup>
-
 </Project>
