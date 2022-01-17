@@ -362,11 +362,76 @@ dotnet_naming_rule.public_protected_static_readonly_fields_rule.severity = warni
 # https://github.com/JosefPihrt/Roslynator
 ##########################################
 
-# Add newline after conditional operator instead of before it
-roslynator.RCS0028.invert = true
+# RCS0003: Add blank line after using directive list
+dotnet_diagnostic.RCS0003.severity = suggestion
 
-# Add newline after expression-body arrow instead of before it
-roslynator.RCS0032.invert = true
+# RCS0009: Add blank line between declaration and documentation comment
+dotnet_diagnostic.RCS0009.severity = suggestion
+
+# RCS0010: Add blank line between declarations
+dotnet_diagnostic.RCS0010.severity = suggestion
+
+# RCS0012: Add blank line between single-line declarations
+dotnet_diagnostic.RCS0012.severity = none
+
+# RCS0013: Add blank line between single-line declarations of different kind
+dotnet_diagnostic.RCS0013.severity = suggestion
+
+# RCS0015: Add/remove blank line between using directives
+roslynator_blank_line_between_using_directives = separate_groups
+dotnet_diagnostic.RCS0015.severity = suggestion
+
+# RCS0016: Put attribute list on its own line
+dotnet_diagnostic.RCS0016.severity = suggestion
+
+# RCS0020: Format accessor's braces on a single line or multiple lines
+roslynator_accessor_braces_style = single_line_when_expression_is_on_single_line
+
+# RCS0021: Format block's braces on a single line or multiple lines
+roslynator_block_braces_style = single_line_when_empty
+
+# RCS0024: Add new line after switch label
+dotnet_diagnostic.RCS0024.severity = suggestion
+
+# RCS0027: Place new line after/before binary operator
+roslynator_binary_operator_new_line = before
+
+# RCS0028: Place new line after/before '?:' operator
+roslynator_conditional_operator_new_line = before
+
+# RCS0031: Add new line before enum member
+dotnet_diagnostic.RCS0031.severity = suggestion
+
+# RCS0032: Place new line after/before arrow token
+roslynator_arrow_token_new_line = after
+
+# RCS0034: Add new line before type parameter constraint
+dotnet_diagnostic.RCS0034.severity = suggestion
+
+# RCS0039: Remove new line before base list
+dotnet_diagnostic.RCS0039.severity = suggestion
+
+# RCS0041: Remove new line between 'if' keyword and 'else' keyword
+dotnet_diagnostic.RCS0041.severity = suggestion
+
+# RCS0042: Put auto-accessors on a single line
+dotnet_diagnostic.RCS0042.severity = suggestion
+
+# RCS0043: Format accessor's braces on a single line when expression is on single line
+dotnet_diagnostic.RCS0043.severity = suggestion
+
+# RCS0046: Use spaces instead of tab
+dotnet_diagnostic.RCS0046.severity = suggestion
+
+# RCS0051: Add/remove new line before 'while' in 'do' statement
+roslynator_new_line_before_while_in_do_statement = false
+
+# RCS0054: Fix formatting of a call chain
+dotnet_diagnostic.RCS0054.severity = suggestion
+
+# RCS0058: Normalize whitespace at the end of a file
+roslynator_new_line_at_end_of_file = true
+dotnet_diagnostic.RCS0058.severity = suggestion
 
 # RCS1005: Simplify nested using statement
 dotnet_diagnostic.RCS1005.severity = suggestion
