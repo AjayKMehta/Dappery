@@ -1,8 +1,11 @@
 using System.Net;
 using System.Threading.Tasks;
+
 using Dappery.Core.Beers.Queries.RetrieveBeer;
 using Dappery.Core.Exceptions;
+
 using Shouldly;
+
 using Xunit;
 
 namespace Dappery.Core.Tests.Beers
@@ -22,10 +25,9 @@ namespace Dappery.Core.Tests.Beers
 
             // Assert
             var beerDto =
-                result
-                .ShouldNotBeNull()
-                .Self
-                .ShouldNotBeNull();
+                result.ShouldNotBeNull()
+                    .Self
+                    .ShouldNotBeNull();
 
             var breweryDto = beerDto.Brewery.ShouldNotBeNull();
             breweryDto.Beers.ShouldBeNull();

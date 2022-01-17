@@ -100,9 +100,10 @@ namespace Dappery.Core.Tests.Beers
             var result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
             // Assert
-            var beerDto = result.
-                ShouldNotBeNull()
-                .Self.ShouldNotBeNull();
+            var beerDto = result
+                .ShouldNotBeNull()
+                .Self
+                .ShouldNotBeNull();
             beerDto.Id.ShouldBe(updateCommand.BeerId);
             beerDto.Name.ShouldBe(updateCommand.Dto.Name);
             beerDto.Style.ShouldBe(updateCommand.Dto.Style);

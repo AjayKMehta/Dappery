@@ -2,11 +2,13 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
 using Dappery.Core.Extensions;
 using Dappery.Domain.Entities;
 using Dappery.Domain.Media;
+
 using MediatR;
 
 namespace Dappery.Core.Beers.Commands.CreateBeer

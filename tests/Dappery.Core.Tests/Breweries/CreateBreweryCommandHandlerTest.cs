@@ -1,10 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
+
 using Dappery.Core.Breweries.Commands.CreateBrewery;
 using Dappery.Domain.Dtos;
 using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Media;
+
 using Shouldly;
+
 using Xunit;
 
 namespace Dappery.Core.Tests.Breweries
@@ -37,7 +40,8 @@ namespace Dappery.Core.Tests.Breweries
             var breweryDto = createdBrewery
                 .ShouldNotBeNull()
                 .ShouldBeOfType<BreweryResource>()
-                .Self.ShouldNotBeNull()
+                .Self
+                .ShouldNotBeNull()
                 .ShouldBeOfType<BreweryDto>();
             breweryDto.Name.ShouldNotBeNull().ShouldBe(createBreweryDto.Name);
             breweryDto.Beers.ShouldBeEmpty();

@@ -52,6 +52,7 @@ namespace Dappery.Core.Tests.Extensions
             addressDto.ZipCode.ShouldBe(beerToMap.Brewery.Address?.ZipCode);
             addressDto.StreetAddress.ShouldBe(beerToMap.Brewery.Address?.StreetAddress);
         }
+
         [Fact]
         public void ToBeerDtoGivenValidBeerWithoutBreweryReturnsMappedBeerDtoWithoutBrewery()
         {

@@ -1,5 +1,6 @@
 using Dappery.Domain.Dtos.Beer;
 using Dappery.Domain.Media;
+
 using MediatR;
 
 namespace Dappery.Core.Beers.Commands.CreateBeer
