@@ -433,14 +433,32 @@ dotnet_diagnostic.RCS0054.severity = suggestion
 roslynator_new_line_at_end_of_file = true
 dotnet_diagnostic.RCS0058.severity = suggestion
 
+# RCS0059: Place new line after/before null-conditional operator
+roslynator_null_conditional_operator_new_line = before
+
+# RCS1001: Add braces (when expression spans over multiple lines)
+dotnet_diagnostic.RCS1001.severity = suggestion
+
+# RCS1003: Add braces to if-else (when expression spans over multiple lines)
+dotnet_diagnostic.RCS1003.severity = suggestion
+
+# RCS1004: Remove braces from if-else
+dotnet_diagnostic.RCS1004.severity = suggestion
+
 # RCS1005: Simplify nested using statement
 dotnet_diagnostic.RCS1005.severity = suggestion
+
+# RCS1006: Merge 'else' with nested 'if'
+dotnet_diagnostic.RCS1006.severity = suggestion
 
 # RCS1013: Use predefined type
 dotnet_diagnostic.RCS1013.severity = suggestion
 
-# Use implicitly typed array (when type is obvious)
-roslynator.RCS1014.use_implicit_type_when_obvious = true
+# RCS1014: Use explicitly/implicitly typed array
+roslynator_array_creation_type_style = implicit_when_type_is_obvious
+
+# RCS1015: Use nameof operator
+dotnet_diagnostic.RCS1015.severity = suggestion
 
 # RCS1031: Remove unnecessary braces
 dotnet_diagnostic.RCS1031.severity = suggestion
@@ -448,12 +466,8 @@ dotnet_diagnostic.RCS1031.severity = suggestion
 # RCS1040: Remove empty 'else' clause
 dotnet_diagnostic.RCS1040.severity = suggestion
 
-# Do not rename private static field to camel case with underscore
-roslynator.RCS1045.suppress_when_field_is_static = true
-
 # RCS1051: Parenthesize condition of conditional expression
-dotnet_diagnostic.RCS1051.severity = none
-roslynator.RCS1051.do_not_parenthesize_single_token = true
+roslynator_conditional_operator_condition_parentheses_style = omit_when_condition_is_single_token
 
 # RCS1052: Declare each attribute separately
 dotnet_diagnostic.RCS1052.severity = none
