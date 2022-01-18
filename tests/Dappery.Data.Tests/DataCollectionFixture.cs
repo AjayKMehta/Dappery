@@ -1,9 +1,8 @@
 using Xunit;
 
-namespace Dappery.Data.Tests
+namespace Dappery.Data.Tests;
+
+[CollectionDefinition("DataCollectionFixture")]
+public class DataCollectionFixture : ICollectionFixture<TestFixture>
 {
-    [CollectionDefinition("DataCollectionFixture")]
-    public class DataCollectionFixture : ICollectionFixture<TestFixture>
-    {
-    }
 }
