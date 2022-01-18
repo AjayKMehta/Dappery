@@ -35,3 +35,5 @@ public class DeleteBeerCommandHandler : IRequestHandler<DeleteBeerCommand, Unit>
         this.unitOfWork.Commit();
 
         return Unit.Value;
+    }
+}

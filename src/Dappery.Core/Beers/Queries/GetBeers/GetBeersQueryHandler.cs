@@ -8,27 +8,26 @@ using Dappery.Domain.Media;
 
 using MediatR;
 
-namespace Dappery.Core.Beers.Queries.GetBeers
+namespace Dappery.Core.Beers.Queries.GetBeers;
+
+public class GetBeersQueryHandler : IRequestHandler<GetBeersQuery, BeerResourceList>
 {
-    public class GetBeersQueryHandler : IRequestHandler<GetBeersQuery, BeerResourceList>
+    private readonly IUnitOfWork unitOfWork;
+
+    public GetBeersQueryHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
+
+    public async Task<BeerResourceList> Handle(GetBeersQuery request, CancellationToken cancellationToken)
     {
-        private readonly IUnitOfWork unitOfWork;
+        // Retrieve all of our beers from the database
+        var beers = await this.unitOfWork.BeerRepository.GetAllBeersAsync(cancellationToken).ConfigureAwait(false);
 
-        public GetBeersQueryHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
+        // Clean up our resources
+        this.unitOfWork.Commit();
 
-        public async Task<BeerResourceList> Handle(GetBeersQuery request, CancellationToken cancellationToken)
-        {
-            // Retrieve all of our beers from the database
-            var beers = await this.unitOfWork.BeerRepository.GetAllBeersAsync(cancellationToken).ConfigureAwait(false);
+        // Map our beers and return the response
+        var mappedBeers = beers.Select(b => b.ToBeerDto());
 
-            // Clean up our resources
-            this.unitOfWork.Commit();
-
-            // Map our beers and return the response
-            var mappedBeers = beers.Select(b => b.ToBeerDto());
-
-            // Return our mapped beers
-            return new BeerResourceList(mappedBeers);
-        }
+        // Return our mapped beers
+        return new BeerResourceList(mappedBeers);
     }
 }

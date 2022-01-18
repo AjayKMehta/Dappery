@@ -2,21 +2,20 @@ using Dappery.Core.Extensions;
 
 using FluentValidation;
 
-namespace Dappery.Core.Beers.Commands.UpdateBeer
+namespace Dappery.Core.Beers.Commands.UpdateBeer;
+
+public class UpdateBeerCommandValidator : AbstractValidator<UpdateBeerCommand>
 {
-    public class UpdateBeerCommandValidator : AbstractValidator<UpdateBeerCommand>
+    public UpdateBeerCommandValidator()
     {
-        public UpdateBeerCommandValidator()
-        {
-            _ = this.RuleFor(b => b.Dto)
-                .NotNull()
-                .WithMessage("Must supply a beer to update");
+        _ = this.RuleFor(b => b.Dto)
+            .NotNull()
+            .WithMessage("Must supply a beer to update");
 
-            this.RuleFor(b => b.Dto!.Name)
-                .NotNullOrEmpty();
+        this.RuleFor(b => b.Dto!.Name)
+            .NotNullOrEmpty();
 
-            this.RuleFor(b => b.Dto!.Style)
-                .NotNullOrEmpty();
-        }
+        this.RuleFor(b => b.Dto!.Style)
+            .NotNullOrEmpty();
     }
 }
