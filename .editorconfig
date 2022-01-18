@@ -472,14 +472,47 @@ roslynator_conditional_operator_condition_parentheses_style = omit_when_conditio
 # RCS1052: Declare each attribute separately
 dotnet_diagnostic.RCS1052.severity = none
 
+# RCS1055: Avoid semicolon at the end of declaration
+dotnet_diagnostic.RCS1052.severity = suggestion
+
+# RCS1061: Merge 'if' with nested 'if'
+dotnet_diagnostic.RCS1061.severity = suggestion
+
 # RCS1071: Remove redundant base constructor call
 dotnet_diagnostic.RCS1071.severity = warning
 
-# Use string.Empty instead of ""
-roslynator.RCS1078.invert = true
+# RCS1074: Remove redundant constructor
+dotnet_diagnostic.RCS1074.severity = suggestion
+
+# RCS1078: Use "" or 'string.Empty'
+roslynator_empty_string_style = field
+
+# RCS1090: Add/remove 'ConfigureAwait(false)' call
+roslynator_configure_await = true
+
+# RCS1124: Inline local variable
+dotnet_diagnostic.RCS1124.severity = suggestion
+
+# RCS1133: Remove redundant Dispose/Close call
+dotnet_diagnostic.RCS1133.severity = suggestion
+
+# RCS1140: Add exception to documentation comment
+dotnet_diagnostic.RCS1140.severity = suggestion
+
+# RCS1141: Add 'param' element to documentation comment
+dotnet_diagnostic.RCS1141.severity = suggestion
+
+# RCS1142: Add 'typeparam' element to documentation comment
+dotnet_diagnostic.RCS1142.severity = suggestion
 
 # RCS1145: Remove redundant 'as' operator
 dotnet_diagnostic.RCS1145.severity = warning
+
+# RCS1158: Static member in generic type should use a type parameter
+dotnet_diagnostic.RCS1158.severity = none
+
+# RCS1161: Enum should declare explicit values
+dotnet_diagnostic.RCS1161.severity = suggestion
 
 # https://github.com/JosefPihrt/Roslynator/issues/384
 # RCS1165: Unconstrained type parameter checked for null
@@ -497,8 +530,14 @@ dotnet_diagnostic.RCS1177.severity = suggestion
 # RCS1182: Remove redundant base interface
 dotnet_diagnostic.RCS1182.severity = suggestion
 
-# RCS1207: Convert anonymous function to method group
-dotnet_diagnostic.RCS1207.severity = suggestion
+# RCS1186: Use Regex instance instead of static method
+dotnet_diagnostic.RCS1186.severity = suggestion
+
+# RCS1198: Avoid unnecessary boxing of value type
+dotnet_diagnostic.RCS1198.severity = none
+
+# RCS1207: Use anonymous function or method group
+roslynator_use_anonymous_function_or_method_group = method_group
 
 # RCS1208: Reduce 'if' nesting
 dotnet_diagnostic.RCS1208.severity = none
