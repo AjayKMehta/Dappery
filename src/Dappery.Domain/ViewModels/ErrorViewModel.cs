@@ -1,11 +1,10 @@
 using Dappery.Domain.Dtos;
 
-namespace Dappery.Domain.ViewModels
-{
-    public class ErrorViewModel
-    {
-        public ErrorViewModel(ErrorDto errors) => this.Errors = errors;
+namespace Dappery.Domain.ViewModels;
 
-        public ErrorDto Errors { get; }
-    }
+public class ErrorViewModel
+{
+    public ErrorViewModel(ErrorDto errors) => this.Errors = errors;
+
+    public ErrorDto Errors { get; }
 }

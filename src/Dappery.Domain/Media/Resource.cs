@@ -1,11 +1,10 @@
-namespace Dappery.Domain.Media
+namespace Dappery.Domain.Media;
+
+public class Resource<T>
 {
-    public class Resource<T>
-    {
-        public Resource(T resource) => this.Self = resource;
+    public Resource(T resource) => this.Self = resource;
 
-        public T Self { get; }
+    public T Self { get; }
 
-        public string ApiVersion => "v1";
-    }
+    public string ApiVersion => "v1";
 }

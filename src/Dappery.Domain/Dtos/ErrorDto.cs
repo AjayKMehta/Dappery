@@ -1,15 +1,14 @@
-namespace Dappery.Domain.Dtos
+namespace Dappery.Domain.Dtos;
+
+public class ErrorDto
 {
-    public class ErrorDto
+    public ErrorDto(string? description, object? details = null)
     {
-        public ErrorDto(string? description, object? details = null)
-        {
-            this.Description = string.IsNullOrWhiteSpace(description) ? "An expected error has occurred." : description;
-            this.Details = details;
-        }
-
-        public string Description { get; }
-
-        public object? Details { get; set; }
+        this.Description = string.IsNullOrWhiteSpace(description) ? "An expected error has occurred." : description;
+        this.Details = details;
     }
+
+    public string Description { get; }
+
+    public object? Details { get; set; }
 }
