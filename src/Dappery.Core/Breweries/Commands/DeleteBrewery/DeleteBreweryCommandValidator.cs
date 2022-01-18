@@ -1,11 +1,10 @@
 using FluentValidation;
 
-namespace Dappery.Core.Breweries.Commands.DeleteBrewery
+namespace Dappery.Core.Breweries.Commands.DeleteBrewery;
+
+public class DeleteBreweryCommandValidator : AbstractValidator<DeleteBreweryCommand>
 {
-    public class DeleteBreweryCommandValidator : AbstractValidator<DeleteBreweryCommand>
-    {
-        public DeleteBreweryCommandValidator() => this.RuleFor(b => b.BreweryId)
-            .NotEmpty()
-            .WithMessage("Must supply the brewery ID");
-    }
+    public DeleteBreweryCommandValidator() => this.RuleFor(b => b.BreweryId)
+        .NotEmpty()
+        .WithMessage("Must supply the brewery ID");
 }

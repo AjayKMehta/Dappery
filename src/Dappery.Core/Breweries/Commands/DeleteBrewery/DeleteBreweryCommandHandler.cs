@@ -7,28 +7,27 @@ using Dappery.Core.Exceptions;
 
 using MediatR;
 
-namespace Dappery.Core.Breweries.Commands.DeleteBrewery
+namespace Dappery.Core.Breweries.Commands.DeleteBrewery;
+
+public class DeleteBreweryCommandHandler : IRequestHandler<DeleteBreweryCommand, Unit>
 {
-    public class DeleteBreweryCommandHandler : IRequestHandler<DeleteBreweryCommand, Unit>
+    private readonly IUnitOfWork unitOfWork;
+
+    public DeleteBreweryCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
+
+    public async Task<Unit> Handle(DeleteBreweryCommand request, CancellationToken cancellationToken)
     {
-        private readonly IUnitOfWork unitOfWork;
+        // Retrieve the brewery and invalidate the request if none is found
+        var breweryToDelete = await this.unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
 
-        public DeleteBreweryCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
+        // Invalidate the request if no brewery is found
+        if (breweryToDelete is null)
+            throw new DapperyApiException($"No brewery was found with ID {request.BreweryId}", HttpStatusCode.NotFound);
 
-        public async Task<Unit> Handle(DeleteBreweryCommand request, CancellationToken cancellationToken)
-        {
-            // Retrieve the brewery and invalidate the request if none is found
-            var breweryToDelete = await this.unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
+        // Delete the brewery from the database and clean up our resources once we know we have a valid beer
+        await this.unitOfWork.BreweryRepository.DeleteBrewery(request.BreweryId, cancellationToken).ConfigureAwait(false);
+        this.unitOfWork.Commit();
 
-            // Invalidate the request if no brewery is found
-            if (breweryToDelete is null)
-                throw new DapperyApiException($"No brewery was found with ID {request.BreweryId}", HttpStatusCode.NotFound);
-
-            // Delete the brewery from the database and clean up our resources once we know we have a valid beer
-            await this.unitOfWork.BreweryRepository.DeleteBrewery(request.BreweryId, cancellationToken).ConfigureAwait(false);
-            this.unitOfWork.Commit();
-
-            return Unit.Value;
-        }
+        return Unit.Value;
     }
 }
