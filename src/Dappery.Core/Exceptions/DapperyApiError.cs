@@ -1,15 +1,14 @@
-namespace Dappery.Core.Exceptions
+namespace Dappery.Core.Exceptions;
+
+public class DapperyApiError
 {
-    public class DapperyApiError
+    public DapperyApiError(string errorMessage, string propertyName)
     {
-        public DapperyApiError(string errorMessage, string propertyName)
-        {
-            this.ErrorMessage = errorMessage;
-            this.PropertyName = propertyName;
-        }
-
-        public string ErrorMessage { get; }
-
-        public string PropertyName { get; }
+        this.ErrorMessage = errorMessage;
+        this.PropertyName = propertyName;
     }
+
+    public string ErrorMessage { get; }
+
+    public string PropertyName { get; }
 }

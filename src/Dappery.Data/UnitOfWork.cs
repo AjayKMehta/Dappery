@@ -11,80 +11,80 @@ using Microsoft.Data.Sqlite;
 
 using Npgsql;
 
-namespace Dappery.Data
+namespace Dappery.Data;
+
+public class UnitOfWork : IUnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    private readonly IDbConnection dbConnection;
+    private readonly IDbTransaction dbTransaction;
+
+    public UnitOfWork(string? connectionString, bool isPostgres = false)
     {
-        private readonly IDbConnection dbConnection;
-        private readonly IDbTransaction dbTransaction;
+        // Based on our database implementation, we'll need a reference to the last row inserted
+        string rowInsertRetrievalQuery;
 
-        public UnitOfWork(string? connectionString, bool isPostgres = false)
+        // If no connection string is passed, we'll assume we're running with our SQLite database provider
+        if (string.IsNullOrWhiteSpace(connectionString))
         {
-            // Based on our database implementation, we'll need a reference to the last row inserted
-            string rowInsertRetrievalQuery;
-
-            // If no connection string is passed, we'll assume we're running with our SQLite database provider
-            if (string.IsNullOrWhiteSpace(connectionString))
-            {
-                this.dbConnection = new SqliteConnection("Data Source=:memory:");
-                rowInsertRetrievalQuery = "; SELECT last_insert_rowid();";
-            }
-            else
-            {
-                this.dbConnection = isPostgres ? new NpgsqlConnection(connectionString) : new SqlConnection(connectionString);
-                rowInsertRetrievalQuery = isPostgres ? "returning Id;" : "; SELECT CAST(SCOPE_IDENTITY() as int);";
-            }
-
-            // Open our connection, begin our transaction, and instantiate our repositories
-            this.dbConnection.Open();
-            this.dbTransaction = this.dbConnection.BeginTransaction();
-            this.BreweryRepository = new BreweryRepository(this.dbTransaction, rowInsertRetrievalQuery);
-            this.BeerRepository = new BeerRepository(this.dbTransaction, rowInsertRetrievalQuery);
-
-            // Once our connection is open, if we're running SQLite for unit tests (or that actual application), let's seed some data
-            if (string.IsNullOrWhiteSpace(connectionString))
-                this.SeedDatabase(this.dbConnection);
+            this.dbConnection = new SqliteConnection("Data Source=:memory:");
+            rowInsertRetrievalQuery = "; SELECT last_insert_rowid();";
+        }
+        else
+        {
+            this.dbConnection = isPostgres ? new NpgsqlConnection(connectionString) : new SqlConnection(connectionString);
+            rowInsertRetrievalQuery = isPostgres ? "returning Id;" : "; SELECT CAST(SCOPE_IDENTITY() as int);";
         }
 
-        public IBreweryRepository BreweryRepository { get; }
+        // Open our connection, begin our transaction, and instantiate our repositories
+        this.dbConnection.Open();
+        this.dbTransaction = this.dbConnection.BeginTransaction();
+        this.BreweryRepository = new BreweryRepository(this.dbTransaction, rowInsertRetrievalQuery);
+        this.BeerRepository = new BeerRepository(this.dbTransaction, rowInsertRetrievalQuery);
 
-        public IBeerRepository BeerRepository { get; }
+        // Once our connection is open, if we're running SQLite for unit tests (or that actual application), let's seed some data
+        if (string.IsNullOrWhiteSpace(connectionString))
+            this.SeedDatabase(this.dbConnection);
+    }
 
-        public void Commit()
+    public IBreweryRepository BreweryRepository { get; }
+
+    public IBeerRepository BeerRepository { get; }
+
+    public void Commit()
+    {
+        try
         {
-            try
-            {
-                this.dbTransaction.Commit();
-            }
-            catch (InvalidOperationException e)
-            {
-                Console.WriteLine($"Could not commit the transaction, reason: {e.Message}");
-                this.dbTransaction.Rollback();
-            }
-            finally
-            {
-                this.dbTransaction.Dispose();
-            }
+            this.dbTransaction.Commit();
         }
-
-        public void Dispose()
+        catch (InvalidOperationException e)
         {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
+            Console.WriteLine($"Could not commit the transaction, reason: {e.Message}");
+            this.dbTransaction.Rollback();
         }
-
-        protected virtual void Dispose(bool disposing)
+        finally
         {
-            if (disposing)
-            {
-                this.dbTransaction?.Dispose();
-                this.dbConnection?.Dispose();
-            }
+            this.dbTransaction.Dispose();
         }
+    }
 
-        private void SeedDatabase(IDbConnection dbConnection)
+    public void Dispose()
+    {
+        this.Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
         {
-            const string createBreweriesSql = @"
+            this.dbTransaction?.Dispose();
+            this.dbConnection?.Dispose();
+        }
+    }
+
+    private void SeedDatabase(IDbConnection dbConnection)
+    {
+        const string createBreweriesSql = @"
                 CREATE TABLE Breweries (
                     Id INTEGER PRIMARY KEY,
                     Name TEXT(32),
@@ -93,7 +93,7 @@ namespace Dappery.Data
                 );
             ";
 
-            const string createBeersSql = @"
+        const string createBeersSql = @"
                 CREATE TABLE Beers (
                     Id INTEGER PRIMARY KEY,
                     Name TEXT(32),
@@ -106,7 +106,7 @@ namespace Dappery.Data
                 );
             ";
 
-            const string createAddressSql = @"
+        const string createAddressSql = @"
                 CREATE TABLE Addresses (
                     Id INTEGER PRIMARY KEY,
                     StreetAddress TEXT(32),
@@ -121,13 +121,13 @@ namespace Dappery.Data
                 );
             ";
 
-            // Add our tables
-            _ = dbConnection.Execute(createBreweriesSql, this.dbTransaction);
-            _ = dbConnection.Execute(createBeersSql, this.dbTransaction);
-            _ = dbConnection.Execute(createAddressSql, this.dbTransaction);
+        // Add our tables
+        _ = dbConnection.Execute(createBreweriesSql, this.dbTransaction);
+        _ = dbConnection.Execute(createBeersSql, this.dbTransaction);
+        _ = dbConnection.Execute(createAddressSql, this.dbTransaction);
 
-            // Seed our data
-            _ = dbConnection.Execute(@"
+        // Seed our data
+        _ = dbConnection.Execute(@"
                 INSERT INTO Breweries (Name, CreatedAt, UpdatedAt)
                 VALUES
                     (
@@ -135,9 +135,9 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         CURRENT_DATE
                     );",
-                transaction: this.dbTransaction);
+            transaction: this.dbTransaction);
 
-            _ = dbConnection.Execute(@"
+        _ = dbConnection.Execute(@"
                 INSERT INTO Breweries (Name, CreatedAt, UpdatedAt)
                 VALUES
                     (
@@ -145,9 +145,9 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         CURRENT_DATE
                     );",
-                transaction: this.dbTransaction);
+            transaction: this.dbTransaction);
 
-            _ = dbConnection.Execute(@"
+        _ = dbConnection.Execute(@"
                 INSERT INTO Addresses (StreetAddress, City, State, ZipCode, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
                     (
@@ -159,9 +159,9 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         1
                     );",
-                transaction: this.dbTransaction);
+            transaction: this.dbTransaction);
 
-            _ = dbConnection.Execute(@"
+        _ = dbConnection.Execute(@"
                 INSERT INTO Addresses (StreetAddress, City, State, ZipCode, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
                     (
@@ -173,9 +173,9 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         2
                     );",
-                transaction: this.dbTransaction);
+            transaction: this.dbTransaction);
 
-            _ = dbConnection.Execute(@"
+        _ = dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
                     (
@@ -185,9 +185,9 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         1
                     );",
-                transaction: this.dbTransaction);
+            transaction: this.dbTransaction);
 
-            _ = dbConnection.Execute(@"
+        _ = dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
                     (
@@ -197,9 +197,9 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         1
                     );",
-                transaction: this.dbTransaction);
+            transaction: this.dbTransaction);
 
-            _ = dbConnection.Execute(@"
+        _ = dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
                     (
@@ -209,9 +209,9 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         1
                     );",
-                transaction: this.dbTransaction);
+            transaction: this.dbTransaction);
 
-            _ = dbConnection.Execute(@"
+        _ = dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
                     (
@@ -221,9 +221,9 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         2
                     );",
-                transaction: this.dbTransaction);
+            transaction: this.dbTransaction);
 
-            _ = dbConnection.Execute(@"
+        _ = dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
                 VALUES
                     (
@@ -233,7 +233,6 @@ namespace Dappery.Data
                         CURRENT_DATE,
                         2
                     );",
-                transaction: this.dbTransaction);
-        }
+            transaction: this.dbTransaction);
     }
 }
