@@ -557,6 +557,19 @@ dotnet_diagnostic.RCS1241.severity = warning
 # RCS1248: Use pattern matching to check for null (or vice versa)
 dotnet_diagnostic.RCS1248.severity = suggestion
 
+# RCS1250: Use implicit/explicit object creation
+roslynator_object_creation_type_style = implicit_when_type_is_obvious
+roslynator_use_var_instead_of_implicit_object_creation = true
+
+# RCS9001: Use pattern matching
+dotnet_diagnostic.RCS9001.severity = suggestion
+
+# RR0171: Convert "" to string.Empty
+roslynator_refactoring.RR0171.enabled = true
+
+# RR0066: Introduce constructor
+roslynator_refactoring.RR0066.enabled = true
+
 ##########################################
 # .NET Code Quality Rules
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/
