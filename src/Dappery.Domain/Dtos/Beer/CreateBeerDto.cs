@@ -1,11 +1,10 @@
-namespace Dappery.Domain.Dtos.Beer
+namespace Dappery.Domain.Dtos.Beer;
+
+public class CreateBeerDto
 {
-    public class CreateBeerDto
-    {
-        public string? Name { get; set; }
+    public string? Name { get; set; }
 
-        public string? Style { get; set; }
+    public string? Style { get; set; }
 
-        public int BreweryId { get; set; }
-    }
+    public int BreweryId { get; set; }
 }
