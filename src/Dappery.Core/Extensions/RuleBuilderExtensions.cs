@@ -40,8 +40,8 @@ public static class RuleBuilderExtensions
           {
               if (string.IsNullOrWhiteSpace(streetAddress))
               {
-                      // Add the context failure and break out of the validation
-                      context.AddFailure("Must supply a street address");
+                  // Add the context failure and break out of the validation
+                  context.AddFailure("Must supply a street address");
                   return;
               }
 
@@ -56,8 +56,8 @@ public static class RuleBuilderExtensions
           {
               if (string.IsNullOrWhiteSpace(zipCode))
               {
-                      // Add the context failure and break out of the validation
-                      context.AddFailure("Must supply the zip code");
+                  // Add the context failure and break out of the validation
+                  context.AddFailure("Must supply the zip code");
                   return;
               }
 
