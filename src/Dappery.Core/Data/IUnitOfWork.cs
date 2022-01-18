@@ -1,13 +1,12 @@
 using System;
 
-namespace Dappery.Core.Data
+namespace Dappery.Core.Data;
+
+public interface IUnitOfWork : IDisposable
 {
-    public interface IUnitOfWork : IDisposable
-    {
-        IBeerRepository BeerRepository { get; }
+    IBeerRepository BeerRepository { get; }
 
-        IBreweryRepository BreweryRepository { get; }
+    IBreweryRepository BreweryRepository { get; }
 
-        void Commit();
-    }
+    void Commit();
 }
