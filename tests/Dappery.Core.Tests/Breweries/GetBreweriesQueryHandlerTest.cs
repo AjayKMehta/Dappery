@@ -1,8 +1,11 @@
 using System.Linq;
 using System.Threading.Tasks;
+
 using Dappery.Core.Breweries.Queries.GetBreweries;
 using Dappery.Domain.Media;
+
 using Shouldly;
+
 using Xunit;
 
 namespace Dappery.Core.Tests.Breweries
