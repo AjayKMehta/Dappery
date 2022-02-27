@@ -8,8 +8,8 @@ on:
       - "**.csproj"
 
 jobs:
-  build:
-    name: build-${{matrix.os}}
+  test:
+    name: test-${{matrix.os}}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -28,17 +28,9 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-  test:
-    needs: build
-    name: test-${{matrix.os}}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-
-    steps:
       - name: Test
         run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --no-restore --verbosity normal
+
       - name: Code coverage
         uses:  codecov/codecov-action@v2.1.0
         with:
