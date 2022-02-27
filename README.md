@@ -1,4 +1,6 @@
-[![.github/workflows/ci.yml](https://github.com/AjayKMehta/Dappery/actions/workflows/ci.yml/badge.svg)](https://github.com/AjayKMehta/Dappery/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/AjayKMehta/Dappery/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AjayKMehta/Dappery/actions/workflows/codeql-analysis.yml)
+[![Infersharp](https://github.com/AjayKMehta/Dappery/actions/workflows/infersharp.yml/badge.svg)](
+
 [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/AjayKMehta/Dappery)
 
 ## Run unit tests
