@@ -7,9 +7,6 @@ on:
       - "**.cs"
       - "**.csproj"
 
-env:
-  DOTNET_VERSION: "6.0.2" # The .NET SDK version to use
-
 jobs:
   build:
     name: build-${{matrix.os}}
@@ -23,7 +20,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v2.0.0
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: "6.x"
 
       - name: Install dependencies
         run: dotnet restore
