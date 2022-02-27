@@ -1,3 +1,5 @@
+name: "Infersharp"
+
 on: [push, workflow_dispatch]
 
 jobs:
