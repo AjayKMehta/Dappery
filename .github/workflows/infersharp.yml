@@ -3,7 +3,7 @@ on: [push, workflow_dispatch]
 jobs:
   infersharp:
     if: contains(github.actor, 'dependabot') == false
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
@@ -12,7 +12,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: "6.0.100"
+          dotnet-version: "6.x"
 
       - name: Build dotnet
         run: dotnet build Dappery.sln
@@ -25,3 +25,8 @@ jobs:
 
       - name: Infer# analysis results
         run: echo "${{ steps.runinfersharp.outputs.results }}"
+
+      - name: Upload SARIF output to GitHub Security Center
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: infer-out/report.sarif
