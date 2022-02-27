@@ -1,0 +1,49 @@
+name: "Run tests"
+
+on:
+  push:
+  pull_request:
+    paths:
+      - "**.cs"
+      - "**.csproj"
+
+env:
+  DOTNET_VERSION: "6.0.2" # The .NET SDK version to use
+
+jobs:
+  build:
+    name: build-${{matrix.os}}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2.4
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v2.0.0
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+  test:
+    needs: build
+    name: test-${{matrix.os}}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Test
+        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --no-restore --verbosity normal
+      - name: Code coverage
+        uses:  codecov/uploader@v0.1.17
+        with:
+          flags: unittests
+          verbose: true
