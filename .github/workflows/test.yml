@@ -6,6 +6,8 @@ on:
     paths:
       - "**.cs"
       - "**.csproj"
+permissions:
+  contents: read
 
 jobs:
   test:

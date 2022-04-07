@@ -12,6 +12,9 @@ on:
       - "**/*.md"
       - "**/*.txt"
 
+permissions:
+  contents: read
+
 jobs:
   analyze:
     name: Analyze

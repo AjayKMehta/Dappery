@@ -2,6 +2,9 @@ name: "Infersharp"
 
 on: [push, workflow_dispatch]
 
+permissions:
+  contents: read
+
 jobs:
   infersharp:
     if: contains(github.actor, 'dependabot') == false
