@@ -3,7 +3,7 @@ name: "Infersharp"
 on: [push, workflow_dispatch]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   infersharp:
