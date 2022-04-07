@@ -561,6 +561,10 @@ dotnet_diagnostic.RCS1248.severity = suggestion
 roslynator_object_creation_type_style = implicit_when_type_is_obvious
 roslynator_use_var_instead_of_implicit_object_creation = true
 
+# RCS1252: Normalize usage of infinite loop
+roslynator_infinite_loop_style = while
+dotnet_diagnostic.RCS1252.severity = suggestion
+
 # RCS9001: Use pattern matching
 dotnet_diagnostic.RCS9001.severity = suggestion
 
