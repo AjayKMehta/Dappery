@@ -20,6 +20,7 @@ permissions:
 jobs:
   version-sweep:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     # Checkout the repo into the workspace within the VM
     steps:
