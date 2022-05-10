@@ -8,5 +8,6 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
     <Nullable>Enable</Nullable>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)\bin</BaseOutputPath>
   </PropertyGroup>
 </Project>
