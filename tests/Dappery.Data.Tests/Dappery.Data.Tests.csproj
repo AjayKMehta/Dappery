@@ -2,7 +2,7 @@
 
   <Import Project="../../Dappery.targets" />
   <ItemGroup>
-    <PackageReference Include="GitHubActionsTestLogger" Version="1.4.1">
+    <PackageReference Include="GitHubActionsTestLogger" Version="2.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
