@@ -72,7 +72,7 @@ indent_style = tab
 ##########################################
 
 # Default Severity for all .NET Code Style rules below
-dotnet_analyzer_diagnostic.severity = warning
+dotnet_analyzer_diagnostic.category-Style.severity = warning
 
 ##########################################
 # Code Style Rules
@@ -110,6 +110,7 @@ dotnet_style_parentheses_in_other_operators = never_if_unnecessary:none
 csharp_style_prefer_index_operator = true:suggestion
 csharp_style_prefer_range_operator = true:suggestion
 csharp_style_deconstructed_variable_declaration = true:suggestion
+csharp_style_implicit_object_creation_when_type_is_apparent = true:suggestion
 csharp_style_inlined_variable_declaration = true:suggestion
 dotnet_style_namespace_match_folder = true
 csharp_style_pattern_local_over_anonymous_function = true:suggestion
@@ -125,8 +126,6 @@ dotnet_style_prefer_inferred_tuple_names = true:suggestion
 dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
 dotnet_style_prefer_simplified_boolean_expressions= true:suggestion
 dotnet_style_prefer_simplified_interpolation = true:suggestion
-# C# 9
-csharp_style_implicit_object_creation_when_type_is_apparent = true:suggestion
 
 # Null-checking preferences
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/null-checking-preferences
@@ -158,10 +157,9 @@ csharp_style_expression_bodied_properties = when_on_single_line:suggestion
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/pattern-matching-preferences
 csharp_style_pattern_matching_over_as_with_null_check = true:warning
 csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
-csharp_style_prefer_switch_expression = true:suggestion
-# C# 9
 csharp_style_prefer_not_pattern = true:suggestion
 csharp_style_prefer_pattern_matching = true:suggestion
+csharp_style_prefer_switch_expression = true:suggestion
 
 # Code block preferences
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/code-block-preferences
@@ -266,13 +264,22 @@ csharp_style_namespace_declarations = file_scoped
 # Styles
 ##########################################
 
+dotnet_naming_style.async_method_style.capitalization = pascal_case
+dotnet_naming_style.async_method_style.required_suffix = Async
+
 dotnet_naming_style.camel_case_style.capitalization = camel_case
+
+dotnet_naming_style.interface_style.capitalization = pascal_case
+dotnet_naming_style.interface_style.required_prefix = I
+
 dotnet_naming_style.pascal_case_style.capitalization = pascal_case
 
-dotnet_naming_style.prefix_interface_with_i_style.capitalization = pascal_case
-dotnet_naming_style.prefix_interface_with_i_style.required_prefix = I
+dotnet_naming_style.private_field_style.capitalization = camel_case
+dotnet_naming_style.private_field_style.required_prefix = _
 
-dotnet_naming_style.suffix_method_with_async_style.required_suffix = Async
+dotnet_naming_style.private_static_field_style.capitalization = camel_case
+dotnet_naming_style.private_static_field_style.required_prefix = s_
+
 
 ##########################################
 # Symbol groups
@@ -282,31 +289,35 @@ dotnet_naming_symbols.async_method_group.applicable_accessibilities = *
 dotnet_naming_symbols.async_method_group.applicable_kinds           = method
 dotnet_naming_symbols.async_method_group.required_modifiers         = async
 
-dotnet_naming_symbols.constant_fields_group.applicable_accessibilities = *
-dotnet_naming_symbols.constant_fields_group.applicable_kinds           = field
-dotnet_naming_symbols.constant_fields_group.required_modifiers         = const
+dotnet_naming_symbols.constant_group.applicable_accessibilities     = *
+dotnet_naming_symbols.constant_group.applicable_kinds               = *
+dotnet_naming_symbols.constant_group.required_modifiers             = const
 
-dotnet_naming_symbols.element_group.applicable_accessibilities = *
-dotnet_naming_symbols.element_group.applicable_kinds           = namespace, class, enum, struct, delegate, event, method, property, type_parameter
+dotnet_naming_symbols.element_group.applicable_accessibilities      = *
+dotnet_naming_symbols.element_group.applicable_kinds                = namespace, class, enum, struct, delegate, event, method, property, type_parameter
 
-dotnet_naming_symbols.interface_group.applicable_accessibilities = *
-dotnet_naming_symbols.interface_group.applicable_kinds           = interface
+dotnet_naming_symbols.interface_group.applicable_accessibilities    = *
+dotnet_naming_symbols.interface_group.applicable_kinds              = interface
 
-dotnet_naming_symbols.local_vars_group.applicable_accessibilities = local
-dotnet_naming_symbols.local_vars_group.applicable_kinds           = local
+dotnet_naming_symbols.local_var_group.applicable_accessibilities   = local
+dotnet_naming_symbols.local_var_group.applicable_kinds             = local
 
-dotnet_naming_symbols.other_public_fields_group.applicable_accessibilities = public
-dotnet_naming_symbols.other_public_fields_group.applicable_kinds           = field
+dotnet_naming_symbols.parameter_group.applicable_accessibilities = *
+dotnet_naming_symbols.parameter_group.applicable_kinds           = parameter
 
-dotnet_naming_symbols.parameters_group.applicable_accessibilities = *
-dotnet_naming_symbols.parameters_group.applicable_kinds           = parameter
+dotnet_naming_symbols.private_field_group.applicable_accessibilities = private
+dotnet_naming_symbols.private_field_group.applicable_kinds           = field
 
-dotnet_naming_symbols.private_fields_group.applicable_accessibilities = private
-dotnet_naming_symbols.private_fields_group.applicable_kinds           = field
+dotnet_naming_symbols.private_static_field_group.applicable_accessibilities = private, internal
+dotnet_naming_symbols.private_static_field_group.applicable_kinds           = field
+dotnet_naming_symbols.private_static_field_group.required_modifiers         = static, readonly
 
-dotnet_naming_symbols.public_protected_static_readonly_fields_group.applicable_accessibilities = public, protected, protected_internal
-dotnet_naming_symbols.public_protected_static_readonly_fields_group.applicable_kinds           = field
-dotnet_naming_symbols.public_protected_static_readonly_fields_group.required_modifiers         = static, readonly
+dotnet_naming_symbols.public_field_group.applicable_accessibilities = public
+dotnet_naming_symbols.public_field_group.applicable_kinds           = field
+
+dotnet_naming_symbols.public_protected_static_field_group.applicable_accessibilities = public, protected, protected_internal
+dotnet_naming_symbols.public_protected_static_field_group.applicable_kinds           = field
+dotnet_naming_symbols.public_protected_static_field_group.required_modifiers         = static
 
 ##########################################
 # Naming rules
@@ -314,48 +325,53 @@ dotnet_naming_symbols.public_protected_static_readonly_fields_group.required_mod
 
 # Async methods use 'Async' suffix
 dotnet_naming_rule.async_rule.symbols  = async_method_group
-dotnet_naming_rule.async_rule.style    = suffix_method_with_async_style
+dotnet_naming_rule.async_rule.style    = async_method_style
 dotnet_naming_rule.async_rule.severity = warning
 
-# All constant fields must be PascalCase
-dotnet_naming_rule.constant_fields_rule.symbols  = constant_fields_group
-dotnet_naming_rule.constant_fields_rule.style    = pascal_case_style
-dotnet_naming_rule.constant_fields_rule.severity = warning
+# All constants must be PascalCase
+dotnet_naming_rule.constant_rule.symbols  = constant_group
+dotnet_naming_rule.constant_rule.style    = pascal_case_style
+dotnet_naming_rule.constant_rule.severity = warning
+
+# Interfaces use PascalCase and are prefi`xed with uppercase 'I'
+dotnet_naming_rule.interface_rule.symbols` = interface_group
+dotnet_naming_rule.interface_rule.style    = interface_style
+dotnet_naming_rule.interface_rule.severity = warning
+
+# Local variables must be camelCase
+dotnet_naming_rule.local_var_rule.symbols  = local_var_group
+dotnet_naming_rule.local_var_rule.style    = camel_case_style
+dotnet_naming_rule.local_var_rule.severity = warning
+
+# Method parameters use camelCase
+dotnet_naming_rule.parameter_rule.symbols  = parameter_group
+dotnet_naming_rule.parameter_rule.style    = camel_case_style
+dotnet_naming_rule.parameter_rule.severity = warning
+
+# Private fields use camelCase with '_' prefix
+dotnet_naming_rule.private_field_rule.symbols  = private_field_group
+dotnet_naming_rule.private_field_rule.style    = private_field_style
+dotnet_naming_rule.private_field_rule.severity = warning
+
+# Non-public static fields use camelCase with 's_' prefix
+dotnet_naming_rule.private_static_field_rule.symbols  = private_static_field_group
+dotnet_naming_rule.private_static_field_rule.style    = private_static_field_style
+dotnet_naming_rule.private_static_field_rule.severity = warning
+
+# Public fields are PascalCase
+dotnet_naming_rule.public_field_rule.symbols  = public_field_group
+dotnet_naming_rule.public_field_rule.style    = pascal_case_style
+dotnet_naming_rule.public_field_rule.severity = warning
+
+# Public/protected/protected_internal static readonly fields must be PascalCase
+dotnet_naming_rule.public_protected_static_readonly_field_rule.symbols  = public_protected_static_field_group
+dotnet_naming_rule.public_protected_static_readonly_field_rule.style    = pascal_case_style
+dotnet_naming_rule.public_protected_static_readonly_field_rule.severity = warning
 
 # Other elements use PascalCase
 dotnet_naming_rule.element_rule.symbols  = element_group
 dotnet_naming_rule.element_rule.style    = pascal_case_style
 dotnet_naming_rule.element_rule.severity = warning
-
-# Interfaces use PascalCase and are prefi`xed with uppercase 'I'
-dotnet_naming_rule.interface_rule.symbols` = interface_group
-dotnet_naming_rule.interface_rule.style    = prefix_interface_with_i_style
-dotnet_naming_rule.interface_rule.severity = warning
-
-# Local variables must be camelCase
-dotnet_naming_rule.local_vars_rule.symbols  = local_vars_group
-dotnet_naming_rule.local_vars_rule.style    = camel_case_style
-dotnet_naming_rule.local_vars_rule.severity = warning
-
-# Method parameters use camelCase
-dotnet_naming_rule.parameters_rule.symbols  = parameters_group
-dotnet_naming_rule.parameters_rule.style    = camel_case_style
-dotnet_naming_rule.parameters_rule.severity = warning
-
-# Public fields are PascalCase
-dotnet_naming_rule.other_public_fields_disallowed_rule.symbols  = other_public_fields_group
-dotnet_naming_rule.other_public_fields_disallowed_rule.style    = pascal_case_style
-dotnet_naming_rule.other_public_fields_disallowed_rule.severity = warning
-
-# Private fields use camelCase
-dotnet_naming_rule.private_fields_rule.symbols  = private_fields_group
-dotnet_naming_rule.private_fields_rule.style    = camel_case_style
-dotnet_naming_rule.private_fields_rule.severity = warning
-
-# All public/protected/protected_internal static readonly fields must be PascalCase
-dotnet_naming_rule.public_protected_static_readonly_fields_rule.symbols  = public_protected_static_readonly_fields_group
-dotnet_naming_rule.public_protected_static_readonly_fields_rule.style    = pascal_case_style
-dotnet_naming_rule.public_protected_static_readonly_fields_rule.severity = warning
 
 ##########################################
 # Roslynator Analyzers
@@ -490,6 +506,9 @@ roslynator_empty_string_style = field
 # RCS1090: Add/remove 'ConfigureAwait(false)' call
 roslynator_configure_await = true
 
+# RCS1091: Remove empty region
+dotnet_diagnostic.RCS1091.severity = suggestion
+
 # RCS1124: Inline local variable
 dotnet_diagnostic.RCS1124.severity = suggestion
 
@@ -554,7 +573,11 @@ dotnet_diagnostic.RCS1238.severity = suggestion
 # RCS1241: Implement non-generic counterpart
 dotnet_diagnostic.RCS1241.severity = warning
 
+# RCS1244: Simplify 'default' expression
+dotnet_diagnostic.RCS1244.severity = suggestion
+
 # RCS1248: Use pattern matching to check for null (or vice versa)
+roslynator_null_check_style = pattern_matching
 dotnet_diagnostic.RCS1248.severity = suggestion
 
 # RCS1250: Use implicit/explicit object creation
@@ -580,6 +603,7 @@ roslynator_refactoring.RR0066.enabled = true
 ##########################################
 
 ## Design rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/design-warnings
 
 # CA1000: Do not declare static members on generic types
 dotnet_code_quality.CA1000.api_surface = all
@@ -615,11 +639,27 @@ dotnet_diagnostic.CA1040.severity = none
 # CA1045: Do not pass types by reference
 dotnet_diagnostic.CA1045.severity = none
 
+# CA1046: Do not overload operator equals on reference types
+dotnet_diagnostic.CA1046.severity = suggestion
+
+# CA1047: Do not declare protected members in sealed types
+dotnet_diagnostic.CA1047.severity = warning
+
+# CA1050: Declare types in namespaces
+dotnet_diagnostic.CA1050.severity = error
+
+# CA1052: Static holder types should be Static or NotInheritable
+dotnet_diagnostic.CA1050.severity = warning
+
 # https://github.com/dotnet/roslyn-analyzers/issues/3218
 # If NRT enabled, gives false positives
 dotnet_diagnostic.CA1062.severity = none
 
+# CA1069: Enums should not have duplicate values
+dotnet_diagnostic.CA1069.severity = error
+
 ## Globalization rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/globalization-warnings
 
 # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1303.severity = none
@@ -628,11 +668,16 @@ dotnet_diagnostic.CA1303.severity = none
 dotnet_diagnostic.CA1310.severity = suggestion
 
 ## Maintainability rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/maintainability-warnings
 
 # CA1501: Avoid excessive inheritance
 dotnet_diagnostic.CA1501.severity = suggestion
 
 ## Naming rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/naming-warnings
+
+# CA1712: Do not prefix enum values with type name
+dotnet_code_quality.CA1712.severity = warning
 
 # CA1715: Identifiers should have correct prefix
 dotnet_code_quality.CA1715.exclude_single_letter_type_parameters = true
@@ -641,12 +686,61 @@ dotnet_code_quality.CA1715.exclude_single_letter_type_parameters = true
 dotnet_diagnostic.CA1724.severity = none
 
 ## Performance rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/performance-warnings
 
 # CA1802: Use Literals Where Appropriate
 dotnet_code_quality.CA1802.required_modifiers = none
 
+# CA1805: Do not initialize unnecessarily.
+dotnet_diagnostic.CA1805.severity = warning
+
+# CA1815: Override equals and operator equals on value types
+dotnet_diagnostic.CA1815.severity = warning
+
+# CA1845: Use span-based 'string.Concat'
+dotnet_diagnostic.CA1845.severity = warning
+
+# CA1846: Prefer AsSpan over Substring
+dotnet_diagnostic.CA1846.severity = warning
+
+# CA1849: Call async methods when in an async method
+dotnet_diagnostic.CA1849.severity = warning
+
+# CA1851: Possible multiple enumerations of IEnumerable collection
+dotnet_diagnostic.CA1851.severity = warning
+
+## Reliability rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/reliability-warnings
+
+# CA2000: Dispose objects before losing scope
+dotnet_diagnostic.CA2000.severity = warning
+
+# CA2002: Do not lock on objects with weak identity
+dotnet_diagnostic.CA2002.severity = error
+
+# CA2007: Do not directly await a Task
+dotnet_diagnostic.CA2007.severity = warning
+dotnet_code_quality.CA2007.output_kind = DynamicallyLinkedLibrary
+
+# CA2013: Do not use ReferenceEquals with value types
+dotnet_diagnostic.CA2013.severity = error
+
+# CA2017: Parameter count mismatch
+dotnet_diagnostic.CA2017.severity = warning
+
 ## Usage rules
 
-# CA1801: Review unused parameters
-# This rule has been deprecated in favor of IDE0060.
-dotnet_diagnostic.CA1802.severity = none
+# CA2200: Rethrow to preserve stack details
+dotnet_diagnostic.CA2200.severity = warning
+
+# CA2213: Disposable fields should be disposed
+dotnet_diagnostic.CA2213.severity = warning
+
+# CA2214: Do not call overridable methods in constructors
+dotnet_diagnostic.CA2214.severity = error
+
+# CA2227: Collection properties should be read only
+dotnet_diagnostic.CA2227.severity = warning
+
+# CA2246: Do not assign a symbol and its member in the same statement
+dotnet_diagnostic.CA2246.severity = error
