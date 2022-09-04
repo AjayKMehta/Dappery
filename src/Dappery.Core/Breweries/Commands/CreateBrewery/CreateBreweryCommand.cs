@@ -7,7 +7,7 @@ namespace Dappery.Core.Breweries.Commands.CreateBrewery;
 
 public class CreateBreweryCommand : IRequest<BreweryResource>
 {
-    public CreateBreweryCommand(CreateBreweryDto dto) => this.Dto = dto;
+    public CreateBreweryCommand(CreateBreweryDto dto) => Dto = dto;
 
     public CreateBreweryDto Dto { get; }
 }

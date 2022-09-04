@@ -6,11 +6,11 @@ public class UpdateBreweryCommandValidator : AbstractValidator<UpdateBreweryComm
 {
     public UpdateBreweryCommandValidator()
     {
-        _ = this.RuleFor(request => request.Dto)
+        _ = RuleFor(request => request.Dto)
             .NotNull()
             .WithMessage("Must supply a request body");
 
-        _ = this.RuleFor(request => request.BreweryId)
+        _ = RuleFor(request => request.BreweryId)
             .NotEmpty()
             .WithMessage("Must supply a valid brewery ID");
     }

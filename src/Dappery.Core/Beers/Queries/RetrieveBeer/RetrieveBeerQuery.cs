@@ -6,7 +6,7 @@ namespace Dappery.Core.Beers.Queries.RetrieveBeer;
 
 public class RetrieveBeerQuery : IRequest<BeerResource>
 {
-    public RetrieveBeerQuery(int id) => this.Id = id;
+    public RetrieveBeerQuery(int id) => Id = id;
 
     public int Id { get; }
 }

@@ -12,15 +12,15 @@ namespace Dappery.Core.Breweries.Queries.GetBreweries;
 
 public class GetBreweriesQueryHandler : IRequestHandler<GetBreweriesQuery, BreweryResourceList>
 {
-    private readonly IUnitOfWork unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public GetBreweriesQueryHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
+    public GetBreweriesQueryHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-    public async Task<BreweryResourceList> Handle(GetBreweriesQuery request, CancellationToken cancellationToken)
+    public async Task<BreweryResourceList> HandleAsync(GetBreweriesQuery request, CancellationToken cancellationToken)
     {
         // Retrieve the breweries and clean up our resources
-        var breweries = await this.unitOfWork.BreweryRepository.GetAllBreweries(cancellationToken).ConfigureAwait(false);
-        this.unitOfWork.Commit();
+        var breweries = await _unitOfWork.BreweryRepository.GetAllBreweries(cancellationToken).ConfigureAwait(false);
+        _unitOfWork.Commit();
 
         // Map our breweries from the returned query
         var mappedBreweries = breweries.Select(b => b.ToBreweryDto());

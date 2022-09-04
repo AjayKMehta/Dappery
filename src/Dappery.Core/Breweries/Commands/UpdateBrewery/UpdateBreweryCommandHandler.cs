@@ -13,14 +13,14 @@ namespace Dappery.Core.Breweries.Commands.UpdateBrewery;
 
 public class UpdateBreweryCommandHandler : IRequestHandler<UpdateBreweryCommand, BreweryResource>
 {
-    private readonly IUnitOfWork unitOfWork;
+    private readonly IUnitOfWork _UnitOfWork;
 
-    public UpdateBreweryCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
+    public UpdateBreweryCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-    public async Task<BreweryResource> Handle(UpdateBreweryCommand request, CancellationToken cancellationToken)
+    public async Task<BreweryResource> HandleAsync(UpdateBreweryCommand request, CancellationToken cancellationToken)
     {
         // Retrieve the brewery on the request
-        var breweryToUpdate = await this.unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
+        var breweryToUpdate = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
 
         // Invalidate the request if no brewery was found
         if (breweryToUpdate is null)
@@ -41,9 +41,9 @@ public class UpdateBreweryCommandHandler : IRequestHandler<UpdateBreweryCommand,
         }
 
         // Update the brewery in the database, retrieve it, and clean up our resources
-        await this.unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, cancellationToken, updateBreweryAddress).ConfigureAwait(false);
-        var updatedBrewery = await this.unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
-        this.unitOfWork.Commit();
+        await _unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, cancellationToken, updateBreweryAddress).ConfigureAwait(false);
+        var updatedBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
+        _unitOfWork.Commit();
 
         // Map and return the brewery
         return new BreweryResource(updatedBrewery!.ToBreweryDto());

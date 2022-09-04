@@ -4,8 +4,8 @@ public class DapperyApiError
 {
     public DapperyApiError(string errorMessage, string propertyName)
     {
-        this.ErrorMessage = errorMessage;
-        this.PropertyName = propertyName;
+        ErrorMessage = errorMessage;
+        PropertyName = propertyName;
     }
 
     public string ErrorMessage { get; }
