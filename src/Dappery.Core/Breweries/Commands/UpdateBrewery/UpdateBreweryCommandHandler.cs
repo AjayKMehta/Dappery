@@ -13,11 +13,11 @@ namespace Dappery.Core.Breweries.Commands.UpdateBrewery;
 
 public class UpdateBreweryCommandHandler : IRequestHandler<UpdateBreweryCommand, BreweryResource>
 {
-    private readonly IUnitOfWork _UnitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
     public UpdateBreweryCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-    public async Task<BreweryResource> HandleAsync(UpdateBreweryCommand request, CancellationToken cancellationToken)
+    public async Task<BreweryResource> Handle(UpdateBreweryCommand request, CancellationToken cancellationToken)
     {
         // Retrieve the brewery on the request
         var breweryToUpdate = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);

@@ -43,7 +43,7 @@ public class BreweryRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task GetAllBreweriesWhenInvokedAndNoBreweriesExistReturnsEmptyList()
+    public async Task GetAllBreweriesWhenInvokedAndNoBreweriesExistReturnsEmptyListAsync()
     {
         // Arrange
         using var unitOfWork = UnitOfWork;
@@ -59,7 +59,7 @@ public class BreweryRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task GetBreweryByIdWhenInvokedAndBreweryExistReturnsValidBreweryWithBeersAndAddress()
+    public async Task GetBreweryByIdWhenInvokedAndBreweryExistReturnsValidBreweryWithBeersAndAddressAsync()
     {
         // Arrange
         using var unitOfWork = UnitOfWork;
@@ -81,7 +81,7 @@ public class BreweryRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task GetBreweryByIdWhenInvokedAndNoBreweryExistReturnsNull()
+    public async Task GetBreweryByIdWhenInvokedAndNoBreweryExistReturnsNullAsync()
     {
         // Arrange
         using var unitOfWork = UnitOfWork;
@@ -95,7 +95,7 @@ public class BreweryRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task CreateBreweryWhenBreweryIsValidReturnsNewlyInsertedBrewery()
+    public async Task CreateBreweryWhenBreweryIsValidReturnsNewlyInsertedBreweryAsync()
     {
         // Arrange
         using var unitOfWork = UnitOfWork;

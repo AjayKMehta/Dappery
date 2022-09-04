@@ -11,10 +11,10 @@ namespace Dappery.Core.Tests.Beers;
 public class GetAllBeersQueryHandlerTest : TestFixture
 {
     [Fact]
-    public async Task GivenValidRequestWhenBeersArePopulatedReturnsMappedBeerList()
+    public async Task GivenValidRequestWhenBeersArePopulatedReturnsMappedBeerListAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var query = new GetBeersQuery();
         var handler = new GetBeersQueryHandler(unitOfWork);
 
@@ -27,10 +27,10 @@ public class GetAllBeersQueryHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GivenValidRequestWhenBeersAreNotPopulatedReturnsMappedEmptyBeerList()
+    public async Task GivenValidRequestWhenBeersAreNotPopulatedReturnsMappedEmptyBeerListAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var query = new GetBeersQuery();
         var handler = new GetBeersQueryHandler(unitOfWork);
         await unitOfWork.BeerRepository.DeleteBeerAsync(1, CancellationTestToken).ConfigureAwait(false);

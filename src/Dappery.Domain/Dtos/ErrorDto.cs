@@ -4,11 +4,11 @@ public class ErrorDto
 {
     public ErrorDto(string? description, object? details = null)
     {
-        this.Description = string.IsNullOrWhiteSpace(description) ? "An expected error has occurred." : description;
-        this.Details = details;
+        Description = string.IsNullOrWhiteSpace(description) ? "An expected error has occurred." : description;
+        Details = details;
     }
 
     public string Description { get; }
 
-    public object? Details { get; set; }
+    public object? Details { get; }
 }
