@@ -4,7 +4,7 @@ namespace Dappery.Core.Beers.Commands.DeleteBeer;
 
 public class DeleteBeerCommandValidator : AbstractValidator<DeleteBeerCommand>
 {
-    public DeleteBeerCommandValidator() => this.RuleFor(b => b.BeerId)
+    public DeleteBeerCommandValidator() => RuleFor(b => b.BeerId)
         .NotEmpty()
         .WithMessage("Must supply the beer ID");
 }

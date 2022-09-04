@@ -12,17 +12,17 @@ namespace Dappery.Core.Beers.Queries.GetBeers;
 
 public class GetBeersQueryHandler : IRequestHandler<GetBeersQuery, BeerResourceList>
 {
-    private readonly IUnitOfWork unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public GetBeersQueryHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
+    public GetBeersQueryHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
     public async Task<BeerResourceList> Handle(GetBeersQuery request, CancellationToken cancellationToken)
     {
         // Retrieve all of our beers from the database
-        var beers = await this.unitOfWork.BeerRepository.GetAllBeersAsync(cancellationToken).ConfigureAwait(false);
+        var beers = await _unitOfWork.BeerRepository.GetAllBeersAsync(cancellationToken).ConfigureAwait(false);
 
         // Clean up our resources
-        this.unitOfWork.Commit();
+        _unitOfWork.Commit();
 
         // Map our beers and return the response
         var mappedBeers = beers.Select(b => b.ToBeerDto());
