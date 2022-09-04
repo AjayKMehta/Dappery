@@ -13,10 +13,10 @@ namespace Dappery.Core.Tests.Beers;
 public class RetrieveBeerQueryHandlerTest : TestFixture
 {
     [Fact]
-    public async Task GivenValidRequestWhenBeerExistsReturnsMappedBeer()
+    public async Task GivenValidRequestWhenBeerExistsReturnsMappedBeerAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var query = new RetrieveBeerQuery(1);
         var handler = new RetrieveBeerQueryHandler(unitOfWork);
 
@@ -42,10 +42,10 @@ public class RetrieveBeerQueryHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GivenValidRequestWhenBeerDoesNotExistThrowsApiExceptionForNotFound()
+    public async Task GivenValidRequestWhenBeerDoesNotExistThrowsApiExceptionForNotFoundAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var query = new RetrieveBeerQuery(11);
         var handler = new RetrieveBeerQueryHandler(unitOfWork);
 

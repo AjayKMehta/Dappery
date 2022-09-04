@@ -15,10 +15,10 @@ namespace Dappery.Core.Tests.Beers;
 public class UpdateBeerCommandHandlerTest : TestFixture
 {
     [Fact]
-    public async Task GivenValidRequestWhenBeerExistsAndBreweryIsNotUpdatedUpdatesAndReturnsMappedBeer()
+    public async Task GivenValidRequestWhenBeerExistsAndBreweryIsNotUpdatedUpdatesAndReturnsMappedBeerAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var updateCommand = new UpdateBeerCommand(new UpdateBeerDto
         {
             Name = "Updated Beer Name",
@@ -51,10 +51,10 @@ public class UpdateBeerCommandHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GivenValidRequestWhenBeerExistsAndStyleIsUnknownUpdatesAndReturnsMappedBeerWithOtherStyle()
+    public async Task GivenValidRequestWhenBeerExistsAndStyleIsUnknownUpdatesAndReturnsMappedBeerWithOtherStyleAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var updateCommand = new UpdateBeerCommand(new UpdateBeerDto
         {
             Name = "Updated Beer Name",
@@ -87,10 +87,10 @@ public class UpdateBeerCommandHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GivenValidRequestWhenBeerExistsAndExistingBreweryIsUpdatedUpdatesAndReturnsMappedBeer()
+    public async Task GivenValidRequestWhenBeerExistsAndExistingBreweryIsUpdatedUpdatesAndReturnsMappedBeerAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var updateCommand = new UpdateBeerCommand(new UpdateBeerDto
         {
             Name = "Updated Beer Name",
@@ -124,10 +124,10 @@ public class UpdateBeerCommandHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GivenValidRequestWhenBeerExistsAndNonExistingBreweryThrowsApiExceptionForBadRequest()
+    public async Task GivenValidRequestWhenBeerExistsAndNonExistingBreweryThrowsApiExceptionForBadRequestAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var updateCommand = new UpdateBeerCommand(new UpdateBeerDto
         {
             Name = "Updated Beer Name",

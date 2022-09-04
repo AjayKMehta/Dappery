@@ -15,7 +15,7 @@ namespace Dappery.Core.Tests.Breweries;
 public class CreateBreweryCommandHandlerTest : TestFixture
 {
     [Fact]
-    public async Task CreateBreweryCommandHandlerGivenAValidRequestCreatesBrewery()
+    public async Task CreateBreweryCommandHandlerGivenAValidRequestCreatesBreweryAsync()
     {
         // Arrange
         var createdAddress = new AddressDto
@@ -25,7 +25,7 @@ public class CreateBreweryCommandHandlerTest : TestFixture
             StreetAddress = "123 San Diego St.",
             ZipCode = "92109"
         };
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var createBreweryDto = new CreateBreweryDto
         {
             Name = "Pizza Port Brewing Company",

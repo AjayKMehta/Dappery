@@ -16,10 +16,10 @@ namespace Dappery.Core.Tests.Beers;
 public class CreateBeerCommandHandlerTest : TestFixture
 {
     [Fact]
-    public async Task GivenValidRequestWhenBreweryExistsReturnsMappedAndCreatedBeer()
+    public async Task GivenValidRequestWhenBreweryExistsReturnsMappedAndCreatedBeerAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var beerCommand = new CreateBeerCommand(new CreateBeerDto
         {
             Name = "Test Beer",
@@ -53,10 +53,10 @@ public class CreateBeerCommandHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GivenValidRequestWhenBreweryDoesNotExistThrowsApiExceptionForBadRequest()
+    public async Task GivenValidRequestWhenBreweryDoesNotExistThrowsApiExceptionForBadRequestAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var beerCommand = new CreateBeerCommand(new CreateBeerDto
         {
             Name = "Test Beer",
@@ -73,10 +73,10 @@ public class CreateBeerCommandHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GivenValidRequestWithInvalidBeerStyleReturnsMappedAndCreatedBeerWithOtherAsStyle()
+    public async Task GivenValidRequestWithInvalidBeerStyleReturnsMappedAndCreatedBeerWithOtherAsStyleAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var beerCommand = new CreateBeerCommand(new CreateBeerDto
         {
             Name = "Test Beer",

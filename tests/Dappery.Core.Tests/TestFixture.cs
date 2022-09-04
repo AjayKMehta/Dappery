@@ -8,14 +8,14 @@ namespace Dappery.Core.Tests;
 
 public class TestFixture : IDisposable
 {
-    public TestFixture() => this.UnitOfWork = new UnitOfWork(null);
+    public TestFixture() => UnitOfWork = new UnitOfWork(null);
 
     protected IUnitOfWork UnitOfWork { get; }
     protected static CancellationToken CancellationTestToken => CancellationToken.None;
 
     public void Dispose()
     {
-        this.Dispose(true);
+        Dispose(true);
         GC.SuppressFinalize(this);
     }
 
@@ -23,7 +23,7 @@ public class TestFixture : IDisposable
     {
         if (disposing)
         {
-            this.UnitOfWork.Dispose();
+            UnitOfWork.Dispose();
         }
     }
 }
