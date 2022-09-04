@@ -81,10 +81,10 @@ dotnet_analyzer_diagnostic.category-Style.severity = warning
 
 # "this." and "Me." qualifiers
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009
-dotnet_style_qualification_for_event = true:warning
-dotnet_style_qualification_for_field = true:warning
-dotnet_style_qualification_for_method = true:warning
-dotnet_style_qualification_for_property = true:warning
+dotnet_style_qualification_for_event = false:warning
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_property = false:warning
 
 # Language keywords instead of framework type names for type references
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049
