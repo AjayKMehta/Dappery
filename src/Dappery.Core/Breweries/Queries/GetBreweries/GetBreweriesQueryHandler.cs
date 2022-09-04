@@ -16,7 +16,7 @@ public class GetBreweriesQueryHandler : IRequestHandler<GetBreweriesQuery, Brewe
 
     public GetBreweriesQueryHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-    public async Task<BreweryResourceList> HandleAsync(GetBreweriesQuery request, CancellationToken cancellationToken)
+    public async Task<BreweryResourceList> Handle(GetBreweriesQuery request, CancellationToken cancellationToken)
     {
         // Retrieve the breweries and clean up our resources
         var breweries = await _unitOfWork.BreweryRepository.GetAllBreweries(cancellationToken).ConfigureAwait(false);

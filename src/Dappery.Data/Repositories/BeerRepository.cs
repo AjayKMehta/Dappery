@@ -14,15 +14,15 @@ namespace Dappery.Data.Repositories;
 
 public class BeerRepository : IBeerRepository
 {
-    private readonly IDbTransaction transaction;
-    private readonly IDbConnection? dbConnection;
-    private readonly string insertRowRetrievalQuery;
+    private readonly IDbTransaction _transaction;
+    private readonly IDbConnection? _dbConnection;
+    private readonly string _insertRowRetrievalQuery;
 
     public BeerRepository(IDbTransaction dbTransaction, string insertRowRetrievalQuery)
     {
-        this.transaction = dbTransaction;
-        this.dbConnection = this.transaction.Connection;
-        this.insertRowRetrievalQuery = insertRowRetrievalQuery;
+        _transaction = dbTransaction;
+        _dbConnection = _transaction.Connection;
+        _insertRowRetrievalQuery = insertRowRetrievalQuery;
     }
 
     public async Task<IEnumerable<Beer>> GetAllBeersAsync(CancellationToken cancellationToken)
@@ -30,18 +30,18 @@ public class BeerRepository : IBeerRepository
         // Initialize our commands to utilize our cancellation token
         var addressCommand = new CommandDefinition(
             "SELECT * FROM Addresses",
-            transaction: this.transaction,
+            transaction: _transaction,
             cancellationToken: cancellationToken);
 
         var resultCommand = new CommandDefinition(
             "SELECT b.*, br.* FROM Beers b INNER JOIN Breweries br ON br.Id = b.BreweryId",
-            transaction: this.transaction,
+            transaction: _transaction,
             cancellationToken: cancellationToken);
 
-        // Retrieve the addresses, as this is a nested mapping
-        var addresses = (await this.dbConnection.QueryAsync<Address>(addressCommand).ConfigureAwait(false)).ToList();
+        // Retrieve the addresses, as _is a nested mapping
+        var addresses = (await _dbConnection.QueryAsync<Address>(addressCommand).ConfigureAwait(false)).ToList();
 
-        return await this.dbConnection.QueryAsync<Beer, Brewery, Beer>(
+        return await _dbConnection.QueryAsync<Beer, Brewery, Beer>(
             resultCommand,
             (beer, brewery) =>
                 {
@@ -62,11 +62,11 @@ public class BeerRepository : IBeerRepository
                 INNER JOIN Breweries br ON br.Id = b.BreweryId
                 WHERE b.Id = @Id",
             new { Id = id },
-            this.transaction,
+            _transaction,
             cancellationToken: cancellationToken);
 
         // Retrieve the beer from the database
-        var beerFromId = (await this.dbConnection.QueryAsync<Beer, Brewery, Beer>(
+        var beerFromId = (await _dbConnection.QueryAsync<Beer, Brewery, Beer>(
             beerFromIdCommand,
             (beer, brewery) =>
             {
@@ -86,17 +86,17 @@ public class BeerRepository : IBeerRepository
         var addressCommand = new CommandDefinition(
             "SELECT * FROM Addresses WHERE BreweryId = @BreweryId",
             new { BreweryId = beerFromId.Brewery?.Id },
-            this.transaction,
+            _transaction,
             cancellationToken: cancellationToken);
 
         var breweryCommand = new CommandDefinition(
             "SELECT * FROM Beers WHERE BreweryId = @BreweryId",
             new { beerFromId.BreweryId },
-            this.transaction,
+            _transaction,
             cancellationToken: cancellationToken);
 
         // Map the address to the beer's brewery
-        var address = await this.dbConnection.QueryFirstOrDefaultAsync<Address>(addressCommand).ConfigureAwait(false);
+        var address = await _dbConnection.QueryFirstOrDefaultAsync<Address>(addressCommand).ConfigureAwait(false);
 
         // Set the address found in the previous query to the beer's brewery address, if we have a brewery
         if (beerFromId.Brewery is not null)
@@ -104,8 +104,8 @@ public class BeerRepository : IBeerRepository
             beerFromId.Brewery.Address = address;
         }
 
-        // Let's add all the beers to our brewery attached to this beer
-        var beersFromBrewery = await this.dbConnection.QueryAsync<Beer>(breweryCommand).ConfigureAwait(false);
+        // Let's add all the beers to our brewery attached to _beer
+        var beersFromBrewery = await _dbConnection.QueryAsync<Beer>(breweryCommand).ConfigureAwait(false);
 
         // Lastly, let's add all the beers to the entity model
         foreach (var beer in beersFromBrewery)
@@ -123,7 +123,7 @@ public class BeerRepository : IBeerRepository
                                         VALUES (@Name, @BeerStyle, @CreatedAt, @UpdatedAt, @BreweryId)");
 
         var beerToCreateCommand = new CommandDefinition(
-            beerToInsertSql.Append(this.insertRowRetrievalQuery).ToString(),
+            beerToInsertSql.Append(_insertRowRetrievalQuery).ToString(),
             new
             {
                 beer.Name,
@@ -132,11 +132,11 @@ public class BeerRepository : IBeerRepository
                 beer.UpdatedAt,
                 beer.BreweryId
             },
-            this.transaction,
+            _transaction,
             cancellationToken: cancellationToken);
 
         // Let's insert the beer and grab its ID
-        return await this.dbConnection.ExecuteScalarAsync<int>(beerToCreateCommand).ConfigureAwait(false);
+        return await _dbConnection.ExecuteScalarAsync<int>(beerToCreateCommand).ConfigureAwait(false);
     }
 
     public async Task UpdateBeerAsync(Beer beer, CancellationToken cancellationToken)
@@ -154,10 +154,10 @@ public class BeerRepository : IBeerRepository
                 beer.BreweryId,
                 beer.Id
             },
-            this.transaction,
+            _transaction,
             cancellationToken: cancellationToken);
 
-        _ = await this.dbConnection.ExecuteAsync(updateBeerCommand).ConfigureAwait(false);
+        _ = await _dbConnection.ExecuteAsync(updateBeerCommand).ConfigureAwait(false);
     }
 
     public async Task DeleteBeerAsync(int id, CancellationToken cancellationToken)
@@ -167,9 +167,9 @@ public class BeerRepository : IBeerRepository
         var deleteBeerCommand = new CommandDefinition(
             "DELETE FROM Beers WHERE Id = @Id",
             new { Id = id },
-            this.transaction,
+            _transaction,
             cancellationToken: cancellationToken);
 
-        _ = await this.dbConnection.ExecuteAsync(deleteBeerCommand).ConfigureAwait(false);
+        _ = await _dbConnection.ExecuteAsync(deleteBeerCommand).ConfigureAwait(false);
     }
 }

@@ -15,10 +15,10 @@ namespace Dappery.Core.Tests.Beers;
 public class DeleteBeerCommandHandlerTest : TestFixture
 {
     [Fact]
-    public async Task GivenValidRequestWhenBeerExistsDeletesBeerAndReturnsUnit()
+    public async Task GivenValidRequestWhenBeerExistsDeletesBeerAndReturnsUnitAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var deleteCommand = new DeleteBeerCommand(1);
         var handler = new DeleteBeerCommandHandler(unitOfWork);
 
@@ -30,10 +30,10 @@ public class DeleteBeerCommandHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GivenValidRequestWhenBeerDoesNotExistThrowsApiErrorForNotFound()
+    public async Task GivenValidRequestWhenBeerDoesNotExistThrowsApiErrorForNotFoundAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var deleteCommand = new DeleteBeerCommand(11);
         var handler = new DeleteBeerCommandHandler(unitOfWork);
 

@@ -4,7 +4,7 @@ namespace Dappery.Domain.Entities;
 
 public class Brewery : TimeStampedEntity
 {
-    public Brewery() => this.Beers = new List<Beer>();
+    public Brewery() => Beers = new List<Beer>();
 
     public string? Name { get; set; }
 
@@ -12,5 +12,5 @@ public class Brewery : TimeStampedEntity
 
     public ICollection<Beer> Beers { get; }
 
-    public int BeerCount => this.Beers.Count;
+    public int BeerCount => Beers.Count;
 }

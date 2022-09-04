@@ -7,8 +7,8 @@ public class ResourceList<T>
 {
     public ResourceList(IEnumerable<T> items)
     {
-        this.Items = items;
-        this.Count = this.Items.Count();
+        Items = items;
+        Count = Items.Count();
     }
 
     public IEnumerable<T> Items { get; }
