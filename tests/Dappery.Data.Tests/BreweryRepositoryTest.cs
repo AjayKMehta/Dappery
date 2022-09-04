@@ -18,7 +18,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task GetAllBreweriesWhenInvokedAndBreweriesExistReturnsValidListOfBreweries()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
 
         // Act
         var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false)).ToList();
@@ -46,7 +46,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task GetAllBreweriesWhenInvokedAndNoBreweriesExistReturnsEmptyList()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         await unitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
         await unitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken).ConfigureAwait(false);
 
@@ -62,7 +62,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task GetBreweryByIdWhenInvokedAndBreweryExistReturnsValidBreweryWithBeersAndAddress()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
 
         // Act
         var brewery = await unitOfWork.BreweryRepository.GetBreweryById(1, CancellationTestToken).ConfigureAwait(false);
@@ -84,7 +84,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task GetBreweryByIdWhenInvokedAndNoBreweryExistReturnsNull()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
 
         // Act
         var brewery = await unitOfWork.BreweryRepository.GetBreweryById(11, CancellationTestToken).ConfigureAwait(false);
@@ -98,7 +98,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task CreateBreweryWhenBreweryIsValidReturnsNewlyInsertedBrewery()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var breweryToInsert = new Brewery
         {
             Name = "Bike Dog Brewing Company",
@@ -135,7 +135,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsNotUpdatedReturnsUpdatedBrewery()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var breweryToUpdate = new Brewery
         {
             Id = 2,
@@ -172,7 +172,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsUpdatedReturnsUpdatedBrewery()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var breweryToUpdate = new Brewery
         {
             Id = 2,
@@ -210,7 +210,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task DeleteBreweryWhenBreweryExistsRemovesBreweryAndAllAssociatedBeersAndAddress()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false))?.Count().ShouldBe(2);
         (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationToken.None).ConfigureAwait(false))?.Count().ShouldBe(5);
 

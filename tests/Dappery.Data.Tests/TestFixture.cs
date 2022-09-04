@@ -7,7 +7,7 @@ namespace Dappery.Data.Tests;
 
 public class TestFixture : IDisposable
 {
-    protected TestFixture() => this.UnitOfWork = new UnitOfWork(null);
+    protected TestFixture() => UnitOfWork = new UnitOfWork(null);
 
     protected IUnitOfWork UnitOfWork { get; }
 
@@ -15,13 +15,13 @@ public class TestFixture : IDisposable
 
     public void Dispose()
     {
-        this.Dispose(true);
+        Dispose(true);
         GC.SuppressFinalize(this);
     }
 
     protected virtual void Dispose(bool disposing)
     {
         if (disposing)
-            this.UnitOfWork.Dispose();
+            UnitOfWork.Dispose();
     }
 }

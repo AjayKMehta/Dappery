@@ -15,9 +15,9 @@ namespace Dappery.Core.Beers.Commands.CreateBeer;
 
 public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerResource>
 {
-    private readonly IUnitOfWork unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateBeerCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
+    public CreateBeerCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
     public async Task<BeerResource> Handle(CreateBeerCommand request, CancellationToken cancellationToken)
     {
@@ -25,7 +25,7 @@ public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerR
             throw new ArgumentNullException(nameof(request));
 
         // Check to make sure the brewery exists from the given brewery ID on the request
-        var existingBrewery = await this.unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId, cancellationToken).ConfigureAwait(false);
+        var existingBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId, cancellationToken).ConfigureAwait(false);
 
         // Invalidate the request if no corresponding brewery exists
         // Since we're not overloading the '==' operator, let's use the 'is' comparison here
@@ -48,9 +48,9 @@ public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerR
         };
 
         // Add the record to the database and retrieve the record after we create it
-        var createdBeerId = await this.unitOfWork.BeerRepository.CreateBeerAsync(beerToAdd, cancellationToken).ConfigureAwait(false);
-        var createdBeer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(createdBeerId, cancellationToken).ConfigureAwait(false);
-        this.unitOfWork.Commit();
+        var createdBeerId = await _unitOfWork.BeerRepository.CreateBeerAsync(beerToAdd, cancellationToken).ConfigureAwait(false);
+        var createdBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(createdBeerId, cancellationToken).ConfigureAwait(false);
+        _unitOfWork.Commit();
 
         // Return the mapped beer
         return new BeerResource(createdBeer!.ToBeerDto());
