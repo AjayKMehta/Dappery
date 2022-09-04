@@ -8,27 +8,27 @@ public class CreateBreweryCommandValidator : AbstractValidator<CreateBreweryComm
 {
     public CreateBreweryCommandValidator()
     {
-        _ = this.RuleFor(b => b.Dto)
+        _ = RuleFor(b => b.Dto)
             .NotNull()
             .WithMessage("A request must contain valid creation data");
 
-        this.RuleFor(b => b.Dto!.Name)
+        RuleFor(b => b.Dto!.Name)
             .NotNullOrEmpty();
 
-        _ = this.RuleFor(b => b.Dto.Address)
+        _ = RuleFor(b => b.Dto.Address)
             .NotNull()
             .WithMessage("Must supply the address of the brewery when creating");
 
-        this.RuleFor(b => b.Dto.Address!.City)
+        RuleFor(b => b.Dto.Address!.City)
             .NotNullOrEmpty();
 
-        this.RuleFor(b => b.Dto.Address!.State)
+        RuleFor(b => b.Dto.Address!.State)
             .HasValidStateAbbreviation();
 
-        this.RuleFor(b => b.Dto.Address!.StreetAddress)
+        RuleFor(b => b.Dto.Address!.StreetAddress)
             .HasValidStreetAddress();
 
-        this.RuleFor(b => b.Dto.Address!.ZipCode)
+        RuleFor(b => b.Dto.Address!.ZipCode)
             .HasValidZipCode();
     }
 }

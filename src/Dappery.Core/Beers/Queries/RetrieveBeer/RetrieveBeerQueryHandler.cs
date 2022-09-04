@@ -14,9 +14,9 @@ namespace Dappery.Core.Beers.Queries.RetrieveBeer;
 
 public class RetrieveBeerQueryHandler : IRequestHandler<RetrieveBeerQuery, BeerResource>
 {
-    private readonly IUnitOfWork unitOfWork;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public RetrieveBeerQueryHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
+    public RetrieveBeerQueryHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
     public async Task<BeerResource> Handle(RetrieveBeerQuery request, CancellationToken cancellationToken)
     {
@@ -24,14 +24,14 @@ public class RetrieveBeerQueryHandler : IRequestHandler<RetrieveBeerQuery, BeerR
             throw new ArgumentNullException(nameof(request));
 
         // Grab the beer from the ID
-        var beer = await this.unitOfWork.BeerRepository.GetBeerByIdAsync(request.Id, cancellationToken).ConfigureAwait(false);
+        var beer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.Id, cancellationToken).ConfigureAwait(false);
 
         // Invalidate the request if no beer is found
         if (beer is null)
             throw new DapperyApiException($"No beer found with ID {request.Id}", HttpStatusCode.NotFound);
 
         // Commit the query and clean up our resources
-        this.unitOfWork.Commit();
+        _unitOfWork.Commit();
 
         // Map and return the query
         return new BeerResource(beer.ToBeerDto());
