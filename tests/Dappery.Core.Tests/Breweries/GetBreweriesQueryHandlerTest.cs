@@ -13,10 +13,10 @@ namespace Dappery.Core.Tests.Breweries;
 public class GetBreweriesQueryHandlerTest : TestFixture
 {
     [Fact]
-    public async Task GetBreweriesQueryHandlerWhenBreweriesExistReturnsListOfBreweriesWithBeers()
+    public async Task GetBreweriesQueryHandlerWhenBreweriesExistReturnsListOfBreweriesWithBeersAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var handler = new GetBreweriesQueryHandler(unitOfWork);
 
         // Act
@@ -46,12 +46,12 @@ public class GetBreweriesQueryHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GetBreweriesQueryHandlerWhenNoBreweriesExistReturnsEmptyListOfBreweries()
+    public async Task GetBreweriesQueryHandlerWhenNoBreweriesExistReturnsEmptyListOfBreweriesAsync()
     {
         // Arrange, remove all breweries from the test database
-        using var unitOfWork = this.UnitOfWork;
-        await this.UnitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
-        await this.UnitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken).ConfigureAwait(false);
+        using var unitOfWork = UnitOfWork;
+        await UnitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
+        await UnitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken).ConfigureAwait(false);
         var handler = new GetBreweriesQueryHandler(unitOfWork);
 
         // Act

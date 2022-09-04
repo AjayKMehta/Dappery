@@ -15,7 +15,7 @@ namespace Dappery.Data.Tests;
 public class BreweryRepositoryTest : TestFixture
 {
     [Fact]
-    public async Task GetAllBreweriesWhenInvokedAndBreweriesExistReturnsValidListOfBreweries()
+    public async Task GetAllBreweriesWhenInvokedAndBreweriesExistReturnsValidListOfBreweriesAsync()
     {
         // Arrange
         using var unitOfWork = UnitOfWork;
@@ -132,7 +132,7 @@ public class BreweryRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsNotUpdatedReturnsUpdatedBrewery()
+    public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsNotUpdatedReturnsUpdatedBreweryAsync()
     {
         // Arrange
         using var unitOfWork = UnitOfWork;
@@ -169,7 +169,7 @@ public class BreweryRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsUpdatedReturnsUpdatedBrewery()
+    public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsUpdatedReturnsUpdatedBreweryAsync()
     {
         // Arrange
         using var unitOfWork = UnitOfWork;
@@ -207,7 +207,7 @@ public class BreweryRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task DeleteBreweryWhenBreweryExistsRemovesBreweryAndAllAssociatedBeersAndAddress()
+    public async Task DeleteBreweryWhenBreweryExistsRemovesBreweryAndAllAssociatedBeersAndAddressAsync()
     {
         // Arrange
         using var unitOfWork = UnitOfWork;

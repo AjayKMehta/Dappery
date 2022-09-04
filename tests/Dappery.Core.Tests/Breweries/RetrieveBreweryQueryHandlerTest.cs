@@ -14,10 +14,10 @@ namespace Dappery.Core.Tests.Breweries;
 public class RetrieveBreweryQueryHandlerTest : TestFixture
 {
     [Fact]
-    public async Task RetrieveBreweryHandlerGivenExistingBreweryIdReturnsBreweryWithBeers()
+    public async Task RetrieveBreweryHandlerGivenExistingBreweryIdReturnsBreweryWithBeersAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var query = new RetrieveBreweryQuery(1);
         var handler = new RetrieveBreweryQueryHandler(unitOfWork);
 
@@ -40,10 +40,10 @@ public class RetrieveBreweryQueryHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task RetrieveBreweryHandlerGivenNonExistingBreweryIdReturnsApiException()
+    public async Task RetrieveBreweryHandlerGivenNonExistingBreweryIdReturnsApiExceptionAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var query = new RetrieveBreweryQuery(11);
         var handler = new RetrieveBreweryQueryHandler(unitOfWork);
 

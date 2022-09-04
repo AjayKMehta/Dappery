@@ -14,10 +14,10 @@ namespace Dappery.Data.Tests;
 public class BeerRepositoryTest : TestFixture
 {
     [Fact]
-    public async Task GetAllBeersWhenInvokedAndBeersExistReturnsValidListOfBeers()
+    public async Task GetAllBeersWhenInvokedAndBeersExistReturnsValidListOfBeersAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
 
         // Act
         var beers = (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationTestToken).ConfigureAwait(false)).ToList();
@@ -39,10 +39,10 @@ public class BeerRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task GetAllBeersWhenNoBeersExistReturnsEmptyListOfBeers()
+    public async Task GetAllBeersWhenNoBeersExistReturnsEmptyListOfBeersAsync()
     {
         // Arrange, remove all the beers from our database
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         await unitOfWork.BeerRepository.DeleteBeerAsync(1, CancellationTestToken).ConfigureAwait(false);
         await unitOfWork.BeerRepository.DeleteBeerAsync(2, CancellationTestToken).ConfigureAwait(false);
         await unitOfWork.BeerRepository.DeleteBeerAsync(3, CancellationTestToken).ConfigureAwait(false);
@@ -58,10 +58,10 @@ public class BeerRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task GetBeerByIdWhenInvokedAndBeerExistsReturnsValidBeer()
+    public async Task GetBeerByIdWhenInvokedAndBeerExistsReturnsValidBeerAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
 
         // Act
         var beer = await unitOfWork.BeerRepository.GetBeerByIdAsync(1, CancellationTestToken).ConfigureAwait(false);
@@ -80,10 +80,10 @@ public class BeerRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task GetBeerByIdWhenInvokedAndBeerDoesNotExistReturnsNull()
+    public async Task GetBeerByIdWhenInvokedAndBeerDoesNotExistReturnsNullAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
 
         // Act
         var beer = await unitOfWork.BeerRepository.GetBeerByIdAsync(10, CancellationTestToken).ConfigureAwait(false);
@@ -94,10 +94,10 @@ public class BeerRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task CreateBeerWhenBeerIsValidReturnsNewlyInsertedBeer()
+    public async Task CreateBeerWhenBeerIsValidReturnsNewlyInsertedBeerAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var beerToInsert = new Beer
         {
             Name = "Lazy Hazy",
@@ -124,10 +124,10 @@ public class BeerRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task UpdateBeerWhenBeerIsValidReturnsUpdateBeer()
+    public async Task UpdateBeerWhenBeerIsValidReturnsUpdateBeerAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         var beerToUpdate = new Beer
         {
             Id = 1,
@@ -157,10 +157,10 @@ public class BeerRepositoryTest : TestFixture
     }
 
     [Fact]
-    public async Task DeleteBeerWhenBeerExistsRemovesBeerFromDatabase()
+    public async Task DeleteBeerWhenBeerExistsRemovesBeerFromDatabaseAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
+        using var unitOfWork = UnitOfWork;
         (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationTestToken).ConfigureAwait(false))?.Count().ShouldBe(5);
 
         // Act

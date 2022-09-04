@@ -15,11 +15,11 @@ namespace Dappery.Core.Tests.Breweries;
 public class UpdateBreweryCommandHandlerTest : TestFixture
 {
     [Fact]
-    public async Task GivenValidUpdateRequestWhenBreweryExistsReturnsUpdatedMappedBrewery()
+    public async Task GivenValidUpdateRequestWhenBreweryExistsReturnsUpdatedMappedBreweryAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
-        const int breweryId = 1;
+        using var unitOfWork = UnitOfWork;
+        const int BreweryId = 1;
         var updateCommand = new UpdateBreweryCommand(new UpdateBreweryDto
         {
             Address = new AddressDto
@@ -30,7 +30,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
                 ZipCode = "12345"
             },
             Name = "Updated Brewery Name"
-        }, breweryId);
+        }, BreweryId);
 
         // Act
         var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
@@ -41,7 +41,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
             .ShouldNotBeNull()
             .Self
             .ShouldNotBeNull();
-        breweryDTo.Id.ShouldBe(breweryId);
+        breweryDTo.Id.ShouldBe(BreweryId);
         breweryDTo.Name.ShouldBe(updateCommand.Dto.Name);
 
         _ = result.ApiVersion.ShouldNotBeNull();
@@ -54,11 +54,11 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GivenValidUpdateRequestWhenBreweryDoesNotExistThrowsNotFoundException()
+    public async Task GivenValidUpdateRequestWhenBreweryDoesNotExistThrowsNotFoundExceptionAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
-        const int breweryId = 11;
+        using var unitOfWork = UnitOfWork;
+        const int BreweryId = 11;
         var updateCommand = new UpdateBreweryCommand(new UpdateBreweryDto
         {
             Address = new AddressDto
@@ -69,7 +69,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
                 ZipCode = "Doesn't Exist!"
             },
             Name = "Doesn't Exist!"
-        }, breweryId);
+        }, BreweryId);
 
         // Act
         var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
@@ -80,15 +80,15 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
     }
 
     [Fact]
-    public async Task GivenValidUpdateRequestWhenBreweryDoesExistAndAddressIsNotUpdatedReturnsMappedBreweryWithNoUpdatedAddress()
+    public async Task GivenValidUpdateRequestWhenBreweryDoesExistAndAddressIsNotUpdatedReturnsMappedBreweryWithNoUpdatedAddressAsync()
     {
         // Arrange
-        using var unitOfWork = this.UnitOfWork;
-        const int breweryId = 1;
+        using var unitOfWork = UnitOfWork;
+        const int BreweryId = 1;
         var updateCommand = new UpdateBreweryCommand(new UpdateBreweryDto
         {
             Name = "Cedar Crest Brewery"
-        }, breweryId);
+        }, BreweryId);
 
         // Act
         var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
@@ -101,7 +101,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
             .ShouldNotBeNull();
         var breweryDto = result.Self.ShouldNotBeNull();
         breweryDto.Name.ShouldBe(updateCommand.Dto.Name);
-        breweryDto.Id.ShouldBe(breweryId);
+        breweryDto.Id.ShouldBe(BreweryId);
 
         var addressDto = breweryDto.Address.ShouldNotBeNull();
         addressDto.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");

@@ -15,35 +15,34 @@ namespace Dappery.Data;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly IDbConnection dbConnection;
-    private readonly IDbTransaction dbTransaction;
+    private readonly IDbConnection _dbConnection;
+    private readonly IDbTransaction _dbTransaction;
 
     public UnitOfWork(string? connectionString, bool isPostgres = false)
     {
         // Based on our database implementation, we'll need a reference to the last row inserted
         string rowInsertRetrievalQuery;
 
-        // If no connection string is passed, we'll assume we're running with our SQLite database provider
         if (string.IsNullOrWhiteSpace(connectionString))
         {
-            this.dbConnection = new SqliteConnection("Data Source=:memory:");
+            _dbConnection = new SqliteConnection("Data Source=:memory:");
             rowInsertRetrievalQuery = "; SELECT last_insert_rowid();";
         }
         else
         {
-            this.dbConnection = isPostgres ? new NpgsqlConnection(connectionString) : new SqlConnection(connectionString);
+            _dbConnection = isPostgres ? new NpgsqlConnection(connectionString) : new SqlConnection(connectionString);
             rowInsertRetrievalQuery = isPostgres ? "returning Id;" : "; SELECT CAST(SCOPE_IDENTITY() as int);";
         }
 
         // Open our connection, begin our transaction, and instantiate our repositories
-        this.dbConnection.Open();
-        this.dbTransaction = this.dbConnection.BeginTransaction();
-        this.BreweryRepository = new BreweryRepository(this.dbTransaction, rowInsertRetrievalQuery);
-        this.BeerRepository = new BeerRepository(this.dbTransaction, rowInsertRetrievalQuery);
+        _dbConnection.Open();
+        _dbTransaction = _dbConnection.BeginTransaction();
+        BreweryRepository = new BreweryRepository(_dbTransaction, rowInsertRetrievalQuery);
+        BeerRepository = new BeerRepository(_dbTransaction, rowInsertRetrievalQuery);
 
         // Once our connection is open, if we're running SQLite for unit tests (or that actual application), let's seed some data
         if (string.IsNullOrWhiteSpace(connectionString))
-            this.SeedDatabase(this.dbConnection);
+            SeedDatabase(_dbConnection);
     }
 
     public IBreweryRepository BreweryRepository { get; }
@@ -54,22 +53,22 @@ public class UnitOfWork : IUnitOfWork
     {
         try
         {
-            this.dbTransaction.Commit();
+            _dbTransaction.Commit();
         }
         catch (InvalidOperationException e)
         {
             Console.WriteLine($"Could not commit the transaction, reason: {e.Message}");
-            this.dbTransaction.Rollback();
+            _dbTransaction.Rollback();
         }
         finally
         {
-            this.dbTransaction.Dispose();
+            _dbTransaction.Dispose();
         }
     }
 
     public void Dispose()
     {
-        this.Dispose(true);
+        Dispose(true);
         GC.SuppressFinalize(this);
     }
 
@@ -77,14 +76,14 @@ public class UnitOfWork : IUnitOfWork
     {
         if (disposing)
         {
-            this.dbTransaction?.Dispose();
-            this.dbConnection?.Dispose();
+            _dbTransaction?.Dispose();
+            _dbConnection?.Dispose();
         }
     }
 
     private void SeedDatabase(IDbConnection dbConnection)
     {
-        const string createBreweriesSql = @"
+        const string CreateBreweriesSql = @"
                 CREATE TABLE Breweries (
                     Id INTEGER PRIMARY KEY,
                     Name TEXT(32),
@@ -93,7 +92,7 @@ public class UnitOfWork : IUnitOfWork
                 );
             ";
 
-        const string createBeersSql = @"
+        const string CreateBeersSql = @"
                 CREATE TABLE Beers (
                     Id INTEGER PRIMARY KEY,
                     Name TEXT(32),
@@ -106,7 +105,7 @@ public class UnitOfWork : IUnitOfWork
                 );
             ";
 
-        const string createAddressSql = @"
+        const string CreateAddressSql = @"
                 CREATE TABLE Addresses (
                     Id INTEGER PRIMARY KEY,
                     StreetAddress TEXT(32),
@@ -122,9 +121,9 @@ public class UnitOfWork : IUnitOfWork
             ";
 
         // Add our tables
-        _ = dbConnection.Execute(createBreweriesSql, this.dbTransaction);
-        _ = dbConnection.Execute(createBeersSql, this.dbTransaction);
-        _ = dbConnection.Execute(createAddressSql, this.dbTransaction);
+        _ = dbConnection.Execute(CreateBreweriesSql, _dbTransaction);
+        _ = dbConnection.Execute(CreateBeersSql, _dbTransaction);
+        _ = dbConnection.Execute(CreateAddressSql, _dbTransaction);
 
         // Seed our data
         _ = dbConnection.Execute(@"
@@ -135,7 +134,7 @@ public class UnitOfWork : IUnitOfWork
                         CURRENT_DATE,
                         CURRENT_DATE
                     );",
-            transaction: this.dbTransaction);
+            transaction: _dbTransaction);
 
         _ = dbConnection.Execute(@"
                 INSERT INTO Breweries (Name, CreatedAt, UpdatedAt)
@@ -145,7 +144,7 @@ public class UnitOfWork : IUnitOfWork
                         CURRENT_DATE,
                         CURRENT_DATE
                     );",
-            transaction: this.dbTransaction);
+            transaction: _dbTransaction);
 
         _ = dbConnection.Execute(@"
                 INSERT INTO Addresses (StreetAddress, City, State, ZipCode, CreatedAt, UpdatedAt, BreweryId)
@@ -159,7 +158,7 @@ public class UnitOfWork : IUnitOfWork
                         CURRENT_DATE,
                         1
                     );",
-            transaction: this.dbTransaction);
+            transaction: _dbTransaction);
 
         _ = dbConnection.Execute(@"
                 INSERT INTO Addresses (StreetAddress, City, State, ZipCode, CreatedAt, UpdatedAt, BreweryId)
@@ -173,7 +172,7 @@ public class UnitOfWork : IUnitOfWork
                         CURRENT_DATE,
                         2
                     );",
-            transaction: this.dbTransaction);
+            transaction: _dbTransaction);
 
         _ = dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -185,7 +184,7 @@ public class UnitOfWork : IUnitOfWork
                         CURRENT_DATE,
                         1
                     );",
-            transaction: this.dbTransaction);
+            transaction: _dbTransaction);
 
         _ = dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -197,7 +196,7 @@ public class UnitOfWork : IUnitOfWork
                         CURRENT_DATE,
                         1
                     );",
-            transaction: this.dbTransaction);
+            transaction: _dbTransaction);
 
         _ = dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -209,7 +208,7 @@ public class UnitOfWork : IUnitOfWork
                         CURRENT_DATE,
                         1
                     );",
-            transaction: this.dbTransaction);
+            transaction: _dbTransaction);
 
         _ = dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -221,7 +220,7 @@ public class UnitOfWork : IUnitOfWork
                         CURRENT_DATE,
                         2
                     );",
-            transaction: this.dbTransaction);
+            transaction: _dbTransaction);
 
         _ = dbConnection.Execute(@"
                 INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -233,6 +232,6 @@ public class UnitOfWork : IUnitOfWork
                         CURRENT_DATE,
                         2
                     );",
-            transaction: this.dbTransaction);
+            transaction: _dbTransaction);
     }
 }
