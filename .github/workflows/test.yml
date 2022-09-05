@@ -39,13 +39,3 @@ jobs:
         with:
           flags: unittests
           verbose: true
-
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          path: ./artifacts
-
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: ./artifacts
