@@ -8,8 +8,8 @@
 *.csproj   text eol=crlf
 
 # Docker
-Dockerfile        text
+Dockerfile text
 
 # Documentation
-*.markdown        text diff=markdown
-*.md              text diff=markdown
+*.markdown text diff=markdown
+*.md       text diff=markdown linguist-detectable
