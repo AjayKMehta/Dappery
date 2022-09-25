@@ -6,9 +6,9 @@ namespace Dappery.Core.Extensions;
 
 public static class RuleBuilderExtensions
 {
-    private static readonly Regex s_validStateRegex = new("^((A[LKZR])|(C[AOT])|(D[EC])|(FL)|(GA)|(HI)|(I[DLNA])|(K[SY])|(LA)|(M[EDAINSOT])|(N[EVHJMYCD])|(O[HKR])|(PA)|(RI)|(S[CD])|(T[NX])|(UT)|(V[TA])|(W[AVIY]))$");
-    private static readonly Regex s_streetAddressRegex = new("\\d{1,5}\\s(\\b\\w*\\b\\s){1,2}\\w*\\.");
-    private static readonly Regex s_zipCodeRegex = new("^\\d{5}$");
+    private static readonly Regex s_validStateRegex = new(/*lang=regex*/"^((A[LKZR])|(C[AOT])|(D[EC])|(FL)|(GA)|(HI)|(I[DLNA])|(K[SY])|(LA)|(M[EDAINSOT])|(N[EVHJMYCD])|(O[HKR])|(PA)|(RI)|(S[CD])|(T[NX])|(UT)|(V[TA])|(W[AVIY]))$");
+    private static readonly Regex s_streetAddressRegex = new(/*lang=regex*/"\\d{1,5}\\s(\\b\\w*\\b\\s){1,2}\\w*\\.");
+    private static readonly Regex s_zipCodeRegex = new(/*lang=regex*/"^\\d{5}$");
 
     public static void NotNullOrEmpty<T>(this IRuleBuilder<T, string?> ruleBuilder)
     {
