@@ -61,8 +61,8 @@ jobs:
           dotnet-version: "6.x"
 
       # https://github.com/github/codeql-action/issues/757#issuecomment-978693262
-      - name: Autobuild
-        uses: dotnet build Dappery.sln
+      - name: Build solution
+        run: dotnet build Dappery.sln
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2.1.25
