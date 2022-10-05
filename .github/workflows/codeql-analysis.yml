@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: Checkout repository
         id: checkout_repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.1
         with:
           fetch-depth: 2
 
@@ -56,7 +56,7 @@ jobs:
           # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v3.0.0
+        uses: actions/setup-dotnet@v3.0.1
         with:
           dotnet-version: "6.x"
 
