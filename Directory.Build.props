@@ -9,5 +9,6 @@
     <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
     <Nullable>Enable</Nullable>
     <BaseOutputPath>$(MSBuildThisFileDirectory)bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
   </PropertyGroup>
 </Project>
