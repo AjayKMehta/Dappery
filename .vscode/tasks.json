@@ -22,6 +22,16 @@
       },
       "problemMatcher": "$msCompile"
     },
+    {
+      "label": "clean",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "clean",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
   ],
   "inputs": [
     {
