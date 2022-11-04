@@ -11,5 +11,5 @@
 Dockerfile text
 
 # Documentation
-*.markdown text diff=markdown
+*.markdown text diff=markdown linguist-detectable
 *.md       text diff=markdown linguist-detectable
