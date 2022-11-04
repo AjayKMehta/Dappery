@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="../../Dappery.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Dappery.Domain\Dappery.Domain.csproj" />
   </ItemGroup>
