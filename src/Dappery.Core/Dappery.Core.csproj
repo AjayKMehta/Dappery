@@ -3,7 +3,7 @@
     <ProjectReference Include="..\Dappery.Domain\Dappery.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.2.2" />
+    <PackageReference Include="FluentValidation" Version="11.3.0" />
     <PackageReference Include="MediatR" Version="11.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
