@@ -64,6 +64,9 @@ indent_size = 2
 [Makefile]
 indent_style = tab
 
+[*.{generated.cs,g.cs}]
+generated_code = true
+
 [*.{cs,csx,cake}]
 
 ##########################################
