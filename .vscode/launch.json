@@ -1,5 +1,4 @@
 {
-  // Use IntelliSense to find out which attributes exist for C# debugging
   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
   // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
   "version": "0.2.0",
@@ -10,7 +9,7 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/bin/Debug/net6.0/Dappery.Core.Tests.dll",
+      "program": "${workspaceFolder}/bin/${input:rememberConfig}/net6.0/Dappery.Core.Tests.dll",
       "args": [],
       "cwd": "${workspaceFolder}/tests/Dappery.Core.Tests",
       "console": "internalConsole",
@@ -22,7 +21,7 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/bin/Debug/net6.0/Dappery.Data.Tests.dll",
+      "program": "${workspaceFolder}/bin/${input:rememberConfig}/net6.0/Dappery.Data.Tests.dll",
       "args": [],
       "cwd": "${workspaceFolder}/tests/Dappery.Data.Tests",
       "console": "internalConsole",
@@ -33,6 +32,16 @@
       "type": "coreclr",
       "request": "attach",
       "processId": "${command:pickProcess}"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "rememberConfig",
+      "type": "command",
+      "command": "extension.commandvariable.remember",
+      "args": {
+        "key": "buildConfig"
+      }
     }
   ]
 }
