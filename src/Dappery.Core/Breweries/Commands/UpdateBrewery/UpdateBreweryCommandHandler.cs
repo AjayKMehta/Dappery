@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
 using Dappery.Core.Extensions;
+using Dappery.Domain.Entities;
 using Dappery.Domain.Media;
 
 using MediatR;
@@ -42,7 +43,7 @@ public class UpdateBreweryCommandHandler : IRequestHandler<UpdateBreweryCommand,
 
         // Update the brewery in the database, retrieve it, and clean up our resources
         await _unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, cancellationToken, updateBreweryAddress).ConfigureAwait(false);
-        var updatedBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
+        Brewery? updatedBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
         _unitOfWork.Commit();
 
         // Map and return the brewery

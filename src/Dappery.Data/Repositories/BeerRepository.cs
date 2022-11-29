@@ -66,7 +66,7 @@ public class BeerRepository : IBeerRepository
             cancellationToken: cancellationToken);
 
         // Retrieve the beer from the database
-        var beerFromId = (await _dbConnection.QueryAsync<Beer, Brewery, Beer>(
+        Beer? beerFromId = (await _dbConnection.QueryAsync<Beer, Brewery, Beer>(
             beerFromIdCommand,
             (beer, brewery) =>
             {
@@ -96,7 +96,7 @@ public class BeerRepository : IBeerRepository
             cancellationToken: cancellationToken);
 
         // Map the address to the beer's brewery
-        var address = await _dbConnection.QueryFirstOrDefaultAsync<Address>(addressCommand).ConfigureAwait(false);
+        Address? address = await _dbConnection.QueryFirstOrDefaultAsync<Address>(addressCommand).ConfigureAwait(false);
 
         // Set the address found in the previous query to the beer's brewery address, if we have a brewery
         if (beerFromId.Brewery is not null)
@@ -105,10 +105,10 @@ public class BeerRepository : IBeerRepository
         }
 
         // Let's add all the beers to our brewery attached to _beer
-        var beersFromBrewery = await _dbConnection.QueryAsync<Beer>(breweryCommand).ConfigureAwait(false);
+        IEnumerable<Beer>? beersFromBrewery = await _dbConnection.QueryAsync<Beer>(breweryCommand).ConfigureAwait(false);
 
         // Lastly, let's add all the beers to the entity model
-        foreach (var beer in beersFromBrewery)
+        foreach (Beer beer in beersFromBrewery)
         {
             beerFromId.Brewery?.Beers.Add(beer);
         }

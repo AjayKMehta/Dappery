@@ -1,6 +1,7 @@
 using System.Linq;
 
 using Dappery.Core.Extensions;
+using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Entities;
 
 using Shouldly;
@@ -37,7 +38,7 @@ public class BreweryExtensionsTest
         var mappedBrewery = breweryToMap.ToBreweryDto();
 
         // Assert
-        var breweryDto = mappedBrewery.ShouldNotBeNull();
+        BreweryDto breweryDto = mappedBrewery.ShouldNotBeNull();
         breweryDto.Id.ShouldBe(breweryToMap.Id);
         breweryDto.Name.ShouldBe(breweryToMap.Name);
         breweryDto.BeerCount.ShouldNotBeNull().ShouldBe(3);

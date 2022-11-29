@@ -1,4 +1,7 @@
 using Dappery.Core.Extensions;
+using Dappery.Domain.Dtos;
+using Dappery.Domain.Dtos.Beer;
+using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Entities;
 
 using Shouldly;
@@ -36,19 +39,19 @@ public class BeerExtensionsTest
         var mappedBeer = beerToMap.ToBeerDto();
 
         // Assert
-        var beerDto = mappedBeer.ShouldNotBeNull();
+        BeerDto beerDto = mappedBeer.ShouldNotBeNull();
         beerDto.Id.ShouldBe(beerToMap.Id);
         beerDto.Name.ShouldBe(beerToMap.Name);
         beerDto.Style.ShouldBe(beerToMap.BeerStyle.ToString());
 
-        var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+        BreweryDto? breweryDto = beerDto.Brewery.ShouldNotBeNull();
         breweryDto.Id.ShouldBe(beerToMap.Brewery.Id);
         breweryDto.Name.ShouldBe(beerToMap.Brewery.Name);
         // Validate the beers were not recursively mapped
         breweryDto.Beers.ShouldBeNull();
         breweryDto.BeerCount.ShouldBeNull();
 
-        var addressDto = breweryDto.Address.ShouldNotBeNull();
+        AddressDto? addressDto = breweryDto.Address.ShouldNotBeNull();
         addressDto.City.ShouldBe(beerToMap.Brewery.Address?.City);
         addressDto.State.ShouldBe(beerToMap.Brewery.Address?.State);
         addressDto.ZipCode.ShouldBe(beerToMap.Brewery.Address?.ZipCode);
@@ -70,7 +73,7 @@ public class BeerExtensionsTest
         var mappedBeer = beerToMap.ToBeerDto();
 
         // Assert
-        var beerDto = mappedBeer.ShouldNotBeNull();
+        BeerDto? beerDto = mappedBeer.ShouldNotBeNull();
         beerDto.Id.ShouldBe(beerToMap.Id);
         beerDto.Name.ShouldBe(beerToMap.Name);
         beerDto.Style.ShouldBe(beerToMap.BeerStyle.ToString());

@@ -2,9 +2,11 @@ using System.Net;
 using System.Threading.Tasks;
 
 using Dappery.Core.Breweries.Commands.UpdateBrewery;
+using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
 using Dappery.Domain.Dtos;
 using Dappery.Domain.Dtos.Brewery;
+using Dappery.Domain.Media;
 
 using Shouldly;
 
@@ -83,7 +85,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
     public async Task GivenValidUpdateRequestWhenBreweryDoesExistAndAddressIsNotUpdatedReturnsMappedBreweryWithNoUpdatedAddressAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork? unitOfWork = UnitOfWork;
         const int BreweryId = 1;
         var updateCommand = new UpdateBreweryCommand(new UpdateBreweryDto
         {
@@ -92,18 +94,18 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
 
         // Act
         var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
-        var result = await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
+        BreweryResource? result = await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
         _ = result
             .ShouldNotBeNull()
             .ApiVersion
             .ShouldNotBeNull();
-        var breweryDto = result.Self.ShouldNotBeNull();
+        BreweryDto? breweryDto = result.Self.ShouldNotBeNull();
         breweryDto.Name.ShouldBe(updateCommand.Dto.Name);
         breweryDto.Id.ShouldBe(BreweryId);
 
-        var addressDto = breweryDto.Address.ShouldNotBeNull();
+        AddressDto? addressDto = breweryDto.Address.ShouldNotBeNull();
         addressDto.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
         addressDto.City.ShouldBe("Redding");
         addressDto.State.ShouldBe("CA");
