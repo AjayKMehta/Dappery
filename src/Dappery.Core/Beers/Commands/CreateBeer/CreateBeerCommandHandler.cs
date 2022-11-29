@@ -48,7 +48,7 @@ public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerR
 
         // Add the record to the database and retrieve the record after we create it
         var createdBeerId = await _unitOfWork.BeerRepository.CreateBeerAsync(beerToAdd, cancellationToken).ConfigureAwait(false);
-        var createdBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(createdBeerId, cancellationToken).ConfigureAwait(false);
+        Beer? createdBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(createdBeerId, cancellationToken).ConfigureAwait(false);
         _unitOfWork.Commit();
 
         // Return the mapped beer

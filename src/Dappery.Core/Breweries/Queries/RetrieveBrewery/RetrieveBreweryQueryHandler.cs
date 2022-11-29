@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
 using Dappery.Core.Extensions;
+using Dappery.Domain.Entities;
 using Dappery.Domain.Media;
 
 using MediatR;
@@ -20,7 +21,7 @@ public class RetrieveBreweryQueryHandler : IRequestHandler<RetrieveBreweryQuery,
     public async Task<BreweryResource> Handle(RetrieveBreweryQuery request, CancellationToken cancellationToken)
     {
         // Retrieve the brewery and clean up our resources
-        var brewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.Id, cancellationToken).ConfigureAwait(false);
+        Brewery? brewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.Id, cancellationToken).ConfigureAwait(false);
         _unitOfWork.Commit();
 
         // Invalidate the request if no brewery is found

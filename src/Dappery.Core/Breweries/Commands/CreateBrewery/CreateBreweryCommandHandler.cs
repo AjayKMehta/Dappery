@@ -37,7 +37,7 @@ public class CreateBreweryCommandHandler : IRequestHandler<CreateBreweryCommand,
 
         // Create our brewery, retrieve the brewery so we can map it to the response, and clean up our resources
         var breweryId = await _unitOfWork.BreweryRepository.CreateBrewery(breweryToCreate, cancellationToken).ConfigureAwait(false);
-        var insertedBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(breweryId, cancellationToken).ConfigureAwait(false);
+        Brewery? insertedBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(breweryId, cancellationToken).ConfigureAwait(false);
         _unitOfWork.Commit();
 
         // Map and return the response

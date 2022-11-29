@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.Logging;
+
 using FluentValidation;
+using FluentValidation.Results;
 
 using MediatR;
-
-using Microsoft.Extensions.Logging;
 
 namespace Dappery.Core.Infrastructure;
 
@@ -31,12 +32,11 @@ public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
 
     public Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        if (next is null)
-            throw new ArgumentNullException(nameof(next));
+        ArgumentNullException.ThrowIfNull(next);
 
         var context = new ValidationContext<TRequest>(request);
 
-        var failures = _validators
+        IEnumerable<ValidationFailure> failures = _validators
             .SelectMany(v => v.Validate(context).Errors)
             .Where(f => f is not null);
 

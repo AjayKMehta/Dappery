@@ -20,11 +20,10 @@ public class RetrieveBeerQueryHandler : IRequestHandler<RetrieveBeerQuery, BeerR
 
     public async Task<BeerResource> Handle(RetrieveBeerQuery request, CancellationToken cancellationToken)
     {
-        if (request is null)
-            throw new ArgumentNullException(nameof(request));
+        ArgumentNullException.ThrowIfNull(request);
 
         // Grab the beer from the ID
-        var beer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.Id, cancellationToken).ConfigureAwait(false);
+        Domain.Entities.Beer? beer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.Id, cancellationToken).ConfigureAwait(false);
 
         // Invalidate the request if no beer is found
         if (beer is null)
