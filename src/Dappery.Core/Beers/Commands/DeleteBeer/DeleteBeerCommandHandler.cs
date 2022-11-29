@@ -18,13 +18,10 @@ public class DeleteBeerCommandHandler : IRequestHandler<DeleteBeerCommand, Unit>
 
     public async Task<Unit> Handle(DeleteBeerCommand request, CancellationToken cancellationToken)
     {
-        if (request is null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
+        ArgumentNullException.ThrowIfNull(request);
 
         // Retrieve the beer from the request
-        var existingBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
+        Domain.Entities.Beer? existingBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
 
         // Invalidate the request if no beer is found
         if (existingBeer is null)

@@ -21,11 +21,10 @@ public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerR
 
     public async Task<BeerResource> Handle(CreateBeerCommand request, CancellationToken cancellationToken)
     {
-        if (request is null)
-            throw new ArgumentNullException(nameof(request));
+        ArgumentNullException.ThrowIfNull(request);
 
         // Check to make sure the brewery exists from the given brewery ID on the request
-        var existingBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId, cancellationToken).ConfigureAwait(false);
+        Brewery? existingBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId, cancellationToken).ConfigureAwait(false);
 
         // Invalidate the request if no corresponding brewery exists
         // Since we're not overloading the '==' operator, let's use the 'is' comparison here
@@ -35,7 +34,7 @@ public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerR
         }
 
         // Attempt to parse the incoming BeerStyle enumeration value
-        var parsedBeerStyle = Enum.TryParse<BeerStyle>(request.Dto.Style, true, out var beerStyle);
+        var parsedBeerStyle = Enum.TryParse(request.Dto.Style, true, out BeerStyle beerStyle);
 
         // Let's instantiate a beer instance
         var beerToAdd = new Beer

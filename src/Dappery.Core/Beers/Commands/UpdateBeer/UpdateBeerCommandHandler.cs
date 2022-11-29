@@ -21,11 +21,10 @@ public class UpdateBeerCommandHandler : IRequestHandler<UpdateBeerCommand, BeerR
 
     public async Task<BeerResource> Handle(UpdateBeerCommand request, CancellationToken cancellationToken)
     {
-        if (request is null)
-            throw new ArgumentNullException(nameof(request));
+        ArgumentNullException.ThrowIfNull(request);
 
         // First validate both the beer
-        var existingBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
+        Beer? existingBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
 
         // Invalidate the request if no beer was found
         if (existingBeer is null)
@@ -34,7 +33,7 @@ public class UpdateBeerCommandHandler : IRequestHandler<UpdateBeerCommand, BeerR
         }
 
         // Attempt to parse the incoming BeerStyle enumeration value (exactly how we parse in the CreateBeerCommandHandler)
-        var parsedBeerStyle = Enum.TryParse<BeerStyle>(request.Dto.Style, true, out var beerStyle);
+        var parsedBeerStyle = Enum.TryParse(request.Dto.Style, true, out BeerStyle beerStyle);
 
         // Update the fields on the existing beer
         existingBeer.BeerStyle = parsedBeerStyle ? beerStyle : BeerStyle.Other;
@@ -45,7 +44,7 @@ public class UpdateBeerCommandHandler : IRequestHandler<UpdateBeerCommand, BeerR
         if (request.Dto.BreweryId.HasValue)
         {
             // Retrieve the brewery, or invalidate the request if none is returned
-            var existingBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId.Value, cancellationToken).ConfigureAwait(false);
+            Brewery? existingBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId.Value, cancellationToken).ConfigureAwait(false);
 
             if (existingBrewery is null)
             {
@@ -57,7 +56,7 @@ public class UpdateBeerCommandHandler : IRequestHandler<UpdateBeerCommand, BeerR
 
         // Perform the update and grab the newly return beer for the response
         await _unitOfWork.BeerRepository.UpdateBeerAsync(existingBeer, cancellationToken).ConfigureAwait(false);
-        var updatedBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(existingBeer.Id, cancellationToken).ConfigureAwait(false);
+        Beer? updatedBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(existingBeer.Id, cancellationToken).ConfigureAwait(false);
         _unitOfWork.Commit();
 
         // Return the response with the updated beer

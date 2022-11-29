@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 using Dappery.Core.Data;
 using Dappery.Core.Extensions;
+using Dappery.Domain.Dtos.Beer;
+using Dappery.Domain.Entities;
 using Dappery.Domain.Media;
 
 using MediatR;
@@ -19,13 +22,13 @@ public class GetBeersQueryHandler : IRequestHandler<GetBeersQuery, BeerResourceL
     public async Task<BeerResourceList> Handle(GetBeersQuery request, CancellationToken cancellationToken)
     {
         // Retrieve all of our beers from the database
-        var beers = await _unitOfWork.BeerRepository.GetAllBeersAsync(cancellationToken).ConfigureAwait(false);
+        IEnumerable<Beer>? beers = await _unitOfWork.BeerRepository.GetAllBeersAsync(cancellationToken).ConfigureAwait(false);
 
         // Clean up our resources
         _unitOfWork.Commit();
 
         // Map our beers and return the response
-        var mappedBeers = beers.Select(b => b.ToBeerDto());
+        IEnumerable<BeerDto>? mappedBeers = beers.Select(b => b.ToBeerDto());
 
         // Return our mapped beers
         return new BeerResourceList(mappedBeers);
