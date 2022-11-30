@@ -21,7 +21,7 @@ public class UpdateBreweryCommandHandler : IRequestHandler<UpdateBreweryCommand,
     public async Task<BreweryResource> Handle(UpdateBreweryCommand request, CancellationToken cancellationToken)
     {
         // Retrieve the brewery on the request
-        var breweryToUpdate = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
+        Brewery? breweryToUpdate = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
 
         // Invalidate the request if no brewery was found
         if (breweryToUpdate is null)

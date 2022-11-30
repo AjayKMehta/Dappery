@@ -2,6 +2,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Dappery.Core.Breweries.Queries.GetBreweries;
+using Dappery.Core.Data;
+using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Media;
 
 using Shouldly;
@@ -16,29 +18,29 @@ public class GetBreweriesQueryHandlerTest : TestFixture
     public async Task GetBreweriesQueryHandlerWhenBreweriesExistReturnsListOfBreweriesWithBeersAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var handler = new GetBreweriesQueryHandler(unitOfWork);
 
         // Act
-        var response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken).ConfigureAwait(false);
+        BreweryResourceList response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken).ConfigureAwait(false);
 
         // Assert
-        var breweryList = response
+        BreweryResourceList breweryList = response
             .ShouldNotBeNull()
             .ShouldBeOfType<BreweryResourceList>();
         breweryList.Count.ShouldBe(2);
 
-        var items = breweryList
+        System.Collections.Generic.IEnumerable<Domain.Dtos.Brewery.BreweryDto> items = breweryList
             .Items
             .ShouldNotBeNull();
         items.ShouldNotBeEmpty();
 
-        var firstBreweryDto = items.FirstOrDefault(b => b.Id == 1);
+        BreweryDto? firstBreweryDto = items.FirstOrDefault(b => b.Id == 1);
         _ = firstBreweryDto?.Address.ShouldNotBeNull();
         firstBreweryDto?.Beers.ShouldNotBeEmpty();
         firstBreweryDto?.BeerCount.ShouldBe(3);
 
-        var secondBreweryDto = items.FirstOrDefault(b => b.Id == 2);
+        BreweryDto? secondBreweryDto = items.FirstOrDefault(b => b.Id == 2);
         _ = secondBreweryDto?.Address.ShouldNotBeNull();
         secondBreweryDto?.Beers.ShouldNotBeEmpty();
         _ = secondBreweryDto?.BeerCount.ShouldNotBeNull();
@@ -49,13 +51,13 @@ public class GetBreweriesQueryHandlerTest : TestFixture
     public async Task GetBreweriesQueryHandlerWhenNoBreweriesExistReturnsEmptyListOfBreweriesAsync()
     {
         // Arrange, remove all breweries from the test database
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         await UnitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
         await UnitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken).ConfigureAwait(false);
         var handler = new GetBreweriesQueryHandler(unitOfWork);
 
         // Act
-        var response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken).ConfigureAwait(false);
+        BreweryResourceList response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken).ConfigureAwait(false);
 
         // Assert
         response

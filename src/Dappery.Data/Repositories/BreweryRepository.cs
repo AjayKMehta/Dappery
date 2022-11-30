@@ -42,14 +42,14 @@ public class BreweryRepository : IBreweryRepository
 
         var beersFromBrewery = (await _dbConnection!.QueryAsync<Beer>(beersFromBreweryCommand).ConfigureAwait(false)).ToList();
 
-        var breweries = await _dbConnection!.QueryAsync<Brewery, Address, Brewery>(
+        IEnumerable<Brewery> breweries = await _dbConnection!.QueryAsync<Brewery, Address, Brewery>(
             breweryCommand,
             (brewery, address) =>
             {
                 // Since breweries have a one-to-one relation with address, we can initialize that mapping here
                 brewery.Address = address;
 
-                foreach (var beer in beersFromBrewery)
+                foreach (Beer? beer in beersFromBrewery)
                     brewery.Beers.Add(beer);
 
                 return brewery;
@@ -85,7 +85,7 @@ public class BreweryRepository : IBreweryRepository
                 // Map each beer to the beer collection for the brewery during iteration over our result set
                 if (beers.Any(b => b.BreweryId == brewery.Id))
                 {
-                    foreach (var beer in beers.Where(b => b.BreweryId == brewery.Id))
+                    foreach (Beer? beer in beers.Where(b => b.BreweryId == brewery.Id))
                         brewery.Beers.Add(beer);
                 }
 
@@ -97,7 +97,7 @@ public class BreweryRepository : IBreweryRepository
     public async Task<int> CreateBrewery(Brewery brewery, CancellationToken cancellationToken)
     {
         // Grab a reference to the address
-        var address = brewery.Address;
+        Address? address = brewery.Address;
         var breweryInsertSql =
             new StringBuilder("INSERT INTO Breweries (Name, CreatedAt, UpdatedAt) VALUES (@Name, @CreatedAt, @UpdatedAt)");
 

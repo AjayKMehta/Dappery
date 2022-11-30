@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Dappery.Core.Data;
 using Dappery.Domain.Entities;
 
 using Shouldly;
@@ -18,7 +19,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task GetAllBreweriesWhenInvokedAndBreweriesExistReturnsValidListOfBreweriesAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
 
         // Act
         var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false)).ToList();
@@ -32,7 +33,7 @@ public class BreweryRepositoryTest : TestFixture
         breweries.All(br => br.Beers is not null).ShouldBeTrue();
         breweries.All(br => br.Beers.Count > 0).ShouldBeTrue();
 
-        var brewery = breweries.Find(br => br.Name == "Fall River Brewery");
+        Brewery? brewery = breweries.Find(br => br.Name == "Fall River Brewery");
         brewery?.Beers.ShouldContain(b => b.Name == "Hexagenia");
         brewery?.Beers.ShouldContain(b => b.Name == "Widowmaker");
         brewery?.Beers.ShouldContain(b => b.Name == "Hooked");
@@ -46,7 +47,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task GetAllBreweriesWhenInvokedAndNoBreweriesExistReturnsEmptyListAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         await unitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
         await unitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken).ConfigureAwait(false);
 
@@ -62,10 +63,10 @@ public class BreweryRepositoryTest : TestFixture
     public async Task GetBreweryByIdWhenInvokedAndBreweryExistReturnsValidBreweryWithBeersAndAddressAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
 
         // Act
-        var brewery = await unitOfWork.BreweryRepository.GetBreweryById(1, CancellationTestToken).ConfigureAwait(false);
+        Brewery? brewery = await unitOfWork.BreweryRepository.GetBreweryById(1, CancellationTestToken).ConfigureAwait(false);
         unitOfWork.Commit();
 
         // Assert
@@ -73,7 +74,7 @@ public class BreweryRepositoryTest : TestFixture
         _ = brewery.Address.ShouldNotBeNull();
         brewery.BeerCount.ShouldBe(3);
 
-        var beers = brewery.Beers.ShouldNotBeNull();
+        ICollection<Beer> beers = brewery.Beers.ShouldNotBeNull();
         beers.ShouldNotBeEmpty();
         beers.ShouldContain(b => b.Name == "Hexagenia");
         beers.ShouldContain(b => b.Name == "Widowmaker");
@@ -84,10 +85,10 @@ public class BreweryRepositoryTest : TestFixture
     public async Task GetBreweryByIdWhenInvokedAndNoBreweryExistReturnsNullAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
 
         // Act
-        var brewery = await unitOfWork.BreweryRepository.GetBreweryById(11, CancellationTestToken).ConfigureAwait(false);
+        Brewery? brewery = await unitOfWork.BreweryRepository.GetBreweryById(11, CancellationTestToken).ConfigureAwait(false);
         unitOfWork.Commit();
 
         // Assert
@@ -98,7 +99,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task CreateBreweryWhenBreweryIsValidReturnsNewlyInsertedBreweryAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var breweryToInsert = new Brewery
         {
             Name = "Bike Dog Brewing Company",
@@ -117,16 +118,16 @@ public class BreweryRepositoryTest : TestFixture
 
         // Act
         var breweryId = await unitOfWork.BreweryRepository.CreateBrewery(breweryToInsert, CancellationTestToken).ConfigureAwait(false);
-        var insertedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryId, CancellationTestToken).ConfigureAwait(false);
+        Brewery? insertedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryId, CancellationTestToken).ConfigureAwait(false);
         unitOfWork.Commit();
 
         // Assert
-        var brewery = insertedBrewery
+        Brewery brewery = insertedBrewery
             .ShouldNotBeNull()
             .ShouldBeOfType<Brewery>();
         brewery.Beers.ShouldBeEmpty();
 
-        var address = insertedBrewery.Address.ShouldNotBeNull();
+        Address address = insertedBrewery.Address.ShouldNotBeNull();
         address.StreetAddress.ShouldBe(breweryToInsert.Address.StreetAddress);
         address.BreweryId.ShouldBe(3);
     }
@@ -135,7 +136,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsNotUpdatedReturnsUpdatedBreweryAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var breweryToUpdate = new Brewery
         {
             Id = 2,
@@ -154,16 +155,16 @@ public class BreweryRepositoryTest : TestFixture
 
         // Act
         await unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, CancellationTestToken).ConfigureAwait(false);
-        var updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken).ConfigureAwait(false);
+        Brewery? updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken).ConfigureAwait(false);
         unitOfWork.Commit();
 
         // Assert
-        var brewery = updatedBrewery
+        Brewery brewery = updatedBrewery
             .ShouldNotBeNull()
             .ShouldBeOfType<Brewery>();
         brewery.Beers.ShouldNotBeNull().ShouldNotBeEmpty();
 
-        var address = brewery.Address.ShouldNotBeNull();
+        Address address = brewery.Address.ShouldNotBeNull();
         address.StreetAddress.ShouldBe(breweryToUpdate.Address.StreetAddress);
         address.BreweryId.ShouldBe(2);
     }
@@ -172,7 +173,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsUpdatedReturnsUpdatedBreweryAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var breweryToUpdate = new Brewery
         {
             Id = 2,
@@ -192,14 +193,14 @@ public class BreweryRepositoryTest : TestFixture
 
         // Act
         await unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, CancellationTestToken, true).ConfigureAwait(false);
-        var updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken).ConfigureAwait(false);
+        Brewery? updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken).ConfigureAwait(false);
         unitOfWork.Commit();
 
         // Assert
-        var brewery = updatedBrewery.ShouldNotBeNull().ShouldBeOfType<Brewery>();
+        Brewery brewery = updatedBrewery.ShouldNotBeNull().ShouldBeOfType<Brewery>();
         brewery.Beers.ShouldNotBeNull().ShouldNotBeEmpty();
 
-        var address = updatedBrewery.Address.ShouldNotBeNull();
+        Address address = updatedBrewery.Address.ShouldNotBeNull();
         address.StreetAddress.ShouldBe(breweryToUpdate.Address.StreetAddress);
         address.ZipCode.ShouldBe(breweryToUpdate.Address.ZipCode);
         address.City.ShouldBe(breweryToUpdate.Address.City);
@@ -210,7 +211,7 @@ public class BreweryRepositoryTest : TestFixture
     public async Task DeleteBreweryWhenBreweryExistsRemovesBreweryAndAllAssociatedBeersAndAddressAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false))?.Count().ShouldBe(2);
         (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationToken.None).ConfigureAwait(false))?.Count().ShouldBe(5);
 

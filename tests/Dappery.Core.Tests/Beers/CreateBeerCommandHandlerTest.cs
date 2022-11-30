@@ -2,8 +2,11 @@ using System.Net;
 using System.Threading.Tasks;
 
 using Dappery.Core.Beers.Commands.CreateBeer;
+using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
+using Dappery.Domain.Dtos;
 using Dappery.Domain.Dtos.Beer;
+using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Entities;
 using Dappery.Domain.Media;
 
@@ -19,7 +22,7 @@ public class CreateBeerCommandHandlerTest : TestFixture
     public async Task GivenValidRequestWhenBreweryExistsReturnsMappedAndCreatedBeerAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var beerCommand = new CreateBeerCommand(new CreateBeerDto
         {
             Name = "Test Beer",
@@ -29,10 +32,10 @@ public class CreateBeerCommandHandlerTest : TestFixture
         var handler = new CreateBeerCommandHandler(unitOfWork);
 
         // Act
-        var result = await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false);
+        BeerResource result = await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
-        var beerDto = result
+        BeerDto beerDto = result
             .ShouldNotBeNull()
             .ShouldBeOfType<BeerResource>()
             .Self
@@ -40,12 +43,12 @@ public class CreateBeerCommandHandlerTest : TestFixture
         beerDto.Name.ShouldBe(beerCommand.Dto.Name);
         beerDto.Style.ShouldBe(beerCommand.Dto.Style);
 
-        var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+        BreweryDto breweryDto = beerDto.Brewery.ShouldNotBeNull();
         breweryDto.Beers.ShouldBeNull();
         breweryDto.Id.ShouldBe(1);
         breweryDto.Name.ShouldBe("Fall River Brewery");
 
-        var addressDto = breweryDto.Address.ShouldNotBeNull();
+        AddressDto addressDto = breweryDto.Address.ShouldNotBeNull();
         addressDto.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
         addressDto.City.ShouldBe("Redding");
         addressDto.State.ShouldBe("CA");
@@ -56,7 +59,7 @@ public class CreateBeerCommandHandlerTest : TestFixture
     public async Task GivenValidRequestWhenBreweryDoesNotExistThrowsApiExceptionForBadRequestAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var beerCommand = new CreateBeerCommand(new CreateBeerDto
         {
             Name = "Test Beer",
@@ -66,7 +69,7 @@ public class CreateBeerCommandHandlerTest : TestFixture
         var handler = new CreateBeerCommandHandler(unitOfWork);
 
         // Act
-        var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
+        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
         // Assert
         result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.BadRequest);
@@ -76,7 +79,7 @@ public class CreateBeerCommandHandlerTest : TestFixture
     public async Task GivenValidRequestWithInvalidBeerStyleReturnsMappedAndCreatedBeerWithOtherAsStyleAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var beerCommand = new CreateBeerCommand(new CreateBeerDto
         {
             Name = "Test Beer",
@@ -86,10 +89,10 @@ public class CreateBeerCommandHandlerTest : TestFixture
         var handler = new CreateBeerCommandHandler(unitOfWork);
 
         // Act
-        var result = await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false);
+        BeerResource result = await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
-        var beerDto = result
+        BeerDto beerDto = result
             .ShouldNotBeNull()
             .ShouldBeOfType<BeerResource>()
             .Self
@@ -97,12 +100,12 @@ public class CreateBeerCommandHandlerTest : TestFixture
         beerDto.Name.ShouldBe(beerCommand.Dto.Name);
         beerDto.Style.ShouldBe(nameof(BeerStyle.Other));
 
-        var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+        BreweryDto breweryDto = beerDto.Brewery.ShouldNotBeNull();
         breweryDto.Beers.ShouldBeNull();
         breweryDto.Id.ShouldBe(1);
         breweryDto.Name.ShouldBe("Fall River Brewery");
 
-        var addressDto = breweryDto.Address.ShouldNotBeNull();
+        AddressDto addressDto = breweryDto.Address.ShouldNotBeNull();
         addressDto.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
         addressDto.City.ShouldBe("Redding");
         addressDto.State.ShouldBe("CA");
