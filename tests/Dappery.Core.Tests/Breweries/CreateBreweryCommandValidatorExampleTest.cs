@@ -28,7 +28,7 @@ public class CreateBreweryCommandValidatorExampleTest
             });
 
         // Act
-        var validationResult = new CreateBreweryCommandValidator().TestValidate(command);
+        TestValidationResult<CreateBreweryCommand> validationResult = new CreateBreweryCommandValidator().TestValidate(command);
 
         // Assert
         validationResult.ShouldNotHaveValidationErrorFor(b => b.Dto);

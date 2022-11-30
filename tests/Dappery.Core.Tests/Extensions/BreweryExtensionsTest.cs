@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using System.Linq;
 
 using Dappery.Core.Extensions;
+using Dappery.Domain.Dtos;
+using Dappery.Domain.Dtos.Beer;
 using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Entities;
 
@@ -43,24 +46,24 @@ public class BreweryExtensionsTest
         breweryDto.Name.ShouldBe(breweryToMap.Name);
         breweryDto.BeerCount.ShouldNotBeNull().ShouldBe(3);
 
-        var addressDto = breweryDto.Address.ShouldNotBeNull();
+        AddressDto addressDto = breweryDto.Address.ShouldNotBeNull();
         addressDto.City.ShouldBe(breweryToMap.Address?.City);
         addressDto.State.ShouldBe(breweryToMap.Address?.State);
         addressDto.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
         addressDto.ZipCode.ShouldBe(breweryToMap.Address?.ZipCode);
 
-        var beers = mappedBrewery.Beers.ShouldNotBeNull();
+        IEnumerable<BeerDto> beers = mappedBrewery.Beers.ShouldNotBeNull();
         beers.ShouldNotBeEmpty();
 
-        var firstBeer = beers.First(b => b.Id == 1);
+        BeerDto firstBeer = beers.First(b => b.Id == 1);
         firstBeer.Name.ShouldBe("Test Beer 1");
         firstBeer.Style.ShouldBe("Lager");
 
-        var secondBeer = beers.First(b => b.Id == 2);
+        BeerDto secondBeer = beers.First(b => b.Id == 2);
         secondBeer.Name.ShouldBe("Test Beer 2");
         secondBeer.Style.ShouldBe("Ipa");
 
-        var thirdBeer = beers.First(b => b.Id == 3);
+        BeerDto thirdBeer = beers.First(b => b.Id == 3);
         thirdBeer.Name.ShouldBe("Test Beer 3");
         thirdBeer.Style.ShouldBe("DoubleIpa");
     }
@@ -89,7 +92,7 @@ public class BreweryExtensionsTest
         _ = mappedBrewery.ShouldNotBeNull();
         mappedBrewery.Id.ShouldBe(breweryToMap.Id);
         mappedBrewery.Name.ShouldBe(breweryToMap.Name);
-        var addressDto = mappedBrewery.Address.ShouldNotBeNull();
+        AddressDto addressDto = mappedBrewery.Address.ShouldNotBeNull();
         addressDto.City.ShouldBe(breweryToMap.Address?.City);
         addressDto.State.ShouldBe(breweryToMap.Address?.State);
         addressDto.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
@@ -130,13 +133,13 @@ public class BreweryExtensionsTest
         var mappedBrewery = breweryToMap.ToBreweryDto(false);
 
         // Assert
-        var breweryDto = mappedBrewery.ShouldNotBeNull();
+        BreweryDto breweryDto = mappedBrewery.ShouldNotBeNull();
         breweryDto.Id.ShouldBe(breweryToMap.Id);
         breweryDto.Name.ShouldBe(breweryToMap.Name);
         breweryDto.Beers.ShouldBeNull();
         breweryDto.BeerCount.ShouldBeNull();
 
-        var addressDto = mappedBrewery.Address.ShouldNotBeNull();
+        AddressDto addressDto = mappedBrewery.Address.ShouldNotBeNull();
         addressDto.City.ShouldBe(breweryToMap.Address?.City);
         addressDto.State.ShouldBe(breweryToMap.Address?.State);
         addressDto.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);
@@ -164,13 +167,13 @@ public class BreweryExtensionsTest
         var mappedBrewery = breweryToMap.ToBreweryDto(false);
 
         // Assert
-        var breweryDto = mappedBrewery.ShouldNotBeNull();
+        BreweryDto breweryDto = mappedBrewery.ShouldNotBeNull();
         breweryDto.Id.ShouldBe(breweryToMap.Id);
         breweryDto.Name.ShouldBe(breweryToMap.Name);
         breweryDto.Beers.ShouldBeNull();
         breweryDto.BeerCount.ShouldBeNull();
 
-        var addressDto = mappedBrewery.Address.ShouldNotBeNull();
+        AddressDto addressDto = mappedBrewery.Address.ShouldNotBeNull();
         addressDto.City.ShouldBe(breweryToMap.Address?.City);
         addressDto.State.ShouldBe(breweryToMap.Address?.State);
         addressDto.StreetAddress.ShouldBe(breweryToMap.Address?.StreetAddress);

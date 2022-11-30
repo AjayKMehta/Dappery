@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,17 +31,17 @@ public class GetBreweriesQueryHandlerTest : TestFixture
             .ShouldBeOfType<BreweryResourceList>();
         breweryList.Count.ShouldBe(2);
 
-        System.Collections.Generic.IEnumerable<Domain.Dtos.Brewery.BreweryDto> items = breweryList
+        IEnumerable<BreweryDto> items11 = breweryList
             .Items
             .ShouldNotBeNull();
-        items.ShouldNotBeEmpty();
+        items11.ShouldNotBeEmpty();
 
-        BreweryDto? firstBreweryDto = items.FirstOrDefault(b => b.Id == 1);
+        BreweryDto? firstBreweryDto = items11.FirstOrDefault(b => b.Id == 1);
         _ = firstBreweryDto?.Address.ShouldNotBeNull();
         firstBreweryDto?.Beers.ShouldNotBeEmpty();
         firstBreweryDto?.BeerCount.ShouldBe(3);
 
-        BreweryDto? secondBreweryDto = items.FirstOrDefault(b => b.Id == 2);
+        BreweryDto? secondBreweryDto = items11.FirstOrDefault(b => b.Id == 2);
         _ = secondBreweryDto?.Address.ShouldNotBeNull();
         secondBreweryDto?.Beers.ShouldNotBeEmpty();
         _ = secondBreweryDto?.BeerCount.ShouldNotBeNull();

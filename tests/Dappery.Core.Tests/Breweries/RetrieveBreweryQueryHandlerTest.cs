@@ -2,7 +2,9 @@ using System.Net;
 using System.Threading.Tasks;
 
 using Dappery.Core.Breweries.Queries.RetrieveBrewery;
+using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
+using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Media;
 
 using Shouldly;
@@ -17,15 +19,15 @@ public class RetrieveBreweryQueryHandlerTest : TestFixture
     public async Task RetrieveBreweryHandlerGivenExistingBreweryIdReturnsBreweryWithBeersAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var query = new RetrieveBreweryQuery(1);
         var handler = new RetrieveBreweryQueryHandler(unitOfWork);
 
         // Act
-        var response = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
+        BreweryResource response = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
-        var breweryDto = response
+        BreweryDto breweryDto = response
             .ShouldNotBeNull()
             .ShouldBeOfType<BreweryResource>()
             .Self
@@ -43,12 +45,12 @@ public class RetrieveBreweryQueryHandlerTest : TestFixture
     public async Task RetrieveBreweryHandlerGivenNonExistingBreweryIdReturnsApiExceptionAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var query = new RetrieveBreweryQuery(11);
         var handler = new RetrieveBreweryQueryHandler(unitOfWork);
 
         // Act
-        var response = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(query, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
+        DapperyApiException response = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(query, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
         // Assert
         response

@@ -20,7 +20,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
     public async Task GivenValidUpdateRequestWhenBreweryExistsReturnsUpdatedMappedBreweryAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         const int BreweryId = 1;
         var updateCommand = new UpdateBreweryCommand(new UpdateBreweryDto
         {
@@ -36,10 +36,10 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
 
         // Act
         var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
-        var result = await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
+        BreweryResource result = await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
-        var breweryDTo = result
+        BreweryDto breweryDTo = result
             .ShouldNotBeNull()
             .Self
             .ShouldNotBeNull();
@@ -48,7 +48,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
 
         _ = result.ApiVersion.ShouldNotBeNull();
 
-        var addressDto = breweryDTo.Address.ShouldNotBeNull();
+        AddressDto addressDto = breweryDTo.Address.ShouldNotBeNull();
         addressDto.City.ShouldBe(updateCommand.Dto.Address?.City);
         addressDto.State.ShouldBe(updateCommand.Dto.Address?.State);
         addressDto.StreetAddress.ShouldBe(updateCommand.Dto.Address?.StreetAddress);
@@ -59,7 +59,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
     public async Task GivenValidUpdateRequestWhenBreweryDoesNotExistThrowsNotFoundExceptionAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         const int BreweryId = 11;
         var updateCommand = new UpdateBreweryCommand(new UpdateBreweryDto
         {
@@ -75,7 +75,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
 
         // Act
         var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
-        var result = await Should.ThrowAsync<DapperyApiException>(async () => await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
+        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
         // Assert
         result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.NotFound);

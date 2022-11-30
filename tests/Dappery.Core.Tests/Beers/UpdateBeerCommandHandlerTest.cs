@@ -2,9 +2,13 @@ using System.Net;
 using System.Threading.Tasks;
 
 using Dappery.Core.Beers.Commands.UpdateBeer;
+using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
+using Dappery.Domain.Dtos;
 using Dappery.Domain.Dtos.Beer;
+using Dappery.Domain.Dtos.Brewery;
 using Dappery.Domain.Entities;
+using Dappery.Domain.Media;
 
 using Shouldly;
 
@@ -18,7 +22,7 @@ public class UpdateBeerCommandHandlerTest : TestFixture
     public async Task GivenValidRequestWhenBeerExistsAndBreweryIsNotUpdatedUpdatesAndReturnsMappedBeerAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var updateCommand = new UpdateBeerCommand(new UpdateBeerDto
         {
             Name = "Updated Beer Name",
@@ -27,10 +31,10 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         var handler = new UpdateBeerCommandHandler(unitOfWork);
 
         // Act
-        var result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
+        BeerResource result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
-        var beerDto = result
+        BeerDto beerDto = result
             .ShouldNotBeNull()
             .Self
             .ShouldNotBeNull();
@@ -38,12 +42,12 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         beerDto.Name.ShouldBe(updateCommand.Dto.Name);
         beerDto.Style.ShouldBe(updateCommand.Dto.Style);
 
-        var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+        BreweryDto breweryDto = beerDto.Brewery.ShouldNotBeNull();
         breweryDto.Id.ShouldBe(1);
         breweryDto.Name.ShouldBe("Fall River Brewery");
         breweryDto.Beers.ShouldBeNull();
 
-        var addressDto = breweryDto.Address.ShouldNotBeNull();
+        AddressDto addressDto = breweryDto.Address.ShouldNotBeNull();
         addressDto.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
         addressDto.City.ShouldBe("Redding");
         addressDto.State.ShouldBe("CA");
@@ -54,7 +58,7 @@ public class UpdateBeerCommandHandlerTest : TestFixture
     public async Task GivenValidRequestWhenBeerExistsAndStyleIsUnknownUpdatesAndReturnsMappedBeerWithOtherStyleAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var updateCommand = new UpdateBeerCommand(new UpdateBeerDto
         {
             Name = "Updated Beer Name",
@@ -63,10 +67,10 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         var handler = new UpdateBeerCommandHandler(unitOfWork);
 
         // Act
-        var result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
+        BeerResource result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
-        var beerDto = result
+        BeerDto beerDto = result
             .ShouldNotBeNull()
             .Self
             .ShouldNotBeNull();
@@ -74,12 +78,12 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         beerDto.Name.ShouldBe(updateCommand.Dto.Name);
         beerDto.Style.ShouldBe(nameof(BeerStyle.Other));
 
-        var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+        BreweryDto breweryDto = beerDto.Brewery.ShouldNotBeNull();
         breweryDto.Id.ShouldBe(1);
         breweryDto.Name.ShouldBe("Fall River Brewery");
         breweryDto.Beers.ShouldBeNull();
 
-        var addressDto = breweryDto.Address.ShouldNotBeNull();
+        AddressDto addressDto = breweryDto.Address.ShouldNotBeNull();
         addressDto.StreetAddress.ShouldBe("1030 E Cypress Ave Ste D");
         addressDto.City.ShouldBe("Redding");
         addressDto.State.ShouldBe("CA");
@@ -90,7 +94,7 @@ public class UpdateBeerCommandHandlerTest : TestFixture
     public async Task GivenValidRequestWhenBeerExistsAndExistingBreweryIsUpdatedUpdatesAndReturnsMappedBeerAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var updateCommand = new UpdateBeerCommand(new UpdateBeerDto
         {
             Name = "Updated Beer Name",
@@ -100,10 +104,10 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         var handler = new UpdateBeerCommandHandler(unitOfWork);
 
         // Act
-        var result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
+        BeerResource result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
-        var beerDto = result
+        BeerDto beerDto = result
             .ShouldNotBeNull()
             .Self
             .ShouldNotBeNull();
@@ -111,12 +115,12 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         beerDto.Name.ShouldBe(updateCommand.Dto.Name);
         beerDto.Style.ShouldBe(updateCommand.Dto.Style);
 
-        var breweryDto = beerDto.Brewery.ShouldNotBeNull();
+        BreweryDto breweryDto = beerDto.Brewery.ShouldNotBeNull();
         breweryDto.Beers.ShouldBeNull();
         breweryDto.Id.ShouldBe(2);
         breweryDto.Name.ShouldBe("Sierra Nevada Brewing Company");
 
-        var addressDto = breweryDto.Address.ShouldNotBeNull();
+        AddressDto addressDto = breweryDto.Address.ShouldNotBeNull();
         addressDto.StreetAddress.ShouldBe("1075 E 20th St");
         addressDto.City.ShouldBe("Chico");
         addressDto.State.ShouldBe("CA");
@@ -127,7 +131,7 @@ public class UpdateBeerCommandHandlerTest : TestFixture
     public async Task GivenValidRequestWhenBeerExistsAndNonExistingBreweryThrowsApiExceptionForBadRequestAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var updateCommand = new UpdateBeerCommand(new UpdateBeerDto
         {
             Name = "Updated Beer Name",
@@ -137,7 +141,7 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         var handler = new UpdateBeerCommandHandler(unitOfWork);
 
         // Act
-        var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
+        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
         // Assert
         result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.BadRequest);

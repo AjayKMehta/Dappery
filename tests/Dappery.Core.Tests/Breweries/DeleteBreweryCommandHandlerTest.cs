@@ -2,6 +2,7 @@ using System.Net;
 using System.Threading.Tasks;
 
 using Dappery.Core.Breweries.Commands.DeleteBrewery;
+using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
 
 using MediatR;
@@ -18,12 +19,12 @@ public class DeleteBreweryCommandHandlerTest : TestFixture
     public async Task GivenValidDeleteRequestWhenBreweryExistsIsRemovedFromDatabaseIncludingAllBeersAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var deleteCommand = new DeleteBreweryCommand(1);
         var handler = new DeleteBreweryCommandHandler(unitOfWork);
 
         // Act
-        var result = await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false);
+        Unit result = await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
         _ = result.ShouldBeOfType<Unit>();
@@ -33,12 +34,12 @@ public class DeleteBreweryCommandHandlerTest : TestFixture
     public async Task GivenValidDeleteRequestWhenDoesNotBreweryExistIsNotRemovedFromDatabaseAndExceptionIsThrownAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var deleteCommand = new DeleteBreweryCommand(11);
         var handler = new DeleteBreweryCommandHandler(unitOfWork);
 
         // Act
-        var result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
+        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
 
         // Assert
         result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.NotFound);

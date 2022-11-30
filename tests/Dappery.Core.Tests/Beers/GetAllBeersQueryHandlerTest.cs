@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 
 using Dappery.Core.Beers.Queries.GetBeers;
+using Dappery.Core.Data;
+using Dappery.Domain.Media;
 
 using Shouldly;
 
@@ -14,12 +16,12 @@ public class GetAllBeersQueryHandlerTest : TestFixture
     public async Task GivenValidRequestWhenBeersArePopulatedReturnsMappedBeerListAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var query = new GetBeersQuery();
         var handler = new GetBeersQueryHandler(unitOfWork);
 
         // Act
-        var result = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
+        BeerResourceList result = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
         result.ShouldNotBeNull().Count.ShouldBe(5);
@@ -30,7 +32,7 @@ public class GetAllBeersQueryHandlerTest : TestFixture
     public async Task GivenValidRequestWhenBeersAreNotPopulatedReturnsMappedEmptyBeerListAsync()
     {
         // Arrange
-        using var unitOfWork = UnitOfWork;
+        using IUnitOfWork unitOfWork = UnitOfWork;
         var query = new GetBeersQuery();
         var handler = new GetBeersQueryHandler(unitOfWork);
         await unitOfWork.BeerRepository.DeleteBeerAsync(1, CancellationTestToken).ConfigureAwait(false);
@@ -40,7 +42,7 @@ public class GetAllBeersQueryHandlerTest : TestFixture
         await unitOfWork.BeerRepository.DeleteBeerAsync(5, CancellationTestToken).ConfigureAwait(false);
 
         // Act
-        var result = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
+        BeerResourceList result = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
 
         // Assert
         result.ShouldNotBeNull().Count.ShouldBe(0);
