@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 using Dappery.Core.Extensions;
 using Dappery.Domain.Dtos;
@@ -55,15 +54,34 @@ public class BreweryExtensionsTest
         IEnumerable<BeerDto> beers = mappedBrewery.Beers.ShouldNotBeNull();
         beers.ShouldNotBeEmpty();
 
-        BeerDto firstBeer = beers.First(b => b.Id == 1);
+        BeerDto? firstBeer = null;
+        BeerDto? secondBeer = null;
+        BeerDto? thirdBeer = null;
+        foreach (BeerDto beer in beers)
+        {
+            switch (beer.Id)
+            {
+                case 1:
+                    firstBeer = beer;
+                    break;
+                case 2:
+                    secondBeer = beer;
+                    break;
+                case 3:
+                    thirdBeer = beer;
+                    break;
+            }
+        }
+
+        _ = firstBeer.ShouldNotBeNull();
         firstBeer.Name.ShouldBe("Test Beer 1");
         firstBeer.Style.ShouldBe("Lager");
 
-        BeerDto secondBeer = beers.First(b => b.Id == 2);
+        _ = secondBeer.ShouldNotBeNull();
         secondBeer.Name.ShouldBe("Test Beer 2");
         secondBeer.Style.ShouldBe("Ipa");
 
-        BeerDto thirdBeer = beers.First(b => b.Id == 3);
+        _ = thirdBeer.ShouldNotBeNull();
         thirdBeer.Name.ShouldBe("Test Beer 3");
         thirdBeer.Style.ShouldBe("DoubleIpa");
     }
