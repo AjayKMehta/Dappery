@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using Dappery.Core.Extensions;
 using Dappery.Domain.Dtos;
@@ -70,6 +71,8 @@ public class BreweryExtensionsTest
                 case 3:
                     thirdBeer = beer;
                     break;
+                default:
+                    throw new UnreachableException();
             }
         }
 
