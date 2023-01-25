@@ -4,20 +4,23 @@ using FluentValidation;
 
 namespace Dappery.Core.Extensions;
 
-public static class RuleBuilderExtensions
+public static partial class RuleBuilderExtensions
 {
-    private static readonly Regex s_validStateRegex = new(/*lang=regex*/"^((A[LKZR])|(C[AOT])|(D[EC])|(FL)|(GA)|(HI)|(I[DLNA])|(K[SY])|(LA)|(M[EDAINSOT])|(N[EVHJMYCD])|(O[HKR])|(PA)|(RI)|(S[CD])|(T[NX])|(UT)|(V[TA])|(W[AVIY]))$");
-    private static readonly Regex s_streetAddressRegex = new(/*lang=regex*/"\\d{1,5}\\s(\\b\\w*\\b\\s){1,2}\\w*\\.");
-    private static readonly Regex s_zipCodeRegex = new(/*lang=regex*/"^\\d{5}$");
+    [GeneratedRegex("\\d{1,5}\\s(\\b\\w*\\b\\s){1,2}\\w*\\.")]
+    private static partial Regex StreetAddressRegex();
+
+    [GeneratedRegex("^((A[LKZR])|(C[AOT])|(D[EC])|(FL)|(GA)|(HI)|(I[DLNA])|(K[SY])|(LA)|(M[EDAINSOT])|(N[EVHJMYCD])|(O[HKR])|(PA)|(RI)|(S[CD])|(T[NX])|(UT)|(V[TA])|(W[AVIY]))$")]
+    private static partial Regex ValidStateRegex();
+
+    [GeneratedRegex("^\\d{5}$")]
+    private static partial Regex ZipCodeRegex();
 
     public static void NotNullOrEmpty<T>(this IRuleBuilder<T, string?> ruleBuilder)
     {
         _ = ruleBuilder.Custom((stringToValidate, context) =>
           {
               if (string.IsNullOrWhiteSpace(stringToValidate))
-              {
                   context.AddFailure($"{context.PropertyName} cannot be null, or empty");
-              }
           });
     }
 
@@ -25,10 +28,8 @@ public static class RuleBuilderExtensions
     {
         _ = ruleBuilder.Custom((stateAbbreviation, context) =>
           {
-              if (stateAbbreviation is not null && !s_validStateRegex.IsMatch(stateAbbreviation))
-              {
+              if (stateAbbreviation is not null && !ValidStateRegex().IsMatch(stateAbbreviation))
                   context.AddFailure($"{stateAbbreviation} is not a valid state code");
-              }
           })
             .NotEmpty()
             .WithMessage("State code cannot be empty");
@@ -45,7 +46,7 @@ public static class RuleBuilderExtensions
                   return;
               }
 
-              if (!s_streetAddressRegex.IsMatch(streetAddress))
+              if (!StreetAddressRegex().IsMatch(streetAddress))
                   context.AddFailure($"{streetAddress} is not a valid street address");
           });
     }
@@ -61,7 +62,7 @@ public static class RuleBuilderExtensions
                   return;
               }
 
-              if (!s_zipCodeRegex.IsMatch(zipCode))
+              if (!ZipCodeRegex().IsMatch(zipCode))
                   context.AddFailure($"{zipCode} is not a valid zipcode");
           });
     }
