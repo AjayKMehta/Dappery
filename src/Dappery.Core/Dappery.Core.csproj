@@ -3,7 +3,7 @@
     <ProjectReference Include="..\Dappery.Domain\Dappery.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.4.0" />
+    <PackageReference Include="FluentValidation" Version="11.5.0" />
     <PackageReference Include="IDisposableAnalyzers" Version="4.0.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
