@@ -1,14 +1,10 @@
 <Project>
-  <Target Name="Versioning" BeforeTargets="MinVer">
+  <Target Name="Versioning" AfterTargets="MinVer">
     <PropertyGroup Label="Build">
-      <!-- Tag your repository with the semantic version e.g. '1.0.0' to version all NuGet packages.
-      If you have multiple NuGet packages in your solution and want to version them separately, then
-      uncomment this line and tag your repository with the name of the package followed by the
-      semantic version e.g. 'PackageName-1.0.0'. -->
+      <!-- Tag your repository with the semantic version e.g. '1.0.0' to version all NuGet packages. If you have multiple NuGet packages in your solution and want to version them separately, then uncomment this line and tag your repository with the name of the package followed by the semantic version e.g. 'PackageName-1.0.0'. -->
       <!-- <MinVerTagPrefix>$(PackageId)-</MinVerTagPrefix> -->
       <MinVerTagPrefix>v</MinVerTagPrefix>
-      <AssemblyVersion>
-        $(MinVerMajor).$(MinVerMinor).$(MinVerPatch)</AssemblyVersion>
+      <AssemblyVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch)</AssemblyVersion>
     </PropertyGroup>
   </Target>
 </Project>
