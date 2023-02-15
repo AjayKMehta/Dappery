@@ -7,7 +7,7 @@
 ## Run unit tests
 
 ```shell
-dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+dotnet test --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura
 ```
 
 ## Display code coverage in VS Code:
