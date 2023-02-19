@@ -6,7 +6,6 @@
     <PackageReference Include="FluentValidation" />
     <PackageReference Include="IDisposableAnalyzers" />
     <PackageReference Include="MediatR" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="ReflectionAnalyzers" />
     <PackageReference Include="UnoptimizedAssemblyDetector" />

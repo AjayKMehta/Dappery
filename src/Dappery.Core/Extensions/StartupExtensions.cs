@@ -18,7 +18,12 @@ public static class StartupExtensions
     {
         // Add our MediatR and FluentValidation dependencies
         _ = services
-            .AddMediatR(Assembly.GetExecutingAssembly())
-            .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            .AddMediatR(cfg =>
+            {
+                _ = cfg
+                    .RegisterServicesFromAssembly(typeof(StartupExtensions).Assembly)
+                    .AddOpenBehavior(typeof(RequestValidationBehavior<,>));
+            }
+            );
     }
 }
