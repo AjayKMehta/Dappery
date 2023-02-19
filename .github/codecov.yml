@@ -18,3 +18,8 @@ coverage:
         paths:
           - "src"
         removed_code_behavior: removals_only
+    patch:
+      default:
+        # basic
+        target: auto
+        threshold: 1%
