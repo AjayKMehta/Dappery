@@ -17,4 +17,4 @@ coverage:
         threshold: 1% # the leniency in hitting the target
         paths:
           - "src"
-        removed_code_behavior: removed_only
+        removed_code_behavior: removals_only
