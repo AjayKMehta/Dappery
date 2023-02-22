@@ -116,7 +116,7 @@ public class BeerRepository : IBeerRepository
         return beerFromId;
     }
 
-    public async Task<int> CreateBeerAsync(Beer beer, CancellationToken cancellationToken)
+    public Task<int> CreateBeerAsync(Beer beer, CancellationToken cancellationToken)
     {
         // From our business we defined, we'll assume the brewery ID is always attached to the beer
         var beerToInsertSql = new StringBuilder(@"INSERT INTO Beers (Name, BeerStyle, CreatedAt, UpdatedAt, BreweryId)
@@ -136,7 +136,7 @@ public class BeerRepository : IBeerRepository
             cancellationToken: cancellationToken);
 
         // Let's insert the beer and grab its ID
-        return await _dbConnection.ExecuteScalarAsync<int>(beerToCreateCommand).ConfigureAwait(false);
+        return _dbConnection.ExecuteScalarAsync<int>(beerToCreateCommand);
     }
 
     public async Task UpdateBeerAsync(Beer beer, CancellationToken cancellationToken)
