@@ -12,6 +12,7 @@
     <PackageReference Include="UnoptimizedAssemblyDetector" />
     <PackageReference Include="Roslynator.Analyzers" />
     <PackageReference Include="MinVer" />
+    <PackageReference Include="AsyncFixer" />
   </ItemGroup>
   <PropertyGroup>
     <MinVerMinimumMajorMinor>1.0</MinVerMinimumMajorMinor>

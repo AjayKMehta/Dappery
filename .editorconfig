@@ -760,7 +760,7 @@ dotnet_diagnostic.CA1845.severity = warning
 dotnet_diagnostic.CA1846.severity = warning
 
 # CA1849: Call async methods when in an async method
-dotnet_diagnostic.CA1849.severity = warning
+dotnet_diagnostic.CA1849.severity = error
 
 # CA1850: Prefer static HashData method over ComputeHash
 dotnet_diagnostic.CA1850.severity = warning
@@ -819,3 +819,17 @@ dotnet_diagnostic.CA2259.severity = error
 
 # CA2260: Implement generic math interfaces correctly
 dotnet_diagnostic.CA2260.severity = error
+
+##########################################
+# AsyncFixer Analyzer
+# https://github.com/semihokur/AsyncFixer
+##########################################
+
+# Unnecessary async/await usage
+dotnet_diagnostic.AsyncFixer01.severity = suggestion
+# Long-running or blocking operations inside an async method
+dotnet_diagnostic.AsyncFixer02.severity = error
+# Fire-and-forget async-void methods and delegates
+dotnet_diagnostic.AsyncFixer03.severity = error
+# Fire-and-forget async call inside an using block
+dotnet_diagnostic.AsyncFixer04.severity = error
