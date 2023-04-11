@@ -15,7 +15,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageVersion>
-    <PackageVersion Include="Microsoft.Data.Sqlite" Version="7.0.4" />
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="7.0.5" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="5.1.1" />
     <PackageVersion Include="Npgsql" Version="7.0.2" />
     <PackageVersion Include="UnoptimizedAssemblyDetector" Version="0.1.1">
