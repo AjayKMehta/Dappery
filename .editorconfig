@@ -543,6 +543,9 @@ dotnet_diagnostic.RCS1071.severity = warning
 # RCS1074: Remove redundant constructor
 dotnet_diagnostic.RCS1074.severity = suggestion
 
+# RCS1077: Optimize LINQ method call
+dotnet_diagnostic.RCS1077.severity = warning
+
 # RCS1078: Use "" or 'string.Empty'
 roslynator_empty_string_style = field
 
@@ -551,6 +554,9 @@ roslynator_configure_await = true
 
 # RCS1091: Remove empty region
 dotnet_diagnostic.RCS1091.severity = suggestion
+
+# RCS1097: Remove redundant 'ToString' call
+dotnet_diagnostic.RCS1097.severity = warning
 
 # RCS1124: Inline local variable
 dotnet_diagnostic.RCS1124.severity = suggestion
@@ -819,17 +825,3 @@ dotnet_diagnostic.CA2259.severity = error
 
 # CA2260: Implement generic math interfaces correctly
 dotnet_diagnostic.CA2260.severity = error
-
-##########################################
-# AsyncFixer Analyzer
-# https://github.com/semihokur/AsyncFixer
-##########################################
-
-# Unnecessary async/await usage
-dotnet_diagnostic.AsyncFixer01.severity = suggestion
-# Long-running or blocking operations inside an async method
-dotnet_diagnostic.AsyncFixer02.severity = error
-# Fire-and-forget async-void methods and delegates
-dotnet_diagnostic.AsyncFixer03.severity = error
-# Fire-and-forget async call inside an using block
-dotnet_diagnostic.AsyncFixer04.severity = error
