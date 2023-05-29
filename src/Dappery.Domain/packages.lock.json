@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net7.0": {
+      "AsyncFixer": {
+        "type": "Direct",
+        "requested": "[1.6.0, )",
+        "resolved": "1.6.0",
+        "contentHash": "/Xfs9H3UMfEv64cwT+C/JrTRp4w08BmPuFbj0ageadCHpx6rxYJxAU2C6sEqRFG22xmGk5cX9ewzoiiehWVHOw=="
+      },
+      "IDisposableAnalyzers": {
+        "type": "Direct",
+        "requested": "[4.0.6, )",
+        "resolved": "4.0.6",
+        "contentHash": "yKprG5WzImj+POCEACoHLi7CgYb8aMqPN/XU2qclARe9SIn73EoY7BItHg+p4DufWNFYxgJiPuqndW5D/OmswA=="
+      },
+      "MinVer": {
+        "type": "Direct",
+        "requested": "[4.3.0, )",
+        "resolved": "4.3.0",
+        "contentHash": "YNVAW3loCFW4kTwensApaZUl+7xREK75QQNOFSbsbXx2sCSm9/IHBjUHsJGn3u0UA5r/sAqrdYBNUlOFfLhUrA=="
+      },
+      "ReflectionAnalyzers": {
+        "type": "Direct",
+        "requested": "[0.3.1, )",
+        "resolved": "0.3.1",
+        "contentHash": "Q7N3nziye+vGsDPcrKrPFjlaFhrM+1adtJcpjFeq4ufBB+uKc4kRezSK03382xpE8iNQbiRHUl+z31NW0W18FQ=="
+      },
+      "Roslynator.Analyzers": {
+        "type": "Direct",
+        "requested": "[4.3.0, )",
+        "resolved": "4.3.0",
+        "contentHash": "NZNaV9DAYGHKZ753WfhtBj8eoP40LLJsA6JQXdzhF87iTZAdbKCgp32mI3cnQF4TMXz7bk+CgzF/kDG+m+9bCg=="
+      },
+      "UnoptimizedAssemblyDetector": {
+        "type": "Direct",
+        "requested": "[0.1.1, )",
+        "resolved": "0.1.1",
+        "contentHash": "9W3HOyH/E81ofSOrdHC0FyWHnX/TUyBzpWZNVkVco1CThxOE32hqBhmkj8l7vaU1cS3Ms1Ztm9VjsN8A024bYw==",
+        "dependencies": {
+          "System.Reflection.Metadata": "5.0.0"
+        }
+      },
+      "System.Reflection.Metadata": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "5NecZgXktdGg34rh1OenY1rFNDCI8xSjFr+Z4OU4cU06AQHUdRnIIEeWENu3Wl4YowbzkymAIMvi3WyK9U53pQ=="
+      }
+    }
+  }
+}
