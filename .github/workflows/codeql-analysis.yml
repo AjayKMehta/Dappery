@@ -5,6 +5,9 @@ name: "CodeQL"
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - "**/*.md"
+      - "**/*.txt"
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [master]
@@ -29,10 +32,11 @@ jobs:
       fail-fast: false
       matrix:
         language: ["csharp"]
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
         # Learn more:
         # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
-
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+      DOTNET_NOLOGO: true
     steps:
       - name: Checkout repository
         id: checkout_repo
@@ -56,9 +60,11 @@ jobs:
           # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v3.0.3
+        uses: actions/setup-dotnet@v3.2.0
         with:
           dotnet-version: "7.x"
+          dotnet-quality: 'ga'
+          cache: true
 
       # https://github.com/github/codeql-action/issues/757#issuecomment-978693262
       - name: Build solution
