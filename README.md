@@ -26,3 +26,14 @@ dotnet test --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura
     ```
 
 3. From Command Palette, select **Coverage Gutters: Display Coverage** after you have run unit tests (see [previous section](#run-unit-tests)).
+
+## Package restore
+
+When building for CI/CD, we want to keep package versions locked based on lock file(s). If you encounter `NU1403`, try doing the following ([source](https://github.com/NuGet/Home/issues/7921#issuecomment-478152479)):
+
+```shell
+dotnet nuget locals all --clear
+git clean -xfd
+git rm **/packages.lock.json -f
+dotnet restore
+```
