@@ -66,12 +66,9 @@ jobs:
           dotnet-quality: 'ga'
           cache: true
 
-      - name: Restore
-        run: dotnet restore --locked-mode
-
       # https://github.com/github/codeql-action/issues/757#issuecomment-978693262
       - name: Build solution
-        run: dotnet build --no-restore Dappery.sln
+        run: dotnet build Dappery.sln
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2.3.5

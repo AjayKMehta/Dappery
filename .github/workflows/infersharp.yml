@@ -17,17 +17,12 @@ jobs:
         uses: actions/checkout@v3.5.2
 
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v3.2.0
+        uses: actions/setup-dotnet@v3.0.3
         with:
           dotnet-version: "7.x"
-          dotnet-quality: 'ga'
-          cache: true
-
-      - name: Restore
-        run: dotnet restore --locked-mode
 
       - name: Build dotnet
-        run: dotnet build --no-restore Dappery.sln
+        run: dotnet build Dappery.sln
 
       - name: Run Infer#
         id: runinfersharp
