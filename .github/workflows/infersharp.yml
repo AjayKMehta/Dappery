@@ -24,8 +24,16 @@ jobs:
           cache: true
           cache-dependency-path: "**/packages.lock.json"
 
-      - name: Build dotnet
-        run: dotnet build Dappery.sln
+      - name: Install dependencies
+        run: dotnet restore --force-evaluate
+        if: contains(github.actor, 'dependabot') == true
+
+      - name: Install dependencies
+        run: dotnet restore
+        if: contains(github.actor, 'dependabot') == false
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
       - name: Run Infer#
         id: runinfersharp

@@ -63,8 +63,16 @@ jobs:
           cache: true
           cache-dependency-path: '**/packages.lock.json'
 
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
+      - name: Install dependencies
+        run: dotnet restore --force-evaluate
+        if: contains(github.actor, 'dependabot') == true
+
+      - name: Install dependencies
+        run: dotnet restore
+        if: contains(github.actor, 'dependabot') == false
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2.3.5
