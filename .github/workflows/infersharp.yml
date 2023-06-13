@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v3.5.3
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3.2.0
@@ -24,8 +24,16 @@ jobs:
           cache: true
           cache-dependency-path: "**/packages.lock.json"
 
-      - name: Build dotnet
-        run: dotnet build Dappery.sln
+      - name: Install dependencies
+        run: dotnet restore --force-evaluate
+        if: contains(github.actor, 'dependabot') == true
+
+      - name: Install dependencies
+        run: dotnet restore
+        if: contains(github.actor, 'dependabot') == false
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
 
       - name: Run Infer#
         id: runinfersharp
