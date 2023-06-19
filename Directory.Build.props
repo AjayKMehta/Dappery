@@ -24,5 +24,6 @@
   <PropertyGroup Label="CI" Condition="'$(CI)' != ''">
     <!-- https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#restore-behavior-with-lock-file -->
     <RestoreLockedMode>true</RestoreLockedMode>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
   </PropertyGroup>
 </Project>
