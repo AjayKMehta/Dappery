@@ -107,8 +107,8 @@
       },
       "Dapper": {
         "type": "Transitive",
-        "resolved": "2.0.123",
-        "contentHash": "RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ=="
+        "resolved": "2.0.138",
+        "contentHash": "QfnstG3t1hQVKCwVDaMjK72O+B+Ognfcf5fYOFI60ELpxuwE0WGtaOOwqczcuPgU3QEDXq/3TTvOilCvwszRhg=="
       },
       "DiffEngine": {
         "type": "Transitive",
@@ -1444,7 +1444,7 @@
         "type": "Project",
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
-          "Dapper": "[2.0.123, )",
+          "Dapper": "[2.0.138, )",
           "Dappery.Core": "[1.0.0, )",
           "IDisposableAnalyzers": "[4.0.6, )",
           "Microsoft.Data.SqlClient": "[5.1.1, )",
