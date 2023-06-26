@@ -24,13 +24,7 @@ public class UpdateBeerCommandHandler : IRequestHandler<UpdateBeerCommand, BeerR
         ArgumentNullException.ThrowIfNull(request);
 
         // First validate both the beer
-        Beer? existingBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
-
-        // Invalidate the request if no beer was found
-        if (existingBeer is null)
-        {
-            throw new DapperyApiException($"Beer with ID {request.BeerId} was not found", HttpStatusCode.NotFound);
-        }
+        Beer? existingBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false) ?? throw new DapperyApiException($"Beer with ID {request.BeerId} was not found", HttpStatusCode.NotFound);
 
         // Attempt to parse the incoming BeerStyle enumeration value (exactly how we parse in the CreateBeerCommandHandler)
         var parsedBeerStyle = Enum.TryParse(request.Dto.Style, true, out BeerStyle beerStyle);
@@ -44,13 +38,7 @@ public class UpdateBeerCommandHandler : IRequestHandler<UpdateBeerCommand, BeerR
         if (request.Dto.BreweryId.HasValue)
         {
             // Retrieve the brewery, or invalidate the request if none is returned
-            Brewery? existingBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId.Value, cancellationToken).ConfigureAwait(false);
-
-            if (existingBrewery is null)
-            {
-                throw new DapperyApiException($"Cannot update brewery as brewery with ID {request.Dto.BreweryId.Value} does not exists", HttpStatusCode.BadRequest);
-            }
-
+            _ = await _unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId.Value, cancellationToken).ConfigureAwait(false) ?? throw new DapperyApiException($"Cannot update brewery as brewery with ID {request.Dto.BreweryId.Value} does not exists", HttpStatusCode.BadRequest);
             existingBeer.BreweryId = request.Dto.BreweryId.Value;
         }
 

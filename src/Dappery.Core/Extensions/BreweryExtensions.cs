@@ -14,7 +14,7 @@ public static class BreweryExtensions
     {
         return (brewery is null)
             ? throw new ArgumentNullException(nameof(brewery))
-            : (new()
+            : new()
             {
                 Id = brewery.Id,
                 Name = brewery.Name,
@@ -32,6 +32,6 @@ public static class BreweryExtensions
                     ZipCode = brewery.Address?.ZipCode
                 },
                 BeerCount = includeBeerList ? brewery.BeerCount : null
-            });
+            };
     }
 }

@@ -24,14 +24,7 @@ public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerR
         ArgumentNullException.ThrowIfNull(request);
 
         // Check to make sure the brewery exists from the given brewery ID on the request
-        Brewery? existingBrewery = await _unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId, cancellationToken).ConfigureAwait(false);
-
-        // Invalidate the request if no corresponding brewery exists
-        // Since we're not overloading the '==' operator, let's use the 'is' comparison here
-        if (existingBrewery is null)
-        {
-            throw new DapperyApiException($"Cannot create beer with brewery ID {request.Dto.BreweryId} as that brewery does not exist", HttpStatusCode.BadRequest);
-        }
+        _ = await _unitOfWork.BreweryRepository.GetBreweryById(request.Dto.BreweryId, cancellationToken).ConfigureAwait(false) ?? throw new DapperyApiException($"Cannot create beer with brewery ID {request.Dto.BreweryId} as that brewery does not exist", HttpStatusCode.BadRequest);
 
         // Attempt to parse the incoming BeerStyle enumeration value
         var parsedBeerStyle = Enum.TryParse(request.Dto.Style, true, out BeerStyle beerStyle);

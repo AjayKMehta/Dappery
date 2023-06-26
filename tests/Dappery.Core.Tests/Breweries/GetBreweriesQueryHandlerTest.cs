@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Dappery.Core.Breweries.Queries.GetBreweries;
@@ -36,12 +35,21 @@ public class GetBreweriesQueryHandlerTest : TestFixture
             .ShouldNotBeNull();
         items11.ShouldNotBeEmpty();
 
-        BreweryDto? firstBreweryDto = items11.FirstOrDefault(b => b.Id == 1);
+        BreweryDto? firstBreweryDto = null, secondBreweryDto = null;
+        foreach (BreweryDto dto in items11)
+        {
+            if (firstBreweryDto is null && dto.Id == 1)
+                firstBreweryDto = dto;
+            if (secondBreweryDto is null && dto.Id == 2)
+                secondBreweryDto = dto;
+            if (firstBreweryDto is not null && secondBreweryDto is not null)
+                break;
+        }
+
         _ = firstBreweryDto?.Address.ShouldNotBeNull();
         firstBreweryDto?.Beers.ShouldNotBeEmpty();
         firstBreweryDto?.BeerCount.ShouldBe(3);
 
-        BreweryDto? secondBreweryDto = items11.FirstOrDefault(b => b.Id == 2);
         _ = secondBreweryDto?.Address.ShouldNotBeNull();
         secondBreweryDto?.Beers.ShouldNotBeEmpty();
         _ = secondBreweryDto?.BeerCount.ShouldNotBeNull();
