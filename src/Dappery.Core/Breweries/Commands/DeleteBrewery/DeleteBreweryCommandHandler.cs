@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 using Dappery.Core.Data;
 using Dappery.Core.Exceptions;
-using Dappery.Domain.Entities;
 
 using MediatR;
 
@@ -19,11 +18,7 @@ public class DeleteBreweryCommandHandler : IRequestHandler<DeleteBreweryCommand,
     public async Task<Unit> Handle(DeleteBreweryCommand request, CancellationToken cancellationToken)
     {
         // Retrieve the brewery and invalidate the request if none is found
-        Brewery? breweryToDelete = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
-
-        // Invalidate the request if no brewery is found
-        if (breweryToDelete is null)
-            throw new DapperyApiException($"No brewery was found with ID {request.BreweryId}", HttpStatusCode.NotFound);
+        _ = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false) ?? throw new DapperyApiException($"No brewery was found with ID {request.BreweryId}", HttpStatusCode.NotFound);
 
         // Delete the brewery from the database and clean up our resources once we know we have a valid beer
         await _unitOfWork.BreweryRepository.DeleteBrewery(request.BreweryId, cancellationToken).ConfigureAwait(false);

@@ -21,11 +21,7 @@ public class UpdateBreweryCommandHandler : IRequestHandler<UpdateBreweryCommand,
     public async Task<BreweryResource> Handle(UpdateBreweryCommand request, CancellationToken cancellationToken)
     {
         // Retrieve the brewery on the request
-        Brewery? breweryToUpdate = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false);
-
-        // Invalidate the request if no brewery was found
-        if (breweryToUpdate is null)
-            throw new DapperyApiException($"No brewery was found with ID {request.BreweryId}", HttpStatusCode.NotFound);
+        Brewery? breweryToUpdate = await _unitOfWork.BreweryRepository.GetBreweryById(request.BreweryId, cancellationToken).ConfigureAwait(false) ?? throw new DapperyApiException($"No brewery was found with ID {request.BreweryId}", HttpStatusCode.NotFound);
 
         // Update the properties on the brewery entity
         breweryToUpdate.Name = request.Dto.Name;

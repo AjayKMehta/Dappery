@@ -23,11 +23,7 @@ public class RetrieveBeerQueryHandler : IRequestHandler<RetrieveBeerQuery, BeerR
         ArgumentNullException.ThrowIfNull(request);
 
         // Grab the beer from the ID
-        Domain.Entities.Beer? beer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.Id, cancellationToken).ConfigureAwait(false);
-
-        // Invalidate the request if no beer is found
-        if (beer is null)
-            throw new DapperyApiException($"No beer found with ID {request.Id}", HttpStatusCode.NotFound);
+        Domain.Entities.Beer? beer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.Id, cancellationToken).ConfigureAwait(false) ?? throw new DapperyApiException($"No beer found with ID {request.Id}", HttpStatusCode.NotFound);
 
         // Commit the query and clean up our resources
         _unitOfWork.Commit();

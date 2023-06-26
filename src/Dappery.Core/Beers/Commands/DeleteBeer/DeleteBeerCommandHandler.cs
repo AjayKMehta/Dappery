@@ -21,7 +21,7 @@ public class DeleteBeerCommandHandler : IRequestHandler<DeleteBeerCommand, Unit>
         ArgumentNullException.ThrowIfNull(request);
 
         // Retrieve the beer from the request
-        Domain.Entities.Beer? existingBeer = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false) ?? throw new DapperyApiException($"No beer found with ID {request.BeerId}", HttpStatusCode.NotFound);
+        _ = await _unitOfWork.BeerRepository.GetBeerByIdAsync(request.BeerId, cancellationToken).ConfigureAwait(false) ?? throw new DapperyApiException($"No beer found with ID {request.BeerId}", HttpStatusCode.NotFound);
 
         // Remove the beer from the database
         await _unitOfWork.BeerRepository.DeleteBeerAsync(request.BeerId, cancellationToken).ConfigureAwait(false);
