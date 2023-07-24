@@ -37,7 +37,7 @@ jobs:
 
       - name: Run Infer#
         id: runinfersharp
-        uses: microsoft/infersharpaction@v1.4
+        uses: microsoft/infersharpaction@v1.5
         with:
           binary-path: "bin"
 
