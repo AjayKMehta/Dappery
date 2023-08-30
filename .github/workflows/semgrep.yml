@@ -1,0 +1,28 @@
+on:
+  pull_request: {}
+  push:
+    branches:
+    - main
+    - master
+    paths:
+    - .github/workflows/semgrep.yml
+  schedule:
+  - cron: '0 0 * * 0'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "The reason for running the workflow"
+        required: true
+        default: "Manual run"
+name: Semgrep
+jobs:
+  semgrep:
+    name: Scan
+    runs-on: ubuntu-20.04
+    env:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    container:
+      image: returntocorp/semgrep
+    steps:
+    - uses: actions/checkout@v3.6.0
+    - run: semgrep ci
