@@ -19,6 +19,7 @@
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <!-- https://github.com/dotnet/reproducible-builds/blob/main/Documentation/Reproducible-MSBuild/Techniques/DisableImplicitNuGetFallbackFolder.md -->
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+    <NuGetAudit>true</NuGetAudit>
   </PropertyGroup>
   <!-- GH, CircleCI, GitLab and BitBucket use CI -->
   <PropertyGroup Label="CI" Condition="'$(CI)' != ''">
