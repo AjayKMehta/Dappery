@@ -15,6 +15,10 @@ indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+# Spelling rules
+spelling_languages = en-us
+spelling_checkable_types = strings,identifiers,comments
+spelling_error_severity = info
 
 #########################
 # File Extension Settings
@@ -379,7 +383,7 @@ dotnet_naming_rule.constant_rule.symbols  = constant_group
 dotnet_naming_rule.constant_rule.style    = pascal_case_style
 dotnet_naming_rule.constant_rule.severity = warning
 
-# Interfaces use PascalCase and are prefi`xed with uppercase 'I'
+# Interfaces use PascalCase and are prefixed with uppercase 'I'
 dotnet_naming_rule.interface_rule.symbols` = interface_group
 dotnet_naming_rule.interface_rule.style    = interface_style
 dotnet_naming_rule.interface_rule.severity = warning
