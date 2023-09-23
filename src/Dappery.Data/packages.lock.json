@@ -10,15 +10,15 @@
       },
       "Dapper": {
         "type": "Direct",
-        "requested": "[2.0.151, )",
-        "resolved": "2.0.151",
-        "contentHash": "mMcZgx1lim0/i1Ozu+lgnBM4GwNIHpCuxV6BV2ovsEfZAXRAq4jb6RIhxGDcVjtmXMLPpdp85jHPdDjBMMwejw=="
+        "requested": "[2.1.4, )",
+        "resolved": "2.1.4",
+        "contentHash": "TnTa28ktP/drRXnnXChHANq2WoF8af9DLu3VBtyPn3RYjxwDzuYhGrSvAN2CrmE+RyNaN1v81kf6rYbp0a4UaQ=="
       },
       "IDisposableAnalyzers": {
         "type": "Direct",
-        "requested": "[4.0.6, )",
-        "resolved": "4.0.6",
-        "contentHash": "yKprG5WzImj+POCEACoHLi7CgYb8aMqPN/XU2qclARe9SIn73EoY7BItHg+p4DufWNFYxgJiPuqndW5D/OmswA=="
+        "requested": "[4.0.7, )",
+        "resolved": "4.0.7",
+        "contentHash": "Xrn/VABG/JhulJOmHOeOAY4/qafbEyRj3Z6gMeSABT1XCqMe8HnqOvid8gEVJt47VUZ6eD7XpTFLZ1KLyTZgdw=="
       },
       "Microsoft.Data.SqlClient": {
         "type": "Direct",
@@ -433,7 +433,7 @@
           "AsyncFixer": "[1.6.0, )",
           "Dappery.Domain": "[1.0.0, )",
           "FluentValidation": "[11.7.1, )",
-          "IDisposableAnalyzers": "[4.0.6, )",
+          "IDisposableAnalyzers": "[4.0.7, )",
           "MediatR": "[12.1.1, )",
           "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )",
           "MinVer": "[4.3.0, )",
@@ -446,7 +446,7 @@
         "type": "Project",
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
-          "IDisposableAnalyzers": "[4.0.6, )",
+          "IDisposableAnalyzers": "[4.0.7, )",
           "MinVer": "[4.3.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
           "Roslynator.Analyzers": "[4.5.0, )",

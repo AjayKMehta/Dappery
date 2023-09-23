@@ -16,9 +16,9 @@
       },
       "IDisposableAnalyzers": {
         "type": "Direct",
-        "requested": "[4.0.6, )",
-        "resolved": "4.0.6",
-        "contentHash": "yKprG5WzImj+POCEACoHLi7CgYb8aMqPN/XU2qclARe9SIn73EoY7BItHg+p4DufWNFYxgJiPuqndW5D/OmswA=="
+        "requested": "[4.0.7, )",
+        "resolved": "4.0.7",
+        "contentHash": "Xrn/VABG/JhulJOmHOeOAY4/qafbEyRj3Z6gMeSABT1XCqMe8HnqOvid8gEVJt47VUZ6eD7XpTFLZ1KLyTZgdw=="
       },
       "MediatR": {
         "type": "Direct",
@@ -82,7 +82,7 @@
         "type": "Project",
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
-          "IDisposableAnalyzers": "[4.0.6, )",
+          "IDisposableAnalyzers": "[4.0.7, )",
           "MinVer": "[4.3.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
           "Roslynator.Analyzers": "[4.5.0, )",
