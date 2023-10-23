@@ -10,9 +10,9 @@
       },
       "Dapper": {
         "type": "Direct",
-        "requested": "[2.1.11, )",
-        "resolved": "2.1.11",
-        "contentHash": "4S2ysi5sxGID6TiAkNpAu4eqkGU1gZjOJ+UAygIdkWFEAX02S8NwUuUzqkqbHL9FTRgimwbz99xte2luMCm6iw=="
+        "requested": "[2.1.15, )",
+        "resolved": "2.1.15",
+        "contentHash": "1aWSAosZymEM+mRwfrXteRIN74/JTUjqj9B/KqEbanH6vfUKy9D9cemRN0q1ZOEfSB7d1PpFTpVOCbf2Uv70Og=="
       },
       "IDisposableAnalyzers": {
         "type": "Direct",
@@ -432,7 +432,7 @@
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
           "Dappery.Domain": "[1.0.0, )",
-          "FluentValidation": "[11.7.1, )",
+          "FluentValidation": "[11.8.0, )",
           "IDisposableAnalyzers": "[4.0.7, )",
           "MediatR": "[12.1.1, )",
           "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )",
@@ -455,9 +455,9 @@
       },
       "FluentValidation": {
         "type": "CentralTransitive",
-        "requested": "[11.7.1, )",
-        "resolved": "11.7.1",
-        "contentHash": "w9Al4gls6iVGFbTd/NPOPlwzqDTghH+ntL4c4FYUatc+LeybpIwhYArLykZJP/VjF2n3ihj3ws+1yd7KR5lQlg=="
+        "requested": "[11.8.0, )",
+        "resolved": "11.8.0",
+        "contentHash": "TiEaaYqSIAS+wXQv46LRm8Mca092XYNePD0n231Hqlkmm5FuToZoWnjI1ef/vJUxBzqR7/k2vaVQXxijNgVKRQ=="
       },
       "MediatR": {
         "type": "CentralTransitive",
