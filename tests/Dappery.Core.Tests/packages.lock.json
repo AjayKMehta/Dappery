@@ -41,9 +41,9 @@
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
-        "requested": "[4.6.0, )",
-        "resolved": "4.6.0",
-        "contentHash": "pIRnhOybcaH57SPBYV+37FUk1RuNslfb95tEKdwHhYKAzXePqD8QXpzm+KDN/KOpdXV42Da+UhfjWzFyeKSHHQ=="
+        "requested": "[4.6.1, )",
+        "resolved": "4.6.1",
+        "contentHash": "SDnYINWUo4n7/OsU2+ygeYexLWZ7KoMIfuNVY4V0S7ANVNHeg9YgEpK7G0zlTJmvWdIuoc0A85zZoyIyRj+Tag=="
       },
       "Shouldly": {
         "type": "Direct",
@@ -107,8 +107,8 @@
       },
       "Dapper": {
         "type": "Transitive",
-        "resolved": "2.1.11",
-        "contentHash": "4S2ysi5sxGID6TiAkNpAu4eqkGU1gZjOJ+UAygIdkWFEAX02S8NwUuUzqkqbHL9FTRgimwbz99xte2luMCm6iw=="
+        "resolved": "2.1.15",
+        "contentHash": "1aWSAosZymEM+mRwfrXteRIN74/JTUjqj9B/KqEbanH6vfUKy9D9cemRN0q1ZOEfSB7d1PpFTpVOCbf2Uv70Og=="
       },
       "DiffEngine": {
         "type": "Transitive",
@@ -126,8 +126,8 @@
       },
       "FluentValidation": {
         "type": "Transitive",
-        "resolved": "11.7.1",
-        "contentHash": "w9Al4gls6iVGFbTd/NPOPlwzqDTghH+ntL4c4FYUatc+LeybpIwhYArLykZJP/VjF2n3ihj3ws+1yd7KR5lQlg=="
+        "resolved": "11.8.0",
+        "contentHash": "TiEaaYqSIAS+wXQv46LRm8Mca092XYNePD0n231Hqlkmm5FuToZoWnjI1ef/vJUxBzqR7/k2vaVQXxijNgVKRQ=="
       },
       "MediatR": {
         "type": "Transitive",
@@ -160,11 +160,11 @@
       },
       "Microsoft.Data.SqlClient": {
         "type": "Transitive",
-        "resolved": "5.1.1",
-        "contentHash": "MW5E9HFvCaV069o8b6YpuRDPBux8s96qDnOJ+4N9QNUCs7c5W3KxwQ+ftpAjbMUlImL+c9WR+l+f5hzjkqhu2g==",
+        "resolved": "5.1.2",
+        "contentHash": "q/F1HTOn9QLwgRp4esJIA1b2X15faeV8WozkNhvU3Zk0DcYDWUsEf5WMkbypY4CaNkZntOduods5wLyv8I699w==",
         "dependencies": {
           "Azure.Identity": "1.7.0",
-          "Microsoft.Data.SqlClient.SNI.runtime": "5.1.0",
+          "Microsoft.Data.SqlClient.SNI.runtime": "5.1.1",
           "Microsoft.Identity.Client": "4.47.2",
           "Microsoft.IdentityModel.JsonWebTokens": "6.24.0",
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.24.0",
@@ -180,22 +180,22 @@
       },
       "Microsoft.Data.SqlClient.SNI.runtime": {
         "type": "Transitive",
-        "resolved": "5.1.0",
-        "contentHash": "jVsElisM5sfBzaaV9kdq2NXZLwIbytetnsOIlJ0cQGgQP4zFNBmkfHBnpwtmKrtBJBEV9+9PVQPVrcCVhDgcIg=="
+        "resolved": "5.1.1",
+        "contentHash": "wNGM5ZTQCa2blc9ikXQouybGiyMd6IHPVJvAlBEPtr6JepZEOYeDxGyprYvFVeOxlCXs7avridZQ0nYkHzQWCQ=="
       },
       "Microsoft.Data.Sqlite": {
         "type": "Transitive",
-        "resolved": "7.0.12",
-        "contentHash": "xDe4lzEJm5bl4aEq6SmLBhgYPgh5GgkGzGaw9PGGajfqMAR7TCk1RkzsFb1iAYtetFHKZmQNGkR2EWKJSZTGSw==",
+        "resolved": "7.0.13",
+        "contentHash": "zBd0ZxGNsgQ03hDT+4LwCopVwSO1yLvUEI5oSkkLK5B3JeWSpiaEALQojNycA2K4zuYBJNL3uPy2J262DoKdRA==",
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "7.0.12",
+          "Microsoft.Data.Sqlite.Core": "7.0.13",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.4"
         }
       },
       "Microsoft.Data.Sqlite.Core": {
         "type": "Transitive",
-        "resolved": "7.0.12",
-        "contentHash": "Y4nEJU7FKYW187VGN0yc71vikqjVhWvpxLkN1R340ONFNXyyFGjYlV3vnnyeGFrxQFBa7N4zJGhZfTFBSduamg==",
+        "resolved": "7.0.13",
+        "contentHash": "acRUY0iRrdIrhUXxu9GnonxV9P3VIeMnpnmHoY9vE9D5CAJeThro7vr63urSD0Qmav2gS2sxNAQ/NkP09OZJBQ==",
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.4"
         }
@@ -1430,13 +1430,13 @@
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
           "Dappery.Domain": "[1.0.0, )",
-          "FluentValidation": "[11.7.1, )",
+          "FluentValidation": "[11.8.0, )",
           "IDisposableAnalyzers": "[4.0.7, )",
           "MediatR": "[12.1.1, )",
           "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )",
           "MinVer": "[4.3.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.6.0, )",
+          "Roslynator.Analyzers": "[4.6.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       },
@@ -1444,15 +1444,15 @@
         "type": "Project",
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
-          "Dapper": "[2.1.11, )",
+          "Dapper": "[2.1.15, )",
           "Dappery.Core": "[1.0.0, )",
           "IDisposableAnalyzers": "[4.0.7, )",
-          "Microsoft.Data.SqlClient": "[5.1.1, )",
-          "Microsoft.Data.Sqlite": "[7.0.12, )",
+          "Microsoft.Data.SqlClient": "[5.1.2, )",
+          "Microsoft.Data.Sqlite": "[7.0.13, )",
           "MinVer": "[4.3.0, )",
           "Npgsql": "[7.0.6, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.6.0, )",
+          "Roslynator.Analyzers": "[4.6.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       },
@@ -1463,7 +1463,7 @@
           "IDisposableAnalyzers": "[4.0.7, )",
           "MinVer": "[4.3.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.6.0, )",
+          "Roslynator.Analyzers": "[4.6.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       }
