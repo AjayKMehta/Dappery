@@ -10,9 +10,9 @@
       },
       "Dapper": {
         "type": "Direct",
-        "requested": "[2.1.15, )",
-        "resolved": "2.1.15",
-        "contentHash": "1aWSAosZymEM+mRwfrXteRIN74/JTUjqj9B/KqEbanH6vfUKy9D9cemRN0q1ZOEfSB7d1PpFTpVOCbf2Uv70Og=="
+        "requested": "[2.1.21, )",
+        "resolved": "2.1.21",
+        "contentHash": "EaTXNZX60/k9snRsLxFhD2XmoSKubc+VOeL3hBM6/R8j2MT8/81xOc2V8EEhwr8Mu3Sf951PJPxjlXN4FznH0w=="
       },
       "IDisposableAnalyzers": {
         "type": "Direct",
@@ -74,9 +74,9 @@
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
-        "requested": "[4.6.1, )",
-        "resolved": "4.6.1",
-        "contentHash": "SDnYINWUo4n7/OsU2+ygeYexLWZ7KoMIfuNVY4V0S7ANVNHeg9YgEpK7G0zlTJmvWdIuoc0A85zZoyIyRj+Tag=="
+        "requested": "[4.6.2, )",
+        "resolved": "4.6.2",
+        "contentHash": "IEVn56S7d1/FmczIosCAcetJVZDPO+o1eET378Fl1xAPDBGkvfgg4tBVQZADsiBufC6EN+hu5UpsRqlIc88fbA=="
       },
       "UnoptimizedAssemblyDetector": {
         "type": "Direct",
@@ -438,7 +438,7 @@
           "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )",
           "MinVer": "[4.3.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.6.1, )",
+          "Roslynator.Analyzers": "[4.6.2, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       },
@@ -449,7 +449,7 @@
           "IDisposableAnalyzers": "[4.0.7, )",
           "MinVer": "[4.3.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.6.1, )",
+          "Roslynator.Analyzers": "[4.6.2, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       },
