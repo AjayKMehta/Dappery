@@ -22,7 +22,7 @@ public class BreweryRepositoryTest : TestFixture
         using IUnitOfWork unitOfWork = UnitOfWork;
 
         // Act
-        var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false)).ToList();
+        var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken)).ToList();
         unitOfWork.Commit();
 
         // Assert
@@ -48,11 +48,11 @@ public class BreweryRepositoryTest : TestFixture
     {
         // Arrange
         using IUnitOfWork unitOfWork = UnitOfWork;
-        await unitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
-        await unitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken).ConfigureAwait(false);
+        await unitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken);
+        await unitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken);
 
         // Act
-        var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false)).ToList();
+        var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken)).ToList();
         unitOfWork.Commit();
 
         // Assert
@@ -66,7 +66,7 @@ public class BreweryRepositoryTest : TestFixture
         using IUnitOfWork unitOfWork = UnitOfWork;
 
         // Act
-        Brewery? brewery = await unitOfWork.BreweryRepository.GetBreweryById(1, CancellationTestToken).ConfigureAwait(false);
+        Brewery? brewery = await unitOfWork.BreweryRepository.GetBreweryById(1, CancellationTestToken);
         unitOfWork.Commit();
 
         // Assert
@@ -88,7 +88,7 @@ public class BreweryRepositoryTest : TestFixture
         using IUnitOfWork unitOfWork = UnitOfWork;
 
         // Act
-        Brewery? brewery = await unitOfWork.BreweryRepository.GetBreweryById(11, CancellationTestToken).ConfigureAwait(false);
+        Brewery? brewery = await unitOfWork.BreweryRepository.GetBreweryById(11, CancellationTestToken);
         unitOfWork.Commit();
 
         // Assert
@@ -117,8 +117,8 @@ public class BreweryRepositoryTest : TestFixture
         };
 
         // Act
-        var breweryId = await unitOfWork.BreweryRepository.CreateBrewery(breweryToInsert, CancellationTestToken).ConfigureAwait(false);
-        Brewery? insertedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryId, CancellationTestToken).ConfigureAwait(false);
+        var breweryId = await unitOfWork.BreweryRepository.CreateBrewery(breweryToInsert, CancellationTestToken);
+        Brewery? insertedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryId, CancellationTestToken);
         unitOfWork.Commit();
 
         // Assert
@@ -154,8 +154,8 @@ public class BreweryRepositoryTest : TestFixture
         };
 
         // Act
-        await unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, CancellationTestToken).ConfigureAwait(false);
-        Brewery? updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken).ConfigureAwait(false);
+        await unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, CancellationTestToken);
+        Brewery? updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken);
         unitOfWork.Commit();
 
         // Assert
@@ -192,8 +192,8 @@ public class BreweryRepositoryTest : TestFixture
         };
 
         // Act
-        await unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, CancellationTestToken, true).ConfigureAwait(false);
-        Brewery? updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken).ConfigureAwait(false);
+        await unitOfWork.BreweryRepository.UpdateBrewery(breweryToUpdate, CancellationTestToken, true);
+        Brewery? updatedBrewery = await unitOfWork.BreweryRepository.GetBreweryById(breweryToUpdate.Id, CancellationTestToken);
         unitOfWork.Commit();
 
         // Assert
@@ -212,13 +212,13 @@ public class BreweryRepositoryTest : TestFixture
     {
         // Arrange
         using IUnitOfWork unitOfWork = UnitOfWork;
-        (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false))?.Count().ShouldBe(2);
-        (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationToken.None).ConfigureAwait(false))?.Count().ShouldBe(5);
+        (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken))?.Count().ShouldBe(2);
+        (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationToken.None))?.Count().ShouldBe(5);
 
         // Act
-        await unitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
-        var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken).ConfigureAwait(false)).ToList();
-        (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationToken.None).ConfigureAwait(false))?.Count().ShouldBe(2);
+        await unitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken);
+        var breweries = (await unitOfWork.BreweryRepository.GetAllBreweries(CancellationTestToken)).ToList();
+        (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationToken.None))?.Count().ShouldBe(2);
         unitOfWork.Commit();
 
         // Assert

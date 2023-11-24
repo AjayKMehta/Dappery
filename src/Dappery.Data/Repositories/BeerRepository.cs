@@ -15,13 +15,13 @@ namespace Dappery.Data.Repositories;
 public class BeerRepository : IBeerRepository
 {
     private readonly IDbTransaction _transaction;
-    private readonly IDbConnection? _dbConnection;
+    private readonly IDbConnection _dbConnection;
     private readonly string _insertRowRetrievalQuery;
 
     public BeerRepository(IDbTransaction dbTransaction, string insertRowRetrievalQuery)
     {
         _transaction = dbTransaction;
-        _dbConnection = _transaction.Connection;
+        _dbConnection = _transaction.Connection!;
         _insertRowRetrievalQuery = insertRowRetrievalQuery;
     }
 

@@ -20,7 +20,7 @@ public static partial class RuleBuilderExtensions
         _ = ruleBuilder.Custom((stringToValidate, context) =>
           {
               if (string.IsNullOrWhiteSpace(stringToValidate))
-                  context.AddFailure($"{context.PropertyName} cannot be null, or empty");
+                  context.AddFailure($"{context.PropertyPath} cannot be null, or empty");
           });
     }
 

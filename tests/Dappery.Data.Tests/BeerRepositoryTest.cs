@@ -21,7 +21,7 @@ public class BeerRepositoryTest : TestFixture
         using IUnitOfWork unitOfWork = UnitOfWork;
 
         // Act
-        var beers = (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationTestToken).ConfigureAwait(false)).ToList();
+        var beers = (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationTestToken)).ToList();
         unitOfWork.Commit();
 
         // Assert
@@ -44,14 +44,14 @@ public class BeerRepositoryTest : TestFixture
     {
         // Arrange, remove all the beers from our database
         using IUnitOfWork unitOfWork = UnitOfWork;
-        await unitOfWork.BeerRepository.DeleteBeerAsync(1, CancellationTestToken).ConfigureAwait(false);
-        await unitOfWork.BeerRepository.DeleteBeerAsync(2, CancellationTestToken).ConfigureAwait(false);
-        await unitOfWork.BeerRepository.DeleteBeerAsync(3, CancellationTestToken).ConfigureAwait(false);
-        await unitOfWork.BeerRepository.DeleteBeerAsync(4, CancellationTestToken).ConfigureAwait(false);
-        await unitOfWork.BeerRepository.DeleteBeerAsync(5, CancellationTestToken).ConfigureAwait(false);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(1, CancellationTestToken);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(2, CancellationTestToken);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(3, CancellationTestToken);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(4, CancellationTestToken);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(5, CancellationTestToken);
 
         // Act
-        var beers = (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationTestToken).ConfigureAwait(false)).ToList();
+        var beers = (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationTestToken)).ToList();
         unitOfWork.Commit();
 
         // Assert
@@ -65,7 +65,7 @@ public class BeerRepositoryTest : TestFixture
         using IUnitOfWork unitOfWork = UnitOfWork;
 
         // Act
-        Beer? beer = await unitOfWork.BeerRepository.GetBeerByIdAsync(1, CancellationTestToken).ConfigureAwait(false);
+        Beer? beer = await unitOfWork.BeerRepository.GetBeerByIdAsync(1, CancellationTestToken);
         unitOfWork.Commit();
 
         // Assert, validate a few properties
@@ -87,7 +87,7 @@ public class BeerRepositoryTest : TestFixture
         using IUnitOfWork unitOfWork = UnitOfWork;
 
         // Act
-        Beer? beer = await unitOfWork.BeerRepository.GetBeerByIdAsync(10, CancellationTestToken).ConfigureAwait(false);
+        Beer? beer = await unitOfWork.BeerRepository.GetBeerByIdAsync(10, CancellationTestToken);
         unitOfWork.Commit();
 
         // Assert, validate a few properties
@@ -109,8 +109,8 @@ public class BeerRepositoryTest : TestFixture
         };
 
         // Act
-        var beerId = await unitOfWork.BeerRepository.CreateBeerAsync(beerToInsert, CancellationTestToken).ConfigureAwait(false);
-        Beer? insertedBeer = await unitOfWork.BeerRepository.GetBeerByIdAsync(beerId, CancellationTestToken).ConfigureAwait(false);
+        var beerId = await unitOfWork.BeerRepository.CreateBeerAsync(beerToInsert, CancellationTestToken);
+        Beer? insertedBeer = await unitOfWork.BeerRepository.GetBeerByIdAsync(beerId, CancellationTestToken);
         unitOfWork.Commit();
 
         Beer beer = insertedBeer
@@ -139,8 +139,8 @@ public class BeerRepositoryTest : TestFixture
         };
 
         // Act
-        await unitOfWork.BeerRepository.UpdateBeerAsync(beerToUpdate, CancellationTestToken).ConfigureAwait(false);
-        Beer? updatedBeer = await unitOfWork.BeerRepository.GetBeerByIdAsync(beerToUpdate.Id, CancellationTestToken).ConfigureAwait(false);
+        await unitOfWork.BeerRepository.UpdateBeerAsync(beerToUpdate, CancellationTestToken);
+        Beer? updatedBeer = await unitOfWork.BeerRepository.GetBeerByIdAsync(beerToUpdate.Id, CancellationTestToken);
         unitOfWork.Commit();
 
         Brewery brewery = updatedBeer
@@ -162,12 +162,12 @@ public class BeerRepositoryTest : TestFixture
     {
         // Arrange
         using IUnitOfWork unitOfWork = UnitOfWork;
-        (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationTestToken).ConfigureAwait(false))?.Count().ShouldBe(5);
+        (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationTestToken))?.Count().ShouldBe(5);
 
         // Act
-        await unitOfWork.BeerRepository.DeleteBeerAsync(1, CancellationTestToken).ConfigureAwait(false);
-        Brewery? breweryOfRemovedBeer = await unitOfWork.BreweryRepository.GetBreweryById(1, CancellationTestToken).ConfigureAwait(false);
-        (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationTestToken).ConfigureAwait(false))?.Count().ShouldBe(4);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(1, CancellationTestToken);
+        Brewery? breweryOfRemovedBeer = await unitOfWork.BreweryRepository.GetBreweryById(1, CancellationTestToken);
+        (await unitOfWork.BeerRepository.GetAllBeersAsync(CancellationTestToken))?.Count().ShouldBe(4);
         unitOfWork.Commit();
 
         // Assert
