@@ -41,9 +41,9 @@
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
-        "requested": "[4.6.2, )",
-        "resolved": "4.6.2",
-        "contentHash": "IEVn56S7d1/FmczIosCAcetJVZDPO+o1eET378Fl1xAPDBGkvfgg4tBVQZADsiBufC6EN+hu5UpsRqlIc88fbA=="
+        "requested": "[4.6.4, )",
+        "resolved": "4.6.4",
+        "contentHash": "lOPpqMv4YzqkQNVmfwRPhjtAFTHd7HT7Jzy50sWU/QUOawGdqw462TCwFNW2DlrfjUUVHOzQp89HuhaqGOsDVg=="
       },
       "Shouldly": {
         "type": "Direct",
@@ -107,8 +107,8 @@
       },
       "Dapper": {
         "type": "Transitive",
-        "resolved": "2.1.21",
-        "contentHash": "EaTXNZX60/k9snRsLxFhD2XmoSKubc+VOeL3hBM6/R8j2MT8/81xOc2V8EEhwr8Mu3Sf951PJPxjlXN4FznH0w=="
+        "resolved": "2.1.24",
+        "contentHash": "/2t2vsdJyZRsk13AsWigZpsuFvEwK+o3v862cEULXoww905gyKhJFSuwmZI/4Ui9COX9ZCFCI09UHyH4wVYl3A=="
       },
       "DiffEngine": {
         "type": "Transitive",
@@ -126,8 +126,8 @@
       },
       "FluentValidation": {
         "type": "Transitive",
-        "resolved": "11.8.0",
-        "contentHash": "TiEaaYqSIAS+wXQv46LRm8Mca092XYNePD0n231Hqlkmm5FuToZoWnjI1ef/vJUxBzqR7/k2vaVQXxijNgVKRQ=="
+        "resolved": "11.8.1",
+        "contentHash": "N72rnlE99XYB7EGA1u9y7m7kNTTynqOPBhZqDE8zr1Y0aSR4t5si94LRA7UVdAV09GaXWCErW+EiFhfbg3DSbg=="
       },
       "MediatR": {
         "type": "Transitive",
@@ -392,10 +392,10 @@
       },
       "Npgsql": {
         "type": "Transitive",
-        "resolved": "7.0.6",
-        "contentHash": "TAqvwRnm3NJ0QvN7cvu6geJkbI0XPzGVRElVY5hF4gsgA+BnE12x6GM1TLhdeq+7ZKvvo3BD8jXKnXmr3tvdEw==",
+        "resolved": "8.0.0",
+        "contentHash": "Qiz74U+O7Mv4knrsXgKVYGJjgwoziK+aMFZqz7PtKR3vyGIhZA0tnW6HoUnL3X+YqtmVuhmoKkN8LDWEHMxPbw==",
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "6.0.0"
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
         }
       },
       "NuGet.Frameworks": {
@@ -1430,13 +1430,13 @@
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
           "Dappery.Domain": "[1.0.0, )",
-          "FluentValidation": "[11.8.0, )",
+          "FluentValidation": "[11.8.1, )",
           "IDisposableAnalyzers": "[4.0.7, )",
           "MediatR": "[12.2.0, )",
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.0, )",
           "MinVer": "[4.3.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.6.2, )",
+          "Roslynator.Analyzers": "[4.6.4, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       },
@@ -1444,15 +1444,15 @@
         "type": "Project",
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
-          "Dapper": "[2.1.21, )",
+          "Dapper": "[2.1.24, )",
           "Dappery.Core": "[1.0.0, )",
           "IDisposableAnalyzers": "[4.0.7, )",
           "Microsoft.Data.SqlClient": "[5.1.2, )",
           "Microsoft.Data.Sqlite": "[8.0.0, )",
           "MinVer": "[4.3.0, )",
-          "Npgsql": "[7.0.6, )",
+          "Npgsql": "[8.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.6.2, )",
+          "Roslynator.Analyzers": "[4.6.4, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       },
@@ -1463,7 +1463,7 @@
           "IDisposableAnalyzers": "[4.0.7, )",
           "MinVer": "[4.3.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.6.2, )",
+          "Roslynator.Analyzers": "[4.6.4, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       }

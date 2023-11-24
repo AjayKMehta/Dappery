@@ -10,9 +10,9 @@
       },
       "FluentValidation": {
         "type": "Direct",
-        "requested": "[11.8.0, )",
-        "resolved": "11.8.0",
-        "contentHash": "TiEaaYqSIAS+wXQv46LRm8Mca092XYNePD0n231Hqlkmm5FuToZoWnjI1ef/vJUxBzqR7/k2vaVQXxijNgVKRQ=="
+        "requested": "[11.8.1, )",
+        "resolved": "11.8.1",
+        "contentHash": "N72rnlE99XYB7EGA1u9y7m7kNTTynqOPBhZqDE8zr1Y0aSR4t5si94LRA7UVdAV09GaXWCErW+EiFhfbg3DSbg=="
       },
       "IDisposableAnalyzers": {
         "type": "Direct",
@@ -53,9 +53,9 @@
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
-        "requested": "[4.6.2, )",
-        "resolved": "4.6.2",
-        "contentHash": "IEVn56S7d1/FmczIosCAcetJVZDPO+o1eET378Fl1xAPDBGkvfgg4tBVQZADsiBufC6EN+hu5UpsRqlIc88fbA=="
+        "requested": "[4.6.4, )",
+        "resolved": "4.6.4",
+        "contentHash": "lOPpqMv4YzqkQNVmfwRPhjtAFTHd7HT7Jzy50sWU/QUOawGdqw462TCwFNW2DlrfjUUVHOzQp89HuhaqGOsDVg=="
       },
       "UnoptimizedAssemblyDetector": {
         "type": "Direct",
@@ -88,7 +88,7 @@
           "IDisposableAnalyzers": "[4.0.7, )",
           "MinVer": "[4.3.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.6.2, )",
+          "Roslynator.Analyzers": "[4.6.4, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       }
