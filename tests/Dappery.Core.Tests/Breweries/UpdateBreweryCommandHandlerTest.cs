@@ -36,7 +36,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
 
         // Act
         var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
-        BreweryResource result = await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
+        BreweryResource result = await commandHandler.Handle(updateCommand, CancellationTestToken);
 
         // Assert
         BreweryDto breweryDTo = result
@@ -75,7 +75,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
 
         // Act
         var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
-        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
+        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await commandHandler.Handle(updateCommand, CancellationTestToken));
 
         // Assert
         result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.NotFound);
@@ -94,7 +94,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
 
         // Act
         var commandHandler = new UpdateBreweryCommandHandler(unitOfWork);
-        BreweryResource? result = await commandHandler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
+        BreweryResource? result = await commandHandler.Handle(updateCommand, CancellationTestToken);
 
         // Assert
         _ = result

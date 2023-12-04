@@ -21,7 +21,7 @@ public class GetAllBeersQueryHandlerTest : TestFixture
         var handler = new GetBeersQueryHandler(unitOfWork);
 
         // Act
-        BeerResourceList result = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
+        BeerResourceList result = await handler.Handle(query, CancellationTestToken);
 
         // Assert
         result.ShouldNotBeNull().Count.ShouldBe(5);
@@ -35,14 +35,14 @@ public class GetAllBeersQueryHandlerTest : TestFixture
         using IUnitOfWork unitOfWork = UnitOfWork;
         var query = new GetBeersQuery();
         var handler = new GetBeersQueryHandler(unitOfWork);
-        await unitOfWork.BeerRepository.DeleteBeerAsync(1, CancellationTestToken).ConfigureAwait(false);
-        await unitOfWork.BeerRepository.DeleteBeerAsync(2, CancellationTestToken).ConfigureAwait(false);
-        await unitOfWork.BeerRepository.DeleteBeerAsync(3, CancellationTestToken).ConfigureAwait(false);
-        await unitOfWork.BeerRepository.DeleteBeerAsync(4, CancellationTestToken).ConfigureAwait(false);
-        await unitOfWork.BeerRepository.DeleteBeerAsync(5, CancellationTestToken).ConfigureAwait(false);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(1, CancellationTestToken);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(2, CancellationTestToken);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(3, CancellationTestToken);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(4, CancellationTestToken);
+        await unitOfWork.BeerRepository.DeleteBeerAsync(5, CancellationTestToken);
 
         // Act
-        BeerResourceList result = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
+        BeerResourceList result = await handler.Handle(query, CancellationTestToken);
 
         // Assert
         result.ShouldNotBeNull().Count.ShouldBe(0);

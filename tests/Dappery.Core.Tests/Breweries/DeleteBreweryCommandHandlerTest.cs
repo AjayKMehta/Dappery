@@ -24,7 +24,7 @@ public class DeleteBreweryCommandHandlerTest : TestFixture
         var handler = new DeleteBreweryCommandHandler(unitOfWork);
 
         // Act
-        Unit result = await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false);
+        Unit result = await handler.Handle(deleteCommand, CancellationTestToken);
 
         // Assert
         _ = result.ShouldBeOfType<Unit>();
@@ -39,7 +39,7 @@ public class DeleteBreweryCommandHandlerTest : TestFixture
         var handler = new DeleteBreweryCommandHandler(unitOfWork);
 
         // Act
-        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(deleteCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
+        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(deleteCommand, CancellationTestToken));
 
         // Assert
         result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.NotFound);

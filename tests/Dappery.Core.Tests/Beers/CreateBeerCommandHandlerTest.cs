@@ -32,7 +32,7 @@ public class CreateBeerCommandHandlerTest : TestFixture
         var handler = new CreateBeerCommandHandler(unitOfWork);
 
         // Act
-        BeerResource result = await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false);
+        BeerResource result = await handler.Handle(beerCommand, CancellationTestToken);
 
         // Assert
         BeerDto beerDto = result
@@ -69,7 +69,7 @@ public class CreateBeerCommandHandlerTest : TestFixture
         var handler = new CreateBeerCommandHandler(unitOfWork);
 
         // Act
-        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
+        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(beerCommand, CancellationTestToken));
 
         // Assert
         result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.BadRequest);
@@ -89,7 +89,7 @@ public class CreateBeerCommandHandlerTest : TestFixture
         var handler = new CreateBeerCommandHandler(unitOfWork);
 
         // Act
-        BeerResource result = await handler.Handle(beerCommand, CancellationTestToken).ConfigureAwait(false);
+        BeerResource result = await handler.Handle(beerCommand, CancellationTestToken);
 
         // Assert
         BeerDto beerDto = result

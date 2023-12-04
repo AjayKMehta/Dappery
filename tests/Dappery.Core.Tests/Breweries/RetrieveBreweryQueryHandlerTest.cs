@@ -24,7 +24,7 @@ public class RetrieveBreweryQueryHandlerTest : TestFixture
         var handler = new RetrieveBreweryQueryHandler(unitOfWork);
 
         // Act
-        BreweryResource response = await handler.Handle(query, CancellationTestToken).ConfigureAwait(false);
+        BreweryResource response = await handler.Handle(query, CancellationTestToken);
 
         // Assert
         BreweryDto breweryDto = response
@@ -50,7 +50,7 @@ public class RetrieveBreweryQueryHandlerTest : TestFixture
         var handler = new RetrieveBreweryQueryHandler(unitOfWork);
 
         // Act
-        DapperyApiException response = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(query, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
+        DapperyApiException response = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(query, CancellationTestToken));
 
         // Assert
         response

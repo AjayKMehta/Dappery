@@ -31,7 +31,7 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         var handler = new UpdateBeerCommandHandler(unitOfWork);
 
         // Act
-        BeerResource result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
+        BeerResource result = await handler.Handle(updateCommand, CancellationTestToken);
 
         // Assert
         BeerDto beerDto = result
@@ -67,7 +67,7 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         var handler = new UpdateBeerCommandHandler(unitOfWork);
 
         // Act
-        BeerResource result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
+        BeerResource result = await handler.Handle(updateCommand, CancellationTestToken);
 
         // Assert
         BeerDto beerDto = result
@@ -104,7 +104,7 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         var handler = new UpdateBeerCommandHandler(unitOfWork);
 
         // Act
-        BeerResource result = await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false);
+        BeerResource result = await handler.Handle(updateCommand, CancellationTestToken);
 
         // Assert
         BeerDto beerDto = result
@@ -141,7 +141,7 @@ public class UpdateBeerCommandHandlerTest : TestFixture
         var handler = new UpdateBeerCommandHandler(unitOfWork);
 
         // Act
-        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(updateCommand, CancellationTestToken).ConfigureAwait(false)).ConfigureAwait(false);
+        DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(updateCommand, CancellationTestToken));
 
         // Assert
         result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.BadRequest);

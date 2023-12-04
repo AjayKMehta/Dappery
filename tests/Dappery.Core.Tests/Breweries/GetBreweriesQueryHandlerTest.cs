@@ -22,7 +22,7 @@ public class GetBreweriesQueryHandlerTest : TestFixture
         var handler = new GetBreweriesQueryHandler(unitOfWork);
 
         // Act
-        BreweryResourceList response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken).ConfigureAwait(false);
+        BreweryResourceList response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken);
 
         // Assert
         BreweryResourceList breweryList = response
@@ -61,12 +61,12 @@ public class GetBreweriesQueryHandlerTest : TestFixture
     {
         // Arrange, remove all breweries from the test database
         using IUnitOfWork unitOfWork = UnitOfWork;
-        await UnitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken).ConfigureAwait(false);
-        await UnitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken).ConfigureAwait(false);
+        await UnitOfWork.BreweryRepository.DeleteBrewery(1, CancellationTestToken);
+        await UnitOfWork.BreweryRepository.DeleteBrewery(2, CancellationTestToken);
         var handler = new GetBreweriesQueryHandler(unitOfWork);
 
         // Act
-        BreweryResourceList response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken).ConfigureAwait(false);
+        BreweryResourceList response = await handler.Handle(new GetBreweriesQuery(), CancellationTestToken);
 
         // Assert
         response

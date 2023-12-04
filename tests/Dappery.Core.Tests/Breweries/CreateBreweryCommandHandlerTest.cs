@@ -35,7 +35,7 @@ public class CreateBreweryCommandHandlerTest : TestFixture
 
         // Act
         var handler = new CreateBreweryCommandHandler(unitOfWork);
-        BreweryResource createdBrewery = await handler.Handle(new CreateBreweryCommand(createBreweryDto), CancellationToken.None).ConfigureAwait(false);
+        BreweryResource createdBrewery = await handler.Handle(new CreateBreweryCommand(createBreweryDto), CancellationToken.None);
 
         // Assert
         BreweryDto breweryDto = createdBrewery
