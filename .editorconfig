@@ -778,6 +778,9 @@ dotnet_diagnostic.CA1845.severity = warning
 # CA1846: Prefer AsSpan over Substring
 dotnet_diagnostic.CA1846.severity = warning
 
+# CA1848: Use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = none
+
 # CA1849: Call async methods when in an async method
 dotnet_diagnostic.CA1849.severity = error
 
