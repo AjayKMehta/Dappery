@@ -14,11 +14,13 @@
                 <ModulePath>.*Tests\.dll$</ModulePath>
               </Exclude>
             </ModulePaths>
+            <CollectFromChildProcesses>True</CollectFromChildProcesses>
             <UseVerifiableInstrumentation>False</UseVerifiableInstrumentation>
             <EnableStaticNativeInstrumentation>False</EnableStaticNativeInstrumentation>
             <EnableDynamicNativeInstrumentation>False</EnableDynamicNativeInstrumentation>
             <EnableDynamicManagedInstrumentation>True</EnableDynamicManagedInstrumentation>
             <EnableStaticManagedInstrumentation>True</EnableStaticManagedInstrumentation>
+            <ExcludeAssembliesWithoutSources>MissingAll</ExcludeAssembliesWithoutSources>
           </CodeCoverage>
         </Configuration>
       </DataCollector>
