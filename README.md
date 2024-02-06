@@ -6,15 +6,22 @@
 
 ## Run unit tests
 
+### coverlet
+
 ```shell
 dotnet test --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura
 ```
 
-OR
+### Microsoft.CodeCoverage
+
+Running `dotnet test --collect "Code Coverage"` at the solution level now automatically merges code coverage for all your test projects. See [here](https://devblogs.microsoft.com/dotnet/whats-new-in-our-code-coverage-tooling) for more information.
 
 ```shell
-dotnet test --collect "Code Coverage;Format=cobertura" -s .runsettings 
+# dotnet test --collect "Code Coverage;Format=cobertura"
+dotnet test -s .runsettings 
 ```
+
+> :bulb: This doesn't work: `dotnet-coverage collect -f cobertura -o report.cobertura.xml "dotnet test -s .runsettings"`.
 
 ## Display code coverage in VS Code:
 
