@@ -10,6 +10,12 @@
 dotnet test --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura
 ```
 
+OR
+
+```shell
+dotnet test --collect "Code Coverage;Format=cobertura" -s .runsettings 
+```
+
 ## Display code coverage in VS Code:
 
 1. Install [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters) if not already installed.
