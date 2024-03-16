@@ -4,9 +4,9 @@
     "net8.0": {
       "coverlet.collector": {
         "type": "Direct",
-        "requested": "[6.0.1, )",
-        "resolved": "6.0.1",
-        "contentHash": "q/8r0muHlF7TbhMUTBAk43KteZYG2ECV96pbzkToQwgjp3BvbS766svUcO6va+cohWOkigeBWmHs0Vu5vQnESA=="
+        "requested": "[6.0.2, )",
+        "resolved": "6.0.2",
+        "contentHash": "bJShQ6uWRTQ100ZeyiMqcFlhP7WJ+bCuabUs885dJiBEzMsJMSFr7BOyeCw4rgvQokteGi5rKQTlkhfQPUXg2A=="
       },
       "GitHubActionsTestLogger": {
         "type": "Direct",
@@ -180,32 +180,32 @@
       },
       "Microsoft.Data.Sqlite": {
         "type": "Transitive",
-        "resolved": "8.0.2",
-        "contentHash": "dbv4HUa1OE5zXkFd5iSV7d+HZJ0ge+4GBiJNX6MXuG0tCGqCkMgh0g7jnLHXPmLY2q7vu5gKSMSraie0fmUACg==",
+        "resolved": "8.0.3",
+        "contentHash": "ZMfnnn5Lr8xRhp9HuEfuMSknJaD+X8ajGnqxyTcmwJbkxH9l4uPjd8WumYPVuamHxiI/JAXkFStYN2IPuAneJw==",
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "8.0.2",
+          "Microsoft.Data.Sqlite.Core": "8.0.3",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.6"
         }
       },
       "Microsoft.Data.Sqlite.Core": {
         "type": "Transitive",
-        "resolved": "8.0.2",
-        "contentHash": "C7VelOBNUrVlatmOoJ9P+vc/gegduv7d2uB5oy7bFxfgZBfaGr+eREW+QuppXwi3MHp0WBxxWjqkK5gD7ymDQA==",
+        "resolved": "8.0.3",
+        "contentHash": "1euU97SivROH7nVIh2c/V63e0nQ73Txr/YlysB7fJuTV8LcfeL9WO1gdiJWcRIDoq8/McxcTc7evY6JJ1pD95w==",
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.6"
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg=="
+        "resolved": "8.0.1",
+        "contentHash": "fGLiCRLMYd00JYpClraLjJTNKLmMJPnqxMaiRzEBIIvevlzxz33mXy39Lkd48hu1G+N21S7QpaO5ZzKsI6FRuA=="
       },
       "Microsoft.Extensions.Logging.Abstractions": {
         "type": "Transitive",
-        "resolved": "8.0.0",
-        "contentHash": "arDBqTgFCyS0EvRV7O3MZturChstm50OJ0y9bDJvAcmEPJm0FFpFyjU/JLYyStNGGey081DvnQYlncNX5SJJGA==",
+        "resolved": "8.0.1",
+        "contentHash": "RIFgaqoaINxkM2KTOw72dmilDmTrYA0ns2KW4lDz4gZ2+o6IQ894CzmdL3StM2oh7QQq44nCWiqKqc4qUI9Jmg==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.1"
         }
       },
       "Microsoft.Identity.Client": {
@@ -312,8 +312,8 @@
       },
       "MinVer": {
         "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "YNVAW3loCFW4kTwensApaZUl+7xREK75QQNOFSbsbXx2sCSm9/IHBjUHsJGn3u0UA5r/sAqrdYBNUlOFfLhUrA=="
+        "resolved": "5.0.0",
+        "contentHash": "ybkgpQMtt0Fo91l5rYtE3TZtD+Nmy5Ko091xvfXXOosQdMi30XO2EZ2+ShZt89gdu7RMmJqZaJ+e1q6d+6+KNw=="
       },
       "Newtonsoft.Json": {
         "type": "Transitive",
@@ -562,8 +562,8 @@
           "FluentValidation": "[11.9.0, )",
           "IDisposableAnalyzers": "[4.0.7, )",
           "MediatR": "[12.2.0, )",
-          "Microsoft.Extensions.Logging.Abstractions": "[8.0.0, )",
-          "MinVer": "[4.3.0, )",
+          "Microsoft.Extensions.Logging.Abstractions": "[8.0.1, )",
+          "MinVer": "[5.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
           "Roslynator.Analyzers": "[4.11.0, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
@@ -577,8 +577,8 @@
           "Dappery.Core": "[1.0.0, )",
           "IDisposableAnalyzers": "[4.0.7, )",
           "Microsoft.Data.SqlClient": "[5.2.0, )",
-          "Microsoft.Data.Sqlite": "[8.0.2, )",
-          "MinVer": "[4.3.0, )",
+          "Microsoft.Data.Sqlite": "[8.0.3, )",
+          "MinVer": "[5.0.0, )",
           "Npgsql": "[8.0.2, )",
           "ReflectionAnalyzers": "[0.3.1, )",
           "Roslynator.Analyzers": "[4.11.0, )",
@@ -590,7 +590,7 @@
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
           "IDisposableAnalyzers": "[4.0.7, )",
-          "MinVer": "[4.3.0, )",
+          "MinVer": "[5.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
           "Roslynator.Analyzers": "[4.11.0, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"

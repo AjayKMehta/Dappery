@@ -10,12 +10,14 @@
     </PackageVersion>
     <PackageVersion Include="FluentValidation" Version="11.9.0" />
     <PackageVersion Include="MediatR" Version="12.2.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+<PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+
     <PackageVersion Include="ReflectionAnalyzers" Version="0.3.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageVersion>
-    <PackageVersion Include="Microsoft.Data.Sqlite" Version="8.0.2" />
+<PackageVersion Include="Microsoft.Data.Sqlite" Version="8.0.3" />
+
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="5.2.0" />
     <PackageVersion Include="Npgsql" Version="8.0.2" />
     <PackageVersion Include="UnoptimizedAssemblyDetector" Version="0.1.1">
@@ -23,7 +25,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageVersion>
     <PackageVersion Include="Roslynator.Analyzers" Version="4.11.0" />
-    <PackageVersion Include="MinVer" Version="4.3.0">
+<PackageVersion Include="MinVer" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
