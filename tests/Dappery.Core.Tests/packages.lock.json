@@ -41,9 +41,9 @@
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
-        "requested": "[4.12.0, )",
-        "resolved": "4.12.0",
-        "contentHash": "0n7hlgpD57vKCC39iz6lLg6RIgPF6B2S0z7HzcRSkeu35svFKSGqKJhh2MfCsoHrrPMugnlMZI9NZwrkFPTqYA=="
+        "requested": "[4.12.1, )",
+        "resolved": "4.12.1",
+        "contentHash": "spdzd9cce7fvmAKlrRjDArKN0ytYHmmcYfAojUFFDPzTOheWGAk4xmAP3y5kEGtYnkUYRo4onO8YEggQFDUZtA=="
       },
       "Shouldly": {
         "type": "Direct",
@@ -565,7 +565,7 @@
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.1, )",
           "MinVer": "[5.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.12.0, )",
+          "Roslynator.Analyzers": "[4.12.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       },
@@ -581,7 +581,7 @@
           "MinVer": "[5.0.0, )",
           "Npgsql": "[8.0.2, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.12.0, )",
+          "Roslynator.Analyzers": "[4.12.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       },
@@ -592,7 +592,7 @@
           "IDisposableAnalyzers": "[4.0.7, )",
           "MinVer": "[5.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
-          "Roslynator.Analyzers": "[4.12.0, )",
+          "Roslynator.Analyzers": "[4.12.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
       }
