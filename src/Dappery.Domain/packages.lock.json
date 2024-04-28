@@ -28,9 +28,9 @@
       },
       "Roslynator.Analyzers": {
         "type": "Direct",
-        "requested": "[4.12.1, )",
-        "resolved": "4.12.1",
-        "contentHash": "spdzd9cce7fvmAKlrRjDArKN0ytYHmmcYfAojUFFDPzTOheWGAk4xmAP3y5kEGtYnkUYRo4onO8YEggQFDUZtA=="
+        "requested": "[4.12.2, )",
+        "resolved": "4.12.2",
+        "contentHash": "6gLnu303OyuBwOjd3QFKG3wEmbRPXKfVHRKLkZB6lDs5Ik8mfBGVoCIVN86HAQcbZI5KQD5dY3HEie0ScoeEag=="
       },
       "UnoptimizedAssemblyDetector": {
         "type": "Direct",

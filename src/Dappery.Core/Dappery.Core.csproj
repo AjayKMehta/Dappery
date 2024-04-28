@@ -9,7 +9,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="ReflectionAnalyzers" />
     <PackageReference Include="UnoptimizedAssemblyDetector" />
-    <PackageReference Include="Roslynator.Analyzers" />
+    <PackageReference Include="Roslynator.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MinVer" />
     <PackageReference Include="AsyncFixer" />
   </ItemGroup>
