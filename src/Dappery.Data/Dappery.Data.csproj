@@ -4,6 +4,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" />
+    <PackageReference Include="ErrorProne.NET.CoreAnalyzers">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="IDisposableAnalyzers" />
     <PackageReference Include="Microsoft.Data.SqlClient" />
     <PackageReference Include="Microsoft.Data.Sqlite" />

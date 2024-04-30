@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <PackageReference Include="ErrorProne.NET.CoreAnalyzers">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="IDisposableAnalyzers" />
     <PackageReference Include="ReflectionAnalyzers" />
     <PackageReference Include="UnoptimizedAssemblyDetector" />

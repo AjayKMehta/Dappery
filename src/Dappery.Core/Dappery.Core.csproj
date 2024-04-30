@@ -3,6 +3,10 @@
     <ProjectReference Include="..\Dappery.Domain\Dappery.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ErrorProne.NET.CoreAnalyzers">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="FluentValidation" />
     <PackageReference Include="IDisposableAnalyzers" />
     <PackageReference Include="MediatR" />

@@ -14,6 +14,12 @@
         "resolved": "2.1.44",
         "contentHash": "L6Zdsn0mZY5+UxF2iag/X1an0g+rsPHVswsibunLvHUqby8CyYq5RoVnic1iz/hCtIcqDRTl31Aiu5JXiTyohA=="
       },
+      "ErrorProne.NET.CoreAnalyzers": {
+        "type": "Direct",
+        "requested": "[0.6.1-beta.1, )",
+        "resolved": "0.6.1-beta.1",
+        "contentHash": "GTARAP2zT0bWrOECP0NPJTFvDNpUSM20UivoYtz5fS65xIRc9b0vpj4YAozQCo4VfJ2L2EqzF4Cl4ZJu8Jx4TQ=="
+      },
       "IDisposableAnalyzers": {
         "type": "Direct",
         "requested": "[4.0.7, )",
