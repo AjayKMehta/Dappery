@@ -3,13 +3,13 @@
   // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
   "version": "0.2.0",
   "configurations": [
+
     {
       "name": "Launch Dappery.Core.Tests",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/bin/${input:rememberConfig}/net6.0/Dappery.Core.Tests.dll",
+      "program": "${workspaceFolder}/artifacts/bin/Dappery.Core.Tests/${input:rememberConfig}/Dappery.Core.Tests.dll",
       "args": [],
       "cwd": "${workspaceFolder}/tests/Dappery.Core.Tests",
       "console": "internalConsole",
@@ -20,8 +20,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/bin/${input:rememberConfig}/net6.0/Dappery.Data.Tests.dll",
+      "program": "${workspaceFolder}/artifacts/bin/Dappery.Data.Tests/${input:rememberConfig}/Dappery.Data.Tests.dll",
       "args": [],
       "cwd": "${workspaceFolder}/tests/Dappery.Data.Tests",
       "console": "internalConsole",
