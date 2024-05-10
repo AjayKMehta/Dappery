@@ -26,7 +26,7 @@ public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
 
     public RequestValidationBehavior(IEnumerable<IValidator<TRequest>> validators, ILogger<TRequest> logger)
     {
-        _validators = validators ?? Enumerable.Empty<IValidator<TRequest>>();
+        _validators = validators ?? [];
         _logger = logger;
     }
 

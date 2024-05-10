@@ -4,6 +4,4 @@ using MediatR;
 
 namespace Dappery.Core.Breweries.Queries.GetBreweries;
 
-public class GetBreweriesQuery : IRequest<BreweryResourceList>
-{
-}
+public class GetBreweriesQuery : IRequest<BreweryResourceList>;
