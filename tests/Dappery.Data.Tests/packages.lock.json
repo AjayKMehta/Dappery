@@ -180,17 +180,17 @@
       },
       "Microsoft.Data.Sqlite": {
         "type": "Transitive",
-        "resolved": "8.0.4",
-        "contentHash": "vgLm03wS+CfsolO7qk4KVuvt0CtzgdjKmoORuwxMmiIF1ow1JlOo1vwfDHfwXnGa5+QEbvOUy3169bBcHshfTg==",
+        "resolved": "8.0.5",
+        "contentHash": "BLHC0wuBzKDkkucMsD+ijT0SbwZLXk8dEY1iyR4hm6vqP/pz8+qPXOsiWEmEQS1Za6C9biFvtsAKUwlAVfGFtg==",
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "8.0.4",
+          "Microsoft.Data.Sqlite.Core": "8.0.5",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.6"
         }
       },
       "Microsoft.Data.Sqlite.Core": {
         "type": "Transitive",
-        "resolved": "8.0.4",
-        "contentHash": "x5FE5m1h31UIDEk0j3r38HtYvsa0fxd5jXzvE/SARI7LecXt/jm4z2SUl6TEoJGQOo9Ow2wg3a0MU2E1TVVAdA==",
+        "resolved": "8.0.5",
+        "contentHash": "JMGBNGTPsrLM14j5gDG2r5/I1nbbQd1ZdgeUnF7uca8RHYin6wZpFtQNYYqOMUpSxJak55trXE9B8/X2X+pOXw==",
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.6"
         }
@@ -576,7 +576,7 @@
           "Dappery.Core": "[1.0.0, )",
           "IDisposableAnalyzers": "[4.0.7, )",
           "Microsoft.Data.SqlClient": "[5.2.0, )",
-          "Microsoft.Data.Sqlite": "[8.0.4, )",
+          "Microsoft.Data.Sqlite": "[8.0.5, )",
           "MinVer": "[5.0.0, )",
           "Npgsql": "[8.0.3, )",
           "ReflectionAnalyzers": "[0.3.1, )",
