@@ -10,11 +10,11 @@
       },
       "GitHubActionsTestLogger": {
         "type": "Direct",
-        "requested": "[2.3.3, )",
-        "resolved": "2.3.3",
-        "contentHash": "9mBfuOIUmZ3dnL/hYaENh/eGKC6r3ufwo2rEkWJVDDj2UUGuu59GsMezYkV3bj/wZ8rcgzDIr1fj/wXh1yklQA==",
+        "requested": "[2.4.1, )",
+        "resolved": "2.4.1",
+        "contentHash": "SH1ar/kg36CggzMqLUDRoUqR8SSjK/JiQ2JS8MYg8u0RCLDkkDEbPGIN91omOPx9f2GuDqsxxofSdgsQje3Xuw==",
         "dependencies": {
-          "Microsoft.TestPlatform.ObjectModel": "17.7.1"
+          "Microsoft.TestPlatform.ObjectModel": "17.10.0"
         }
       },
       "IDisposableAnalyzers": {
@@ -180,17 +180,17 @@
       },
       "Microsoft.Data.Sqlite": {
         "type": "Transitive",
-        "resolved": "8.0.5",
-        "contentHash": "BLHC0wuBzKDkkucMsD+ijT0SbwZLXk8dEY1iyR4hm6vqP/pz8+qPXOsiWEmEQS1Za6C9biFvtsAKUwlAVfGFtg==",
+        "resolved": "8.0.6",
+        "contentHash": "YVzVtU1IoGsTiMAe0BNV9ssKyrUm6lBQJP6w2N4W29YrBYYtyCmTFmrNGjxaJtJXVqttu0sYkPxmStj/OnMFdg==",
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "8.0.5",
+          "Microsoft.Data.Sqlite.Core": "8.0.6",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.6"
         }
       },
       "Microsoft.Data.Sqlite.Core": {
         "type": "Transitive",
-        "resolved": "8.0.5",
-        "contentHash": "JMGBNGTPsrLM14j5gDG2r5/I1nbbQd1ZdgeUnF7uca8RHYin6wZpFtQNYYqOMUpSxJak55trXE9B8/X2X+pOXw==",
+        "resolved": "8.0.6",
+        "contentHash": "umhZ0ZF2RI81rGFTnYmCxI+Euj4Aqe/6Y4+8CxN9OVJNGDNIqB5laJ3wxQTU8zXCcm2k9F7FL+/6RVoOT4z1Fw==",
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.6"
         }
@@ -576,7 +576,7 @@
           "Dappery.Core": "[1.0.0, )",
           "IDisposableAnalyzers": "[4.0.7, )",
           "Microsoft.Data.SqlClient": "[5.2.0, )",
-          "Microsoft.Data.Sqlite": "[8.0.5, )",
+          "Microsoft.Data.Sqlite": "[8.0.6, )",
           "MinVer": "[5.0.0, )",
           "Npgsql": "[8.0.3, )",
           "ReflectionAnalyzers": "[0.3.1, )",
