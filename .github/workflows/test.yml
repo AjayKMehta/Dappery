@@ -45,6 +45,9 @@ jobs:
           cache: true
           cache-dependency-path: "**/packages.lock.json"
 
+      - name: Install dotnet-coverage tool
+        run: dotnet tool install -g dotnet-coverage
+
       - name: Install dependencies
         env:
           COMMIT_VAR: ${{ contains(github.actor, 'dependabot') }}
@@ -102,6 +105,10 @@ jobs:
 
       - name: Publish coverage in build summary
         run: cat $GITHUB_WORKSPACE/coveragereport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+        shell: bash
+
+      - name: Merge code coverage results
+        run: dotnet-coverage merge **/*/*.cobertura.xml -f cobertura -o ./cobertura.xml
         shell: bash
 
         # In v4, Artifacts are immutable (unless deleted). So you must change
