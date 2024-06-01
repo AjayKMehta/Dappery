@@ -64,11 +64,6 @@ jobs:
         with:
           fetch-depth: 2
 
-      # TODO: Comment out?
-      - name: "Checkout head"
-        run: git checkout HEAD
-        if: ${{ github.event_name == 'pull_request' }}
-
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
         id: init_codeql
