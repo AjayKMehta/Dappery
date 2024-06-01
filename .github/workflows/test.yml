@@ -73,6 +73,7 @@ jobs:
           reports: './**/TestResults/**/*.cobertura.xml'
           targetdir: '${{ github.workspace }}/coveragereport'
           reporttypes: 'MarkdownSummaryGithub;MarkdownAssembliesSummary'
+          classfilters: '-System.*;-Microsoft.*;-Newtonsoft.*;-System.Text.RegularExpressions.*;-xunit.*;-NUnit.*'
 
       - uses: 8BitJonny/gh-get-current-pr@3.0.0
         with:
