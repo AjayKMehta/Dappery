@@ -72,7 +72,7 @@ jobs:
         with:
           reports: './**/TestResults/**/*.cobertura.xml'
           targetdir: '${{ github.workspace }}/coveragereport'
-          reporttypes: 'MarkdownSummaryGithub'
+          reporttypes: 'MarkdownSummaryGithub;MarkdownAssembliesSummary'
 
       - uses: 8BitJonny/gh-get-current-pr@3.0.0
         with:
@@ -95,12 +95,13 @@ jobs:
           hide_classify: "OUTDATED"
           skip_unchanged: true
           number: ${{ steps.pr-check.outputs.number }}
-          path: coveragereport/SummaryGithub.md
+          path: coveragereport/Summary.md
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           header: "Code coverage"
 
-      - name: Upload coverage into summary
+      - name: Publish coverage in build summary
         run: cat $GITHUB_WORKSPACE/coveragereport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+        shell: bash
 
         # In v4, Artifacts are immutable (unless deleted). So you must change
         # each of the uploaded Artifacts to have a different name and filter the
