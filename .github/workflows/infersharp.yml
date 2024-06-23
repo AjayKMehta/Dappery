@@ -44,7 +44,7 @@ jobs:
         id: runinfersharp
         uses: microsoft/infersharpaction@v1.5
         with:
-          binary-path: "bin"
+          binary-path: "artifacts/bin"
 
       - name: Infer# analysis results
         run: echo "${{ steps.runinfersharp.outputs.results }}"
