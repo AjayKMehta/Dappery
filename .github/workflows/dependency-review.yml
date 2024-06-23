@@ -6,13 +6,13 @@ permissions:
 
   # https://www.meziantou.net/how-to-cancel-github-workflows-when-pushing-new-commits-on-a-branch.htm
 concurrency:
-  # github.event.pull_request.number || github.ref: pull request number or branch name if not a pull request
+  # pull request number or branch name if not a pull request
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   dependency-review:
-    if: ${{ contains(github.event.pull_request.user.login, 'dependabot') }} == false
+    if: ${{ contains(github.event.pull_request.user.login, 'dependabot') }} == false && ${{ contains(github.event.issue.user.login, 'dependabot') }} == false
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
