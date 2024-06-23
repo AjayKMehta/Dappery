@@ -19,9 +19,9 @@
       },
       "IDisposableAnalyzers": {
         "type": "Direct",
-        "requested": "[4.0.7, )",
-        "resolved": "4.0.7",
-        "contentHash": "Xrn/VABG/JhulJOmHOeOAY4/qafbEyRj3Z6gMeSABT1XCqMe8HnqOvid8gEVJt47VUZ6eD7XpTFLZ1KLyTZgdw=="
+        "requested": "[4.0.8, )",
+        "resolved": "4.0.8",
+        "contentHash": "vNi4NMG0CcJyjXxiNDcQ21FwV/whM9o9OEZKD+oP7tuxAqFEzX/x5OhC3OZJqW/w+8GOtCmJPBquYgMWgz0rfQ=="
       },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
@@ -547,7 +547,7 @@
           "AsyncFixer": "[1.6.0, )",
           "Dappery.Domain": "[1.0.0, )",
           "FluentValidation": "[11.9.2, )",
-          "IDisposableAnalyzers": "[4.0.7, )",
+          "IDisposableAnalyzers": "[4.0.8, )",
           "MediatR": "[12.3.0, )",
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.1, )",
           "MinVer": "[5.0.0, )",
@@ -561,7 +561,7 @@
           "AsyncFixer": "[1.6.0, )",
           "Dapper": "[2.1.44, )",
           "Dappery.Core": "[1.0.0, )",
-          "IDisposableAnalyzers": "[4.0.7, )",
+          "IDisposableAnalyzers": "[4.0.8, )",
           "Microsoft.Data.SqlClient": "[5.2.1, )",
           "Microsoft.Data.Sqlite": "[8.0.6, )",
           "MinVer": "[5.0.0, )",
@@ -574,7 +574,7 @@
         "type": "Project",
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
-          "IDisposableAnalyzers": "[4.0.7, )",
+          "IDisposableAnalyzers": "[4.0.8, )",
           "MinVer": "[5.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"

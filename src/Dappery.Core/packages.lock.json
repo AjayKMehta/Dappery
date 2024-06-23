@@ -22,9 +22,9 @@
       },
       "IDisposableAnalyzers": {
         "type": "Direct",
-        "requested": "[4.0.7, )",
-        "resolved": "4.0.7",
-        "contentHash": "Xrn/VABG/JhulJOmHOeOAY4/qafbEyRj3Z6gMeSABT1XCqMe8HnqOvid8gEVJt47VUZ6eD7XpTFLZ1KLyTZgdw=="
+        "requested": "[4.0.8, )",
+        "resolved": "4.0.8",
+        "contentHash": "vNi4NMG0CcJyjXxiNDcQ21FwV/whM9o9OEZKD+oP7tuxAqFEzX/x5OhC3OZJqW/w+8GOtCmJPBquYgMWgz0rfQ=="
       },
       "MediatR": {
         "type": "Direct",
@@ -91,7 +91,7 @@
         "type": "Project",
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
-          "IDisposableAnalyzers": "[4.0.7, )",
+          "IDisposableAnalyzers": "[4.0.8, )",
           "MinVer": "[5.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
