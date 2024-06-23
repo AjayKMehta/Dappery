@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   dependency-review:
-    if: contains(github.actor, 'dependabot') == false
+    if: ${{ contains(github.event.pull_request.user.login, 'dependabot') }} == false
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'

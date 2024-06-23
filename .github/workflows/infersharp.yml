@@ -1,6 +1,6 @@
 name: "Infersharp"
 
-on: [workflow_dispatch]
+on: [workflow_dispatch, pull_request ]
 
 permissions:
   contents: read
@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   infersharp:
-    if: contains(github.actor, 'dependabot') == false
+    if: ${{ contains(github.event.pull_request.user.login, 'dependabot') }} = false
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -44,7 +44,7 @@ jobs:
         id: runinfersharp
         uses: microsoft/infersharpaction@v1.5
         with:
-          binary-path: "bin"
+          binary-path: "artifacts/bin"
 
       - name: Infer# analysis results
         run: echo "${{ steps.runinfersharp.outputs.results }}"
