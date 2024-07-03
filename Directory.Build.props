@@ -23,6 +23,8 @@
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <NuGetAuditMode>all</NuGetAuditMode>
     <NuGetAuditLevel>high</NuGetAuditLevel>
+    <!-- https://www.meziantou.net/how-to-output-a-sarif-file-from-a-dotnet-project.htm -->
+    <ErrorLog>$(MSBuildProjectName).sarif,version=2.1</ErrorLog>
   </PropertyGroup>
   <!-- GH, CircleCI, GitLab and BitBucket use CI -->
   <PropertyGroup Label="CI" Condition="'$(CI)' != ''">

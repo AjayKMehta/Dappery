@@ -323,3 +323,4 @@ MigrationBackup/
 .history/
 
 tags
+*.sarif
