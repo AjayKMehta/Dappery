@@ -27,7 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageVersion>
     <PackageVersion Include="Roslynator.Analyzers" Version="4.12.4" />
-    <PackageVersion Include="MinVer" Version="5.0.0">
+    <PackageVersion Include="MinVer" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>

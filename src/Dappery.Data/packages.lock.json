@@ -54,9 +54,9 @@
       },
       "MinVer": {
         "type": "Direct",
-        "requested": "[5.0.0, )",
-        "resolved": "5.0.0",
-        "contentHash": "ybkgpQMtt0Fo91l5rYtE3TZtD+Nmy5Ko091xvfXXOosQdMi30XO2EZ2+ShZt89gdu7RMmJqZaJ+e1q6d+6+KNw=="
+        "requested": "[6.0.0, )",
+        "resolved": "6.0.0",
+        "contentHash": "+/SsmiySsXJlvQLCGBqaZKNVt3s/Y/HbAdwtop7Km2CnuZbaScoqkWJEBQ5Cy9ebkn6kCYKrHsXgwrFdTgcb3g=="
       },
       "Npgsql": {
         "type": "Direct",
@@ -395,7 +395,7 @@
           "IDisposableAnalyzers": "[4.0.8, )",
           "MediatR": "[12.4.0, )",
           "Microsoft.Extensions.Logging.Abstractions": "[8.0.1, )",
-          "MinVer": "[5.0.0, )",
+          "MinVer": "[6.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
@@ -405,7 +405,7 @@
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
           "IDisposableAnalyzers": "[4.0.8, )",
-          "MinVer": "[5.0.0, )",
+          "MinVer": "[6.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
         }
