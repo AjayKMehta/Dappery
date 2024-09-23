@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
+  <RunConfiguration>
+    <TargetPlatform>x64</TargetPlatform>
+    <TreatTestAdapterErrorsAsWarnings>False </TreatTestAdapterErrorsAsWarnings>
+    <!-- Path relative to solution directory -->
+    <ResultsDirectory>./TestResults</ResultsDirectory>
+    <!-- 0 allows as many testhosts as you have logical processors -->
+    <MaxCpuCount>0</MaxCpuCount>
+    <!-- Timeout in milliseconds. If 0, timeout will be infinity -->
+    <TestSessionTimeout>3600000</TestSessionTimeout>
+    <TreatNoTestsAsError>False</TreatNoTestsAsError>
+  </RunConfiguration>
   <DataCollectionRunSettings>
     <DataCollectors>
       <DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
