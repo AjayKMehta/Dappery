@@ -44,6 +44,9 @@ bld/
 TestResult.xml
 nunit-*.xml
 
+# Cobertura
+*.cobertura.*
+
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/
