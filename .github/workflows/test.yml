@@ -64,7 +64,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore --tl
 
       - name: Test
-        run: dotnet test -s cicd.runsettings --no-restore --quiet normal --logger "GitHubActions;summary.includeNotFoundTests=false"
+        run: dotnet test --configuration Release -s cicd.runsettings --no-build --verbosity quiet --logger "GitHubActions;summary.includeNotFoundTests=false"
 
       - name: Code coverage
         uses:  codecov/codecov-action@v4.5.0
