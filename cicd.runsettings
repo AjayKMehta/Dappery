@@ -62,9 +62,9 @@
         </Configuration>
       </DataCollector>
       <!-- Isolate test causing crash. -->
-      <DataCollector friendlyName=" blame" enabled="True">
+      <DataCollector friendlyName="blame" enabled="True">
         <Configuration>
-          <CollectDump DumpType=" Full" />
+          <CollectDump DumpType="Full" />
           <CollectDumpOnTestSessionHang TestTimeout="10min" HangDumpType="Full" />
         </Configuration>
       </DataCollector>
