@@ -93,7 +93,7 @@ jobs:
         id: pr-check
 
       # https://github.com/danielpalme/ReportGenerator/issues/431
-      - name: Publish coverage summary
+      - name: Publish PR coverage summary
         uses: marocchino/sticky-pull-request-comment@v2
         if: steps.pr-check.outputs.pr_found == 'true'
         env:
@@ -119,7 +119,7 @@ jobs:
         # In v4, Artifacts are immutable (unless deleted). So you must change
         # each of the uploaded Artifacts to have a different name and filter the
         # downloads by name to achieve the same effect
-      - name: Archive code coverage results
+      - name: Archive results
         # https://github.com/actions/upload-artifact/blob/main/docs/MIGRATION.md
         uses: actions/upload-artifact@v4
         with:
