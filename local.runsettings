@@ -64,6 +64,33 @@
           </CodeCoverage>
         </Configuration>
       </DataCollector>
+      <!-- Isolate test causing crash. -->
+      <DataCollector friendlyName=" blame" enabled="True">
+        <Configuration>
+          <CollectDump DumpType=" Full" />
+          <CollectDumpOnTestSessionHang TestTimeout="10min" HangDumpType="Full" />
+        </Configuration>
+      </DataCollector>
     </DataCollectors>
   </DataCollectionRunSettings>
+  <LoggerRunSettings>
+    <Loggers>
+      <Logger friendlyName="console" enabled="true">
+        <Configuration>
+          <Verbosity>normal</Verbosity>
+        </Configuration>
+      </Logger>
+      <Logger friendlyName="trx" enabled="true">
+        <Configuration>
+          <LogFilePrefix>testresults</LogFilePrefix>
+        </Configuration>
+      </Logger>
+      <Logger friendlyName="html" enabled="true">
+        <Configuration>
+          <LogFileName>Testresults.html</LogFileName>
+        </Configuration>
+      </Logger>
+      <Logger friendlyName="blame" enabled="true" />
+    </Loggers>
+  </LoggerRunSettings>
 </RunSettings>
