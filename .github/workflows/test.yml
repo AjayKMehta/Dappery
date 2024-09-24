@@ -1,5 +1,9 @@
 name: "Run tests"
 
+env:
+  # Only merge code coverage results if 1
+  USE_MERGE: 0
+
 on:
   push:
   pull_request:
@@ -108,6 +112,7 @@ jobs:
         shell: bash
 
       - name: Merge code coverage results
+        if: env.USE_MERGE == 1
         run: dotnet-coverage merge **/*/*.cobertura.xml -f cobertura -o ./cobertura.xml
         shell: bash
 
