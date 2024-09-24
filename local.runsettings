@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- For more information, see: -->
+<!-- https://learn.microsoft.com/en-us/visualstudio/test/configure-unit-tests-by-using-a-dot-runsettings-file -->
+<!-- https://github.com/microsoft/codecoverage/blob/main/docs/configuration.md -->
 <RunSettings>
   <RunConfiguration>
     <TargetPlatform>x64</TargetPlatform>
@@ -11,17 +14,17 @@
     <TestSessionTimeout>3600000</TestSessionTimeout>
     <TreatNoTestsAsError>False</TreatNoTestsAsError>
   </RunConfiguration>
+
   <DataCollectionRunSettings>
     <DataCollectors>
       <DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <Configuration>
           <CoverageLogLevel>Dumps</CoverageLogLevel>
           <InstrumentationLogLevel>Dumps</InstrumentationLogLevel>
-          <ManagedVanguardLogLevel>Info</ManagedVanguardLogLevel>
-          <CoverageFileLogPath>TestResults/coverage.log</CoverageFileLogPath>
+          <CoverageFileLogPath>coverage.log</CoverageFileLogPath>
           <!-- Below doesn't work 😦. For details, see https://github.com/microsoft/codecoverage/issues/76 -->
-          <!-- <CoverageFileName>D:/git/Dappery/coverage.cobertura.xml</CoverageFileName> -->
-          <Format>cobertura</Format>
+          <CoverageFileName>coverage.cobertura.xml</CoverageFileName>
+          <Format>Cobertura</Format>
           <PerTestCodeCoverage>False</PerTestCodeCoverage>
           <IncludeTestAssembly>False</IncludeTestAssembly>
           <CodeCoverage>
@@ -34,6 +37,11 @@
                 <ModulePath>.*Tests\.dll$</ModulePath>
               </Exclude>
             </ModulePaths>
+            <Attributes>
+              <Exclude>
+                <Attribute>^System\.Diagnostics\.DebuggerHiddenAttribute$</Attribute>
+              </Exclude>
+            </Attributes>
             <CollectFromChildProcesses>True</CollectFromChildProcesses>
             <EnableStaticNativeInstrumentation>False</EnableStaticNativeInstrumentation>
             <EnableDynamicNativeInstrumentation>False</EnableDynamicNativeInstrumentation>
