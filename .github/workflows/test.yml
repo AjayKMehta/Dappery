@@ -73,7 +73,7 @@ jobs:
       - name: ReportGenerator
         uses: danielpalme/ReportGenerator-GitHub-Action@5.3.8
         with:
-          reports: './**/TestResults/**/*.cobertura.xml'
+          reports: '**/*.cobertura.xml'
           targetdir: '${{ github.workspace }}/coveragereport'
           reporttypes: 'MarkdownSummaryGithub;MarkdownAssembliesSummary'
           classfilters: '-System.*;-Microsoft.*;-Newtonsoft.*;-System.Text.RegularExpressions.*;-xunit.*;-NUnit.*'
