@@ -9,12 +9,12 @@ public class DapperyApiException : Exception
     public DapperyApiException(string message, HttpStatusCode statusCode)
         : this(message) => StatusCode = statusCode;
 
-    public DapperyApiException() => ApiErrors = new List<DapperyApiError>();
+    public DapperyApiException() => ApiErrors = [];
 
-    public DapperyApiException(string message) : base(message) => ApiErrors = new List<DapperyApiError>();
+    public DapperyApiException(string message) : base(message) => ApiErrors = [];
 
     public DapperyApiException(string message, Exception innerException) : base(message, innerException) =>
-    ApiErrors = new List<DapperyApiError>();
+    ApiErrors = [];
 
     public HttpStatusCode StatusCode { get; }
 
