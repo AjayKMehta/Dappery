@@ -6,7 +6,7 @@
   <RunConfiguration>
     <TargetPlatform>x64</TargetPlatform>
     <TreatTestAdapterErrorsAsWarnings>False </TreatTestAdapterErrorsAsWarnings>
-    <ResultsDirectory>TestResults</ResultsDirectory>
+    <ResultsDirectory>./TestResults</ResultsDirectory>
     <MaxCpuCount>3</MaxCpuCount>
     <!-- Timeout in milliseconds. If 0, timeout will be infinity -->
     <TestSessionTimeout>60000</TestSessionTimeout>
@@ -56,8 +56,8 @@
             <UseVerifiableInstrumentation>False</UseVerifiableInstrumentation>
             <EnableStaticNativeInstrumentation>False</EnableStaticNativeInstrumentation>
             <EnableDynamicNativeInstrumentation>False</EnableDynamicNativeInstrumentation>
-            <EnableDynamicManagedInstrumentation>False</EnableDynamicManagedInstrumentation>
-            <EnableStaticManagedInstrumentation>False</EnableStaticManagedInstrumentation>
+            <EnableDynamicManagedInstrumentation>True</EnableDynamicManagedInstrumentation>
+            <EnableStaticManagedInstrumentation>True</EnableStaticManagedInstrumentation>
             <ExcludeAssembliesWithoutSources>MissingAll</ExcludeAssembliesWithoutSources>
           </CodeCoverage>
         </Configuration>
