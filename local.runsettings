@@ -31,7 +31,7 @@
             <CommunicationTimeout> 120000</CommunicationTimeout>
             <ModulePaths>
               <Include>
-                <ModulePath>.*Dappery[^/\\]*\.dll$</ModulePath>
+                <ModulePath>.*Dappery[^/\\]+\.dll$</ModulePath>
               </Include>
               <Exclude>
                 <ModulePath>.*Tests\.dll$</ModulePath>
@@ -40,13 +40,26 @@
             <Attributes>
               <Exclude>
                 <Attribute>^System\.Diagnostics\.DebuggerHiddenAttribute$</Attribute>
+                <Attribute>^System\.Diagnostics\.DebuggerNonUserCodeAttribute$</Attribute>
+                <Attribute>^System\.CodeDom\.Compiler\.GeneratedCodeAttribute$</Attribute>
+                <Attribute>^System\.Diagnostics\.CodeAnalysis\.ExcludeFromCodeCoverageAttribute$</Attribute>
+                <Attribute>^System\.ObsoleteAttribute$</Attribute>
+                <Attribute>^System\.Runtime\.CompilerServices\.CompilerGeneratedAttribute$</Attribute>
+                <Attribute>^System\.Text\.RegularExpressions\.GeneratedRegexAttribute$</Attribute>
               </Exclude>
             </Attributes>
+            <!-- Match the company name property in the assembly: -->
+            <CompanyNames>
+              <Exclude>
+                <CompanyName>.*microsoft.*</CompanyName>
+              </Exclude>
+            </CompanyNames>
             <CollectFromChildProcesses>True</CollectFromChildProcesses>
+            <UseVerifiableInstrumentation>False</UseVerifiableInstrumentation>
             <EnableStaticNativeInstrumentation>False</EnableStaticNativeInstrumentation>
             <EnableDynamicNativeInstrumentation>False</EnableDynamicNativeInstrumentation>
             <EnableDynamicManagedInstrumentation>True</EnableDynamicManagedInstrumentation>
-            <EnableStaticManagedInstrumentation>False</EnableStaticManagedInstrumentation>
+            <EnableStaticManagedInstrumentation>True</EnableStaticManagedInstrumentation>
             <ExcludeAssembliesWithoutSources>MissingAll</ExcludeAssembliesWithoutSources>
           </CodeCoverage>
         </Configuration>
