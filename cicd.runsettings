@@ -6,6 +6,7 @@
   <RunConfiguration>
     <TargetPlatform>x64</TargetPlatform>
     <TreatTestAdapterErrorsAsWarnings>False </TreatTestAdapterErrorsAsWarnings>
+    <ResultsDirectory>TestResults</ResultsDirectory>
     <MaxCpuCount>3</MaxCpuCount>
     <!-- Timeout in milliseconds. If 0, timeout will be infinity -->
     <TestSessionTimeout>60000</TestSessionTimeout>
