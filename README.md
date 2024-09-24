@@ -19,11 +19,18 @@ dotnet test --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura
 Running `dotnet test --collect "Code Coverage"` at the solution level now automatically merges code coverage for all your test projects. See [here](https://devblogs.microsoft.com/dotnet/whats-new-in-our-code-coverage-tooling) for more information.
 
 ```shell
-# dotnet test --collect "Code Coverage;Format=cobertura"
-dotnet test -s .runsettings 
+# These 2 commands do the same thing:
+dotnet test --no-build --collect "Code Coverage;Format=cobertura"
+dotnet-coverage collect -f cobertura -o report.cobertura.xml "dotnet test --no-build"
 ```
 
-> :bulb: This doesn't work: `dotnet-coverage collect -f cobertura -o report.cobertura.xml "dotnet test -s .runsettings"`.
+Instead of passing parameters to CLI command, you can use a `.runsettings` file instead:
+
+```shell
+dotnet test -s local.runsettings 
+```
+
+> :bulb: `local.runsettings` is for running tests locally while ``cicd.runsettings` is for running tests using GitHub workflows.  
 
 ## Display code coverage in VS Code:
 
@@ -41,6 +48,9 @@ dotnet test -s .runsettings
     ```
 
 3. From Command Palette, select **Coverage Gutters: Display Coverage** after you have run unit tests (see [previous section](#run-unit-tests)).
+
+> [!WARNING]
+> :bulb: This currently only works with `coverlet`. Attempting to use `Microsoft.CodeCoverage` will silently fail.
 
 ## Package restore
 
