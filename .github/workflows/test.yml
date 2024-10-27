@@ -54,11 +54,11 @@ jobs:
 
       - name: Install dependencies
         run: dotnet restore --force-evaluate
-        if: contains(github.actor, 'dependabot')
+        if: github.actor == 'dependabot[bot]'
 
       - name: Install dependencies
         run: dotnet restore --locked-mode
-        if: ${{ !contains(github.actor, 'dependabot') }}
+        if: github.actor != 'dependabot[bot]'
 
       - name: Build
         run: dotnet build --configuration Release --no-restore --tl

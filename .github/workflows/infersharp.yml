@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   infersharp:
-    if: ${{ !contains(github.actor, 'dependabot') }}
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
