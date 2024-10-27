@@ -7,14 +7,37 @@ version: 2
 updates:
   - package-ecosystem: "nuget"
     # Set to zero to disable
-    open-pull-requests-limit: 4
-    directory: "/"
+    open-pull-requests-limit: 2
+    # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#directories
+    directories:
+      - "/src"
+      - "/tests"
     schedule:
       interval: "weekly"
       day: "sunday"
+      time: "07:00"
+      timezone: "America/Los_Angeles"
     groups:
-      nuget-dependencies:
-        dependency-type: "production"
+      # If a dependency update could belong to more than one group, it is only assigned to the first group it matches with.
+      security-updates:
+        applies-to: security-updates
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
+
+      pkg-updates:
+        applies-to: version-updates
+        exclude-patterns:
+          - "*Analyzers"
+        update-types:
+          - "minor"
+          - "patch"
+
+      analyzer-updates:
+        applies-to: version-updates
+        patterns:
+          - "*Analyzers"
         update-types:
           - "minor"
           - "patch"
