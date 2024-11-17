@@ -75,7 +75,7 @@ jobs:
           classfilters: '-System.*;-Microsoft.*;-Newtonsoft.*;-System.Text.RegularExpressions.*;-xunit.*;-NUnit.*'
 
       - name: Upload code coverage results to codecov
-        uses:  codecov/codecov-action@v4.6.0
+        uses:  codecov/codecov-action@v5.0.2
         with:
           flags: unittests
           verbose: true
