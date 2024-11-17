@@ -8,12 +8,22 @@ on:
     paths-ignore:
       - "**/*.md"
       - "**/*.txt"
+      - "**/.editorconfig"
+      - "**/*.runsettings"
+      - "**/typos.toml"
+      - ".github/**"
+      - "!.github/workflows/codeql-analysis.yml"
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [master]
     paths-ignore:
       - "**/*.md"
       - "**/*.txt"
+      - "**/.editorconfig"
+      - "**/*.runsettings"
+      - "**/typos.toml"
+      - ".github/**"
+      - "!.github/workflows/codeql-analysis.yml"
   workflow_dispatch:
 
 # https://www.meziantou.net/how-to-cancel-github-workflows-when-pushing-new-commits-on-a-branch.htm
@@ -92,7 +102,7 @@ jobs:
       - if: matrix.build-mode == 'manual'
         name: Install dependencies
         run: |
-          if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
+          if [[" ${{github.event.pull_request.user.login }} " == 'dependabot[bot]']] || [[ "${{ github.actor }}" == 'dependabot[bot]' ]]; then
             dotnet restore --force-evaluate
           else
             dotnet restore --locked-mode

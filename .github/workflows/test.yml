@@ -6,10 +6,15 @@ env:
 
 on:
   push:
+    paths:
+      - "**.cs"
+      - "**.csproj"
+      - ".github/workflows/test.yml"
   pull_request:
     paths:
       - "**.cs"
       - "**.csproj"
+      - ".github/workflows/test.yml"
 permissions:
   contents: read
   pull-requests: write
@@ -54,7 +59,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          if [[" ${{github.event.pull_request.user.login }} " == 'dependabot[bot]']] || [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
+          if [[" ${{github.event.pull_request.user.login }} " == 'dependabot[bot]']] || [[ "${{ github.actor }}" == 'dependabot[bot]' ]]; then
             dotnet restore --force-evaluate
           else
             dotnet restore --locked-mode
