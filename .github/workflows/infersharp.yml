@@ -30,6 +30,7 @@ jobs:
           cache-dependency-path: "**/packages.lock.json"
 
       - name: Install dependencies
+        # OK as doesn't run for Dependabot.
         run: dotnet restore --locked-mode
 
       - name: Build
