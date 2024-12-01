@@ -24,7 +24,7 @@ jobs:
       # https://github.com/marketplace/actions/auto-label-merge-conflicts
       - uses: mschilde/auto-label-merge-conflicts@master
         with:
-          CONFLICT_LABEL_NAME: "Conflicts :boom:"
+          CONFLICT_LABEL_NAME: "💥 Conflicts"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAX_RETRIES: 5
           WAIT_MS: 5000
