@@ -1,9 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
+
 using Dappery.Core.Extensions;
 
 using FluentValidation;
 
 namespace Dappery.Core.Breweries.Commands.CreateBrewery;
 
+[ExcludeFromCodeCoverage]
 public class CreateBreweryCommandValidator : AbstractValidator<CreateBreweryCommand>
 {
     public CreateBreweryCommandValidator()

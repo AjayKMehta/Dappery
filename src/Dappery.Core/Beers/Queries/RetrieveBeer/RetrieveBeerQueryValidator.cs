@@ -1,7 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
+
 using FluentValidation;
 
 namespace Dappery.Core.Beers.Queries.RetrieveBeer;
 
+[ExcludeFromCodeCoverage]
 public class RetrieveBeerQueryValidator : AbstractValidator<RetrieveBeerQuery>
 {
     public RetrieveBeerQueryValidator() => RuleFor(b => b.Id)
