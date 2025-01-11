@@ -1,0 +1,4 @@
+
+[*.{cs,vb}]
+# XUnit requires test classes to be public.
+dotnet_diagnostic.CA1515.severity = none
