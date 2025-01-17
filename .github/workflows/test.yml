@@ -42,18 +42,12 @@ jobs:
         uses: dorny/paths-filter@v3
         id: filter
         with:
-          filters: |
-            code:
-              - "**/*.cs"
-              - "**/*.csproj"
-              - "**/*.props"
-            workflow:
-              - ".github/workflows/test.yml"
+          filters: .github/filter.yml
 
       - name: Set environment variable
         id: set-env
         run: |
-          if [ "${{ steps.filter.outputs.code }}" == "true" ] || [ "${{ steps.filter.outputs.workflow }}" == "true" ]; then
+          if [ "${{ steps.filter.outputs.code }}" == "true" ] || [ "${{ steps.filter.outputs.test }}" == "true" ]; then
             echo "ENABLED=1" >> $GITHUB_ENV
           else
             echo "ENABLED=0" >> $GITHUB_ENV
