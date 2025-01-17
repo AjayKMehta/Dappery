@@ -2,14 +2,7 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [master]
-    paths-ignore:
-      - "**/*.md"
-      - "**/*.txt"
-      - "**/.editorconfig"
-      - "**/*.runsettings"
-      - "**/typos.toml"
-      - ".github/**"
-      - "!.github/workflows/semgrep.yml"
+
   push:
     branches:
     - main
@@ -40,5 +33,24 @@ jobs:
     container:
       image: returntocorp/semgrep
     steps:
-    - uses: actions/checkout@v4.2.2
-    - run: semgrep ci
+    - name: 'Checkout Repository'
+      uses: actions/checkout@v4.2.2
+    - name: "Check for changed files"
+      uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        predicate-quantifier: 'every'
+        filters: |
+          code:
+            - "!**/*.md"
+            - "!**/*.txt"
+            - "!**/.editorconfig"
+            - "!**/*.runsettings"
+            - "!**/typos.toml"
+            - "!.github/**"
+          workflow:
+            - ".github/workflows/semgrep.yml"
+
+    - name: 'Run Semgrep'
+      if: steps.filter.outputs.code == 'true' || steps.filter.outputs.workflow == 'true'
+      run: semgrep ci
