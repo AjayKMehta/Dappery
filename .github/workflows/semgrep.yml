@@ -25,6 +25,7 @@ jobs:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     container:
       image: returntocorp/semgrep
+      # https://github.com/actions/runner/issues/2033#issuecomment-1598547465
       options: --user 1001
     steps:
     - name: 'Checkout Repository'
