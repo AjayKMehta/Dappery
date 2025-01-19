@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   infersharp:
-    if: github.actor != 'app/dependabot'
+    if: github.actor != 'app/dependabot' && github.event.pull_request.user.login != 'app/dependabot'
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
