@@ -8,7 +8,7 @@ on:
   push:
   pull_request:
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
 
   # https://www.meziantou.net/how-to-cancel-github-workflows-when-pushing-new-commits-on-a-branch.htm
