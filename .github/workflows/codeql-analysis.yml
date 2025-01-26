@@ -109,9 +109,9 @@ jobs:
             if git status --porcelain | grep -q .; then
               git config --global user.name "${{ github.actor }}"
               git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-              git config --local commit.gpgsign false
+              git config --global commit.gpgsign false
               git add ./\*.lock.json
-              git commit -m "Committing changes to lock-files" -S
+              git commit -m "Committing changes to lock-files"
               git push
             else
               echo "No changes detected"
