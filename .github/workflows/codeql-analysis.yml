@@ -106,6 +106,14 @@ jobs:
         run: |
           if [[ "${{ github.event.pull_request.user.login }}" == 'dependabot[bot]' ]] || [[ "${{ github.actor }}" == 'dependabot[bot]' ]]; then
             dotnet restore --force-evaluate
+            if git status --porcelain | grep -q .; then
+              git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+              git add ./\*.lock.json
+              git commit -m "Committing changes to lock-files" -S
+              git push
+            else
+              echo "No changes detected"
+            fi
           else
             dotnet restore --locked-mode
           fi
