@@ -87,7 +87,7 @@ jobs:
               git config --global commit.gpgsign false
               git add ./\*.lock.json
               git commit -m "Committing changes to lock-files"
-              git push
+              git push origin HEAD:${{ github.event.pull_request.head.ref }}
             else
               echo "No changes detected"
             fi
