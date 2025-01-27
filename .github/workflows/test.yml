@@ -80,7 +80,7 @@ jobs:
       - name: Install dependencies
         if: env.ENABLED == '1' && steps.pr-check.outputs.pr_found == 'true'
         run: |
-            dotnet restore --force-evaluate
+            dotnet restore --force-evaluate && git add .
 
 
       - id: commit
