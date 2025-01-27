@@ -105,20 +105,26 @@ jobs:
         name: Install dependencies
         run: |
           if [[ "${{ github.event.pull_request.user.login }}" == 'dependabot[bot]' ]] || [[ "${{ github.actor }}" == 'dependabot[bot]' ]]; then
-            dotnet restore --force-evaluate
-            if git status --porcelain | grep -q .; then
-              git config --global user.name "${{ github.actor }}"
-              git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-              git config --global commit.gpgsign false
-              git add ./\*.lock.json
-              git commit -m "Committing changes to lock files"
-              git push origin HEAD:${{ github.event.pull_request.head.ref }}
-            else
-              echo "No changes detected"
-            fi
+            dotnet restore --force-evaluate && git add .
           else
             dotnet restore --locked-mode
           fi
+
+      - id: commit
+        if: matrix.build-mode == 'manual' && env.ENABLED == '1'
+        uses: qoomon/actions--create-commit@v1
+        with:
+          message: "Committing changes to lock files"
+          allow-empty: false
+          skip-empty: true
+
+      - if: matrix.build-mode == 'manual' && env.ENABLED == '1' && steps.commit.outputs.commit != null
+        run: git push origin HEAD:${{ github.event.pull_request.head.ref }}
+
+      - name: Install dependencies
+        if: env.ENABLED == '1' && steps.pr-check.outputs.pr_found == 'false'
+        run: |
+            dotnet restore --locked-mode
 
       - if: matrix.build-mode == 'manual' && env.ENABLED == '1'
         name: Build
