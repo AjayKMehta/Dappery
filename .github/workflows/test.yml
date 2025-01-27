@@ -87,12 +87,12 @@ jobs:
         if: env.ENABLED == '1' && steps.pr-check.outputs.pr_found == 'true'
         uses: qoomon/actions--create-commit@v1
         with:
-          message: "Committing changes to lock files"
+          message: "Committing changes to lock files [skip ci]"
           allow-empty: false
           skip-empty: true
 
       - if: env.ENABLED == '1' && steps.pr-check.outputs.pr_found == 'true' && steps.commit.outputs.commit != null
-        run: git push origin HEAD:${{ github.event.pull_request.head.ref }}
+        run: git push origin HEAD:${{ github.head_ref || github.ref_name }}
 
       - name: Install dependencies
         if: env.ENABLED == '1' && steps.pr-check.outputs.pr_found == 'false'
