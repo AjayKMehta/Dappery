@@ -82,7 +82,6 @@ jobs:
         run: |
             dotnet restore --force-evaluate && git add .
 
-
       - id: commit
         if: env.ENABLED == '1' && steps.pr-check.outputs.pr_found == 'true'
         uses: qoomon/actions--create-commit@v1
