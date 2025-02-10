@@ -10,9 +10,7 @@
 
 ### coverlet
 
-```shell
-dotnet test --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura
-```
+When running tests with [code coverage using Microsoft Testing Platform](https://xunit.net/docs/getting-started/v3/code-coverage-with-mtp), the standard Coverlet experience is not supported.
 
 ### Microsoft.CodeCoverage
 
