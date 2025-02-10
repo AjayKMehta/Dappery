@@ -20,9 +20,6 @@
           <CoverageLogLevel>Dumps</CoverageLogLevel>
           <InstrumentationLogLevel>Dumps</InstrumentationLogLevel>
           <CoverageFileLogPath>coverage.log</CoverageFileLogPath>
-          <!-- Below doesn't work 😦. For details, see https://github.com/microsoft/codecoverage/issues/76 -->
-          <CoverageFileName>coverage.cobertura.xml</CoverageFileName>
-          <Format>Cobertura</Format>
           <PerTestCodeCoverage>False</PerTestCodeCoverage>
           <IncludeTestAssembly>False</IncludeTestAssembly>
           <CodeCoverage>
