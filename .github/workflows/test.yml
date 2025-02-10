@@ -104,7 +104,6 @@ jobs:
 
       - name: Test
         if: env.ENABLED == '1'
-        # TODO: Figure out how to make this work with runsettings.
         run: dotnet test -s ./cicd.runsettings --configuration Release --no-build --verbosity quiet --logger "GitHubActions;summary.includeNotFoundTests=false" -- --coverage --coverage-output-format xml --coverage-output coverage.cobertura.xml
 
       - name: ReportGenerator
