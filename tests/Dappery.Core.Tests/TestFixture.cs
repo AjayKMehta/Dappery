@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
 using Dappery.Core.Data;
@@ -6,6 +7,7 @@ using Dappery.Data;
 
 namespace Dappery.Core.Tests;
 
+[ExcludeFromCodeCoverage]
 public class TestFixture : IDisposable
 {
     public TestFixture() => UnitOfWork = new UnitOfWork(null);

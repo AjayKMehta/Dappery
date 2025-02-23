@@ -6,8 +6,11 @@
     <!-- Enable the Microsoft Testing Platform 'dotnet test' experience -->
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
     <!-- For more information on Microsoft Testing Platform support in xUnit.net, please visit: https://xunit.net/docs/getting-started/v3/microsoft-testing-platform -->
+    <TestingPlatformShowTestsFailures>true</TestingPlatformShowTestsFailures>
   </PropertyGroup>
-
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+  </ItemGroup>
   <ImportGroup>
     <Import Project="$(ParentDirectoryBuildPropsPath)" />
   </ImportGroup>
