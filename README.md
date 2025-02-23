@@ -22,7 +22,6 @@ dotnet test --no-build --collect "Code Coverage;Format=cobertura"
 dotnet-coverage collect -f cobertura -o report.cobertura.xml "dotnet test --no-build"
 ```
 
-
 ## Display code coverage in VS Code:
 
 > [!WARNING]
