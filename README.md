@@ -22,13 +22,6 @@ dotnet test --no-build --collect "Code Coverage;Format=cobertura"
 dotnet-coverage collect -f cobertura -o report.cobertura.xml "dotnet test --no-build"
 ```
 
-Instead of passing parameters to CLI command, you can use a `.runsettings` file instead:
-
-```shell
-dotnet test -s local.runsettings 
-```
-
-> :bulb: `local.runsettings` is for running tests locally while `cicd.runsettings` is for running tests using GitHub workflows.  
 
 ## Display code coverage in VS Code:
 
