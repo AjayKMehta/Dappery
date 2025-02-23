@@ -27,6 +27,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CrashDump" />
+    <PackageReference Include="Microsoft.Testing.Extensions.HangDump" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dappery.Core\Dappery.Core.csproj" />
