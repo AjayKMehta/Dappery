@@ -1,8 +1,7 @@
-// https://learn.microsoft.com/en-us/dotnet/core/tools/global-json
 {
   "sdk": {
-    "version": "9.0.200",
+    "version": "9.0.103",
     "allowPrerelease": false,
-    "rollForward": "latestMinor"
+    "rollForward": "latestFeature"
   }
 }
