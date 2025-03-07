@@ -26,6 +26,7 @@ jobs:
         with:
           cache: true
           cache-dependency-path: "**/packages.lock.json"
+          dotnet-version: '9.0.x'
 
       - name: Install dependencies
         # OK as doesn't run for Dependabot.
