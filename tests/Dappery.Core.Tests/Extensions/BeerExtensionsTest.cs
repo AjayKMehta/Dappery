@@ -6,13 +6,11 @@ using Dappery.Domain.Entities;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Core.Tests.Extensions;
 
-public class BeerExtensionsTest
+internal sealed class BeerExtensionsTest
 {
-    [Fact]
+    [Test]
     public void ToBeerDtoGivenValidBeerReturnsMappedBeerDtoWithoutBreweryBeerListAndCount()
     {
         // Arrange
@@ -58,7 +56,7 @@ public class BeerExtensionsTest
         addressDto.StreetAddress.ShouldBe(beerToMap.Brewery.Address?.StreetAddress);
     }
 
-    [Fact]
+    [Test]
     public void ToBeerDtoGivenValidBeerWithoutBreweryReturnsMappedBeerDtoWithoutBrewery()
     {
         // Arrange

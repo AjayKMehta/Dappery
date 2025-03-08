@@ -8,13 +8,11 @@ using Dappery.Domain.Entities;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Data.Tests;
 
-public class BeerRepositoryTest : TestFixture
+internal sealed class BeerRepositoryTest : TestFixture
 {
-    [Fact]
+    [Test]
     public async Task GetAllBeersWhenInvokedAndBeersExistReturnsValidListOfBeersAsync()
     {
         // Arrange
@@ -39,7 +37,7 @@ public class BeerRepositoryTest : TestFixture
         beers.Find(b => b.Name == "Hazy Little Thing").ShouldNotBeNull().BeerStyle.ShouldBe(BeerStyle.NewEnglandIpa);
     }
 
-    [Fact]
+    [Test]
     public async Task GetAllBeersWhenNoBeersExistReturnsEmptyListOfBeersAsync()
     {
         // Arrange, remove all the beers from our database
@@ -58,7 +56,7 @@ public class BeerRepositoryTest : TestFixture
         beers.ShouldNotBeNull().ShouldBeOfType<List<Beer>>().ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public async Task GetBeerByIdWhenInvokedAndBeerExistsReturnsValidBeerAsync()
     {
         // Arrange
@@ -80,7 +78,7 @@ public class BeerRepositoryTest : TestFixture
         brewery.Address.ShouldNotBeNull().City.ShouldBe("Redding");
     }
 
-    [Fact]
+    [Test]
     public async Task GetBeerByIdWhenInvokedAndBeerDoesNotExistReturnsNullAsync()
     {
         // Arrange
@@ -94,7 +92,7 @@ public class BeerRepositoryTest : TestFixture
         beer.ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public async Task CreateBeerWhenBeerIsValidReturnsNewlyInsertedBeerAsync()
     {
         // Arrange
@@ -124,7 +122,7 @@ public class BeerRepositoryTest : TestFixture
         brewery.Beers.FirstOrDefault(b => b.Id == insertedBeer.Id)?.Name.ShouldBe(beerToInsert.Name);
     }
 
-    [Fact]
+    [Test]
     public async Task UpdateBeerWhenBeerIsValidReturnsUpdateBeerAsync()
     {
         // Arrange
@@ -157,7 +155,7 @@ public class BeerRepositoryTest : TestFixture
         brewery.Beers.FirstOrDefault(b => b.Id == beerToUpdate.Id)?.Name.ShouldBe(beerToUpdate.Name);
     }
 
-    [Fact]
+    [Test]
     public async Task DeleteBeerWhenBeerExistsRemovesBeerFromDatabaseAsync()
     {
         // Arrange

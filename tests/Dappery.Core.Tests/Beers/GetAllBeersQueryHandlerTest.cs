@@ -6,13 +6,11 @@ using Dappery.Domain.Media;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Core.Tests.Beers;
 
-public class GetAllBeersQueryHandlerTest : TestFixture
+internal sealed class GetAllBeersQueryHandlerTest : TestFixture
 {
-    [Fact]
+    [Test]
     public async Task GivenValidRequestWhenBeersArePopulatedReturnsMappedBeerListAsync()
     {
         // Arrange
@@ -28,7 +26,7 @@ public class GetAllBeersQueryHandlerTest : TestFixture
         _ = result.Items.ShouldNotBeNull();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenValidRequestWhenBeersAreNotPopulatedReturnsMappedEmptyBeerListAsync()
     {
         // Arrange

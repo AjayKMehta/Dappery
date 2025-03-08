@@ -9,13 +9,11 @@ using MediatR;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Core.Tests.Breweries;
 
-public class DeleteBreweryCommandHandlerTest : TestFixture
+internal sealed class DeleteBreweryCommandHandlerTest : TestFixture
 {
-    [Fact]
+    [Test]
     public async Task GivenValidDeleteRequestWhenBreweryExistsIsRemovedFromDatabaseIncludingAllBeersAsync()
     {
         // Arrange
@@ -30,7 +28,7 @@ public class DeleteBreweryCommandHandlerTest : TestFixture
         _ = result.ShouldBeOfType<Unit>();
     }
 
-    [Fact]
+    [Test]
     public async Task GivenValidDeleteRequestWhenDoesNotBreweryExistIsNotRemovedFromDatabaseAndExceptionIsThrownAsync()
     {
         // Arrange

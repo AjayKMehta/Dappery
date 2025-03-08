@@ -8,7 +8,7 @@ using Dappery.Data;
 namespace Dappery.Core.Tests;
 
 [ExcludeFromCodeCoverage]
-public class TestFixture : IDisposable
+internal class TestFixture : IDisposable
 {
     public TestFixture() => UnitOfWork = new UnitOfWork(null);
 

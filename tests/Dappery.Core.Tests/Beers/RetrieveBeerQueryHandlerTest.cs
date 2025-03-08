@@ -11,13 +11,11 @@ using Dappery.Domain.Media;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Core.Tests.Beers;
 
-public class RetrieveBeerQueryHandlerTest : TestFixture
+internal sealed class RetrieveBeerQueryHandlerTest : TestFixture
 {
-    [Fact]
+    [Test]
     public async Task GivenValidRequestWhenBeerExistsReturnsMappedBeerAsync()
     {
         // Arrange
@@ -46,7 +44,7 @@ public class RetrieveBeerQueryHandlerTest : TestFixture
         addressDto.ZipCode.ShouldBe("96002");
     }
 
-    [Fact]
+    [Test]
     public async Task GivenValidRequestWhenBeerDoesNotExistThrowsApiExceptionForNotFoundAsync()
     {
         // Arrange

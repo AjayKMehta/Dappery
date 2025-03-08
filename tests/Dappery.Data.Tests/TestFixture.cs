@@ -5,9 +5,9 @@ using Dappery.Core.Data;
 
 namespace Dappery.Data.Tests;
 
-public class TestFixture : IDisposable
+internal class TestFixture : IDisposable
 {
-    protected TestFixture() => UnitOfWork = new UnitOfWork(null);
+    protected internal TestFixture() => UnitOfWork = new UnitOfWork(null);
 
     protected IUnitOfWork UnitOfWork { get; }
 
