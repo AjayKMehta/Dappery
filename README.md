@@ -8,39 +8,12 @@
 
 ## Run unit tests
 
-### coverlet
-
-When running tests with [code coverage using Microsoft Testing Platform](https://xunit.net/docs/getting-started/v3/code-coverage-with-mtp), the standard Coverlet experience is not supported.
-
-### Microsoft.CodeCoverage
-
-Running `dotnet test --collect "Code Coverage"` at the solution level now automatically merges code coverage for all your test projects. See [here](https://devblogs.microsoft.com/dotnet/whats-new-in-our-code-coverage-tooling) for more information.
+:bulb: You can add `--no-build` to first command if you already built code.
 
 ```shell
-# These 2 commands do the same thing:
-dotnet test --no-build --collect "Code Coverage;Format=cobertura"
-dotnet-coverage collect -f cobertura -o report.cobertura.xml "dotnet test --no-build"
+dotnet test --configuration Release -- --coverage --coverage-output-format xml --coverage-output coverage.cobertura.xml --crashdump --hangdump
+dotnet-coverage merge **/*/*.cobertura.xml -f cobertura -o ./coverage.cobertura.xml
 ```
-
-## Display code coverage in VS Code:
-
-> [!WARNING]
-> :bulb: This currently only works with `coverlet`. Attempting to use `Microsoft.CodeCoverage` will silently fail.
-
-1. Install [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters) if not already installed.
-2. Make sure the setting `coverage-gutters.coverageFileNames` in `settings.json` includes `"coverage.cobertura.xml"` as shown below:
-
-    ```json
-    "coverage-gutters.coverageFileNames": [
-        "lcov.info",
-        "cov.xml",
-        "coverage.xml",
-        "jacoco.xml",
-        "coverage.cobertura.xml"
-    ]
-    ```
-
-3. From Command Palette, select **Coverage Gutters: Display Coverage** after you have run unit tests (see [previous section](#run-unit-tests)).
 
 ## Package restore
 
