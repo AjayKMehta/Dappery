@@ -9,13 +9,11 @@ using Dappery.Domain.Entities;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Core.Tests.Extensions;
 
-public class BreweryExtensionsTest
+internal sealed class BreweryExtensionsTest
 {
-    [Fact]
+    [Test]
     public void ToBreweryDtoGivenValidBreweryWithAListOfBeersReturnsMappedBreweryDto()
     {
         // Arrange
@@ -89,7 +87,7 @@ public class BreweryExtensionsTest
         thirdBeer.Style.ShouldBe("DoubleIpa");
     }
 
-    [Fact]
+    [Test]
     public void ToBreweryDtoGivenValidBreweryWithoutListOfBeersReturnsMappedBreweryDtoWithEmptyBeerListAndZeroCount()
     {
         // Arrange
@@ -128,7 +126,7 @@ public class BreweryExtensionsTest
             .ShouldBe(0);
     }
 
-    [Fact]
+    [Test]
     public void ToBreweryDtoGivenValidBreweryWithoutBeerListIncludedReturnsMappedBreweryDtoWithoutBeerListOrCount()
     {
         // Arrange
@@ -167,7 +165,7 @@ public class BreweryExtensionsTest
         addressDto.ZipCode.ShouldBe(breweryToMap.Address?.ZipCode);
     }
 
-    [Fact]
+    [Test]
     public void ToBreweryDtoGivenValidBreweryWithNoBeerListAndWithoutBeerListIncludedReturnsMappedBreweryDtoWithoutBeerListOrCount()
     {
         // Arrange

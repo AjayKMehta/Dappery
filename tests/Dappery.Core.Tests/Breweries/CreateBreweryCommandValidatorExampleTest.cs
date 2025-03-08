@@ -4,13 +4,11 @@ using Dappery.Domain.Dtos.Brewery;
 
 using FluentValidation.TestHelper;
 
-using Xunit;
-
 namespace Dappery.Core.Tests.Breweries;
 
-public class CreateBreweryCommandValidatorExampleTest
+internal sealed class CreateBreweryCommandValidatorExampleTest
 {
-    [Fact]
+    [Test]
     public void Test()
     {
         // Arrange

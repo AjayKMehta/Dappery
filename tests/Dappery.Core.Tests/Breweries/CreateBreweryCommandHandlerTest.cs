@@ -9,13 +9,11 @@ using Dappery.Domain.Media;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Core.Tests.Breweries;
 
-public class CreateBreweryCommandHandlerTest : TestFixture
+internal sealed class CreateBreweryCommandHandlerTest : TestFixture
 {
-    [Fact]
+    [Test]
     public async Task CreateBreweryCommandHandlerGivenAValidRequestCreatesBreweryAsync()
     {
         // Arrange

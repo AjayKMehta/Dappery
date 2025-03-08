@@ -8,13 +8,11 @@ using Dappery.Domain.Media;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Core.Tests.Breweries;
 
-public class GetBreweriesQueryHandlerTest : TestFixture
+internal sealed class GetBreweriesQueryHandlerTest : TestFixture
 {
-    [Fact]
+    [Test]
     public async Task GetBreweriesQueryHandlerWhenBreweriesExistReturnsListOfBreweriesWithBeersAsync()
     {
         // Arrange
@@ -56,7 +54,7 @@ public class GetBreweriesQueryHandlerTest : TestFixture
         secondBreweryDto?.BeerCount.ShouldBe(2);
     }
 
-    [Fact]
+    [Test]
     public async Task GetBreweriesQueryHandlerWhenNoBreweriesExistReturnsEmptyListOfBreweriesAsync()
     {
         // Arrange, remove all breweries from the test database

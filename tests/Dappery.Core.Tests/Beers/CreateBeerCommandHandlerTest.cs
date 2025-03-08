@@ -12,13 +12,11 @@ using Dappery.Domain.Media;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Core.Tests.Beers;
 
-public class CreateBeerCommandHandlerTest : TestFixture
+internal sealed class CreateBeerCommandHandlerTest : TestFixture
 {
-    [Fact]
+    [Test]
     public async Task GivenValidRequestWhenBreweryExistsReturnsMappedAndCreatedBeerAsync()
     {
         // Arrange
@@ -55,7 +53,7 @@ public class CreateBeerCommandHandlerTest : TestFixture
         addressDto.ZipCode.ShouldBe("96002");
     }
 
-    [Fact]
+    [Test]
     public async Task GivenValidRequestWhenBreweryDoesNotExistThrowsApiExceptionForBadRequestAsync()
     {
         // Arrange
@@ -75,7 +73,7 @@ public class CreateBeerCommandHandlerTest : TestFixture
         result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.BadRequest);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenValidRequestWithInvalidBeerStyleReturnsMappedAndCreatedBeerWithOtherAsStyleAsync()
     {
         // Arrange

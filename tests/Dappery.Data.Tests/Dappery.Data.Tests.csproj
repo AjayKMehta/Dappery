@@ -17,7 +17,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Shouldly" />
-    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="TUnit" />
     <PackageReference Include="coverlet.collector">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -33,8 +33,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dappery.Core\Dappery.Core.csproj" />
     <ProjectReference Include="..\..\src\Dappery.Data\Dappery.Data.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

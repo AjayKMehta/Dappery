@@ -10,13 +10,11 @@ using Dappery.Domain.Media;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Core.Tests.Breweries;
 
-public class UpdateBreweryCommandHandlerTest : TestFixture
+internal sealed class UpdateBreweryCommandHandlerTest : TestFixture
 {
-    [Fact]
+    [Test]
     public async Task GivenValidUpdateRequestWhenBreweryExistsReturnsUpdatedMappedBreweryAsync()
     {
         // Arrange
@@ -55,7 +53,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
         addressDto.ZipCode.ShouldBe(updateCommand.Dto.Address?.ZipCode);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenValidUpdateRequestWhenBreweryDoesNotExistThrowsNotFoundExceptionAsync()
     {
         // Arrange
@@ -81,7 +79,7 @@ public class UpdateBreweryCommandHandlerTest : TestFixture
         result.ShouldNotBeNull().StatusCode.ShouldBe(HttpStatusCode.NotFound);
     }
 
-    [Fact]
+    [Test]
     public async Task GivenValidUpdateRequestWhenBreweryDoesExistAndAddressIsNotUpdatedReturnsMappedBreweryWithNoUpdatedAddressAsync()
     {
         // Arrange

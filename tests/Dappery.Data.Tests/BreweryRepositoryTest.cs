@@ -9,13 +9,11 @@ using Dappery.Domain.Entities;
 
 using Shouldly;
 
-using Xunit;
-
 namespace Dappery.Data.Tests;
 
-public class BreweryRepositoryTest : TestFixture
+internal sealed class BreweryRepositoryTest : TestFixture
 {
-    [Fact]
+    [Test]
     public async Task GetAllBreweriesWhenInvokedAndBreweriesExistReturnsValidListOfBreweriesAsync()
     {
         // Arrange
@@ -43,7 +41,7 @@ public class BreweryRepositoryTest : TestFixture
         brewery?.Beers.ShouldContain(b => b.Name == "Hazy Little Thing");
     }
 
-    [Fact]
+    [Test]
     public async Task GetAllBreweriesWhenInvokedAndNoBreweriesExistReturnsEmptyListAsync()
     {
         // Arrange
@@ -59,7 +57,7 @@ public class BreweryRepositoryTest : TestFixture
         breweries.ShouldNotBeNull().ShouldBeOfType<List<Brewery>>().ShouldBeEmpty();
     }
 
-    [Fact]
+    [Test]
     public async Task GetBreweryByIdWhenInvokedAndBreweryExistReturnsValidBreweryWithBeersAndAddressAsync()
     {
         // Arrange
@@ -81,7 +79,7 @@ public class BreweryRepositoryTest : TestFixture
         beers.ShouldContain(b => b.Name == "Hooked");
     }
 
-    [Fact]
+    [Test]
     public async Task GetBreweryByIdWhenInvokedAndNoBreweryExistReturnsNullAsync()
     {
         // Arrange
@@ -95,7 +93,7 @@ public class BreweryRepositoryTest : TestFixture
         brewery.ShouldBeNull();
     }
 
-    [Fact]
+    [Test]
     public async Task CreateBreweryWhenBreweryIsValidReturnsNewlyInsertedBreweryAsync()
     {
         // Arrange
@@ -132,7 +130,7 @@ public class BreweryRepositoryTest : TestFixture
         address.BreweryId.ShouldBe(3);
     }
 
-    [Fact]
+    [Test]
     public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsNotUpdatedReturnsUpdatedBreweryAsync()
     {
         // Arrange
@@ -169,7 +167,7 @@ public class BreweryRepositoryTest : TestFixture
         address.BreweryId.ShouldBe(2);
     }
 
-    [Fact]
+    [Test]
     public async Task UpdateBreweryWhenBreweryIsValidAndAddressIsUpdatedReturnsUpdatedBreweryAsync()
     {
         // Arrange
@@ -207,7 +205,7 @@ public class BreweryRepositoryTest : TestFixture
         address.BreweryId.ShouldBe(2);
     }
 
-    [Fact]
+    [Test]
     public async Task DeleteBreweryWhenBreweryExistsRemovesBreweryAndAllAssociatedBeersAndAddressAsync()
     {
         // Arrange
