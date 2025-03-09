@@ -79,12 +79,12 @@
       },
       "TUnit": {
         "type": "Direct",
-        "requested": "[0.16.47, )",
-        "resolved": "0.16.47",
-        "contentHash": "CSla+gJ2l34lLhB1MWRjTR+BpHhCcWczu8YPbCEvjESG67LIBYxUwHd5XCTQPIN2WpBOglb3BPK7/cI+YjLErw==",
+        "requested": "[0.16.56, )",
+        "resolved": "0.16.56",
+        "contentHash": "YkFeWgFRfUO676YK9SuSCd9+utvsm3rx5KHHYCzFOLH40llytJpoS7zAs5UfidRcWQDN3SGcwPUYdHzLoY9FUg==",
         "dependencies": {
-          "TUnit.Assertions": "0.16.47",
-          "TUnit.Engine": "0.16.47"
+          "TUnit.Assertions": "0.16.56",
+          "TUnit.Engine": "0.16.56"
         }
       },
       "AsyncFixer": {
@@ -548,24 +548,24 @@
       },
       "TUnit.Assertions": {
         "type": "Transitive",
-        "resolved": "0.16.47",
-        "contentHash": "TR+1zomDcELVBvrZe6wobdjIcicN5gNxA6r7t66vk6AbpQYD4Mi3dfNlyhxwAhO6KUF4TOp/7XjD8kpE2SdbiA=="
+        "resolved": "0.16.56",
+        "contentHash": "5idzsVdy/E4DsQG7lPHollphXn0ff8eC1ow12hCaXwxIEgHttVZQnjgZw/I+9y3DKdYcoBHqWVHrCnVS8EXhfQ=="
       },
       "TUnit.Core": {
         "type": "Transitive",
-        "resolved": "0.16.47",
-        "contentHash": "F1FidEc04v5Liujadk5QwBgbakE0U3bZI/Jwx6QyeZADPCOcF+v47Qj2ySjKhUJn93h7LB3WJGKkVhpeqQEkog=="
+        "resolved": "0.16.56",
+        "contentHash": "Dp9mKGs4cxALfcrUmRzO7Tml74ZI7zVG84jFPNrFl08Sb+RjZX3onUHut788Gw238e514wv92q0sbkZwIxsm7g=="
       },
       "TUnit.Engine": {
         "type": "Transitive",
-        "resolved": "0.16.47",
-        "contentHash": "gEywmw+3YI1GSZRToWEr+8RUPBGSJFNyRGdLtnCF7rcvbJMdrjs6KqgTA07cKD3pu1JRR8frhppw0Q/WSx91fg==",
+        "resolved": "0.16.56",
+        "contentHash": "emjeeq5Kz4khWXXQLLrMLHBgLyOyQFQH4fSvjXrG8EhOvhP+5F51ra1WEbyDakUEHkqKJEx+BHIfpGle5EsZUQ==",
         "dependencies": {
           "EnumerableAsyncProcessor": "2.1.0",
           "Microsoft.Testing.Extensions.TrxReport.Abstractions": "1.4.3",
           "Microsoft.Testing.Platform": "1.4.3",
           "Microsoft.Testing.Platform.MSBuild": "1.4.3",
-          "TUnit.Core": "0.16.47"
+          "TUnit.Core": "0.16.56"
         }
       },
       "UnoptimizedAssemblyDetector": {
