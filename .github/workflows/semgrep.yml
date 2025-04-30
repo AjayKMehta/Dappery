@@ -40,6 +40,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: semgrep/semgrep
+      # https://github.com/actions/runner/issues/2033#issuecomment-1598547465
+      options: --user 1001
+
     steps:
     - name: 'Checkout Repository'
       uses: actions/checkout@v4.2.2
