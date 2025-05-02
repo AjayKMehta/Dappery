@@ -45,6 +45,6 @@ public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
             s_logValidationFailure(_logger, request, null);
             throw new ValidationException(failures);
         }
-        return next();
+        return next(cancellationToken);
     }
 }
