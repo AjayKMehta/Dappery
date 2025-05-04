@@ -85,7 +85,9 @@ jobs:
       - name: Set environment variable
         id: set-env
         run: |
-          if [${{ github.event_name == 'workflow_dispatch' }}] || ["${{ steps.filter.outputs.code }}" == "true"] || ["${{ steps.filter.outputs.codeql }}" == "true"]; then
+          if [[ ${{ github.event_name == 'workflow_dispatch' }} ]] ||
+             [[ "${{ steps.filter.outputs.code }}" == "true"]] ||
+             [[ "${{ steps.filter.outputs.codeql }}" == "true" ]]; then
             echo "ENABLED=1" >> $GITHUB_ENV
           else
             echo "ENABLED=0" >> $GITHUB_ENV
