@@ -77,6 +77,8 @@ StyleCopReport.xml
 *.pgc
 *.pgd
 *.rsp
+# but not Directory.Build.rsp, as it configures directory-level build defaults
+!Directory.Build.rsp
 *.sbr
 *.tlb
 *.tli
@@ -341,6 +343,13 @@ FodyWeavers.xsd
 
 # Local History for Visual Studio Code
 .history/
+
+# Windows Installer files from build outputs
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
 
 tags
 *.sarif
