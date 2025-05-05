@@ -3,7 +3,6 @@
   // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
   "version": "0.2.0",
   "configurations": [
-
     {
       "name": "Launch Dappery.Core.Tests",
       "type": "coreclr",
@@ -27,6 +26,16 @@
       "stopAtEntry": false
     },
     {
+      "name": "Launch Test project",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/artifacts/bin/${input:testProject}/${input:rememberConfig}/${input:testProject}.dll",
+      "args": [],
+      "console": "internalConsole",
+      "stopAtEntry": false
+    },
+    {
       "name": ".NET Core Attach",
       "type": "coreclr",
       "request": "attach",
@@ -40,6 +49,27 @@
       "command": "extension.commandvariable.remember",
       "args": {
         "key": "buildConfig"
+      }
+    },
+    {
+      "id": "testProject",
+      "type": "command",
+      "command": "extension.commandvariable.file.pickFile",
+      "args": {
+        "description": "Pick a test project.",
+        "include": "**/tests/**/*.csproj",
+        "acceptIfOneFile": true,
+        "display": "transform",
+        "keyRemember": "testProject",
+        "valueTransform": {
+          "text": "${fileBasename}",
+          "apply": [
+            {
+              "find": "\\.csproj$",
+              "replace": ""
+            },
+          ]
+        }
       }
     }
   ]
