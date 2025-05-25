@@ -24,14 +24,14 @@ updates:
       major-pkg-updates:
         applies-to: version-updates
         exclude-patterns:
-          - "*Analyzers*"
+          - "*[Aa]nalyzers*"
         update-types:
           - "major"
 
       pkg-updates:
         applies-to: version-updates
         exclude-patterns:
-          - "*Analyzers*"
+          - "*[Aa]nalyzers*"
         update-types:
           - "minor"
           - "patch"
@@ -39,7 +39,7 @@ updates:
       analyzer-updates:
         applies-to: version-updates
         patterns:
-          - "*Analyzers*"
+          - "*[Aa]nalyzers*"
         update-types:
           - "major"
           - "minor"
