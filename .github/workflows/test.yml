@@ -4,6 +4,7 @@ env:
   # Only merge code coverage results if 1
   USE_MERGE: 0
   BUILD_CONFIG: Release
+
 on:
   push:
   pull_request:
