@@ -18,33 +18,39 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
 
     steps:
-      - name: Checkout repo
+      - id: checkout
+        name: Checkout repo
         uses: actions/checkout@v4.2.2
 
-      - name: Setup dotnet
+      - id: setup-dotnet
+        name: Setup dotnet
         uses: actions/setup-dotnet@v4.3.1
         with:
           cache: true
           cache-dependency-path: "**/packages.lock.json"
           dotnet-version: '9.0.x'
 
-      - name: Install dependencies
+      - id: dotnet-restore
+        name: Install dependencies
         # OK as doesn't run for Dependabot.
         run: dotnet restore --locked-mode
 
-      - name: Build
+      - id: build
+        name: Build
         run: dotnet build --configuration Release --no-restore --tl
 
-      - name: Run Infer#
-        id: runinfersharp
+      - id: run-infersharp
+        name: Run Infer#
         uses: microsoft/infersharpaction@v1.5
         with:
           binary-path: "artifacts/bin"
 
-      - name: Infer# analysis results
-        run: echo "${{ steps.runinfersharp.outputs.results }}"
+      - id: print-results
+        name: Infer# analysis results
+        run: echo "${{ steps.run-infersharp.outputs.results }}"
 
-      - name: Upload SARIF output to GitHub Security Center
+      - id: upload-sarif
+        name: Upload SARIF output to GitHub Security Center
         continue-on-error: true
         uses: github/codeql-action/upload-sarif@v3.28.18
         with:
