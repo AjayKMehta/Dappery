@@ -45,11 +45,11 @@
       },
       "Microsoft.Data.Sqlite": {
         "type": "Direct",
-        "requested": "[9.0.5, )",
-        "resolved": "9.0.5",
-        "contentHash": "Fht/vwX7uzPaIdlj1xtcpKD225GXjPOj7iW8934NNiTfBX5uqeCy2TdlPWPpLj+VPty/UmfgUSJSb55hXHqJMw==",
+        "requested": "[9.0.6, )",
+        "resolved": "9.0.6",
+        "contentHash": "JtLL15uSBqqkDs6mhRc4rUbNPaJJCgN+gGQfLs+paD600td6V6YGgOreXWWoIKdq2eyRipggSJnE/eM5PlxYVA==",
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "9.0.5",
+          "Microsoft.Data.Sqlite.Core": "9.0.6",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.10",
           "SQLitePCLRaw.core": "2.1.10"
         }
@@ -141,8 +141,8 @@
       },
       "Microsoft.Data.Sqlite.Core": {
         "type": "Transitive",
-        "resolved": "9.0.5",
-        "contentHash": "cP5eBSqra4Ae80X72g0h2N+jdrA4BgoMQmz9JaQmKAEXUHw9N21DPIBqIyMjOo2fK9ISiGytlAOxBAJf1hEvqg==",
+        "resolved": "9.0.6",
+        "contentHash": "3auiudiViGzj1TidUdjuDqtP3+f6PBk4xdw6r9sBaTtkYoGc3AZn0cP8LgYZaLRnJBqY5bXRLB+qhjoB+iATzA==",
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.10"
         }
@@ -169,8 +169,8 @@
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions": {
         "type": "Transitive",
-        "resolved": "9.0.5",
-        "contentHash": "cjnRtsEAzU73aN6W7vkWy8Phj5t3Xm78HSqgrbh/O4Q9SK/yN73wZVa21QQY6amSLQRQ/M8N+koGnY6PuvKQsw=="
+        "resolved": "9.0.6",
+        "contentHash": "0Zn6nR/6g+90MxskZyOOMPQvnPnrrGu6bytPwkV+azDcTtCSuQ1+GJUrg8Klmnrjk1i6zMpw2lXijl+tw7Q3kA=="
       },
       "Microsoft.Extensions.Options": {
         "type": "Transitive",
@@ -387,7 +387,7 @@
           "FluentValidation": "[12.0.0, )",
           "IDisposableAnalyzers": "[4.0.8, )",
           "MediatR": "[12.5.0, )",
-          "Microsoft.Extensions.Logging.Abstractions": "[9.0.5, )",
+          "Microsoft.Extensions.Logging.Abstractions": "[9.0.6, )",
           "MinVer": "[6.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )",
           "UnoptimizedAssemblyDetector": "[0.1.1, )"
@@ -421,11 +421,11 @@
       },
       "Microsoft.Extensions.Logging.Abstractions": {
         "type": "CentralTransitive",
-        "requested": "[9.0.5, )",
-        "resolved": "9.0.5",
-        "contentHash": "pP1PADCrIxMYJXxFmTVbAgEU7GVpjK5i0/tyfU9DiE0oXQy3JWQaOVgCkrCiePLgS8b5sghM3Fau3EeHiVWbCg==",
+        "requested": "[9.0.6, )",
+        "resolved": "9.0.6",
+        "contentHash": "LFnyBNK7WtFmKdnHu3v0HOYQ8BcjYuy0jdC9pgCJ/rbLKoJEG9/dBzSKMEeeWDbDeoWS0TIxOC8a9CM5ufca3A==",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.5"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.6"
         }
       }
     }
