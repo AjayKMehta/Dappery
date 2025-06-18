@@ -6,6 +6,10 @@
 
 **[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/AjayKMehta/Dappery)**
 
+## Introduction
+
+This repo started out as a fork to learn more about how to use MediatR. Over time, I have used this more as a playground to explore and test out new .NET tooling, functionality and set up CI pipelines using GitHub Actions.
+
 ## Run unit tests
 
 :bulb: You can add `--no-build` to first command if you already built code.
