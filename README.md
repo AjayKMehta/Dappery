@@ -12,6 +12,8 @@ This repo started out as a fork to learn more about how to use MediatR. Over tim
 
 ## Run unit tests
 
+The test projects use [TUnit](https://github.com/thomhurst/TUnit) as it is more performant compared to the alterntaives -- it uses source-generated tests and parallel execution by default.
+
 :bulb: You can add `--no-build` to first command if you already built code.
 
 ```shell
