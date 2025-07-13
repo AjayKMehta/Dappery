@@ -23,6 +23,7 @@ permissions:
 # Run on the latest version of Ubuntu
 jobs:
   version-sweep:
+    name: Sweep .NET Versions
     runs-on: ubuntu-latest
     timeout-minutes: 10
 

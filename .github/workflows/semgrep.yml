@@ -31,9 +31,9 @@ jobs:
           concurrent_skipping: same_content_newer
 
   semgrep:
+    name: Semgrep/CI
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
-    name: Semgrep/CI
     runs-on: ubuntu-latest
     container:
       image: semgrep/semgrep
