@@ -34,7 +34,7 @@ jobs:
           concurrent_skipping: same_content_newer
 
   test:
-    name: Test (${{ matrix.language }})
+    name: Run Tests
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
