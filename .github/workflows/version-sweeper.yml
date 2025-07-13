@@ -56,6 +56,7 @@ jobs:
         if: steps.dotnet-version-sweeper.outputs.has-remaining-work == 'true'
         env:
           UPGRADE_PROJECTS: ${{ steps.dotnet-version-sweeper.outputs.upgrade-projects }}
+          SUPPORT: ${{ inputs.support }}
         run: |
           upgradeProjects: "$UPGRADE_PROJECTS"
 
@@ -70,7 +71,7 @@ jobs:
             git checkout -b upgrade/$projectDir
 
             # Perform the upgrade using upgrade-assistant
-            upgrade-assistant upgrade "$projectDir" --non-interactive -t ${{ inputs.support }}
+            upgrade-assistant upgrade "$projectDir" --non-interactive -t "$SUPPORT"
 
             # Commit the changes
             git add .
