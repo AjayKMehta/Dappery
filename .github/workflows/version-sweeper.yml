@@ -54,8 +54,10 @@ jobs:
       - id: create-pr
         name: Create pull requests
         if: steps.dotnet-version-sweeper.outputs.has-remaining-work == 'true'
+        env:
+          UPGRADE_PROJECTS: ${{ steps.dotnet-version-sweeper.outputs.upgrade-projects }}
         run: |
-          upgradeProjects: ${{ steps.dotnet-version-sweeper.outputs.upgrade-projects }}
+          upgradeProjects: "$UPGRADE_PROJECTS"
 
           # Install .NET Upgrade Assistant global tool
           dotnet tool install --global upgrade-assistant
