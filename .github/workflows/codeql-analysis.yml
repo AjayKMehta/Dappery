@@ -37,7 +37,7 @@ jobs:
 
   analyze:
     needs: pre_job
-    if: github.event_name == 'pull_request' || needs.pre_job.outputs.should_skip != 'true'
+    if: needs.pre_job.outputs.should_skip != 'true'
     name: Analyze (${{ matrix.language }})
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
     timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
@@ -85,8 +85,7 @@ jobs:
       - id: set-env
         name: Set environment variable
         run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]] ||
-          [[ "${{ github.event_name }}" == "workflow_dispatch" ]] ||
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]] ||
              [[ "${{ steps.filter.outputs.code }}" == "true" ]] ||
              [[ "${{ steps.filter.outputs.codeql }}" == "true" ]]; then
             echo "ENABLED=1" >> $GITHUB_ENV
