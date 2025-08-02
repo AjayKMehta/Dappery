@@ -37,7 +37,7 @@ jobs:
 
   analyze:
     needs: pre_job
-    if: needs.pre_job.outputs.should_skip != 'true'
+    if: github.event_name == 'pull_request' || needs.pre_job.outputs.should_skip != 'true'
     name: Analyze (${{ matrix.language }})
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
     timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
