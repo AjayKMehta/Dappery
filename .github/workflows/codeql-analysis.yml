@@ -85,7 +85,8 @@ jobs:
       - id: set-env
         name: Set environment variable
         run: |
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]] ||
+          if [[ "${{ github.event_name }}" == "pull_request" ]] ||
+          [[ "${{ github.event_name }}" == "workflow_dispatch" ]] ||
              [[ "${{ steps.filter.outputs.code }}" == "true" ]] ||
              [[ "${{ steps.filter.outputs.codeql }}" == "true" ]]; then
             echo "ENABLED=1" >> $GITHUB_ENV
