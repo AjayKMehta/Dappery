@@ -79,12 +79,12 @@
       },
       "TUnit": {
         "type": "Direct",
-        "requested": "[0.55.6, )",
-        "resolved": "0.55.6",
-        "contentHash": "l1sY5IKpoIW01OIikkKbbdta9mvaWQEhtc7kLRBe3DaEJnBEYC+2Xtr+tzIp9EqzYt1fAa3bA1edXxUvEQxDbA==",
+        "requested": "[0.56.44, )",
+        "resolved": "0.56.44",
+        "contentHash": "C5FCykDeuajejGyTFCWCkDOJcAC7RqvtqGl/ihrALlSZxipWPqPi+2o+N9TzuECuumSHMjRTycCzn9x3kZIGhA==",
         "dependencies": {
-          "TUnit.Assertions": "0.55.6",
-          "TUnit.Engine": "0.55.6"
+          "TUnit.Assertions": "0.56.44",
+          "TUnit.Engine": "0.56.44"
         }
       },
       "AsyncFixer": {
@@ -553,25 +553,25 @@
       },
       "TUnit.Assertions": {
         "type": "Transitive",
-        "resolved": "0.55.6",
-        "contentHash": "Xp6FuHCjaaHtxQS3RMFDotkHi9spnMbyXqujgQyzKk3r6xemNkJllyDF/OLEx5lNa24j0gpQv7/S7nITk4mS5A=="
+        "resolved": "0.56.44",
+        "contentHash": "yJluFyeHQ9x5BlMlOS9yjyp+SfKZB3+OXiHAdI/VfiBnY6LzueZTGv94ftx7RQkxOl6ejir9gS6+u9+0ikN5vQ=="
       },
       "TUnit.Core": {
         "type": "Transitive",
-        "resolved": "0.55.6",
-        "contentHash": "X7GDVVhLIfBu76djkOZ5ZxynDnefoCVqfoXuzvE/A6U31+o21dTH7NkA2gm3y2FeGlRsSyQ/q/BF7YcpPaCWLA=="
+        "resolved": "0.56.44",
+        "contentHash": "eH3QvNjsn7YL50ziaaLqIa6mxIgpkgBKKh2Zt9oycqyyvCe9mn93mGwf7RkLY3kKE918Ka4jORmDE54ZQDiElA=="
       },
       "TUnit.Engine": {
         "type": "Transitive",
-        "resolved": "0.55.6",
-        "contentHash": "MGcd0BX54eUw1iesYdRbAmXS3R9PuFB7wwcZNTRFKfL/kI4Ei1DRXqHpvE+WCbgg3C0BeplFmi8VWxEwT7z7/g==",
+        "resolved": "0.56.44",
+        "contentHash": "3D5XWC7hprTU4nz7JofGUCNnmMFlBWK3mGGyc1AE4GLtIkbjDMZhzorTfLbXkNeNU55iX08NmqFTD/M4UWYMXg==",
         "dependencies": {
           "EnumerableAsyncProcessor": "3.8.4",
-          "Microsoft.Testing.Extensions.TrxReport.Abstractions": "1.8.1",
-          "Microsoft.Testing.Platform": "1.8.1",
+          "Microsoft.Testing.Extensions.TrxReport.Abstractions": "1.8.2",
+          "Microsoft.Testing.Platform": "1.8.2",
           "Microsoft.Testing.Platform.MSBuild": "1.4.3",
           "System.Threading.Channels": "9.0.0",
-          "TUnit.Core": "0.55.6"
+          "TUnit.Core": "0.56.44"
         }
       },
       "UnoptimizedAssemblyDetector": {
