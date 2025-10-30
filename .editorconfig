@@ -68,16 +68,22 @@ indent_size = 2
 [Makefile]
 indent_style = tab
 
+# Verify settings
+[*.{received,verified}.{json,txt,xml}]
+charset = utf-8-bom
+end_of_line = lf
+indent_size = unset
+indent_style = unset
+insert_final_newline = false
+tab_width = unset
+trim_trailing_whitespace = false
+
 [*.{AssemblyAttributes.cs,AssemblyInfo.cs}]
 exclude = true
 
 [*.{generated.cs,g.cs}]
 exclude = true
 generated_code = true
-
-[{Program.cs,*Tests.cs}]
-# CA1515: Consider making public types internal
-dotnet_diagnostic.CA1515.severity = none
 
 [*.{cs,csx,cake}]
 
