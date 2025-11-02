@@ -817,6 +817,10 @@ dotnet_diagnostic.CA1845.severity = warning
 # CA1846: Prefer AsSpan over Substring
 dotnet_diagnostic.CA1846.severity = warning
 
+# CA1822: Mark members as static
+dotnet_code_quality.CA1822.api_surface = private
+dotnet_diagnostic.CA1822.severity = suggestion
+
 # CA1848: Use the LoggerMessage delegates
 dotnet_diagnostic.CA1848.severity = none
 
