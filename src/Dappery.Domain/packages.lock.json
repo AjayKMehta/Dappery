@@ -37,20 +37,6 @@
         "requested": "[4.14.1, )",
         "resolved": "4.14.1",
         "contentHash": "yMSjze/xMYDF6PCE60/ULWx0tttNyKAndw2KijNxbKil0FX8nvDeEneDZGma8Uifk17RlfZqIXxf1mmBmhRHjg=="
-      },
-      "UnoptimizedAssemblyDetector": {
-        "type": "Direct",
-        "requested": "[0.1.1, )",
-        "resolved": "0.1.1",
-        "contentHash": "9W3HOyH/E81ofSOrdHC0FyWHnX/TUyBzpWZNVkVco1CThxOE32hqBhmkj8l7vaU1cS3Ms1Ztm9VjsN8A024bYw==",
-        "dependencies": {
-          "System.Reflection.Metadata": "5.0.0"
-        }
-      },
-      "System.Reflection.Metadata": {
-        "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "5NecZgXktdGg34rh1OenY1rFNDCI8xSjFr+Z4OU4cU06AQHUdRnIIEeWENu3Wl4YowbzkymAIMvi3WyK9U53pQ=="
       }
     }
   }

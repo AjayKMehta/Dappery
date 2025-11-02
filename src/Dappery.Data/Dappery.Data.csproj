@@ -13,7 +13,6 @@
     <PackageReference Include="Microsoft.Data.Sqlite" />
     <PackageReference Include="Npgsql" />
     <PackageReference Include="ReflectionAnalyzers" />
-    <PackageReference Include="UnoptimizedAssemblyDetector" />
     <PackageReference Include="Roslynator.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

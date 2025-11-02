@@ -72,12 +72,14 @@
       },
       "TUnit": {
         "type": "Direct",
-        "requested": "[0.78.0, )",
-        "resolved": "0.78.0",
-        "contentHash": "rC3Xos8RR4BM3pufQu3/4XF5xCI/viOPU+0eQO/093lPGMQlSCdaYBCrhnLu8VDx5+WF0hx/iViA23omkMTzIg==",
+        "requested": "[0.90.6, )",
+        "resolved": "0.90.6",
+        "contentHash": "aq7UQTvrp0Yx6WTR+tpc5mgq6pr30KcbVvZNE/3swaoJnIajweSdAoVwo5X1j0dDn5xkC+OJuY0HHblOGtc1gg==",
         "dependencies": {
-          "TUnit.Assertions": "0.78.0",
-          "TUnit.Engine": "0.78.0"
+          "Microsoft.Testing.Extensions.CodeCoverage": "18.1.0",
+          "Microsoft.Testing.Extensions.TrxReport": "2.0.1",
+          "TUnit.Assertions": "0.90.6",
+          "TUnit.Engine": "0.90.6"
         }
       },
       "AsyncFixer": {
@@ -344,6 +346,15 @@
         "resolved": "1.0.0",
         "contentHash": "N4KeF3cpcm1PUHym1RmakkzfkEv3GRMyofVv40uXsQhCQeglr2OHNcUk2WOG51AKpGO8ynGpo9M/kFXSzghwug=="
       },
+      "Microsoft.Testing.Extensions.TrxReport": {
+        "type": "Transitive",
+        "resolved": "2.0.1",
+        "contentHash": "8XsUmt8RfelkKggTZm/HfrTtY3pnT1/Rfmi4xxPbx9ko5fToxnpsDH3uvU6LwxKff41WQAABNN0K/qdLdk5FaQ==",
+        "dependencies": {
+          "Microsoft.Testing.Extensions.TrxReport.Abstractions": "2.0.1",
+          "Microsoft.Testing.Platform": "2.0.1"
+        }
+      },
       "Microsoft.Testing.Extensions.TrxReport.Abstractions": {
         "type": "Transitive",
         "resolved": "2.0.1",
@@ -486,8 +497,8 @@
       },
       "System.Reflection.Metadata": {
         "type": "Transitive",
-        "resolved": "5.0.0",
-        "contentHash": "5NecZgXktdGg34rh1OenY1rFNDCI8xSjFr+Z4OU4cU06AQHUdRnIIEeWENu3Wl4YowbzkymAIMvi3WyK9U53pQ=="
+        "resolved": "1.6.0",
+        "contentHash": "COC1aiAJjCoA5GBF+QKL2uLqEBew4JsCkQmoHKbN3TlOZKa2fKLz5CpiRQKDz0RsAOEGsVKqOD5bomsXq/4STQ=="
       },
       "System.Runtime.CompilerServices.Unsafe": {
         "type": "Transitive",
@@ -516,32 +527,24 @@
       },
       "TUnit.Assertions": {
         "type": "Transitive",
-        "resolved": "0.78.0",
-        "contentHash": "7N0F0ShOJyxL2tTl28wKeqME0T1lBmTYgHA7dj53tiy4UX0dUwryk9rjzVKDp+izlH+LiM44ikQ5IPDDUHZfWQ=="
+        "resolved": "0.90.6",
+        "contentHash": "ik/z2/rJBmRk+QwUh+iH1Xnf3RJkwf/EiS3CEa6eqlBPofNaiu08OIoxkwG3+Z8Y+0G1r9+QieGpwaKfS/SVdQ=="
       },
       "TUnit.Core": {
         "type": "Transitive",
-        "resolved": "0.78.0",
-        "contentHash": "gRSdqjNdPxAorizZJg4/OnQ9O4bJBDCBOjvig3RiAzBZkQqE2k3ppwIzoSElU7aEBdLSmCgaObvFgnvw/QXxuw=="
+        "resolved": "0.90.6",
+        "contentHash": "Rh6KJdA/DZWP8QOSK8JWSt2heSAmuK5TQn0cjxsGDRzgXBL3kHryFnndwW7D1Tp0LJw4XFal4Ksoxnr03E0xqA=="
       },
       "TUnit.Engine": {
         "type": "Transitive",
-        "resolved": "0.78.0",
-        "contentHash": "kwW/lyT8cL6PGiJMoyS94u77+Rrdr6AW2HkO8XthyRhlNLCPBEOQWdQI2Ptp2HCVW2IXV0wnkl7u9rvguQegaQ==",
+        "resolved": "0.90.6",
+        "contentHash": "0l+GaIzODJmGJXrLbG8XUATr9bXiZcf4JgOxGKeK2YAdsqts8K38QXQIV3qx9U7IcGtflJe3IJ6Bi4ZdLaXdjg==",
         "dependencies": {
           "EnumerableAsyncProcessor": "3.8.4",
           "Microsoft.Testing.Extensions.TrxReport.Abstractions": "2.0.1",
           "Microsoft.Testing.Platform": "2.0.1",
           "Microsoft.Testing.Platform.MSBuild": "2.0.1",
-          "TUnit.Core": "0.78.0"
-        }
-      },
-      "UnoptimizedAssemblyDetector": {
-        "type": "Transitive",
-        "resolved": "0.1.1",
-        "contentHash": "9W3HOyH/E81ofSOrdHC0FyWHnX/TUyBzpWZNVkVco1CThxOE32hqBhmkj8l7vaU1cS3Ms1Ztm9VjsN8A024bYw==",
-        "dependencies": {
-          "System.Reflection.Metadata": "5.0.0"
+          "TUnit.Core": "0.90.6"
         }
       },
       "dappery.core": {
@@ -554,8 +557,7 @@
           "MediatR": "[13.1.0, )",
           "Microsoft.Extensions.Logging.Abstractions": "[9.0.10, )",
           "MinVer": "[6.0.0, )",
-          "ReflectionAnalyzers": "[0.3.1, )",
-          "UnoptimizedAssemblyDetector": "[0.1.1, )"
+          "ReflectionAnalyzers": "[0.3.1, )"
         }
       },
       "dappery.data": {
@@ -569,8 +571,7 @@
           "Microsoft.Data.Sqlite": "[9.0.10, )",
           "MinVer": "[6.0.0, )",
           "Npgsql": "[9.0.4, )",
-          "ReflectionAnalyzers": "[0.3.1, )",
-          "UnoptimizedAssemblyDetector": "[0.1.1, )"
+          "ReflectionAnalyzers": "[0.3.1, )"
         }
       },
       "dappery.domain": {
@@ -579,8 +580,7 @@
           "AsyncFixer": "[1.6.0, )",
           "IDisposableAnalyzers": "[4.0.8, )",
           "MinVer": "[6.0.0, )",
-          "ReflectionAnalyzers": "[0.3.1, )",
-          "UnoptimizedAssemblyDetector": "[0.1.1, )"
+          "ReflectionAnalyzers": "[0.3.1, )"
         }
       }
     }
