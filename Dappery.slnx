@@ -1,0 +1,23 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Dappery.Core/Dappery.Core.csproj" />
+    <Project Path="src/Dappery.Data/Dappery.Data.csproj" />
+    <Project Path="src/Dappery.Domain/Dappery.Domain.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Dappery.Core.Tests/Dappery.Core.Tests.csproj" />
+    <Project Path="tests/Dappery.Data.Tests/Dappery.Data.Tests.csproj" />
+  </Folder>
+</Solution>
