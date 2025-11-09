@@ -346,7 +346,7 @@
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
           "Dappery.Domain": "[1.0.0, )",
-          "FluentValidation": "[12.0.0, )",
+          "FluentValidation": "[12.1.0, )",
           "IDisposableAnalyzers": "[4.0.8, )",
           "MediatR": "[13.1.0, )",
           "Microsoft.Extensions.Logging.Abstractions": "[9.0.10, )",
@@ -365,9 +365,9 @@
       },
       "FluentValidation": {
         "type": "CentralTransitive",
-        "requested": "[12.0.0, )",
-        "resolved": "12.0.0",
-        "contentHash": "8NVLxtMUXynRHJIX3Hn1ACovaqZIJASufXIIFkD0EUbcd5PmMsL1xUD5h548gCezJ5BzlITaR9CAMrGe29aWpA=="
+        "requested": "[12.1.0, )",
+        "resolved": "12.1.0",
+        "contentHash": "FqWEn8BdbbFEHGanj9K8SVo+LyBeFWy2rolaE+e1TNUbifr8M7Iss+I1AqTSc8kjKtvjl/WN4XIHiRpslh42bA=="
       },
       "MediatR": {
         "type": "CentralTransitive",
