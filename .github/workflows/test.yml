@@ -132,7 +132,7 @@ jobs:
       - id: test
         name: Test
         if: env.ENABLED == '1'
-        run: dotnet test --configuration $BUILD_CONFIG --no-build --verbosity quiet --logger "GitHubActions;summary.includeNotFoundTests=false" -- --coverage --coverage-output-format xml --coverage-output coverage.cobertura.xml --crashdump --hangdump
+        run: dotnet test --configuration $BUILD_CONFIG --no-build --verbosity quiet --logger "GitHubActions;summary.includeNotFoundTests=false"  --blame-hang-timeout 10m -- --coverage --coverage-output-format xml --coverage-output coverage.cobertura.xml
 
       - id: upload-logs
         name: Upload Test Logs
