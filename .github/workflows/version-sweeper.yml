@@ -58,6 +58,7 @@ jobs:
         env:
           UPGRADE_PROJECTS: ${{ steps.dotnet-version-sweeper.outputs.upgrade-projects }}
           SUPPORT: ${{ inputs.support }}
+          DOTNET_CLI_TELEMETRY_OPTOUT: true
         run: |
           upgradeProjects: "$UPGRADE_PROJECTS"
 
