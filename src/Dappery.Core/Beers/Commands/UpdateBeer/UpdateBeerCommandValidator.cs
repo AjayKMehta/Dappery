@@ -15,10 +15,10 @@ public class UpdateBeerCommandValidator : AbstractValidator<UpdateBeerCommand>
             .NotNull()
             .WithMessage("Must supply a beer to update");
 
-        RuleFor(b => b.Dto!.Name)
+        RuleFor(static b => b.Dto.Name)
             .NotNullOrEmpty();
 
-        RuleFor(b => b.Dto!.Style)
+        RuleFor(static b => b.Dto.Style)
             .NotNullOrEmpty();
     }
 }

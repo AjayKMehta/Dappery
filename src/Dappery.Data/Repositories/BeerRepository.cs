@@ -79,7 +79,7 @@ public class BeerRepository : IBeerRepository
         // Return back to the caller if no beer is found, let the business logic decide what to do if we can't the specified beer
         if (beerFromId is null)
         {
-            return null!;
+            return null;
         }
 
         // Instantiate a command for the address and brewery

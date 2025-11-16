@@ -40,9 +40,9 @@ public class BreweryRepository : IBreweryRepository
             _dbTransaction,
             cancellationToken: cancellationToken);
 
-        var beersFromBrewery = (await _dbConnection!.QueryAsync<Beer>(beersFromBreweryCommand).ConfigureAwait(false)).ToList();
+        var beersFromBrewery = (await _dbConnection.QueryAsync<Beer>(beersFromBreweryCommand).ConfigureAwait(false)).ToList();
 
-        IEnumerable<Brewery> breweries = await _dbConnection!.QueryAsync<Brewery, Address, Brewery>(
+        IEnumerable<Brewery> breweries = await _dbConnection.QueryAsync<Brewery, Address, Brewery>(
             breweryCommand,
             (brewery, address) =>
             {

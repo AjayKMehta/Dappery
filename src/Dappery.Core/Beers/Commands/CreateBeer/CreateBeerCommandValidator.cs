@@ -15,13 +15,13 @@ public class CreateBeerCommandValidator : AbstractValidator<CreateBeerCommand>
             .NotNull()
             .WithMessage("Must supply a request object to create a beer");
 
-        RuleFor(b => b.Dto!.Name)
+        RuleFor(b => b.Dto.Name)
             .NotNullOrEmpty();
 
-        RuleFor(b => b.Dto!.Style)
+        RuleFor(b => b.Dto.Style)
             .NotNullOrEmpty();
 
-        _ = RuleFor(b => b.Dto!.BreweryId)
+        _ = RuleFor(b => b.Dto.BreweryId)
             .NotEmpty()
             .WithMessage("Must supply the brewery ID");
     }
