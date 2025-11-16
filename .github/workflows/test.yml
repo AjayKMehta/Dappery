@@ -132,7 +132,7 @@ jobs:
       - id: test
         name: Test
         if: env.ENABLED == '1'
-        run: dotnet test --configuration $BUILD_CONFIG --no-build --verbosity quiet --hangdump --hangdump-timeout 10m --coverage --coverage-output-format xml --coverage-output coverage.cobertura.xml
+        run: dotnet test --configuration $BUILD_CONFIG --no-build --verbosity quiet --crashdump --hangdump --hangdump-timeout 10m --coverage --coverage-output-format xml --coverage-output coverage.cobertura.xml
 
       - id: upload-logs
         name: Upload Test Logs
@@ -142,6 +142,7 @@ jobs:
           name: test-logs
           path: |
             **/TestResults/**/*.log
+          if-no-files-found: warn
 
       - id: generate-report
         name: Generate codecoverage report
