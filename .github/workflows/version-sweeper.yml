@@ -3,7 +3,7 @@ name: ".NET version sweeper"
 
 # When to run this action:
 # - Scheduled on the first of every month
-# - Manually runable from the GitHub UI with a reason
+# - Manually runnable from the GitHub UI with a reason
 on:
   schedule:
     - cron: "0 0 1 * *"
