@@ -99,10 +99,7 @@ public class BeerRepository : IBeerRepository
         Address? address = await _dbConnection.QueryFirstOrDefaultAsync<Address>(addressCommand).ConfigureAwait(false);
 
         // Set the address found in the previous query to the beer's brewery address, if we have a brewery
-        if (beerFromId.Brewery is not null)
-        {
-            beerFromId.Brewery.Address = address;
-        }
+        _ = (beerFromId.Brewery?.Address = address);
 
         // Let's add all the beers to our brewery attached to _beer
         IEnumerable<Beer>? beersFromBrewery = await _dbConnection.QueryAsync<Beer>(breweryCommand).ConfigureAwait(false);

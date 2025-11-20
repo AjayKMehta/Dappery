@@ -1,11 +1,6 @@
 <Project>
   <PropertyGroup>
     <ParentDirectoryBuildPropsPath>$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)..\'))</ParentDirectoryBuildPropsPath>
-    <!-- Enable the Microsoft Testing Platform native command line experience -->
-    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
-    <!-- Enable the Microsoft Testing Platform 'dotnet test' experience -->
-    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
-    <TestingPlatformShowTestsFailures>true</TestingPlatformShowTestsFailures>
   </PropertyGroup>
   <ItemGroup>
     <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />

@@ -811,15 +811,15 @@ dotnet_diagnostic.CA1805.severity = warning
 # CA1815: Override equals and operator equals on value types
 dotnet_diagnostic.CA1815.severity = warning
 
+# CA1822: Mark members as static
+dotnet_code_quality.CA1822.api_surface = private
+dotnet_diagnostic.CA1822.severity = suggestion
+
 # CA1845: Use span-based 'string.Concat'
 dotnet_diagnostic.CA1845.severity = warning
 
 # CA1846: Prefer AsSpan over Substring
 dotnet_diagnostic.CA1846.severity = warning
-
-# CA1822: Mark members as static
-dotnet_code_quality.CA1822.api_surface = private
-dotnet_diagnostic.CA1822.severity = suggestion
 
 # CA1848: Use the LoggerMessage delegates
 dotnet_diagnostic.CA1848.severity = none
@@ -858,6 +858,15 @@ dotnet_diagnostic.CA2017.severity = warning
 
 # CA2019: ThreadStatic fields should not use inline initialization
 dotnet_diagnostic.CA2019.severity = error
+
+# CA2024: Do not use StreamReader.EndOfStream in async methods
+dotnet_diagnostic.CA2024.severity = error
+
+# CA2025: Do not pass 'IDisposable' instances into unawaited tasks
+dotnet_diagnostic.CA2025.severity = warning
+
+# CA2026: Prefer JsonElement.Parse over JsonDocument.Parse().RootElement
+dotnet_diagnostic.CA2025.severity = warning
 
 ## Usage rules
 # https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/usage-warnings
