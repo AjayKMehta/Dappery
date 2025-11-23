@@ -63,11 +63,11 @@
       },
       "Npgsql": {
         "type": "Direct",
-        "requested": "[9.0.4, )",
-        "resolved": "9.0.4",
-        "contentHash": "68BASXH0FAEuL/J4J0eRfYC8/3vzqQTmoW8zDzNf0JgaVxc7LZeEkS6jaG0ib3voFLxY5ZiCwJG+uQM+mzuu0Q==",
+        "requested": "[10.0.0, )",
+        "resolved": "10.0.0",
+        "contentHash": "xZAYhPOU2rUIFpV48xsqhCx9vXs6Y+0jX2LCoSEfDFYMw9jtAOUk3iQsCnDLrFIv9NT3JGMihn7nnuZsPKqJmA==",
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0"
         }
       },
       "ReflectionAnalyzers": {

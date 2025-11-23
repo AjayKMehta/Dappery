@@ -378,10 +378,10 @@
       },
       "Npgsql": {
         "type": "Transitive",
-        "resolved": "9.0.4",
-        "contentHash": "68BASXH0FAEuL/J4J0eRfYC8/3vzqQTmoW8zDzNf0JgaVxc7LZeEkS6jaG0ib3voFLxY5ZiCwJG+uQM+mzuu0Q==",
+        "resolved": "10.0.0",
+        "contentHash": "xZAYhPOU2rUIFpV48xsqhCx9vXs6Y+0jX2LCoSEfDFYMw9jtAOUk3iQsCnDLrFIv9NT3JGMihn7nnuZsPKqJmA==",
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0"
         }
       },
       "SQLitePCLRaw.bundle_e_sqlite3": {
@@ -516,7 +516,7 @@
           "Microsoft.Data.SqlClient": "[6.1.3, )",
           "Microsoft.Data.Sqlite": "[10.0.0, )",
           "MinVer": "[6.0.0, )",
-          "Npgsql": "[9.0.4, )",
+          "Npgsql": "[10.0.0, )",
           "ReflectionAnalyzers": "[0.3.1, )"
         }
       },
