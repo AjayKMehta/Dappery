@@ -48,7 +48,7 @@ jobs:
     steps:
     - id: checkout
       name: 'Checkout Repository'
-      uses: actions/checkout@v4.2.2
+      uses: actions/checkout@v6.0.0
 
     - id: filter
       name: "Check for changed files"
