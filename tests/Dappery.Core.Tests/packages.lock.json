@@ -72,14 +72,14 @@
       },
       "TUnit": {
         "type": "Direct",
-        "requested": "[0.90.45, )",
-        "resolved": "0.90.45",
-        "contentHash": "gVvt5jCXQAE9aQC3H5cQeCuhEpb6DLO/zjW83z+6tJXB//pS4SW70uqz55aSYqb/D+i/gF7PDKbn75FNlDHboQ==",
+        "requested": "[1.0.39, )",
+        "resolved": "1.0.39",
+        "contentHash": "9WZqrdgMwW/BDbNkWbTs47YdIq5LzgsPFjKYap/dWsY0D5HtRrUo2uQWp3kb87IGuCQPKWcqi1ruhsk2eFJMlA==",
         "dependencies": {
           "Microsoft.Testing.Extensions.CodeCoverage": "18.1.0",
           "Microsoft.Testing.Extensions.TrxReport": "2.0.1",
-          "TUnit.Assertions": "0.90.45",
-          "TUnit.Engine": "0.90.45"
+          "TUnit.Assertions": "1.0.39",
+          "TUnit.Engine": "1.0.39"
         }
       },
       "AsyncFixer": {
@@ -473,24 +473,24 @@
       },
       "TUnit.Assertions": {
         "type": "Transitive",
-        "resolved": "0.90.45",
-        "contentHash": "yEup1/Q8alDsqUpF1Sx1G/AclVWH7QDGw5Wl5FcvPz4bXJGS6uIc7uA7ruBmNhu+gWnXbuqsgBBpO6ptirszmA=="
+        "resolved": "1.0.39",
+        "contentHash": "tn750at5Ta3go+fBwUhD01c/fbdLPIQgKfNHPWc+I70BRnTEOHa8u1vSegqpmWIvq9YRmFBJP4SriSwS3EAfdw=="
       },
       "TUnit.Core": {
         "type": "Transitive",
-        "resolved": "0.90.45",
-        "contentHash": "TNfAfQ1f/mV+skq70PqWctNMl6dMiltrgBm+TcnnZL7og2eL7VCcsOCUnuMHYFfTSjKe7qoN2IyPDQipi05RNQ=="
+        "resolved": "1.0.39",
+        "contentHash": "5Nj4n3vj2LdM7OtILOXmpkheibfGtaXfXo8ZdiWi9MmbQfXd4wv9zeOvn9hZop2MbWZxv5lAjqwGCH5zlkGHyQ=="
       },
       "TUnit.Engine": {
         "type": "Transitive",
-        "resolved": "0.90.45",
-        "contentHash": "fhLsoaXTs6PTHfPpLhf42Z6kCZbkclSKB210XmzfC8Bu2e9NsqjsI91DoNGdazVCfpPwUeh2S+4nm9Rsg+V5ug==",
+        "resolved": "1.0.39",
+        "contentHash": "+R29bUcxj5baSqyaqN9qSx8Ov835d+/nXAWR9+yJsuTTox/vJhBfSPLnJui7ncP/WvKvjZLuCfljBz4k8VvGwQ==",
         "dependencies": {
           "EnumerableAsyncProcessor": "3.8.4",
           "Microsoft.Testing.Extensions.TrxReport.Abstractions": "2.0.1",
           "Microsoft.Testing.Platform": "2.0.1",
           "Microsoft.Testing.Platform.MSBuild": "2.0.1",
-          "TUnit.Core": "0.90.45"
+          "TUnit.Core": "1.0.39"
         }
       },
       "dappery.core": {
