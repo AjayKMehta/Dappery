@@ -51,7 +51,7 @@ jobs:
 
     steps:
       - name: 'Checkout Repository'
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v6.0.0
         # https://github.com/adamralph/minver?tab=readme-ov-file#why-is-the-default-version-sometimes-used-in-github-actions-azure-pipelines-and-travis-ci-when-a-version-tag-exists-in-the-history
         with:
           fetch-depth: 0
@@ -74,7 +74,7 @@ jobs:
 
       - id: setup-dotnet
         name: Setup .NET Core
-        uses: actions/setup-dotnet@v4.3.1
+        uses: actions/setup-dotnet@v5.0.1
         if: env.ENABLED == '1'
         with:
           cache: true
