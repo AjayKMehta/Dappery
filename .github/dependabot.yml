@@ -37,6 +37,7 @@ updates:
         patterns:
           - "*[Aa]nalyzers*"
         update-types:
+          - "major"
           - "minor"
           - "patch"
     labels:
@@ -57,6 +58,7 @@ updates:
     groups:
       actions-dependencies:
         update-types:
+          - "major"
           - "minor"
           - "patch"
     labels:
