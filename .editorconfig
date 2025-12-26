@@ -718,6 +718,10 @@ dotnet_code_quality.CA1008.severity = suggestion
 # https://github.com/dotnet/roslyn/issues/37876#issuecomment-738042719
 dotnet_diagnostic.CA1014.severity = none
 
+# CA1016: Mark assemblies with AssemblyVersionAttribute
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1016
+dotnet_diagnostic.CA1016.severity = none
+
 # CA1017: Mark assemblies with ComVisibleAttribute
 dotnet_diagnostic.CA1017.severity = none
 
@@ -897,7 +901,7 @@ dotnet_diagnostic.CA2260.severity = error
 # CA5394: Do not use insecure randomness
 dotnet_diagnostic.CA5394.severity = none
 
-[*.{AssemblyAttributes.cs,AssemblyInfo.cs}]
+[*.{AssemblyAttributes.cs,*AssemblyInfo.cs}]
 exclude = true
 dotnet_diagnostic.CS8019.severity = none
 
