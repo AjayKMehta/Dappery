@@ -16,8 +16,9 @@ namespace Dappery.Core.Beers.Commands.CreateBeer;
 public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerResource>
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly TimeProvider _timeProvider;
 
-    public CreateBeerCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+    public CreateBeerCommandHandler(IUnitOfWork unitOfWork, TimeProvider timeProvider) => (_unitOfWork, _timeProvider) = (unitOfWork, timeProvider);
 
     public async Task<BeerResource> Handle(CreateBeerCommand request, CancellationToken cancellationToken)
     {
@@ -35,8 +36,8 @@ public class CreateBeerCommandHandler : IRequestHandler<CreateBeerCommand, BeerR
             Name = request.Dto.Name,
             BeerStyle = parsedBeerStyle ? beerStyle : BeerStyle.Other,
             BreweryId = request.Dto.BreweryId,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            CreatedAt = _timeProvider.GetUtcNow(),
+            UpdatedAt = _timeProvider.GetUtcNow()
         };
 
         // Add the record to the database and retrieve the record after we create it

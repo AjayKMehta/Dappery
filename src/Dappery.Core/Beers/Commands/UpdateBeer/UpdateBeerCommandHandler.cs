@@ -16,8 +16,9 @@ namespace Dappery.Core.Beers.Commands.UpdateBeer;
 public class UpdateBeerCommandHandler : IRequestHandler<UpdateBeerCommand, BeerResource>
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly TimeProvider _timeProvider;
 
-    public UpdateBeerCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+    public UpdateBeerCommandHandler(IUnitOfWork unitOfWork, TimeProvider timeProvider) => (_unitOfWork, _timeProvider) = (unitOfWork, timeProvider);
 
     public async Task<BeerResource> Handle(UpdateBeerCommand request, CancellationToken cancellationToken)
     {
@@ -32,7 +33,7 @@ public class UpdateBeerCommandHandler : IRequestHandler<UpdateBeerCommand, BeerR
         // Update the fields on the existing beer
         existingBeer.BeerStyle = parsedBeerStyle ? beerStyle : BeerStyle.Other;
         existingBeer.Name = request.Dto.Name;
-        existingBeer.UpdatedAt = DateTime.UtcNow;
+        existingBeer.UpdatedAt = _timeProvider.GetUtcNow();
 
         // If the user wants to update the brewery the beer is attached to, verify first that it exists
         if (request.Dto.BreweryId.HasValue)

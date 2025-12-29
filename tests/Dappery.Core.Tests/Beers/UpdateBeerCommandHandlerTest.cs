@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ internal sealed class UpdateBeerCommandHandlerTest : TestFixture
             Name = "Updated Beer Name",
             Style = "Ipa"
         }, 1);
-        var handler = new UpdateBeerCommandHandler(unitOfWork);
+        var handler = new UpdateBeerCommandHandler(unitOfWork, TimeProvider.System);
 
         // Act
         BeerResource result = await handler.Handle(updateCommand, CancellationTestToken);
@@ -62,7 +63,7 @@ internal sealed class UpdateBeerCommandHandlerTest : TestFixture
             Name = "Updated Beer Name",
             Style = "Not a valid beer style!"
         }, 1);
-        var handler = new UpdateBeerCommandHandler(unitOfWork);
+        var handler = new UpdateBeerCommandHandler(unitOfWork, TimeProvider.System);
 
         // Act
         BeerResource result = await handler.Handle(updateCommand, CancellationTestToken);
@@ -99,7 +100,7 @@ internal sealed class UpdateBeerCommandHandlerTest : TestFixture
             Style = "Ipa",
             BreweryId = 2
         }, 1);
-        var handler = new UpdateBeerCommandHandler(unitOfWork);
+        var handler = new UpdateBeerCommandHandler(unitOfWork, TimeProvider.System);
 
         // Act
         BeerResource result = await handler.Handle(updateCommand, CancellationTestToken);
@@ -136,7 +137,7 @@ internal sealed class UpdateBeerCommandHandlerTest : TestFixture
             Style = "Ipa",
             BreweryId = 22
         }, 1);
-        var handler = new UpdateBeerCommandHandler(unitOfWork);
+        var handler = new UpdateBeerCommandHandler(unitOfWork, TimeProvider.System);
 
         // Act
         DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(updateCommand, CancellationTestToken));

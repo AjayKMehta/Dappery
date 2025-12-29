@@ -14,24 +14,25 @@ namespace Dappery.Core.Breweries.Commands.CreateBrewery;
 public class CreateBreweryCommandHandler : IRequestHandler<CreateBreweryCommand, BreweryResource>
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly TimeProvider _timeProvider;
 
-    public CreateBreweryCommandHandler(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
+    public CreateBreweryCommandHandler(IUnitOfWork unitOfWork, TimeProvider timeProvider) => (_unitOfWork, _timeProvider) = (unitOfWork, timeProvider);
 
     public async Task<BreweryResource> Handle(CreateBreweryCommand request, CancellationToken cancellationToken)
     {
         var breweryToCreate = new Brewery
         {
             Name = request.Dto.Name,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow,
+            CreatedAt = _timeProvider.GetUtcNow(),
+            UpdatedAt = _timeProvider.GetUtcNow(),
             Address = new Address
             {
                 StreetAddress = request.Dto.Address?.StreetAddress,
                 City = request.Dto.Address?.City,
                 State = request.Dto.Address?.State,
                 ZipCode = request.Dto.Address?.ZipCode,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                CreatedAt = _timeProvider.GetUtcNow(),
+                UpdatedAt = _timeProvider.GetUtcNow()
             }
         };
 
