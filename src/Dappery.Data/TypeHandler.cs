@@ -1,20 +1,13 @@
 using System;
 using System.Data;
+using System.Globalization;
 
 using Dapper;
-
-using Dappery.Core.Data;
-using Dappery.Data.Repositories;
-
-using Microsoft.Data.SqlClient;
-using Microsoft.Data.Sqlite;
-
-using Npgsql;
 
 namespace Dappery.Data;
 
 // https://learn.microsoft.com/en-us/dotnet/standard/data/sqlite/dapper-limitations
-abstract class SqliteTypeHandler<T> : SqlMapper.TypeHandler<T>
+public abstract class SqliteTypeHandler<T> : SqlMapper.TypeHandler<T>
 {
     // Parameters are converted by Microsoft.Data.Sqlite
     public override void SetValue(IDbDataParameter parameter, T? value)
@@ -24,7 +17,7 @@ abstract class SqliteTypeHandler<T> : SqlMapper.TypeHandler<T>
 internal sealed class DateTimeOffsetHandler : SqliteTypeHandler<DateTimeOffset>
 {
     public override DateTimeOffset Parse(object value)
-        => DateTimeOffset.Parse((string)value);
+        => DateTimeOffset.Parse((string)value, CultureInfo.InvariantCulture);
 }
 
 internal sealed class GuidHandler : SqliteTypeHandler<Guid>
@@ -36,5 +29,5 @@ internal sealed class GuidHandler : SqliteTypeHandler<Guid>
 internal sealed class TimeSpanHandler : SqliteTypeHandler<TimeSpan>
 {
     public override TimeSpan Parse(object value)
-        => TimeSpan.Parse((string)value);
+        => TimeSpan.Parse((string)value, CultureInfo.InvariantCulture);
 }
