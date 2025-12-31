@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -27,7 +28,7 @@ internal sealed class CreateBeerCommandHandlerTest : TestFixture
             Style = "Lager",
             BreweryId = 1
         });
-        var handler = new CreateBeerCommandHandler(unitOfWork);
+        var handler = new CreateBeerCommandHandler(unitOfWork, TimeProvider.System);
 
         // Act
         BeerResource result = await handler.Handle(beerCommand, CancellationTestToken);
@@ -64,7 +65,7 @@ internal sealed class CreateBeerCommandHandlerTest : TestFixture
             Style = "Lager",
             BreweryId = 11
         });
-        var handler = new CreateBeerCommandHandler(unitOfWork);
+        var handler = new CreateBeerCommandHandler(unitOfWork, TimeProvider.System);
 
         // Act
         DapperyApiException result = await Should.ThrowAsync<DapperyApiException>(async () => await handler.Handle(beerCommand, CancellationTestToken));
@@ -84,7 +85,7 @@ internal sealed class CreateBeerCommandHandlerTest : TestFixture
             Style = "Not defined!",
             BreweryId = 1
         });
-        var handler = new CreateBeerCommandHandler(unitOfWork);
+        var handler = new CreateBeerCommandHandler(unitOfWork, TimeProvider.System);
 
         // Act
         BeerResource result = await handler.Handle(beerCommand, CancellationTestToken);

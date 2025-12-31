@@ -25,6 +25,9 @@ public class UnitOfWork : IUnitOfWork
 
         if (string.IsNullOrWhiteSpace(connectionString))
         {
+            SqlMapper.AddTypeHandler(new DateTimeOffsetHandler());
+            SqlMapper.AddTypeHandler(new GuidHandler());
+            SqlMapper.AddTypeHandler(new TimeSpanHandler());
             _dbConnection = new SqliteConnection("Data Source=:memory:");
             rowInsertRetrievalQuery = "; SELECT last_insert_rowid();";
         }

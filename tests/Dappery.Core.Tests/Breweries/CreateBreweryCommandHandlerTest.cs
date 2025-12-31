@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ internal sealed class CreateBreweryCommandHandlerTest : TestFixture
         };
 
         // Act
-        var handler = new CreateBreweryCommandHandler(unitOfWork);
+        var handler = new CreateBreweryCommandHandler(unitOfWork, TimeProvider.System);
         BreweryResource createdBrewery = await handler.Handle(new CreateBreweryCommand(createBreweryDto), CancellationToken.None);
 
         // Assert
