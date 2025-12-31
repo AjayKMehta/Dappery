@@ -4,11 +4,11 @@ namespace Dappery.Domain.Dtos.Beer;
 
 public class BeerDto
 {
-    public int Id { get; set; }
+    public int Id { get; init; }
 
-    public string? Name { get; set; }
+    public string? Name { get; init; }
 
-    public string? Style { get; set; }
+    public string? Style { get; init; }
 
-    public BreweryDto? Brewery { get; set; }
+    public BreweryDto? Brewery { get; init; }
 }
