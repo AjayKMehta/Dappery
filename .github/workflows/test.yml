@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: 'Checkout Repository'
-        uses: actions/checkout@v6.0.0
+        uses: actions/checkout@v6.0.1
         # https://github.com/adamralph/minver?tab=readme-ov-file#why-is-the-default-version-sometimes-used-in-github-actions-azure-pipelines-and-travis-ci-when-a-version-tag-exists-in-the-history
         with:
           fetch-depth: 0
@@ -138,7 +138,7 @@ jobs:
 
       - id: upload-logs
         name: Upload Test Logs
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: env.ENABLED == '1' && failure() && steps.test.outcome == 'failure'
         with:
           name: test-logs
@@ -149,7 +149,7 @@ jobs:
       - id: generate-report
         name: Generate codecoverage report
         if: env.ENABLED == '1'
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.5.0
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.5.1
         with:
           reports: '**/TestResults/**/coverage.cobertura.xml'
           targetdir: '${{ github.workspace }}/coveragereport'
@@ -159,7 +159,7 @@ jobs:
       - id: upload-codecov
         name: Upload code coverage results to codecov
         if: env.ENABLED == '1'
-        uses:  codecov/codecov-action@v5.5.1
+        uses:  codecov/codecov-action@v5.5.2
         with:
           flags: unittests
           fail_ci_if_error: true
@@ -201,7 +201,7 @@ jobs:
       - id: archive-results
         name: Archive results
         # https://github.com/actions/upload-artifact/blob/main/docs/MIGRATION.md
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: env.ENABLED == '1'
         with:
           name: code-coverage-report-${{ matrix.os }}
