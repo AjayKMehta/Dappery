@@ -1,0 +1,10 @@
+[allowlist]
+description = "Directories to ignore during Gitleaks scans"
+paths = [
+  '''artifacts/''',
+  '''.*cache/''',
+  '''.*img/''',
+  '''.*node_modules/''',
+  '''.git/''',
+  '''.*\.vs/'''
+]
