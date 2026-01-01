@@ -7,6 +7,7 @@ useDefault = true
 [[allowlists]]
 description = "Directories to ignore during Gitleaks scans"
 paths = [
+  '''.*\.env''',
   '''artifacts/''',
   '''.*cache/''',
   '''.*img/''',
