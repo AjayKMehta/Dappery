@@ -49,9 +49,9 @@
       },
       "MinVer": {
         "type": "Direct",
-        "requested": "[6.0.0, )",
-        "resolved": "6.0.0",
-        "contentHash": "+/SsmiySsXJlvQLCGBqaZKNVt3s/Y/HbAdwtop7Km2CnuZbaScoqkWJEBQ5Cy9ebkn6kCYKrHsXgwrFdTgcb3g=="
+        "requested": "[6.1.0, )",
+        "resolved": "6.1.0",
+        "contentHash": "dGyb6EBQ87AhyagcXslfDGL/A+xbNtRD23CBjXoKo82TvjHqF2BBz61B6EBx/S117KUMB1PEUpRLrHcu6UjOhg=="
       },
       "ReflectionAnalyzers": {
         "type": "Direct",
@@ -110,7 +110,7 @@
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
           "IDisposableAnalyzers": "[4.0.8, )",
-          "MinVer": "[6.0.0, )",
+          "MinVer": "[6.1.0, )",
           "ReflectionAnalyzers": "[0.3.1, )"
         }
       }
