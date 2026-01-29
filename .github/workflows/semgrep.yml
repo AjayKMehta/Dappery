@@ -1,3 +1,5 @@
+name: Semgrep
+
 on:
   pull_request:
     branches: [master]
@@ -6,29 +8,46 @@ on:
     branches: [master]
 
   schedule:
-  - cron: '0 0 * * 0'
+    - cron: 0 0 * * 0
 
   workflow_dispatch:
     inputs:
       reason:
-        description: "The reason for running the workflow"
+        description: The reason for running the workflow
         required: true
-        default: "Manual run"
+        default: Manual run
 
-name: Semgrep
+concurrency:
+  # github.event.pull_request.number || github.ref: pull request number or branch name if not a pull request
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  CHECK_PERMISSIONS: 0
+
+permissions: {}
 
 jobs:
   pre_job:
+    name: Check for Duplicate Actions
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
     # Map a step output to a job output
     outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      should_skip: ${{ steps.check-duplicate-actions.outputs.should_skip }}
     steps:
-      - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v5
+      - id: check-permissions
+        name: Check action permissions
+        uses: GitHubSecurityLab/actions-permissions/monitor@b25f731bf2f9eb9748c2e9757d366c3e72fa2109 # v1.0.2-beta8
+        if: env.CHECK_PERMISSIONS == '1'
+      - id: check-duplicate-actions
+        name: Check for duplicate actions
+        uses: fkirc/skip-duplicate-actions@f75f66ce1886f00957d99748a42c724f4330bdcf # v5.3.1
         with:
-          cancel_others: 'true'
-          skip_after_successful_duplicate: 'true'
+          cancel_others: true
+          skip_after_successful_duplicate: true
           concurrent_skipping: same_content_newer
 
   semgrep:
@@ -38,26 +57,28 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     container:
-      image: semgrep/semgrep
-      # https://github.com/actions/runner/issues/2033#issuecomment-1598547465
+      image: semgrep/semgrep@sha256:543f663e06ef0806a62c832a2d55760d6c84b3eb4f3e0e5a0af0321611062c28 # 1.150.0-nonroot
+      # # https://github.com/actions/runner/issues/2033#issuecomment-1598547465
       options: --user 1001
     permissions:
       contents: read
       pull-requests: read
+
     steps:
-    - id: checkout
-      name: 'Checkout Repository'
-      uses: actions/checkout@v6.0.2
+      - id: checkout-repo
+        name: Checkout Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: true
+      - id: filter
+        name: Check for changed files
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        with:
+          filters: .github/filter.yml
 
-    - id: filter
-      name: "Check for changed files"
-      uses: dorny/paths-filter@v3
-      with:
-        filters: .github/filter.yml
-
-    - id: run-semgrep
-      name: 'Run Semgrep'
-      if: steps.filter.outputs.code == 'true' || steps.filter.outputs.workflows == 'true'
-      run: semgrep ci
-      env:
-        SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+      - id: run-semgrep
+        name: Run Semgrep
+        if: steps.filter.outputs.code == 'true' || steps.filter.outputs.workflows == 'true'
+        run: semgrep ci
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}

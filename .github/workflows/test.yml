@@ -1,38 +1,49 @@
-name: "Run tests"
+name: Run tests
 
-env:
-  # Only merge code coverage results if 1
-  USE_MERGE: 0
-  BUILD_CONFIG: Release
+defaults:
+  run:
+    # bash --noprofile --norc -e(o) pipefail {0}
+    shell: bash
 
 on:
   push:
   pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pull-requests: write
-
-  # https://www.meziantou.net/how-to-cancel-github-workflows-when-pushing-new-commits-on-a-branch.htm
 concurrency:
   # github.event.pull_request.number || github.ref: pull request number or branch name if not a pull request
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+env:
+  CHECK_PERMISSIONS: 0
+  # Only merge code coverage results if 1
+  USE_MERGE: 0
+  BUILD_CONFIG: Release
+
+permissions: {}
+
 jobs:
   pre_job:
     name: Check for Duplicate Actions
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
     # Map a step output to a job output
     outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      should_skip: ${{ steps.check-duplicate-actions.outputs.should_skip }}
     steps:
-      - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v5
+      - id: check-permissions
+        name: Check action permissions
+        uses: GitHubSecurityLab/actions-permissions/monitor@b25f731bf2f9eb9748c2e9757d366c3e72fa2109 # v1.0.2-beta8
+        if: env.CHECK_PERMISSIONS == '1'
+      - id: check-duplicate-actions
+        name: Check for duplicate actions
+        uses: fkirc/skip-duplicate-actions@f75f66ce1886f00957d99748a42c724f4330bdcf # v5.3.1
         with:
-          cancel_others: 'true'
-          skip_after_successful_duplicate: 'true'
+          cancel_others: true
+          skip_after_successful_duplicate: true
           concurrent_skipping: same_content_newer
 
   test:
@@ -50,18 +61,21 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
       TESTINGPLATFORM_DIAGNOSTIC: 1
       TESTINGPLATFORM_DIAGNOSTIC_VERBOSITY: Information
+    permissions:
+      contents: write # Need to check out code and push changes
+      pull-requests: write # Need to update PR
 
     steps:
-      - name: 'Checkout Repository'
-        uses: actions/checkout@v6.0.2
+      - name: Checkout Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         # https://github.com/adamralph/minver?tab=readme-ov-file#why-is-the-default-version-sometimes-used-in-github-actions-azure-pipelines-and-travis-ci-when-a-version-tag-exists-in-the-history
         with:
           fetch-depth: 0
           filter: tree:0
 
       - id: filter
-        name: "Check for changed files"
-        uses: dorny/paths-filter@v3
+        name: Check for changed files
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         with:
           filters: .github/filter.yml
 
@@ -76,12 +90,12 @@ jobs:
 
       - id: setup-dotnet
         name: Setup .NET Core
-        uses: actions/setup-dotnet@v5.1.0
+        uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5.1.0
         if: env.ENABLED == '1'
         with:
           cache: true
           cache-dependency-path: "**/packages.lock.json"
-          dotnet-version: '10.0.x'
+          dotnet-version: 10.0.x
 
       - id: install-dotnet-coverage
         name: Install dotnet-coverage tool
@@ -91,7 +105,7 @@ jobs:
       - id: pr-check
         name: Check if PR for current commit
         if: env.ENABLED == '1'
-        uses: 8BitJonny/gh-get-current-pr@4.0.0
+        uses: 8BitJonny/gh-get-current-pr@4056877062a1f3b624d5d4c2bedefa9cf51435c9 # 4.0.0
         with:
           # This will work no matter the trigger event and no matter if it is the first PR commit or not.
           sha: ${{ github.event.pull_request.head.sha }}
@@ -108,9 +122,9 @@ jobs:
 
       - id: commit
         if: env.ENABLED == '1' && steps.pr-check.outputs.pr_found == 'true'
-        uses: qoomon/actions--create-commit@v1
+        uses: qoomon/actions--create-commit@dfef4d264de752be6d6195a4d61a2f3d3262d406 # v1.2.3
         with:
-          message: "Committing changes to lock files [skip ci]"
+          message: Committing changes to lock files [skip ci]
           allow-empty: false
           skip-empty: true
 
@@ -138,7 +152,7 @@ jobs:
 
       - id: upload-logs
         name: Upload Test Logs
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         if: env.ENABLED == '1' && failure() && steps.test.outcome == 'failure'
         with:
           name: test-logs
@@ -149,17 +163,18 @@ jobs:
       - id: generate-report
         name: Generate codecoverage report
         if: env.ENABLED == '1'
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.5.1
+        uses: danielpalme/ReportGenerator-GitHub-Action@ee0ae774f6d3afedcbd1683c1ab21b83670bdf8e # 5.5.1
         with:
           reports: '**/TestResults/**/coverage.cobertura.xml'
-          targetdir: '${{ github.workspace }}/coveragereport'
-          reporttypes: 'Cobertura;MarkdownSummaryGithub;MarkdownAssembliesSummary'
-          classfilters: '-System.*;-Microsoft.*;-Newtonsoft.*;-System.Text.RegularExpressions.*;-xunit.*;-NUnit.*;-TUnit.*'
+          # yamllint disable-line
+          targetdir: "${{ github.workspace }}/coveragereport"
+          reporttypes: Cobertura;MarkdownSummaryGithub;MarkdownAssembliesSummary
+          classfilters: -System.*;-Microsoft.*;-Newtonsoft.*;-System.Text.RegularExpressions.*;-xunit.*;-NUnit.*;-TUnit.*
 
       - id: upload-codecov
         name: Upload code coverage results to codecov
         if: env.ENABLED == '1'
-        uses:  codecov/codecov-action@v5.5.2
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
           flags: unittests
           fail_ci_if_error: true
@@ -170,18 +185,18 @@ jobs:
       # https://github.com/danielpalme/ReportGenerator/issues/431
       - id: publish-pr-cov-summary
         name: Publish PR coverage summary
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
         if: steps.pr-check.outputs.pr_found == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           hide: true # Hide previous comment
-          hide_classify: "OUTDATED"
+          hide_classify: OUTDATED
           skip_unchanged: true
           number: ${{ steps.pr-check.outputs.number }}
           path: coveragereport/Summary.md
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          header: "Code coverage"
+          header: Code coverage
 
       - id: publish-cov
         name: Publish coverage in build summary
@@ -201,7 +216,7 @@ jobs:
       - id: archive-results
         name: Archive results
         # https://github.com/actions/upload-artifact/blob/main/docs/MIGRATION.md
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         if: env.ENABLED == '1'
         with:
           name: code-coverage-report-${{ matrix.os }}

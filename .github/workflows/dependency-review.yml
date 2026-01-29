@@ -1,17 +1,21 @@
-name: 'Dependency Review'
+name: Dependency Review
+
+defaults:
+  run:
+    # bash --noprofile --norc -e(o) pipefail {0}
+    shell: bash
+
 on:
   push:
-
-  pull_request_target:
+  pull_request:
     types: [opened, reopened]
-
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pull-requests: write
+env:
+  CHECK_PERMISSIONS: 0
 
-  # https://www.meziantou.net/how-to-cancel-github-workflows-when-pushing-new-commits-on-a-branch.htm
+permissions: {}
+
 concurrency:
   # pull request number or branch name if not a pull request
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -23,32 +27,65 @@ jobs:
     # continue-on-error: true # Uncomment once integration is finished
     runs-on: ubuntu-latest
     # Map a step output to a job output
+    permissions:
+      actions: write
+      contents: read
     outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      should_skip: ${{ steps.check-duplicate-actions.outputs.should_skip }}
     steps:
-      - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v5
+      - id: check-permissions
+        name: Check action permissions
+        uses: GitHubSecurityLab/actions-permissions/monitor@b25f731bf2f9eb9748c2e9757d366c3e72fa2109 # v1.0.2-beta8
+        if: env.CHECK_PERMISSIONS == '1'
+      - id: check-duplicate-actions
+        name: Check for duplicate actions
+        uses: fkirc/skip-duplicate-actions@f75f66ce1886f00957d99748a42c724f4330bdcf # v5.3.1
         with:
-          cancel_others: 'true'
-          skip_after_successful_duplicate: 'true'
+          cancel_others: true
+          skip_after_successful_duplicate: true
           concurrent_skipping: same_content_newer
 
-  dependency-review:
+  review-deps:
     name: Review Dependencies
     needs: pre_job
     if: github.actor != 'dependabot[bot]' && needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write # Updates PR comments
     steps:
-      - id: checkout
-        name: 'Checkout Repository'
-        uses: actions/checkout@v6.0.2
-
+      - id: checkout-repo
+        name: Checkout repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - id: review-deps
-        name: 'Dependency Review'
-        uses: actions/dependency-review-action@v4
+        name: Review dependencies
+        uses: actions/dependency-review-action@3c4e3dcb1aa7874d2c16be7d79418e9b7efd6261 # v4.8.2
         with:
           base-ref: master
           head-ref: master
           fail-on-severity: high
           comment-summary-in-pr: always
+
+      - id: setup-dotnet
+        name: Setup .NET
+        uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5.1.0
+        with:
+          cache: true
+          cache-dependency-path: "**/packages.lock.json"
+          dotnet-version: 10.0.x
+
+      - id: check-vulnerable
+        name: Check for vulnerable packages
+        run: |
+          dotnet restore --force-evaluate
+          OUTPUT=$(dotnet list package --vulnerable --include-transitive)
+          echo "$OUTPUT"
+          if echo "$OUTPUT" | grep -q 'Vulnerable'; then
+            echo "Vulnerable packages found"
+            exit 1
+          else
+            echo "No vulnerable packages found"
+          fi
