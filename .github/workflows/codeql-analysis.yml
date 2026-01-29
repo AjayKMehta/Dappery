@@ -1,6 +1,9 @@
-# https://docs.microsoft.com/en-us/dotnet/devops/dotnet-secure-github-action
+name: CodeQL Analysis
 
-name: "CodeQL Analysis"
+defaults:
+  run:
+    # bash --noprofile --norc -e(o) pipefail {0}
+    shell: bash
 
 on:
   push:
@@ -11,58 +14,55 @@ on:
 
   workflow_dispatch:
 
-# https://www.meziantou.net/how-to-cancel-github-workflows-when-pushing-new-commits-on-a-branch.htm
 concurrency:
+  # github.event.pull_request.number || github.ref: pull request number or branch name if not a pull request
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: write
-  pull-requests: read
+env:
+  CHECK_PERMISSIONS: 0
+
+permissions: {}
 
 jobs:
-
   pre_job:
     name: Check for Duplicate Actions
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
     # Map a step output to a job output
     outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      should_skip: ${{ steps.check-duplicate-actions.outputs.should_skip }}
     steps:
-      - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v5
+      - id: check-permissions
+        name: Check action permissions
+        uses: GitHubSecurityLab/actions-permissions/monitor@b25f731bf2f9eb9748c2e9757d366c3e72fa2109 # v1.0.2-beta8
+        if: env.CHECK_PERMISSIONS == '1'
+      - id: check-duplicate-actions
+        name: Check for duplicate actions
+        uses: fkirc/skip-duplicate-actions@f75f66ce1886f00957d99748a42c724f4330bdcf # v5.3.1
         with:
-          cancel_others: 'true'
-          skip_after_successful_duplicate: 'true'
+          cancel_others: true
+          skip_after_successful_duplicate: true
           concurrent_skipping: same_content_newer
-
   analyze:
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
+
     name: Analyze (${{ matrix.language }})
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
     timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
     permissions:
-      # required for all workflows
-      security-events: write
-
-      # required to fetch internal or private CodeQL packs
-      packages: read
-
-      # only required for workflows in private repositories
-      actions: read
-      contents: read
-
+      security-events: write # Required for all workflows
+      contents: write # Need to push changes
+      pull-requests: read # Need to check if PR
     strategy:
       fail-fast: false
       matrix:
         include:
-        - language: csharp
-          build-mode: manual
-        # To learn more about changing the languages that are analyzed or customizing the build mode for your analysis,
-        # see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning.
-        # If you are analyzing a compiled language, you can modify the 'build-mode' for that language to customize how
-        # your codebase is analyzed, see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/codeql-code-scanning-for-compiled-languages
+          - language: csharp
+            build-mode: manual
 
     env:
       NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
@@ -70,79 +70,81 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
 
     steps:
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@v6.0.1
+      - id: check-permissions
+        name: Check action permissions
+        uses: GitHubSecurityLab/actions-permissions/monitor@b25f731bf2f9eb9748c2e9757d366c3e72fa2109 # v1.0.2-beta8
+        if: env.CHECK_PERMISSIONS == '1'
+      - id: checkout-repo
+        name: Checkout repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 2
+          persist-credentials: true # Need for next step.
 
       - id: filter
-        name: "Check for changed files"
+        name: Check for changed files
         if: ${{ github.event_name != 'workflow_dispatch' }}
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         with:
           filters: .github/filter.yml
 
       - id: set-env
         name: Set environment variable
         run: |
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]] ||
-             [[ "${{ steps.filter.outputs.code }}" == "true" ]] ||
-             [[ "${{ steps.filter.outputs.codeql }}" == "true" ]]; then
+          if [[ "${EVENT_NAME}" == "workflow_dispatch" ]] ||
+             [[ "${IS_CODE}" == "true" ]] ||
+             [[ "${IS_CODEQL}" == "true" ]]; then
             echo "ENABLED=1" >> $GITHUB_ENV
           else
             echo "ENABLED=0" >> $GITHUB_ENV
           fi
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          IS_CODE: ${{ steps.filter.outputs.code }}
+          IS_CODEQL: ${{ steps.filter.outputs.codeql }}
 
       # Initializes the CodeQL tools for scanning.
       - id: init-codeql
         name: Initialize CodeQL
         if: env.ENABLED == '1'
-        uses: github/codeql-action/init@v4.31.9
+        uses: github/codeql-action/init@51f77329afa6477de8c49fc9c7046c15b9a4e79d # v3.29.5
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           dependency-caching: true
-          # If you wish to specify custom queries, you can do so here or in a config file.
-          # By default, queries listed here will override any specified in a config file.
-          # Prefix the list here with "+" to use these queries and those in the config file.
-
-      # If the analyze step fails for one of the languages you are analyzing with
-      # "We were unable to automatically build your code", modify the matrix above
-      # to set the build mode to "manual" for that language. Then modify this step
-      # to build your code.
-      # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
       - id: setup-dotnet
         name: Set up .NET
         if: matrix.build-mode == 'manual' && env.ENABLED == '1'
-        uses: actions/setup-dotnet@v5.0.1
+        uses: actions/setup-dotnet@baa11fbfe1d6520db94683bd5c7a3818018e4309 # v5.1.0
         with:
           cache: true
-          cache-dependency-path: '**/packages.lock.json'
-          dotnet-version: '10.0.x'
+          dotnet-version: 10.0.x
+          cache-dependency-path: "**/packages.lock.json"
 
       - id: dotnet-restore
-        name: Install dependencies
+        name: Restore NuGet packages
         if: matrix.build-mode == 'manual' && env.ENABLED == '1'
         run: |
-          if [[ "${{ github.event.pull_request.user.login }}" == 'dependabot[bot]' ]] || [[ "${{ github.actor }}" == 'dependabot[bot]' ]]; then
+          if [[ "${PR_LOGIN}" == 'dependabot[bot]' ]]; then
             dotnet restore --force-evaluate && git add .
           else
             dotnet restore --locked-mode
           fi
+        env:
+          PR_LOGIN: ${{ github.event.pull_request.user.login }}
 
-      - id: commit
+      - id: commit-changes
         name: Commit changes
         if: matrix.build-mode == 'manual' && env.ENABLED == '1'
-        uses: qoomon/actions--create-commit@v1
+        uses: qoomon/actions--create-commit@dfef4d264de752be6d6195a4d61a2f3d3262d406 # v1.2.3
         with:
-          message: "Committing changes to lock files [skip ci]"
+          message: Committing changes to lock files [skip ci]
           allow-empty: false
           skip-empty: true
 
       - id: push-changes
         name: Push changes
-        if: matrix.build-mode == 'manual' && env.ENABLED == '1' && steps.commit.outputs.commit != null
+        if: matrix.build-mode == 'manual' && env.ENABLED == '1' && steps.commit-changes.outputs.commit != null
         env:
           HEAD_REF: ${{ github.head_ref || github.ref_name }}
         run: git push origin HEAD:$HEAD_REF
@@ -150,7 +152,7 @@ jobs:
       - id: pr-check
         name: Check if PR for current commit
         if: env.ENABLED == '1'
-        uses: 8BitJonny/gh-get-current-pr@4.0.0
+        uses: 8BitJonny/gh-get-current-pr@4056877062a1f3b624d5d4c2bedefa9cf51435c9 # 4.0.0
         with:
           # This will work no matter the trigger event and no matter if it is the first PR commit or not.
           sha: ${{ github.event.pull_request.head.sha }}
@@ -160,11 +162,11 @@ jobs:
           filterOutDraft: true
 
       - id: dotnet-restore-locked
-        name: Install dependencies
+        name: Restore NuGet packages (locked)
         # No PR found implies not Dependabot-related.
         if: env.ENABLED == '1' && steps.pr-check.outputs.pr_found == 'false'
         run: |
-            dotnet restore --locked-mode
+          dotnet restore --locked-mode
 
       - id: build
         name: Build
@@ -174,6 +176,7 @@ jobs:
       - id: codeql-analysis
         name: Perform CodeQL Analysis
         if: env.ENABLED == '1'
-        uses: github/codeql-action/analyze@v4.31.9
+        uses: github/codeql-action/analyze@51f77329afa6477de8c49fc9c7046c15b9a4e79d # v3.29.5
         with:
+          # yamllint disable-line
           category: "/language:${{matrix.language}}"
