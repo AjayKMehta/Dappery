@@ -31,7 +31,7 @@ jobs:
     steps:
       - id: check-permissions
         name: Check action permissions
-        uses: GitHubSecurityLab/actions-permissions/monitor@b25f731bf2f9eb9748c2e9757d366c3e72fa2109 # v1.0.2-beta8
+        uses: GitHubSecurityLab/actions-permissions/monitor@bf82d13b9b10051d224345ab9184f5ede0a94289 # v1.0.2-beta9
         if: env.CHECK_PERMISSIONS == '1'
       - id: check-duplicate-actions
         name: Check for duplicate actions
@@ -82,6 +82,6 @@ jobs:
       - id: upload-sarif
         name: Upload SARIF output to GitHub Security Center
         continue-on-error: true
-        uses: github/codeql-action/upload-sarif@b20883b0cd1f46c72ae0ba6d1090936928f9fa30 # v4.32.0
+        uses: github/codeql-action/upload-sarif@6bc82e05fd0ea64601dd4b465378bbcf57de0314 # v4.32.1
         with:
           sarif_file: infer-out/report.sarif
