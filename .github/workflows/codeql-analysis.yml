@@ -8,10 +8,8 @@ defaults:
 on:
   push:
     branches: [master]
-
   pull_request:
     branches: [master]
-
   workflow_dispatch:
 
 concurrency:
@@ -80,7 +78,6 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: true # Need for next step.
-
       - id: filter
         name: Check for changed files
         if: ${{ github.event_name != 'workflow_dispatch' }}

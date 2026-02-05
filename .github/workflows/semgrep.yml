@@ -3,13 +3,10 @@ name: Semgrep
 on:
   pull_request:
     branches: [master]
-
   push:
     branches: [master]
-
   schedule:
     - cron: 0 0 * * 0
-
   workflow_dispatch:
     inputs:
       reason:
@@ -75,7 +72,7 @@ jobs:
         uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         with:
           filters: .github/filter.yml
-
+          list-files: shell
       - id: run-semgrep
         name: Run Semgrep
         if: steps.filter.outputs.code == 'true' || steps.filter.outputs.workflows == 'true'
