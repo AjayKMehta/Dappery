@@ -16,13 +16,13 @@
       },
       "Microsoft.Testing.Extensions.CodeCoverage": {
         "type": "Direct",
-        "requested": "[18.4.1, )",
-        "resolved": "18.4.1",
-        "contentHash": "l1VZM9dg9s76L5D288ipAT4HRYDJ6Vxh8wX20gfS9VnpueedRfN4/aGNn4oA1g6pwq2WSM3Ci7IoSSGPiqu+WQ==",
+        "requested": "[18.5.2, )",
+        "resolved": "18.5.2",
+        "contentHash": "UNcGLx9pVtlXF8MPDR8KDp+/OKKNIJjpzwRyZSt609TSGvaD8mtuQMb5GKZvhMucPp0a5Juvn3kxXDceQZWmAg==",
         "dependencies": {
-          "Microsoft.DiaSymReader": "2.0.0",
+          "Microsoft.DiaSymReader": "2.2.3",
           "Microsoft.Extensions.DependencyModel": "8.0.2",
-          "Microsoft.Testing.Platform": "2.0.2"
+          "Microsoft.Testing.Platform": "2.1.0"
         }
       },
       "Microsoft.Testing.Extensions.CrashDump": {
@@ -69,15 +69,15 @@
       },
       "TUnit": {
         "type": "Direct",
-        "requested": "[1.17.11, )",
-        "resolved": "1.17.11",
-        "contentHash": "S3VPUZT0C2QsVlsgGYOCA5O0pgLiQDw673rNIwJBqq/X5mTMat8IeaxnRNPiOatIjAxOQ3ydbboKEX8sld5WyA==",
+        "requested": "[1.18.9, )",
+        "resolved": "1.18.9",
+        "contentHash": "D6nUWZWy24oB6boiD/nNSMKsQkLLlW41zGObdfdM1sbIgXsHOtataidD4jcK+omxVt7ddaRWSSsKeNA86Whynw==",
         "dependencies": {
-          "Microsoft.Testing.Extensions.CodeCoverage": "18.4.1",
+          "Microsoft.Testing.Extensions.CodeCoverage": "18.5.1",
           "Microsoft.Testing.Extensions.Telemetry": "2.1.0",
           "Microsoft.Testing.Extensions.TrxReport": "2.1.0",
-          "TUnit.Assertions": "1.17.11",
-          "TUnit.Engine": "1.17.11"
+          "TUnit.Assertions": "1.18.9",
+          "TUnit.Engine": "1.18.9"
         }
       },
       "AsyncFixer": {
@@ -107,8 +107,8 @@
       },
       "Dapper": {
         "type": "Transitive",
-        "resolved": "2.1.66",
-        "contentHash": "/q77jUgDOS+bzkmk3Vy9SiWMaetTw+NOoPAV0xPBsGVAyljd5S6P+4RUW7R3ZUGGr9lDRyPKgAMj2UAOwvqZYw=="
+        "resolved": "2.1.72",
+        "contentHash": "ns4mGqQd9a/MhP8m6w556vVlZIa0/MfUu03zrxjZC/jlr1uVCsUac8bkdB+Fs98Llbd56rRSo1eZH5VVmeGZyw=="
       },
       "DiffEngine": {
         "type": "Transitive",
@@ -211,8 +211,8 @@
       },
       "Microsoft.DiaSymReader": {
         "type": "Transitive",
-        "resolved": "2.0.0",
-        "contentHash": "QcZrCETsBJqy/vQpFtJc+jSXQ0K5sucQ6NUFbTNVHD4vfZZOwjZ/3sBzczkC4DityhD3AVO/+K/+9ioLs1AgRA=="
+        "resolved": "2.2.3",
+        "contentHash": "bhwzJfzyiJM0nXJyNB7Y9OfsEXyxLdDBHG99soIp5JjnPydwkOaBdRCtRtWgQh3noSLi2cSIZ/wpbHNNE9knxQ=="
       },
       "Microsoft.Extensions.Caching.Abstractions": {
         "type": "Transitive",
@@ -476,24 +476,24 @@
       },
       "TUnit.Assertions": {
         "type": "Transitive",
-        "resolved": "1.17.11",
-        "contentHash": "FZutXHpCBb6uzVpmRKqj3ePon/0RzNKQMNGrLIurC8a8R9jonjdJ+hxH0dpm+Zak8UI7114iycYP0uao/0DClQ=="
+        "resolved": "1.18.9",
+        "contentHash": "h7aUWZDSnjw+2crm8oPFrbRC3XVLQwYpVUsg9wGr+ZYx4ptypTmM9tw9b/bCj3WQE7pdNvLudBpIUnNbl8FgUw=="
       },
       "TUnit.Core": {
         "type": "Transitive",
-        "resolved": "1.17.11",
-        "contentHash": "NN4kCxRHUfb8qvwlU0z5fcGoxzGqS5KCAq5mowvNBwaRLMSoyLvneOGm69hXpGGvfJZIdd54qOxKQJar55JYwA=="
+        "resolved": "1.18.9",
+        "contentHash": "Ryq4UKAGj2lNLda65Vo1z73GQkpG5nTFwS5RSKSULNp2ItGt1SNu+cyoPzo+Q1hOhEY9pmfRwjjBrGZShxbztQ=="
       },
       "TUnit.Engine": {
         "type": "Transitive",
-        "resolved": "1.17.11",
-        "contentHash": "yeDEZgakD7obfZs3xW53JMgGnzC+O5Km/W4z6ry8ImL4k2BHb6bOtPk4qhyiwsqow28KrM0OAJI3djMzofdTqw==",
+        "resolved": "1.18.9",
+        "contentHash": "PD2Buc1nlBzojljRoGnpyQ6WoyTeqyN6NYbYT1HAc7SgVGkDuBCyZmkNbtzcxKCr7XLIjW5D/lG1/yiEzDp7rg==",
         "dependencies": {
           "EnumerableAsyncProcessor": "3.8.4",
           "Microsoft.Testing.Extensions.TrxReport.Abstractions": "2.1.0",
           "Microsoft.Testing.Platform": "2.1.0",
           "Microsoft.Testing.Platform.MSBuild": "2.1.0",
-          "TUnit.Core": "1.17.11"
+          "TUnit.Core": "1.18.9"
         }
       },
       "dappery.core": {
@@ -513,7 +513,7 @@
         "type": "Project",
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
-          "Dapper": "[2.1.66, )",
+          "Dapper": "[2.1.72, )",
           "Dappery.Core": "[1.0.0, )",
           "IDisposableAnalyzers": "[4.0.8, )",
           "Microsoft.Data.SqlClient": "[6.1.4, )",
