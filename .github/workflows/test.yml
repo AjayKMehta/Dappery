@@ -72,6 +72,7 @@ jobs:
         with:
           fetch-depth: 0
           filter: tree:0
+          persist-credentials: true
 
       - id: filter
         name: Check for changed files
@@ -82,11 +83,14 @@ jobs:
       - id: set-env
         name: Set environment variable
         run: |
-          if [ "${{ steps.filter.outputs.code }}" == "true" ] || [ "${{ steps.filter.outputs.test }}" == "true" ]; then
+          if [ "${STEPS_FILTER_OUTPUTS_CODE}" == "true" ] || [ "${STEPS_FILTER_OUTPUTS_TEST}" == "true" ]; then
             echo "ENABLED=1" >> $GITHUB_ENV
           else
             echo "ENABLED=0" >> $GITHUB_ENV
           fi
+        env:
+          STEPS_FILTER_OUTPUTS_CODE: ${{ steps.filter.outputs.code }}
+          STEPS_FILTER_OUTPUTS_TEST: ${{ steps.filter.outputs.test }}
 
       - id: setup-dotnet
         name: Setup .NET Core
