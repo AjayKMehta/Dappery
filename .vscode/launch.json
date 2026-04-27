@@ -8,6 +8,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
+      // There does not seem to be a way to have this run after preLaunchTask is done. Ergo, it sometimes runs with wrong build configuration!
       "program": "${workspaceFolder}/artifacts/bin/Dappery.Core.Tests/${input:rememberConfig}/Dappery.Core.Tests.dll",
       "args": [],
       "cwd": "${workspaceFolder}/tests/Dappery.Core.Tests",
