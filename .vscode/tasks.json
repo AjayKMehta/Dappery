@@ -41,14 +41,15 @@
         "default": "Debug",
         // Directory names are case-sensitive in Linux.
         "options": [
-          [
-            "Debug",
-            "debug"
-          ],
-          [
-            "Release",
-            "release"
-          ]
+          {
+            "label": "Debug",
+            "value": "Debug",
+            "picked": true
+          },
+          {
+            "label": "Release",
+            "value": "release"
+          }
         ],
         "description": "Build configuration"
       }
