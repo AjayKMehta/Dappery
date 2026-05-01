@@ -104,7 +104,7 @@ jobs:
       - id: init-codeql
         name: Initialize CodeQL
         if: env.ENABLED == '1'
-        uses: github/codeql-action/init@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.1
+        uses: github/codeql-action/init@95e58e9a2cdfd71adc6e0353d5c52f41a045d225 # v4.35.2
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
@@ -133,7 +133,7 @@ jobs:
       - id: commit-changes
         name: Commit changes
         if: matrix.build-mode == 'manual' && env.ENABLED == '1'
-        uses: qoomon/actions--create-commit@dfef4d264de752be6d6195a4d61a2f3d3262d406 # v1.2.3
+        uses: qoomon/actions--create-commit@0f4cc87a8ad11282dfed4639db11c6e4ac09b25b # v1.2.4
         with:
           message: Committing changes to lock files [skip ci]
           allow-empty: false
@@ -173,7 +173,7 @@ jobs:
       - id: codeql-analysis
         name: Perform CodeQL Analysis
         if: env.ENABLED == '1'
-        uses: github/codeql-action/analyze@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.1
+        uses: github/codeql-action/analyze@95e58e9a2cdfd71adc6e0353d5c52f41a045d225 # v4.35.2
         with:
           # yamllint disable-line
           category: "/language:${{matrix.language}}"
