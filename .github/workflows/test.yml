@@ -126,7 +126,7 @@ jobs:
 
       - id: commit
         if: env.ENABLED == '1' && steps.pr-check.outputs.pr_found == 'true'
-        uses: qoomon/actions--create-commit@dfef4d264de752be6d6195a4d61a2f3d3262d406 # v1.2.3
+        uses: qoomon/actions--create-commit@0f4cc87a8ad11282dfed4639db11c6e4ac09b25b # v1.2.4
         with:
           message: Committing changes to lock files [skip ci]
           allow-empty: false
@@ -156,7 +156,7 @@ jobs:
 
       - id: upload-logs
         name: Upload Test Logs
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: env.ENABLED == '1' && failure() && steps.test.outcome == 'failure'
         with:
           name: test-logs
@@ -167,7 +167,7 @@ jobs:
       - id: generate-report
         name: Generate codecoverage report
         if: env.ENABLED == '1'
-        uses: danielpalme/ReportGenerator-GitHub-Action@cf6fe1b38ed5becc89ffe056c1f240825993be5b # 5.5.4
+        uses: danielpalme/ReportGenerator-GitHub-Action@ee3806a36b8b2eb9594cb3e5fae045af7e5ead10 # 5.5.6
         with:
           reports: '**/TestResults/**/coverage.cobertura.xml'
           # yamllint disable-line
@@ -189,7 +189,7 @@ jobs:
       # https://github.com/danielpalme/ReportGenerator/issues/431
       - id: publish-pr-cov-summary
         name: Publish PR coverage summary
-        uses: marocchino/sticky-pull-request-comment@70d2764d1a7d5d9560b100cbea0077fc8f633987 # v3.0.2
+        uses: marocchino/sticky-pull-request-comment@0ea0beb66eb9baf113663a64ec522f60e49231c0 # v3.0.4
         if: steps.pr-check.outputs.pr_found == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -220,7 +220,7 @@ jobs:
       - id: archive-results
         name: Archive results
         # https://github.com/actions/upload-artifact/blob/main/docs/MIGRATION.md
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: env.ENABLED == '1'
         with:
           name: code-coverage-report-${{ matrix.os }}
