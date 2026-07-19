@@ -8,8 +8,28 @@ defaults:
 on:
   push:
     branches: [master]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '.github/workflows/codeql-analysis.yml'
+      - '**/*.cs'
+      - '**/*.csproj'
+      - '**/Directory.*.props'
+      - '**/*.sln'
+      - '**/*.slnx'
+      - '**/packages.lock.json'
   pull_request:
     branches: [master]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '.github/workflows/codeql-analysis.yml'
+      - '**/*.cs'
+      - '**/*.csproj'
+      - '**/Directory.*.props'
+      - '**/*.sln'
+      - '**/*.slnx'
+      - '**/packages.lock.json'
   workflow_dispatch:
 
 concurrency:
@@ -26,10 +46,10 @@ jobs:
   pre_job:
     name: Check for Duplicate Actions
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       actions: write
       contents: read
-    # Map a step output to a job output
     outputs:
       should_skip: ${{ steps.check-duplicate-actions.outputs.should_skip }}
     steps:
@@ -44,6 +64,7 @@ jobs:
           cancel_others: true
           skip_after_successful_duplicate: true
           concurrent_skipping: same_content_newer
+
   analyze:
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
@@ -78,40 +99,17 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: true # Need for next step.
-      - id: filter
-        name: Check for changed files
-        if: ${{ github.event_name != 'workflow_dispatch' }}
-        uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
-        with:
-          filters: .github/filter.yml
-
-      - id: set-env
-        name: Set environment variable
-        run: |
-          if [[ "${EVENT_NAME}" == "workflow_dispatch" ]] ||
-             [[ "${IS_CODE}" == "true" ]] ||
-             [[ "${IS_CODEQL}" == "true" ]]; then
-            echo "ENABLED=1" >> $GITHUB_ENV
-          else
-            echo "ENABLED=0" >> $GITHUB_ENV
-          fi
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          IS_CODE: ${{ steps.filter.outputs.code }}
-          IS_CODEQL: ${{ steps.filter.outputs.codeql }}
-
-      # Initializes the CodeQL tools for scanning.
       - id: init-codeql
         name: Initialize CodeQL
-        if: env.ENABLED == '1'
         uses: github/codeql-action/init@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4.36.2
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           dependency-caching: true
+
       - id: setup-dotnet
         name: Set up .NET
-        if: matrix.build-mode == 'manual' && env.ENABLED == '1'
+        if: matrix.build-mode == 'manual'
         uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5.4.0
         with:
           cache: true
@@ -120,19 +118,19 @@ jobs:
 
       - id: dotnet-restore
         name: Restore NuGet packages
-        if: matrix.build-mode == 'manual' && env.ENABLED == '1'
+        if: matrix.build-mode == 'manual'
         run: |
-          if [[ "${PR_LOGIN}" == 'dependabot[bot]' ]]; then
+          if [[ "${PR_LOGIN}" == "dependabot[bot]" ]]; then
             dotnet restore --force-evaluate && git add .
           else
             dotnet restore --locked-mode
           fi
         env:
-          PR_LOGIN: ${{ github.event.pull_request.user.login }}
+          PR_LOGIN: ${{ github.event.pull_request.user.login || '' }}
 
       - id: commit-changes
         name: Commit changes
-        if: matrix.build-mode == 'manual' && env.ENABLED == '1'
+        if: matrix.build-mode == 'manual'
         uses: qoomon/actions--create-commit@7102b1a8b3cb8716dc70dbeb6d774c375d779d2f # v1.2.5
         with:
           message: Committing changes to lock files [skip ci]
@@ -141,14 +139,13 @@ jobs:
 
       - id: push-changes
         name: Push changes
-        if: matrix.build-mode == 'manual' && env.ENABLED == '1' && steps.commit-changes.outputs.commit != null
+        if: matrix.build-mode == 'manual' && steps.commit-changes.outputs.commit != null
         env:
           HEAD_REF: ${{ github.head_ref || github.ref_name }}
         run: git push origin HEAD:$HEAD_REF
 
       - id: pr-check
         name: Check if PR for current commit
-        if: env.ENABLED == '1'
         uses: 8BitJonny/gh-get-current-pr@4056877062a1f3b624d5d4c2bedefa9cf51435c9 # 4.0.0
         with:
           # This will work no matter the trigger event and no matter if it is the first PR commit or not.
@@ -161,18 +158,17 @@ jobs:
       - id: dotnet-restore-locked
         name: Restore NuGet packages (locked)
         # No PR found implies not Dependabot-related.
-        if: env.ENABLED == '1' && steps.pr-check.outputs.pr_found == 'false'
+        if: steps.pr-check.outputs.pr_found == 'false'
         run: |
           dotnet restore --locked-mode
 
       - id: build
         name: Build
-        if: matrix.build-mode == 'manual' && env.ENABLED == '1'
+        if: matrix.build-mode == 'manual'
         run: dotnet build --configuration Release --no-restore --tl
 
       - id: codeql-analysis
         name: Perform CodeQL Analysis
-        if: env.ENABLED == '1'
         uses: github/codeql-action/analyze@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4.36.2
         with:
           # yamllint disable-line
