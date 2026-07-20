@@ -1,5 +1,6 @@
 ﻿---
-mode: 'agent'
+agent: 'agent'
+model: batiai/gemma4-e2b:q4
 tools: ['changes', 'codebase', 'editFiles', 'problems', 'search']
 description: 'Get best practices for TUnit unit testing, including data-driven tests'
 ---
