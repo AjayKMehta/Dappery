@@ -15,8 +15,7 @@ on:
       - '**/*.cs'
       - '**/*.csproj'
       - '**/Directory.*.props'
-      - '**/*.sln'
-      - '**/*.slnx'
+      - '**/*.slnx?'
       - '**/packages.lock.json'
   pull_request:
     branches: [master]
@@ -27,8 +26,7 @@ on:
       - '**/*.cs'
       - '**/*.csproj'
       - '**/Directory.*.props'
-      - '**/*.sln'
-      - '**/*.slnx'
+      - '**/*.slnx?'
       - '**/packages.lock.json'
   workflow_dispatch:
 
