@@ -8,11 +8,11 @@
     <PackageVersion Include="GitHubActionsTestLogger" Version="3.0.5" />
     <PackageVersion Include="IDisposableAnalyzers" Version="4.0.8" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.11.2" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.CrashDump" Version="2.4.1" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.HangDump" Version="2.4.1" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.CrashDump" Version="2.5.0" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.HangDump" Version="2.5.0" />
     <PackageVersion Include="ReflectionAnalyzers" Version="0.3.1" />
     <PackageVersion Include="Roslynator.Analyzers" Version="4.16.1" />
     <PackageVersion Include="Shouldly" Version="4.3.0" />
-    <PackageVersion Include="TUnit" Version="1.71.0" />
+    <PackageVersion Include="TUnit" Version="1.72.16" />
   </ItemGroup>
 </Project>
