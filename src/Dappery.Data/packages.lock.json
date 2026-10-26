@@ -57,12 +57,6 @@
           "SQLitePCLRaw.core": "2.1.13"
         }
       },
-      "MinVer": {
-        "type": "Direct",
-        "requested": "[6.1.0, )",
-        "resolved": "6.1.0",
-        "contentHash": "dGyb6EBQ87AhyagcXslfDGL/A+xbNtRD23CBjXoKo82TvjHqF2BBz61B6EBx/S117KUMB1PEUpRLrHcu6UjOhg=="
-      },
       "Npgsql": {
         "type": "Direct",
         "requested": "[10.0.3, )",
@@ -332,7 +326,6 @@
           "IDisposableAnalyzers": "[4.0.8, )",
           "MediatR": "[13.1.0, )",
           "Microsoft.Extensions.Logging.Abstractions": "[10.0.13, )",
-          "MinVer": "[6.1.0, )",
           "ReflectionAnalyzers": "[0.3.1, )"
         }
       },
@@ -341,7 +334,6 @@
         "dependencies": {
           "AsyncFixer": "[1.6.0, )",
           "IDisposableAnalyzers": "[4.0.8, )",
-          "MinVer": "[6.1.0, )",
           "ReflectionAnalyzers": "[0.3.1, )"
         }
       },
