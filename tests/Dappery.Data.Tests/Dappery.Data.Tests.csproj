@@ -5,7 +5,7 @@
     <RootNamespace>Dappery.Data.Tests</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="GitHubActionsTestLogger"/>
+    <PackageReference Include="GitHubActionsTestLogger" />
     <PackageReference Include="IDisposableAnalyzers">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -23,6 +23,7 @@
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
     <PackageReference Include="Microsoft.Testing.Extensions.CrashDump" />
     <PackageReference Include="Microsoft.Testing.Extensions.HangDump" />
+    <PackageReference Include="Microsoft.Testing.Extensions.HotReload" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dappery.Core\Dappery.Core.csproj" />

@@ -24,6 +24,7 @@
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
     <PackageReference Include="Microsoft.Testing.Extensions.CrashDump" />
     <PackageReference Include="Microsoft.Testing.Extensions.HangDump" />
+    <PackageReference Include="Microsoft.Testing.Extensions.HotReload" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dappery.Data\Dappery.Data.csproj" />

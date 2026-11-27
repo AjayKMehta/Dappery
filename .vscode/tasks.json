@@ -28,6 +28,31 @@
       ],
       "problemMatcher": "$msCompile"
     },
+        {
+          "label": "Test: MTP Hot Reload",
+          "type": "shell",
+          "command": "dotnet",
+          "args": [
+            "run",
+            "--project",
+            "${input:testProject}"
+          ],
+          "options": {
+            "env": {
+              "TESTINGPLATFORM_HOTRELOAD_ENABLED": "1"
+            }
+          },
+          "group": {
+            "kind": "test",
+            "isDefault": true
+          },
+          "presentation": {
+            "reveal": "always",
+            "panel": "dedicated",
+            "clear": true
+          },
+          "problemMatcher": "$msCompile"
+        }
   ],
   "inputs": [
     {
@@ -52,6 +77,17 @@
           }
         ],
         "description": "Build configuration"
+      }
+    },
+    {
+      "id": "testProject",
+      "type": "command",
+      "command": "extension.commandvariable.file.pickFile",
+      "args": {
+        "description": "Pick a test project.",
+        "include": "**/tests/**/*.csproj",
+        "acceptIfOneFile": true,
+        "keyRemember": "testProject"
       }
     }
   ]
